@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luxusbetten24 — August 2026 Testing Pipeline (English)</title>
+<style>
+:root{
+  --ink:#101720; --ink-2:#2b3644; --muted:#68758a; --faint:#98a3b3;
+  --line:#e2e7ee; --line-2:#eef1f6; --page:#f2f4f8; --card:#ffffff;
+  --brand:#0d8f9b; --brand-dk:#0a6d77; --brand-soft:#e7f5f6;
+  --yellow:#f2c421; --gold:#b8935c; --gold-soft:#f7f1e6;
+  --red:#c8443c; --red-soft:#fbeceb; --green:#2f8f5b; --green-soft:#eaf5ef;
+  --sale:#b3261e;
+  --radius:14px; --shadow:0 1px 2px rgba(16,23,32,.04),0 8px 24px rgba(16,23,32,.06);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--page);color:var(--ink);
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px 96px}
+
+.masthead{background:var(--ink);color:#fff;padding:44px 0 40px;margin-bottom:26px}
+.masthead .wrap{padding-bottom:0}
+.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#8ea2b5;margin:0 0 10px}
+.masthead h1{margin:0 0 8px;font-size:33px;line-height:1.15;letter-spacing:-.022em;font-weight:650}
+.masthead p{margin:0;color:#a9b8c8;max-width:80ch;font-size:14.5px}
+.scoreboard{display:grid;grid-template-columns:repeat(2,1fr);max-width:520px;gap:12px;margin-top:24px}
+.sb{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:11px;padding:13px 15px}
+.sb b{display:block;font-size:25px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.sb span{display:block;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:#8ea2b5;margin-top:4px}
+.sb.g b{color:#7ee0a8}
+
+h2.sect{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);font-weight:700;margin:34px 0 14px}
+.legend{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;
+  display:flex;flex-wrap:wrap;gap:22px;align-items:center;box-shadow:var(--shadow);margin-bottom:30px;
+  font-size:12.5px;color:var(--muted)}
+.legend b{color:var(--ink);font-weight:600}
+.key{display:inline-flex;align-items:center;gap:7px}
+.dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+.note-en{background:#fff;border:1px solid #bfd8dd;border-left:4px solid var(--brand);border-radius:var(--radius);
+  padding:16px 20px;box-shadow:var(--shadow);margin-bottom:30px;font-size:12.5px;color:var(--ink-2);line-height:1.6}
+.note-en b{color:var(--ink)}
+
+/* ---------- idea shell ---------- */
+.idea{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);
+  margin-bottom:34px;overflow:hidden}
+.idea-head{padding:26px 28px 22px;border-bottom:1px solid var(--line-2)}
+.idea-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--brand-dk);background:var(--brand-soft);padding:4px 9px;border-radius:6px;margin-bottom:12px}
+.idea-head h2{margin:0 0 6px;font-size:23px;letter-spacing:-.015em;font-weight:650;line-height:1.3;
+  display:flex;align-items:center}
+.numb{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;flex:0 0 30px;
+  border-radius:9px;background:var(--ink);color:#fff;font-size:14.5px;font-weight:800;margin-right:11px}
+.idea-sub{margin:0;color:var(--muted);font-size:13.5px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.chip{font-size:11px;padding:4px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:#fafbfc}
+.chip.hi{color:var(--green);background:var(--green-soft);border-color:#cde6d9}
+.chip.md{color:var(--gold);background:var(--gold-soft);border-color:#eadfc9}
+.chip.lo{color:var(--red);background:var(--red-soft);border-color:#eec7c4}
+.srcline{margin:13px 0 0;font-size:11px;color:var(--faint)}
+.srcline b{color:var(--muted);font-weight:600}
+
+.psh{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line-2)}
+.psh > div{padding:22px 28px;border-right:1px solid var(--line-2)}
+.psh > div:last-child{border-right:0}
+.psh h3{margin:0 0 9px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);
+  font-weight:700;display:flex;align-items:center;gap:7px}
+.psh h3::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--faint)}
+.psh .prob h3::before{background:var(--red)}
+.psh .sol h3::before{background:var(--brand)}
+.psh .hyp h3::before{background:var(--gold)}
+.psh p{margin:0 0 10px;font-size:13.5px;color:var(--ink-2);line-height:1.6}
+.psh ul{margin:0 0 10px;padding-left:17px;font-size:13px;color:var(--ink-2);line-height:1.65}
+.psh li{margin-bottom:4px}
+.psh .hyp p{font-style:italic}
+.psh .hyp .if{font-style:normal;font-weight:600;color:var(--ink)}
+.metric{margin-top:12px;font-size:11.5px;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px}
+.metric b{color:var(--ink-2);font-weight:600}
+
+.frames{padding:30px 28px 34px;background:#f8fafb;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.frame-col{display:flex;flex-direction:column;align-items:center}
+.frame-label{align-self:stretch;display:flex;align-items:center;gap:9px;margin-bottom:16px;
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.frame-label .pill{padding:4px 9px;border-radius:6px}
+.frame-label.before .pill{background:var(--red-soft);color:var(--red)}
+.frame-label.after .pill{background:var(--green-soft);color:var(--green)}
+.frame-label .note{font-weight:500;letter-spacing:0;text-transform:none;font-size:12.5px;color:var(--muted)}
+
+/* ---------- phone ---------- */
+.phone{width:344px;background:#171d25;border-radius:38px;padding:9px;position:relative;
+  box-shadow:0 2px 4px rgba(16,23,32,.10),0 22px 44px rgba(16,23,32,.16)}
+.screen{background:#fff;border-radius:30px;overflow:hidden;height:690px;overflow-y:auto;
+  font-size:11px;line-height:1.45;position:relative;scrollbar-width:thin}
+.screen::-webkit-scrollbar{width:5px}
+.screen::-webkit-scrollbar-thumb{background:#cfd6df;border-radius:3px}
+.statusbar{display:flex;justify-content:space-between;align-items:center;padding:9px 18px 5px;
+  font-size:10px;font-weight:600;position:sticky;top:0;background:#fff;z-index:12}
+.statusbar .r{display:flex;gap:4px;align-items:center;opacity:.8}
+.bars{display:inline-block;width:14px;height:9px;background:
+  linear-gradient(to right,var(--ink) 2px,transparent 2px) 0 6px/4px 3px repeat-x,
+  linear-gradient(to right,var(--ink) 2px,transparent 2px) 0 4px/4px 5px repeat-x}
+.batt{width:16px;height:8px;border:1px solid var(--ink);border-radius:2px;position:relative}
+.batt::after{content:"";position:absolute;inset:1px;right:4px;background:var(--ink);border-radius:1px}
+
+.announce{background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;gap:6px;
+  font-size:9px;padding:6px 10px}
+.announce .arw{opacity:.45;font-size:8px}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:9px 13px;
+  border-bottom:1px solid var(--line);background:#fff}
+.nav .logo{font-size:12px;font-weight:750;letter-spacing:.05em}
+.icons{display:flex;gap:10px;color:var(--ink-2);align-items:center}
+.icons svg{width:15px;height:15px}
+.icons .cc{font-size:7.4px;font-weight:700;border:1px solid var(--line);border-radius:4px;padding:1px 4px}
+.crumb{padding:8px 13px 0;font-size:8px;color:var(--faint)}
+.sec{padding:13px}
+
+.img{border-radius:8px;background:linear-gradient(135deg,#e8ecf1,#dde3ea 50%,#e8ecf1);position:relative;overflow:hidden}
+.img::before{content:"";position:absolute;left:14%;right:66%;bottom:18%;height:46%;background:#d6dee7;border-radius:6px 6px 0 0}
+.img::after{content:"";position:absolute;left:10%;right:10%;bottom:16%;height:32%;
+  background:linear-gradient(180deg,#c9d2dc,#b9c4d0);border-radius:6px}
+.img.warm{background:linear-gradient(135deg,#efe9e0,#e3dbcf 60%,#eee8df)}
+.img.flat::before,.img.flat::after{display:none}
+
+/* homepage hero */
+.hero{position:relative;min-height:236px;display:flex;flex-direction:column;justify-content:flex-end;padding:13px}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,
+  rgba(16,23,32,.30),rgba(16,23,32,.05) 34%,rgba(16,23,32,.72) 78%,rgba(16,23,32,.88))}
+.hero > *{position:relative;z-index:2}
+.vidbadge{position:absolute;top:10px;right:11px;z-index:3;background:rgba(16,23,32,.55);color:#fff;
+  font-size:7px;font-weight:700;letter-spacing:.1em;padding:3px 7px;border-radius:999px;
+  display:flex;align-items:center;gap:4px}
+.vidbadge i{width:0;height:0;border-left:4px solid #fff;border-top:2.6px solid transparent;border-bottom:2.6px solid transparent}
+.hero h4{margin:0 0 4px;font-size:15px;font-weight:700;letter-spacing:-.02em;color:#fff;line-height:1.24}
+.hero .subline{margin:0 0 10px;font-size:9.5px;color:rgba(255,255,255,.86);line-height:1.4}
+.tp-hero{display:inline-flex;align-items:center;gap:4px;margin-bottom:9px}
+.stars{display:flex;gap:1.5px}
+.star{width:11px;height:11px;background:#00b67a;display:flex;align-items:center;justify-content:center}
+.star svg{width:8px;height:8px;fill:#fff}
+.star.off{background:#dcdce6}
+.tp-lbl{font-size:8.5px;font-weight:700;color:#fff}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.btn{display:block;text-align:center;font-weight:700;font-size:11px;padding:10px;border-radius:7px;
+  background:var(--brand);color:#fff}
+.btn.white{background:#fff;color:var(--ink)}
+.btn.ghost-l{background:transparent;border:1.4px solid rgba(255,255,255,.8);color:#fff}
+.btn.ghost{background:transparent;border:1.3px solid var(--ink);color:var(--ink)}
+.usp-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:12px 13px 14px;background:#fff}
+.usp{text-align:center}
+.usp .ic{width:22px;height:22px;margin:0 auto 4px;border-radius:50%;background:var(--brand-soft);
+  display:flex;align-items:center;justify-content:center;color:var(--brand-dk)}
+.usp .ic svg{width:12px;height:12px}
+.usp b{font-size:8.2px;font-weight:700;line-height:1.2;display:block}
+.sec-t{font-size:13px;font-weight:700;letter-spacing:-.01em;margin:0 0 8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.tile .im{height:64px;margin-bottom:5px;border-radius:8px}
+.tile b{font-size:9.5px;font-weight:650;line-height:1.3;display:block}
+
+/* PDP */
+.gal{position:relative}
+.gal .main{height:190px;border-radius:0}
+.gal .flash{position:absolute;top:9px;left:9px;z-index:3;background:var(--sale);color:#fff;
+  font-size:7.6px;font-weight:800;padding:3px 7px;border-radius:4px}
+.gal .idx{position:absolute;bottom:9px;right:9px;z-index:3;background:rgba(16,23,32,.72);color:#fff;
+  font-size:7.4px;font-weight:700;padding:3px 8px;border-radius:999px}
+.thumbs{display:flex;gap:5px;padding:8px 13px 0;overflow:hidden}
+.thumbs .t{flex:0 0 42px;height:36px;border-radius:5px;position:relative;overflow:hidden}
+.thumbs .t.on{outline:1.8px solid var(--ink);outline-offset:1px}
+.thumbs .t .lbl{position:absolute;inset:auto 0 0 0;background:rgba(16,23,32,.7);color:#fff;
+  font-size:5.4px;text-align:center;font-weight:800;letter-spacing:.04em;padding:1px 0}
+.thumbs .t.vid{background:linear-gradient(150deg,#4a545f,#232a33)}
+.thumbs .t.vid::after{content:"";position:absolute;top:44%;left:50%;transform:translate(-50%,-50%);
+  width:0;height:0;border-left:8px solid rgba(255,255,255,.95);border-top:5px solid transparent;border-bottom:5px solid transparent}
+.thumbs .more{flex:0 0 42px;height:36px;border-radius:5px;background:#f2f4f7;border:1px dashed var(--line);
+  display:flex;align-items:center;justify-content:center;font-size:7px;color:var(--muted);font-weight:700}
+.rating{display:flex;align-items:center;gap:5px;font-size:8.6px;color:var(--ink-2);font-weight:600}
+.mini-stars{display:flex;gap:1px}
+.mini-stars i{width:7px;height:7px;background:#f5a623;display:block;
+  clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+.ptitle{font-size:14px;font-weight:700;letter-spacing:-.02em;margin:6px 0 0;line-height:1.3}
+.pricerow{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;margin-top:7px}
+.pricerow .now{font-size:16px;font-weight:800;color:var(--sale)}
+.pricerow .was{font-size:10px;color:var(--faint);text-decoration:line-through}
+.pricerow .save{font-size:8px;font-weight:700;background:var(--red-soft);color:var(--sale);padding:2px 6px;border-radius:4px}
+.taxline{font-size:8px;color:var(--muted);margin-top:2px}
+.finance{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);
+  border-radius:7px;padding:6px 9px;margin-top:8px;font-size:8.4px}
+.finance a{color:var(--brand-dk);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.optlbl{font-size:9.6px;font-weight:700;margin:12px 0 0;display:flex;justify-content:space-between;align-items:baseline}
+.optlbl a{font-size:8px;color:var(--brand-dk);font-weight:650;text-decoration:underline;text-underline-offset:2px}
+.sw18{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.sw18 i{width:19px;height:19px;border-radius:50%;display:block;border:1px solid rgba(0,0,0,.12)}
+.sw18 i.on{outline:1.6px solid var(--ink);outline-offset:2px}
+.pillrow{display:flex;gap:6px;margin-top:7px}
+.pillrow span{flex:1;border:1.2px solid var(--line);border-radius:6px;padding:7px;text-align:center;
+  font-size:9px;font-weight:650;background:#fff}
+.pillrow span.on{border-color:var(--ink);background:var(--ink);color:#fff}
+.pillrow span.solo{flex:0 0 auto;padding:7px 14px}
+.pay{display:flex;flex-wrap:wrap;gap:3px;margin-top:9px}
+.pay i{width:20px;height:13px;border-radius:2.5px;background:#eef1f5;border:1px solid #e0e5ec;display:block}
+.atc{display:block;text-align:center;font-weight:800;font-size:11.5px;padding:12px;border-radius:8px;
+  background:var(--ink);color:#fff;margin-top:9px}
+.reassure{display:grid;gap:7px;margin-top:11px}
+.rc{display:flex;gap:8px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:8px 9px}
+.rc .ic{width:22px;height:22px;flex:0 0 22px;border-radius:6px;background:var(--brand-soft);
+  display:flex;align-items:center;justify-content:center;color:var(--brand-dk)}
+.rc .ic svg{width:12px;height:12px}
+.rc b{font-size:9px;font-weight:700;display:block;line-height:1.25}
+.rc span{font-size:7.6px;color:var(--muted);display:block;line-height:1.3}
+.acc{border-top:1px solid var(--line)}
+.acc .row{display:flex;justify-content:space-between;align-items:center;padding:11px 13px;
+  border-bottom:1px solid var(--line-2);font-size:10px;font-weight:700}
+.acc .row .cv{color:var(--faint);font-weight:400}
+.four{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+.four .c{border:1px solid var(--line);border-radius:8px;padding:8px}
+.four .c b{font-size:8.6px;display:block;line-height:1.25}
+.four .c span{font-size:7.4px;color:var(--muted);display:block;line-height:1.3;margin-top:2px}
+.bsnap{display:grid;gap:6px;margin-top:9px}
+.bs{display:flex;gap:8px;align-items:center;background:var(--brand-soft);border-radius:8px;padding:7px 9px}
+.bs .ic{width:20px;height:20px;flex:0 0 20px;border-radius:50%;background:#fff;
+  display:flex;align-items:center;justify-content:center;color:var(--brand-dk)}
+.bs .ic svg{width:11px;height:11px}
+.bs b{font-size:9px;font-weight:700;display:block;line-height:1.25}
+.band{border:1.4px solid var(--brand);border-radius:8px;padding:9px;margin-top:9px;background:var(--brand-soft)}
+.band b{font-size:9.2px;font-weight:750;color:var(--brand-dk);display:flex;gap:6px;align-items:flex-start;line-height:1.3}
+.band b svg{width:12px;height:12px;flex:0 0 12px;margin-top:1px}
+
+/* collection */
+.h1c{font-size:17px;font-weight:700;letter-spacing:-.02em;margin:0}
+.count{font-size:9.5px;color:var(--muted);margin:3px 0 0}
+.count b{color:var(--ink);font-weight:700}
+.pc{border:1px solid var(--line);border-radius:9px;overflow:hidden;background:#fff;position:relative;margin-bottom:9px}
+.pc-img{height:120px;border-radius:0}
+.bdg{position:absolute;top:6px;left:6px;z-index:3;background:var(--ink);color:#fff;font-size:6.6px;
+  font-weight:700;padding:2px 5px;border-radius:3px}
+.bdg.new{left:auto;right:6px;background:var(--brand)}
+.pc-b{padding:7px 8px 8px}
+.pc-n{font-size:9.4px;font-weight:650;line-height:1.3;display:block}
+.pc-rv{font-size:7.6px;color:var(--faint);display:flex;gap:4px;align-items:center;margin-top:3px}
+.pc-p{font-size:10px;font-weight:750;color:var(--sale);display:block;margin-top:4px}
+.pc-p s{color:var(--faint);font-weight:500;font-size:8.4px;margin-left:3px}
+.pc-sw{display:flex;gap:3px;align-items:center;margin-top:5px}
+.pc-sw i{width:9px;height:9px;border-radius:50%;border:1px solid rgba(0,0,0,.12);display:block}
+.pc-sw em{font-size:7.4px;color:var(--muted);font-style:normal;margin-left:2px}
+.pc-cta{display:block;text-align:center;margin-top:7px;font-size:8.6px;font-weight:650;
+  padding:6px;border:1.2px solid var(--ink);border-radius:5px}
+.pc-sig{margin-top:5px;padding-top:5px;border-top:1px dashed var(--line);display:grid;gap:3px}
+.pc-sig span{font-size:7.8px;font-weight:650;color:var(--brand-dk);display:flex;gap:4px;align-items:center;line-height:1.2}
+.pc-sig span svg{width:9px;height:9px;flex:0 0 9px}
+.topbar{position:sticky;top:26px;background:#fff;padding:9px 13px;z-index:9;border-bottom:1px solid var(--line);
+  box-shadow:0 3px 10px rgba(16,23,32,.07)}
+.bottombar{position:sticky;bottom:0;background:#fff;border-top:1px solid var(--line);padding:9px 13px;z-index:9;
+  box-shadow:0 -3px 12px rgba(16,23,32,.08)}
+.twobtn{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tb{border:1.3px solid var(--ink);border-radius:7px;padding:8px;text-align:center;font-size:9.6px;
+  font-weight:700;display:flex;align-items:center;justify-content:center;gap:5px;background:#fff}
+.tb svg{width:12px;height:12px}
+.tb .cnt{background:var(--ink);color:#fff;font-size:7.6px;border-radius:999px;padding:1px 5px;font-weight:800}
+.onebtn{border:1.3px solid var(--ink);border-radius:7px;padding:9px;text-align:center;font-size:10px;
+  font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;background:#fff}
+.wa{position:absolute;right:11px;bottom:62px;width:30px;height:30px;border-radius:50%;background:#25d366;
+  z-index:10;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 9px rgba(0,0,0,.22)}
+.wa svg{width:17px;height:17px;fill:#fff}
+.wa.low{bottom:14px}
+
+/* cart */
+.appbar{display:flex;align-items:center;gap:8px;padding:7px 11px;background:#f4f6f9;border-bottom:1px solid var(--line)}
+.appbar .ic{width:24px;height:24px;flex:0 0 24px;border-radius:6px;background:var(--ink)}
+.appbar b{font-size:8.4px;display:block;line-height:1.2}
+.appbar em{font-size:7px;color:var(--muted);display:block;font-style:normal}
+.appbar .go{margin-left:auto;font-size:7.6px;font-weight:800;background:var(--ink);color:#fff;padding:4px 9px;border-radius:999px}
+.appbar .x{font-size:9px;color:var(--faint)}
+.promostrip{background:var(--yellow);color:var(--ink);display:flex;align-items:center;justify-content:center;
+  gap:6px;font-size:8.6px;font-weight:700;padding:6px 10px}
+.promostrip .arw{opacity:.45;font-size:8px}
+.navmini{display:flex;align-items:center;justify-content:center;gap:7px;padding:10px 13px;
+  border-bottom:1px solid var(--line);background:#fff}
+.navmini .logo{font-size:11.5px;font-weight:750;letter-spacing:.05em}
+.navmini .lock{display:flex;align-items:center;gap:4px;font-size:8.4px;font-weight:700;color:var(--muted)}
+.navmini .lock svg{width:10px;height:10px}
+.chatban{display:flex;align-items:center;gap:8px;margin:11px 13px;padding:9px 10px;
+  border:1px solid var(--line);border-radius:9px;background:#f7f9fa}
+.chatban .ic{width:26px;height:26px;flex:0 0 26px;border-radius:50%;background:#25d366;
+  display:flex;align-items:center;justify-content:center}
+.chatban .ic svg{width:14px;height:14px;fill:#fff}
+.chatban b{font-size:8.8px;display:block}
+.chatban em{font-size:7.4px;color:var(--muted);display:block;font-style:normal}
+.citem{display:flex;gap:9px;border:1px solid var(--line);border-radius:9px;padding:9px;background:#fff}
+.citem .ph{width:62px;height:62px;flex:0 0 62px;border-radius:7px}
+.citem .bd{flex:1;min-width:0}
+.citem .n{font-size:9.2px;font-weight:650;line-height:1.3;display:block}
+.citem .del{font-size:7.6px;color:var(--muted);display:block;margin-top:3px}
+.citem .p{font-size:10.5px;font-weight:800;margin-top:4px;display:block}
+.citem .foot{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.qty span{padding:3px 7px;font-size:9px;font-weight:700}
+.qty span.mid{border-left:1px solid var(--line);border-right:1px solid var(--line);min-width:20px;text-align:center}
+.rm{font-size:7.6px;color:var(--muted);text-decoration:underline}
+.xsell{display:flex;gap:7px;overflow:hidden;margin-top:8px}
+.xsell .c{flex:0 0 82px}
+.xsell .c .ph{height:62px;border-radius:6px;margin-bottom:3px}
+.xsell .c b{font-size:7.6px;font-weight:600;display:block;line-height:1.25}
+.xsell .c em{font-size:8px;font-weight:750;display:block;font-style:normal}
+.totals{border:1px solid var(--line);border-radius:9px;padding:10px;margin-top:11px}
+.totals .r{display:flex;justify-content:space-between;font-size:9px;margin-bottom:5px;color:var(--ink-2)}
+.totals .r.big{font-size:11.5px;font-weight:800;color:var(--ink);border-top:1px solid var(--line);
+  padding-top:7px;margin-top:7px;margin-bottom:0}
+.totals .r .sm{font-size:7.4px;color:var(--faint);font-weight:400}
+.datefield{margin-top:10px}
+.datefield label{font-size:8.6px;font-weight:700;display:block;margin-bottom:4px}
+.datefield .box{border:1px solid var(--line);border-radius:7px;padding:9px 10px;display:flex;
+  justify-content:space-between;align-items:center;font-size:9px;color:var(--faint)}
+.datefield .box svg{width:12px;height:12px;color:var(--muted)}
+.ctaY{display:block;text-align:center;font-weight:800;font-size:11.5px;padding:12px;border-radius:8px;
+  background:var(--yellow);color:#fff}
+.ctaT{display:block;text-align:center;font-weight:800;font-size:11.5px;padding:12px;border-radius:8px;
+  background:var(--brand);color:#fff}
+.ctaD{display:flex;align-items:center;justify-content:center;gap:6px;text-align:center;font-weight:800;
+  font-size:11.5px;padding:12px;border-radius:8px;background:var(--ink);color:#fff}
+.ctaD svg{width:12px;height:12px}
+.express{display:grid;gap:6px;margin-top:8px}
+.express .b{border-radius:7px;padding:9px;text-align:center;font-size:9.4px;font-weight:800;color:#fff}
+.express .sp{background:#5a31f4} .express .gp{background:#000}
+.orsep{display:flex;align-items:center;gap:8px;margin:9px 0;color:var(--faint);font-size:7.6px}
+.orsep::before,.orsep::after{content:"";flex:1;height:1px;background:var(--line)}
+.reicons{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:11px}
+.reicons .u{text-align:center}
+.reicons .u .ic{width:20px;height:20px;margin:0 auto 3px;border-radius:50%;background:var(--brand-soft);
+  display:flex;align-items:center;justify-content:center;color:var(--brand-dk)}
+.reicons .u .ic svg{width:11px;height:11px}
+.reicons .u b{font-size:7.4px;font-weight:700;display:block;line-height:1.2}
+
+/* shared frame furniture */
+.fold{position:relative;border-top:1.5px dashed #c3ccd8}
+.fold span{position:absolute;top:-7px;left:13px;background:#fff;padding:0 6px;font-size:7.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:700}
+.filler{padding:0 13px 13px}
+.filler .bar{height:9px;border-radius:3px;background:#eef1f5;margin-bottom:6px}
+.filler .bar.s{width:62%} .filler .bar.m{width:84%}
+.deep{padding:9px 13px;background:#f7f8fa;border-top:1px solid var(--line-2);
+  font-size:8.4px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:6px}
+.deep svg{flex:0 0 12px}
+.anno{position:absolute;z-index:11;width:17px;height:17px;border-radius:50%;background:var(--green);color:#fff;
+  font-size:9.5px;font-weight:800;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 2.5px #fff,0 2px 6px rgba(0,0,0,.2)}
+
+.changes,.unchanged,.notebox{margin-top:16px;width:344px;background:#fff;border:1px solid var(--line);
+  border-radius:11px;padding:13px 14px}
+.changes h4,.unchanged b,.notebox h4{margin:0 0 8px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--faint);font-weight:700;display:block}
+.changes ol{margin:0;padding-left:0;list-style:none;counter-reset:c}
+.changes li{counter-increment:c;position:relative;padding-left:24px;margin-bottom:7px;font-size:11.5px;
+  color:var(--ink-2);line-height:1.45}
+.changes li::before{content:counter(c);position:absolute;left:0;top:1px;width:16px;height:16px;border-radius:50%;
+  background:var(--green-soft);color:var(--green);font-size:9px;font-weight:800;
+  display:flex;align-items:center;justify-content:center}
+.unchanged{font-size:11.5px;color:var(--muted);line-height:1.5}
+.notebox{border-color:#eadfc9;background:var(--gold-soft)}
+.notebox h4{color:var(--gold)}
+.notebox p{margin:0 0 7px;font-size:11.5px;color:#6d5730;line-height:1.5}
+.notebox p:last-child{margin:0}
+.notebox b.k{color:#4d3d1f;font-weight:700}
+
+footer.foot{text-align:center;color:var(--faint);font-size:12px;padding:26px 0 0;line-height:1.7}
+@media (max-width:1080px){
+  .psh{grid-template-columns:1fr}
+  .psh > div{border-right:0;border-bottom:1px solid var(--line-2)}
+  .frames{grid-template-columns:1fr}
+  .scoreboard{grid-template-columns:repeat(2,1fr)}
+}
+@media print{ body{background:#fff} .idea{break-inside:avoid;box-shadow:none} .screen{height:auto;overflow:visible} }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Luxusbetten24 · CRO Programme</p>
+    <h1>August 2026 Testing Pipeline</h1>
+    <p>Seven experiments across four surfaces, each with the full mobile before/after wireframe, the problem it addresses, and the notes needed to build and read it. Mobile only. Minimum runtimes are set at two full weeks so every test covers complete weekly buying cycles.</p>
+    <div class="scoreboard">
+      <div class="sb"><b>7</b><span>Tests in pipeline</span></div>
+      <div class="sb g"><b>4</b><span>Surfaces covered</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="note-en">
+    <b>English-language version.</b> All interface copy in these wireframes is shown in English so the document can be reviewed without translation. The store's production copy is German. Prices are shown in euros as they appear on the live store.
+  </div>
+
+  <div class="legend">
+    <b>How to read these:</b>
+    <span class="key"><i class="dot" style="background:var(--red)"></i> Control = the live site today</span>
+    <span class="key"><i class="dot" style="background:var(--green)"></i> Variant = proposed</span>
+    <span class="key"><i class="dot" style="background:#cfd6df"></i> Grey blocks = imagery, unchanged</span>
+    <span class="key">Numbered markers on the variant map to “What changed”. Phone screens scroll — drag inside them.</span>
+  </div>
+
+  <h2 class="sect">7 tests in pipeline</h2>
+
+  <!-- ============ 01 ============ -->
+  <section class="idea">
+    <div class="idea-head">
+      <span class="idea-tag">Test 01 · Homepage · Roadmap HP-03</span>
+      <h2><span class="numb">01</span> Add Review Volume and Three USPs Around the Hero CTA</h2>
+      <p class="idea-sub">Rating context and purchase reassurance at the point of decision</p>
+      <div class="chips">
+        <span class="chip">Primary: hero CTA click-through</span>
+        <span class="chip">Min. runtime: 2 weeks</span>
+        <span class="chip hi">Effort: low</span>
+        <span class="chip hi">Confidence: high</span>
+        <span class="chip">Scope: homepage</span>
+      </div>
+      <p class="srcline"><b>Source wireframe:</b> homepage deck → Homepage Test 03</p>
+    </div>
+
+    <div class="psh">
+      <div class="prob">
+        <h3>Problem</h3>
+        <p>The hero already carries a Trustpilot badge above the headline, but it is <b>stars and a wordmark only</b> — no score, no review count. Stars alone don't communicate how much evidence sits behind them.</p>
+        <p>Reassurance is scattered elsewhere: free delivery rotates through the announcement bar, and the four real selling points sit in a “Why Luxusbetten24?” section <b>seven sections below the hero buttons</b>.</p>
+        <p>On mobile that leaves visitors deciding on the primary call to action with no support at all.</p>
+      </div>
+      <div class="sol">
+        <h3>Solution</h3>
+        <p>Keep the existing stars and add one line underneath, pulled from live Trustpilot data — the numerical score and the total review count. Make the stars and the line one clickable target to the Trustpilot profile.</p>
+        <p>Add a compact three-item reassurance row directly below the hero buttons: small icons, single-line labels, all three visible without a carousel, clear spacing from the buttons.</p>
+        <p>Leave the headline, sub-line, both button labels and their destinations untouched so the test isolates trust presentation.</p>
+      </div>
+      <div class="hyp">
+        <h3>Hypothesis</h3>
+        <p><span class="if">If</span> the numerical rating and review count appear directly below the Trustpilot stars, and three clear selling points appear below the hero buttons, <span class="if">then</span> more mobile visitors will click a primary call to action, <span class="if">because</span> the store's social proof and purchase reassurance become legible at the moment of decision.</p>
+        <div class="metric">
+          <b>Evidence:</b> live homepage audit — hero badge carries no score or volume, reassurance section sits seven sections lower; competitor comparison — Boxspring Welt and Mozart both surface numerical ratings and service reassurance; funnel data — 3.48% of sessions add to cart; homepage generated 37,635 landing sessions and grew 27%.
+        </div>
+      </div>
+    </div>
+
+    <div class="frames">
+      <div class="frame-col">
+        <div class="frame-label before"><span class="pill">Before</span><span class="note">Stars with no number, no reassurance under the buttons</span></div>
+        <div class="phone"><div class="screen">
+          <div class="statusbar"><span>9:41</span><span class="r"><i class="bars"></i><i class="batt"></i></span></div>
+          <div class="announce"><span class="arw">‹</span> Free delivery <span class="arw">›</span></div>
+          <div class="nav">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#2b3644" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            <div class="logo">Luxusbetten24</div>
+            <div class="icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+            </div>
+          </div>
+          <div class="hero img warm" style="min-height:248px">
+            <span class="vidbadge"><i></i> VIDEO</span>
+            <span class="tp-hero">
+              <span class="stars"><i class="star"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></i><i class="star"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></i><i class="star"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></i><i class="star"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></i><i class="star off"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></i></span>
+              <span class="tp-lbl">Trustpilot</span>
+            </span>
+            <h4>Design furniture for your home — handcrafted in Europe</h4>
+            <p class="subline">Discover premium beds, sofas and living ideas with fast delivery times.</p>
+            <div class="btn-row"><a class="btn white">Discover now</a><a class="btn ghost-l">Discover sale</a></div>
+          </div>
+          <div class="fold"><span>Fold ≈ 844 px</span></div>
+          <div class="sec">
+            <p class="sec-t">Discover our collections</p>
+            <div class="grid2">
+              <div class="tile"><div class="im img"></div><b>Box-spring beds</b></div>
+              <div class="tile"><div class="im img"></div><b>Sofas</b></div>
+              <div class="tile"><div class="im img"></div><b>Garden</b></div>
+              <div class="tile"><div class="im img"></div><b>Home accessories</b></div>
+            </div>
+            <div style="margin-top:9px"><a class="btn ghost" style="font-size:9.5px;padding:8px">All products</a></div>
+          </div>
+          <div class="sec" style="background:#f7f8fa">
+            <p class="sec-t">Build your own piece</p>
+            <div class="grid2">
+              <div class="tile"><div class="im img" style="height:52px"></div><b>Box-spring bed</b></div>
+              <div class="tile"><div class="im img" style="height:52px"></div><b>Upholstered bed</b></div>
+            </div>
+          </div>
+          <div class="sec"><p class="sec-t">Customer favourites</p><div class="filler" style="padding:0"><div class="bar m"></div><div class="bar s"></div></div></div>
+          <div class="deep">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+            Selling points appear here — section 8 of 10
+          </div>
+          <div class="usp-row" style="opacity:.45">
+            <div class="usp"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 4v6c0 4-3 7-7 8-4-1-7-4-7-8V7z"/><path d="M9 12l2 2 4-4"/></svg></div><b>5-year warranty</b></div>
+            <div class="usp"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 20v-6h6"/></svg></div><b>30-day returns</b></div>
+            <div class="usp"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18v-5a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v5M4 18h16"/></svg></div><b>100,000+ sold</b></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="frame-col">
+        <div class="frame-label after"><span class="pill">After</span><span class="note">Rating in the badge, reassurance under the buttons</span></div>
+        <div class="phone">
+          <div class="anno" style="top:150px;left:-8px">1</div>
+          <div class="anno" style="top:330px;left:-8px">2</div>
+          <div class="screen">
+          <div class="statusbar"><span>9:41</span><span class="r"><i class="bars"></i><i class="batt"></i></span></div>
+          <div class="announce"><span class="arw">‹</span> Free delivery <span class="arw">›</span></div>
+          <div class="nav">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#2b3644" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            <div class="logo">Luxusbetten24</div>
+            <div class="icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+            </div>
+          </div>
+          <div class="hero img warm" style="min-height:248px">
+            <span class="vidbadge"><i></i> VIDEO</span>
+            <a style="display:block;margin-bottom:9px">
+              <span class="tp-hero" style="margin-bottom:2px">
+                <span class="stars"><i class="star"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></i><i class="star"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></i><i class="star"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></i><i class="star"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></i><i class="star off"><svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></i></span>
+                <span class="tp-lbl">Trustpilot</span>
+              </span>
+              <span style="display:block;font-size:8.8px;font-weight:700;color:#fff;text-decoration:underline;text-underline-offset:2px">4.6 out of 5 from 2,418 Trustpilot reviews</span>
+            </a>
+            <h4>Design furniture for your home — handcrafted in Europe</h4>
+            <p class="subline">Discover premium beds, sofas and living ideas with fast delivery times.</p>
+            <div class="btn-row"><a class="btn white">Discover now</a><a class="btn ghost-l">Discover sale</a></div>
+          </div>
+
+          <div class="usp-row" style="border-bottom:1px solid var(--line-2)">
+            <div class="usp"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 4v6c0 4-3 7-7 8-4-1-7-4-7-8V7z"/><path d="M9 12l2 2 4-4"/></svg></div><b>Up to 5-year warranty</b></div>
+            <div class="usp"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 20v-6h6"/></svg></div><b>Up to 30-day returns</b></div>
+            <div class="usp"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 18v-5a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v5M4 18h16"/></svg></div><b>100,000+ pieces sold</b></div>
+          </div>
+
+          <div class="fold"><span>Fold ≈ 844 px</span></div>
+          <div class="sec">
+            <p class="sec-t">Discover our collections</p>
+            <div class="grid2">
+              <div class="tile"><div class="im img"></div><b>Box-spring beds</b></div>
+              <div class="tile"><div class="im img"></div><b>Sofas</b></div>
+              <div class="tile"><div class="im img"></div><b>Garden</b></div>
+              <div class="tile"><div class="im img"></div><b>Home accessories</b></div>
+            </div>
+            <div style="margin-top:9px"><a class="btn ghost" style="font-size:9.5px;padding:8px">All products</a></div>
+          </div>
+          <div class="sec" style="background:#f7f8fa">
+            <p class="sec-t">Build your own piece</p>
+            <div class="grid2">
+              <div class="tile"><div class="im img" style="height:52px"></div><b>Box-spring bed</b></div>
+              <div class="tile"><div class="im img" style="height:52px"></div><b>Upholstered bed</b></div>
+            </div>
+          </div>
+          <div class="sec"><p class="sec-t">Customer favourites</p><div class="filler" style="padding:0"><div class="bar m"></div><div class="bar s"></div></div></div>
+        </div></div>
+
+        <div class="changes">
+          <h4>What changed</h4>
+          <ol>
+            <li>One line under the stars carrying the live score and review count. Stars, wordmark and line become a single clickable target to the Trustpilot profile.</li>
+            <li>Three-item reassurance row directly below the hero buttons — small icons, single-line labels, no carousel, a hairline divider so it reads as reassurance rather than three more buttons.</li>
+          </ol>
+        </div>
+        <div class="notebox">
+          <h4>Which three selling points</h4>
+          <p><b class="k">The roadmap's original set repeats the hero.</b> Two of its three items already appear on screen — “handcrafted in Europe” closes the headline, and free delivery rotates in the announcement bar. Repeating either spends a slot on something the visitor just read.</p>
+          <p>The variant above therefore uses three claims the site already makes and the hero does not: <b class="k">warranty, returns and units sold</b>. If you would rather test the roadmap wording as specified, run it as a third arm rather than replacing this one.</p>
+          <p><b class="k">The score and review count must render from live Trustpilot data.</b> The figures shown here are illustrative; hard-coded numbers will go stale and undermine the exact claim the test is making.</p>
+        </div>
+        <div class="unchanged">
+          <b>Held constant</b>
+          Hero video, headline, sub-line, both button labels and destinations, collections grid, configurator section and customer favourites. The lower reassurance section stays in place — the variant adds support at the decision point rather than relocating it.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 ============ -->
+  <section class="idea">
+    <div class="idea-head">
+      <span class="idea-tag">Test 02 · PDP · Roadmap PDP-01</span>
+      <h2><span class="numb">02</span> Mobile Benefit Snapshot</h2>
+      <p class="idea-sub">Show the core benefits before the options</p>
+      <div class="chips">
+        <span class="chip">Primary: add-to-cart rate</span>
+        <span class="chip">Min. runtime: 3 weeks</span>
+        <span class="chip md">Effort: low-medium</span>
+        <span class="chip">Confidence: medium-high</span>
+        <span class="chip hi">Scope: three highest-traffic PDPs</span>
+      </div>
+      <p class="srcline"><b>Source wireframe:</b> PDP deck → PDP Test 01</p>
+    </div>
+
+    <div class="psh">
+      <div class="prob">
+        <h3>Problem</h3>
+        <p>The product title communicates the sleeping and folding function. Every other reason to buy — compact footprint, hidden storage, everyday versatility — is buried in the description.</p>
+        <p>The page proves the point twice over. There is a key-features checklist and a “4 reasons thousands fell in love” block, both written and both sitting <b>below the add-to-cart button</b>, the first of them inside a collapsed accordion.</p>
+        <p>Many visitors land directly on these pages and have seen no prior brand or product explanation. Between the price and the button they get eighteen colour swatches, a left-or-right choice and a single-option material selector — and no reason to want the sofa.</p>
+      </div>
+      <div class="sol">
+        <h3>Solution</h3>
+        <p>Add three concise, icon-supported benefit statements directly below the price and before the colour options:</p>
+        <ul>
+          <li>Converts to a comfortable guest bed in seconds</li>
+          <li>Compact width — ideal for small rooms</li>
+          <li>Storage for blankets and cushions</li>
+        </ul>
+        <p>Leave the price, financing message, all variant controls and the button unchanged so the test isolates early benefit communication.</p>
+        <p>All three statements are verifiable from copy already published lower on the same page — this promotes existing content rather than making new claims.</p>
+      </div>
+      <div class="hyp">
+        <h3>Hypothesis</h3>
+        <p><span class="if">If</span> three product-specific benefits are displayed directly below the price and before the colour options, <span class="if">then</span> more mobile visitors will begin product selection and add to cart, <span class="if">because</span> they will understand the product's main value without scrolling into the long description.</p>
+        <div class="metric">
+          <b>Evidence:</b> live PDP audit — benefits exist in the key-features list and the “4 reasons” block, both below the button; the reference PDP received 16,772 landing sessions in 30 days; sitewide add-to-cart rate is 3.48%; CRO practice for direct-entry, high-consideration product pages.
+        </div>
+      </div>
+    </div>
+
+    <div class="frames">
+      <div class="frame-col">
+        <div class="frame-label before"><span class="pill">Before</span><span class="note">Price, then straight into the options</span></div>
+        <div class="phone"><div class="screen">
+          <div class="statusbar"><span>9:41</span><span class="r"><i class="bars"></i><i class="batt"></i></span></div>
+          <div class="announce"><span class="arw">‹</span> Limited time: 5% off with code SUN5 <span class="arw">›</span></div>
+          <div class="nav">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#2b3644" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            <div class="logo">Luxusbetten24</div>
+            <div class="icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+            </div>
+          </div>
+          <div class="crumb">Home / All products / Designer Sofa Roma …</div>
+          <div class="gal">
+            <span class="flash">Flash sale −26%</span>
+            <div class="main img warm"></div>
+            <span class="idx">1 / 90</span>
+          </div>
+          <div class="thumbs">
+            <span class="t img warm on"></span>
+            <span class="t img flat" style="background:#eef1f5"><span class="lbl">DIMENSIONS</span></span>
+            <span class="t vid"><span class="lbl">VIDEO</span></span>
+            <span class="t img warm"></span>
+            <span class="t img warm"></span>
+            <span class="more">+85</span>
+          </div>
+          <div class="sec" style="padding-bottom:0">
+            <span class="rating"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 4.8 · 5,689 reviews</span>
+            <h2 class="ptitle">Designer Sofa Roma in corduroy with sleep and fold function</h2>
+            <div class="pricerow"><span class="now">€519.00</span><span class="was">€699.00</span><span class="save">You save €180.00</span></div>
+            <p class="taxline">incl. VAT, free shipping</p>
+            <div class="finance"><span>From <b>€43.25</b> / month · 0% financing</span><a>Learn more</a></div>
+          </div>
+          <div class="sec">
+            <div class="optlbl"><span>Colour: Beige</span><a>Free fabric sample</a></div>
+            <div class="sw18">
+              <i class="on" style="background:#e3d5bd"></i><i style="background:#7a5c46"></i><i style="background:#4a6b4f"></i><i style="background:#5b7691"></i><i style="background:#d0743a"></i><i style="background:#d8aeb0"></i>
+              <i style="background:#c3c8cd"></i><i style="background:#8b9198"></i><i style="background:#2a2d31"></i><i style="background:#3f5b8a"></i><i style="background:#a3b39a"></i><i style="background:#7d7f4a"></i>
+              <i style="background:#b5613f"></i><i style="background:#e8c4bd"></i><i style="background:#a4899b"></i><i style="background:#2f6570"></i><i style="background:#d9a441"></i><i style="background:#c8832c"></i>
+            </div>
+            <div class="optlbl"><span>Ottoman position (top view)</span></div>
+            <div class="pillrow"><span class="on">Left</span><span>Right</span></div>
+            <div class="optlbl"><span>Material</span></div>
+            <div class="pillrow"><span class="on solo">Corduroy</span></div>
+            <div class="pay"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <a class="atc">Add to cart — €519.00</a>
+          </div>
+          <div class="fold"><span>Fold ≈ 844 px</span></div>
+          <div class="sec" style="padding-top:11px">
+            <div class="reassure">
+              <div class="rc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 8h11v8H1zM12 11h5l4 3v2h-9z"/><circle cx="6" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg></div><div><b>Free delivery into your home</b><span>By our specialist team</span></div></div>
+              <div class="rc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><b>Delivery time: 2–3 weeks</b><span>Incl. tracking</span></div></div>
+              <div class="rc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6L12 15.8 6.6 18.6l1.2-6L3.3 8.4l6.1-.8z"/></svg></div><div><b>200,000+ satisfied customers</b><span>A trusted home specialist</span></div></div>
+            </div>
+          </div>
+          <div class="acc">
+            <div class="row"><span>Product details</span><span class="cv">＋</span></div>
+          </div>
+          <div class="deep">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+            Key features list sits collapsed inside this accordion
+          </div>
+          <div class="sec" style="padding-top:0">
+            <p class="sec-t" style="font-size:11px">4 reasons thousands fell in love</p>
+            <div class="four">
+              <div class="c"><b>Sleep &amp; fold function</b><span>From sofa to a full guest bed in moments.</span></div>
+              <div class="c"><b>Corduroy in 18 colours</b><span>Soft cover for any interior style.</span></div>
+              <div class="c"><b>Ottoman side of your choice</b><span>Left or right — fits any room.</span></div>
+              <div class="c"><b>Free delivery</b><span>Carried into your home at no extra cost.</span></div>
+            </div>
+          </div>
+          <div class="deep">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+            Four good reasons to buy — all of them below the button
+          </div>
+        </div></div>
+      </div>
+
+      <div class="frame-col">
+        <div class="frame-label after"><span class="pill">After</span><span class="note">Three benefits between price and options</span></div>
+        <div class="phone">
+          <div class="anno" style="top:352px;left:-8px">1</div>
+          <div class="anno" style="top:392px;left:-8px">2</div>
+          <div class="anno" style="top:432px;left:-8px">3</div>
+          <div class="screen">
+          <div class="statusbar"><span>9:41</span><span class="r"><i class="bars"></i><i class="batt"></i></span></div>
+          <div class="announce"><span class="arw">‹</span> Limited time: 5% off with code SUN5 <span class="arw">›</span></div>
+          <div class="nav">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#2b3644" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            <div class="logo">Luxusbetten24</div>
+            <div class="icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+            </div>
+          </div>
+          <div class="crumb">Home / All products / Designer Sofa Roma …</div>
+          <div class="gal">
+            <span class="flash">Flash sale −26%</span>
+            <div class="main img warm"></div>
+            <span class="idx">1 / 90</span>
+          </div>
+          <div class="thumbs">
+            <span class="t img warm on"></span>
+            <span class="t img flat" style="background:#eef1f5"><span class="lbl">DIMENSIONS</span></span>
+            <span class="t vid"><span class="lbl">VIDEO</span></span>
+            <span class="t img warm"></span>
+            <span class="t img warm"></span>
+            <span class="more">+85</span>
+          </div>
+          <div class="sec" style="padding-bottom:0">
+            <span class="rating"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 4.8 · 5,689 reviews</span>
+            <h2 class="ptitle">Designer Sofa Roma in corduroy with sleep and fold function</h2>
+            <div class="pricerow"><span class="now">€519.00</span><span class="was">€699.00</span><span class="save">You save €180.00</span></div>
+            <p class="taxline">incl. VAT, free shipping</p>
+
+            <div class="bsnap">
+              <div class="bs">
+                <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 15v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4M3 15h18v3H3zM7 9V7h10v2"/></svg></div>
+                <div><b>Converts to a comfortable guest bed in seconds</b></div>
+              </div>
+              <div class="bs">
+                <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8V5h3M21 8V5h-3M3 16v3h3M21 16v3h-3M7 12h10"/></svg></div>
+                <div><b>Compact width — ideal for small rooms</b></div>
+              </div>
+              <div class="bs">
+                <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M3 13h18M9 16h6"/></svg></div>
+                <div><b>Storage for blankets and cushions</b></div>
+              </div>
+            </div>
+
+            <div class="finance" style="margin-top:9px"><span>From <b>€43.25</b> / month · 0% financing</span><a>Learn more</a></div>
+          </div>
+          <div class="fold"><span>Fold ≈ 844 px</span></div>
+          <div class="sec">
+            <div class="optlbl"><span>Colour: Beige</span><a>Free fabric sample</a></div>
+            <div class="sw18">
+              <i class="on" style="background:#e3d5bd"></i><i style="background:#7a5c46"></i><i style="background:#4a6b4f"></i><i style="background:#5b7691"></i><i style="background:#d0743a"></i><i style="background:#d8aeb0"></i>
+              <i style="background:#c3c8cd"></i><i style="background:#8b9198"></i><i style="background:#2a2d31"></i><i style="background:#3f5b8a"></i><i style="background:#a3b39a"></i><i style="background:#7d7f4a"></i>
+              <i style="background:#b5613f"></i><i style="background:#e8c4bd"></i><i style="background:#a4899b"></i><i style="background:#2f6570"></i><i style="background:#d9a441"></i><i style="background:#c8832c"></i>
+            </div>
+            <div class="optlbl"><span>Ottoman position (top view)</span></div>
+            <div class="pillrow"><span class="on">Left</span><span>Right</span></div>
+            <div class="optlbl"><span>Material</span></div>
+            <div class="pillrow"><span class="on solo">Corduroy</span></div>
+            <div class="pay"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <a class="atc">Add to cart — €519.00</a>
+          </div>
+          <div class="sec" style="padding-top:0">
+            <div class="reassure">
+              <div class="rc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 8h11v8H1zM12 11h5l4 3v2h-9z"/><circle cx="6" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg></div><div><b>Free delivery into your home</b><span>By our specialist team</span></div></div>
+              <div class="rc"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><b>Delivery time: 2–3 weeks</b><span>Incl. tracking</span></div></div>
+            </div>
+          </div>
+          <div class="acc"><div class="row"><span>Product details</span><span class="cv">＋</span></div></div>
+        </div></div>
+
+        <div class="changes">
+          <h4>What changed</h4>
+          <ol>
+            <li>Three benefit rows inserted between the price and the colour selector — the first thing after the price is now a reason to want the sofa, not a decision to make.</li>
+            <li>Copy is lifted from content already published lower on the same page, so nothing new has to be written or legally checked.</li>
+            <li>Financing line moves below the snapshot so the benefits sit tight against the price. Everything from the colour label down is identical to the control.</li>
+          </ol>
+        </div>
+        <div class="notebox">
+          <h4>Before build</h4>
+          <p><b class="k">Confirm the exact width figure.</b> The reference page states two different widths in two places — the description and the dimensions block disagree by six centimetres. The benefit line above deliberately says “compact width” rather than a number for that reason. Measure the product, align both places on the page, then decide whether the line is stronger with the figure in it.</p>
+          <p><b class="k">Each of the three PDPs needs its own three benefits.</b> The copy is product-specific and must be verifiable from that product's own description — this is not one creative applied three times.</p>
+          <p><b class="k">Confirm the three products.</b> The reference PDP is the known highest-volume page; the other two need pulling from analytics before the test is scoped.</p>
+          <p><b class="k">Fourth candidate worth testing:</b> the folded sleeping surface dimension is on the page and is the most concrete guest-bed proof point available. Worth trialling against the storage line.</p>
+        </div>
+        <div class="unchanged">
+          <b>Held constant</b>
+          Gallery, rating line, title, price, savings badge, financing message, all three variant controls, payment logos, button label and destination, and the reassurance cards. The test isolates early benefit communication only.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 ============ -->
+  <section class="idea">
+    <div class="idea-head">
+      <span class="idea-tag">Test 03 · PDP · Roadmap PDP-02</span>
+      <h2><span class="numb">03</span> Product Video as Gallery Item Two</h2>
+      <p class="idea-sub">Move the video ahead of the technical dimensions drawing</p>
+      <div class="chips">
+        <span class="chip">Primary: video play rate</span>
+        <span class="chip">Min. runtime: 2 weeks</span>
+        <span class="chip hi">Effort: very low</span>
+        <span class="chip">Confidence: medium</span>
+        <span class="chip hi">Scope: sitewide, all PDPs with video</span>
+      </div>
+      <p class="srcline"><b>Source wireframe:</b> PDP deck → PDP Test 02</p>
+    </div>
+
+    <div class="psh">
+      <div class="prob">
+        <h3>Problem</h3>
+        <p>The video is not buried at the back of the gallery — it is already the third item. The problem is what sits in front of it: <b>position two is a technical dimensions drawing</b>, a measured line diagram rather than a product shot.</p>
+        <p>So the second thing a visitor swipes to, immediately after the lifestyle hero, is a spec drawing. The one asset that demonstrates the sleeping, folding and storage functions in motion is one swipe further back.</p>
+        <p>The gallery is also very large — roughly ninety items, eighteen colours photographed five ways each. Anything outside the first few positions is effectively invisible on mobile.</p>
+      </div>
+      <div class="sol">
+        <h3>Solution</h3>
+        <p>Move the existing product video to the <b>second gallery position</b>, directly after the main lifestyle image. The dimensions drawing takes position three.</p>
+        <p>Keep the first image, the video file, the thumbnail treatment, every remaining asset and all swipe behaviour unchanged, so the test isolates media order.</p>
+        <p>Nothing is added and nothing is removed — this is a swap of two adjacent slots.</p>
+      </div>
+      <div class="hyp">
+        <h3>Hypothesis</h3>
+        <p><span class="if">If</span> the existing product video moves to the second position in the mobile gallery, <span class="if">then</span> more visitors will watch it and add the product to cart, <span class="if">because</span> its functionality will be demonstrated earlier in the decision journey.</p>
+        <div class="metric">
+          <b>Evidence:</b> live gallery audit — order runs lifestyle, dimensions drawing, video, with roughly ninety items in total; product positioning — sleeping, folding and storage are the primary benefits; CRO practice: functional products benefit from demonstration rather than description alone.
+        </div>
+      </div>
+    </div>
+
+    <div class="frames">
+      <div class="frame-col">
+        <div class="frame-label before"><span class="pill">Before</span><span class="note">Slot 2 is a spec drawing; video sits third</span></div>
+        <div class="phone"><div class="screen">
+          <div class="statusbar"><span>9:41</span><span class="r"><i class="bars"></i><i class="batt"></i></span></div>
+          <div class="announce"><span class="arw">‹</span> Limited time: 5% off with code SUN5 <span class="arw">›</span></div>
+          <div class="nav">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#2b3644" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            <div class="logo">Luxusbetten24</div>
+            <div class="icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+            </div>
+          </div>
+          <div class="crumb">Home / All products / Designer Sofa Roma …</div>
+
+          <div class="gal">
+            <span class="flash">Flash sale −26%</span>
+            <div class="main img flat" style="height:190px;background:#eef1f5;display:flex;align-items:center;justify-content:center">
+              <span style="font-size:9px;font-weight:700;color:#8a94a3;letter-spacing:.1em">SWIPE 2 · DIMENSIONS DRAWING</span>
+            </div>
+            <span class="idx">2 / 90</span>
+          </div>
+          <div class="thumbs">
+            <span class="t img warm"><span class="lbl">1</span></span>
+            <span class="t img flat on" style="background:#eef1f5"><span class="lbl">2 · DIMENSIONS</span></span>
+            <span class="t vid"><span class="lbl">3 · VIDEO</span></span>
+            <span class="t img warm"><span class="lbl">4</span></span>
+            <span class="t img warm"><span class="lbl">5</span></span>
+            <span class="more">+85</span>
+          </div>
+
+          <div class="deep" style="margin-top:9px;border-top:0">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+            One swipe after the hero the visitor gets a line diagram
+          </div>
+
+          <div class="sec" style="padding-top:4px;padding-bottom:0">
+            <span class="rating"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 4.8 · 5,689 reviews</span>
+            <h2 class="ptitle">Designer Sofa Roma in corduroy with sleep and fold function</h2>
+            <div class="pricerow"><span class="now">€519.00</span><span class="was">€699.00</span><span class="save">You save €180.00</span></div>
+            <p class="taxline">incl. VAT, free shipping</p>
+          </div>
+          <div class="sec">
+            <div class="optlbl"><span>Colour: Beige</span><a>Free fabric sample</a></div>
+            <div class="sw18">
+              <i class="on" style="background:#e3d5bd"></i><i style="background:#7a5c46"></i><i style="background:#4a6b4f"></i><i style="background:#5b7691"></i><i style="background:#d0743a"></i><i style="background:#d8aeb0"></i>
+              <i style="background:#c3c8cd"></i><i style="background:#8b9198"></i><i style="background:#2a2d31"></i><i style="background:#3f5b8a"></i><i style="background:#a3b39a"></i><i style="background:#7d7f4a"></i>
+            </div>
+            <div class="optlbl"><span>Ottoman position (top view)</span></div>
+            <div class="pillrow"><span class="on">Left</span><span>Right</span></div>
+            <a class="atc">Add to cart — €519.00</a>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="frame-col">
+        <div class="frame-label after"><span class="pill">After</span><span class="note">Video and drawing swap places</span></div>
+        <div class="phone">
+          <div class="anno" style="top:120px;left:-8px">1</div>
+          <div class="anno" style="top:236px;left:-8px">2</div>
+          <div class="screen">
+          <div class="statusbar"><span>9:41</span><span class="r"><i class="bars"></i><i class="batt"></i></span></div>
+          <div class="announce"><span class="arw">‹</span> Limited time: 5% off with code SUN5 <span class="arw">›</span></div>
+          <div class="nav">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#2b3644" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            <div class="logo">Luxusbetten24</div>
+            <div class="icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+            </div>
+          </div>
+          <div class="crumb">Home / All products / Designer Sofa Roma …</div>
+
+          <div class="gal">
+            <span class="flash">Flash sale −26%</span>
+            <div class="main" style="height:190px;background:linear-gradient(150deg,#4a545f,#232a33);position:relative">
+              <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:0;height:0;
+                border-left:22px solid rgba(255,255,255,.95);border-top:14px solid transparent;border-bottom:14px solid transparent"></span>
+              <span style="position:absolute;bottom:11px;left:11px;font-size:8px;font-weight:800;letter-spacing:.1em;color:rgba(255,255,255,.85)">SWIPE 2 · PRODUCT VIDEO</span>
+            </div>
+            <span class="idx">2 / 90</span>
+          </div>
+          <div class="thumbs">
+            <span class="t img warm"><span class="lbl">1</span></span>
+            <span class="t vid on"><span class="lbl">2 · VIDEO</span></span>
+            <span class="t img flat" style="background:#eef1f5"><span class="lbl">3 · DIMENSIONS</span></span>
+            <span class="t img warm"><span class="lbl">4</span></span>
+            <span class="t img warm"><span class="lbl">5</span></span>
+            <span class="more">+85</span>
+          </div>
+
+          <div class="sec" style="padding-top:11px;padding-bottom:0">
+            <span class="rating"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 4.8 · 5,689 reviews</span>
+            <h2 class="ptitle">Designer Sofa Roma in corduroy with sleep and fold function</h2>
+            <div class="pricerow"><span class="now">€519.00</span><span class="was">€699.00</span><span class="save">You save €180.00</span></div>
+            <p class="taxline">incl. VAT, free shipping</p>
+          </div>
+          <div class="sec">
+            <div class="optlbl"><span>Colour: Beige</span><a>Free fabric sample</a></div>
+            <div class="sw18">
+              <i class="on" style="background:#e3d5bd"></i><i style="background:#7a5c46"></i><i style="background:#4a6b4f"></i><i style="background:#5b7691"></i><i style="background:#d0743a"></i><i style="background:#d8aeb0"></i>
+              <i style="background:#c3c8cd"></i><i style="background:#8b9198"></i><i style="background:#2a2d31"></i><i style="background:#3f5b8a"></i><i style="background:#a3b39a"></i><i style="background:#7d7f4a"></i>
+            </div>
+            <div class="optlbl"><span>Ottoman position (top view)</span></div>
+            <div class="pillrow"><span class="on">Left</span><span>Right</span></div>
+            <a class="atc">Add to cart — €519.00</a>
+          </div>
+        </div></div>
+
+        <div class="changes">
+          <h4>What changed</h4>
+          <ol>
+            <li>Video moves from slot 3 to slot 2; the dimensions drawing moves from slot 2 to slot 3. Nothing else in the gallery moves.</li>
+            <li>The thumbnail strip reflects the new order, so the play icon is visible without scrolling the strip sideways.</li>
+          </ol>
+        </div>
+        <div class="notebox">
+          <h4>Size the test accordingly</h4>
+          <p><b class="k">This is a one-slot swap, not a rescue from the back of the gallery.</b> A single-position move on one media item will produce a modest effect. Add-to-cart is the business metric but will be underpowered — <b class="k">use video play rate as the primary</b> and treat add-to-cart as directional.</p>
+          <p><b class="k">The bigger prize is the gallery itself.</b> Roughly ninety items, eighteen colours photographed five near-identical ways. Filtering the gallery to the selected colour would be a far larger change than reordering two slides, and it is not currently in the roadmap.</p>
+          <p><b class="k">Keep the dimensions drawing in the top five.</b> It is unusual to have one at all and it answers the “will it fit” question the product's positioning invites. Demote it, don't bury it.</p>
+          <p><b class="k">Confirm the population.</b> Sitewide scope depends on how many PDPs actually carry a product video — if only a handful do, this shrinks back to a single-product test.</p>
+        </div>
+        <div class="unchanged">
+          <b>Held constant</b>
+          First image, video file and thumbnail treatment, every remaining gallery asset and its relative order, swipe behaviour, and everything below the gallery.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 ============ -->
+  <section class="idea">
+    <div class="idea-head">
+      <span class="idea-tag">Test 04 · PDP · Roadmap PDP-03a</span>
+      <h2><span class="numb">04</span> Fabric Close-Up on Colour Selection</h2>
+      <p class="idea-sub">Make the chosen colour evaluable — all eighteen swatches stay in place</p>
+      <div class="chips">
+        <span class="chip">Primary: completed colour selection</span>
+        <span class="chip">Min. runtime: 2 weeks</span>
+        <span class="chip md">Effort: medium</span>
+        <span class="chip">Confidence: medium-high</span>
+        <span class="chip hi">Scope: sitewide, excluding the three PDPs in test 02</span>
+      </div>
+      <p class="srcline"><b>Source wireframe:</b> PDP deck → PDP Test 03a</p>
+    </div>
+
+    <div class="psh">
+      <div class="prob">
+        <h3>Problem</h3>
+        <p>At nineteen pixels, a swatch cannot carry the information a fabric decision needs. <b>Sage against olive, blush against rosé, light grey against grey</b> — on a phone these are the same dot. Corduroy has a visible rib, and none of that is legible at swatch size.</p>
+        <p>Nothing confirms the choice either. Tapping a swatch updates the label, but there is no enlarged view of the fabric the buyer is committing several hundred euros to.</p>
+        <p>Free fabric samples are offered, and the link sits right there — but as small text on the same line as the colour label, competing with the controls instead of supporting them, and placed <em>before</em> the doubt occurs rather than after.</p>
+      </div>
+      <div class="sol">
+        <h3>Solution</h3>
+        <p>Keep all eighteen swatches exactly as they are. When a colour is selected:</p>
+        <ul>
+          <li>Show a large fabric close-up revealing the corduroy texture</li>
+          <li>Keep the colour name visible beside it</li>
+          <li>Update the main product image to the selected colour</li>
+          <li>Show a reassurance prompt after the choice offering a free fabric sample</li>
+        </ul>
+        <p>Do not change which colours are available, how many are shown, or their pricing — every variant is the same price today, so there is no pricing complication.</p>
+      </div>
+      <div class="hyp">
+        <h3>Hypothesis</h3>
+        <p><span class="if">If</span> the selected colour is shown as a large fabric close-up with its name, the main image updates to match, and the sample offer is promoted into its own prompt after the choice, <span class="if">then</span> more visitors will complete colour selection and fewer will commit to a colour they later reject, <span class="if">because</span> they can finally see what they are choosing.</p>
+        <div class="metric">
+          <b>Evidence:</b> live PDP audit — eighteen swatches at nineteen pixels, no enlarged preview, sample link set as small competing text, all variants priced identically; existing free fabric-sample offer; sales reversals run at roughly 13.2% of gross sales; CRO practice for tactile and colour-sensitive furniture purchases.
+        </div>
+      </div>
+    </div>
+
+    <div class="frames">
+      <div class="frame-col">
+        <div class="frame-label before"><span class="pill">Before</span><span class="note">No preview; sample link as small competing text</span></div>
+        <div class="phone"><div class="screen">
+          <div class="statusbar"><span>9:41</span><span class="r"><i class="bars"></i><i class="batt"></i></span></div>
+          <div class="announce"><span class="arw">‹</span> Limited time: 5% off with code SUN5 <span class="arw">›</span></div>
+          <div class="nav">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#2b3644" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            <div class="logo">Luxusbetten24</div>
+            <div class="icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+            </div>
+          </div>
+          <div class="gal">
+            <div class="main img warm" style="height:160px"></div>
+            <span class="idx">1 / 90</span>
+          </div>
+          <div class="sec" style="padding-bottom:0">
+            <span class="rating"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 4.8 · 5,689 reviews</span>
+            <h2 class="ptitle" style="font-size:12.5px">Designer Sofa Roma in corduroy with sleep and fold function</h2>
+            <div class="pricerow"><span class="now">€519.00</span><span class="was">€699.00</span></div>
+          </div>
+          <div class="sec">
+            <div class="optlbl"><span>Colour: Beige</span><a>Free fabric sample</a></div>
+            <div class="sw18">
+              <i class="on" style="background:#e3d5bd"></i><i style="background:#7a5c46"></i><i style="background:#4a6b4f"></i><i style="background:#5b7691"></i><i style="background:#d0743a"></i><i style="background:#d8aeb0"></i>
+              <i style="background:#c3c8cd"></i><i style="background:#8b9198"></i><i style="background:#2a2d31"></i><i style="background:#3f5b8a"></i><i style="background:#a3b39a"></i><i style="background:#7d7f4a"></i>
+              <i style="background:#b5613f"></i><i style="background:#e8c4bd"></i><i style="background:#a4899b"></i><i style="background:#2f6570"></i><i style="background:#d9a441"></i><i style="background:#c8832c"></i>
+            </div>
+            <div class="optlbl"><span>Ottoman position (top view)</span></div>
+            <div class="pillrow"><span class="on">Left</span><span>Right</span></div>
+            <div class="optlbl"><span>Material</span></div>
+            <div class="pillrow"><span class="on solo">Corduroy</span></div>
+            <div class="pay"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <a class="atc">Add to cart — €519.00</a>
+          </div>
+          <div class="deep">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+            Neighbouring tones are indistinguishable at this size
+          </div>
+        </div></div>
+      </div>
+
+      <div class="frame-col">
+        <div class="frame-label after"><span class="pill">After</span><span class="note">Close-up preview; all eighteen swatches kept</span></div>
+        <div class="phone">
+          <div class="anno" style="top:268px;left:-8px">1</div>
+          <div class="anno" style="top:346px;left:-8px">2</div>
+          <div class="anno" style="top:404px;left:-8px">3</div>
+          <div class="screen">
+          <div class="statusbar"><span>9:41</span><span class="r"><i class="bars"></i><i class="batt"></i></span></div>
+          <div class="announce"><span class="arw">‹</span> Limited time: 5% off with code SUN5 <span class="arw">›</span></div>
+          <div class="nav">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#2b3644" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            <div class="logo">Luxusbetten24</div>
+            <div class="icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+            </div>
+          </div>
+          <div class="gal">
+            <div class="main img warm" style="height:160px"></div>
+            <span class="idx">1 / 90</span>
+          </div>
+          <div class="sec" style="padding-bottom:0">
+            <span class="rating"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 4.8 · 5,689 reviews</span>
+            <h2 class="ptitle" style="font-size:12.5px">Designer Sofa Roma in corduroy with sleep and fold function</h2>
+            <div class="pricerow"><span class="now">€519.00</span><span class="was">€699.00</span></div>
+          </div>
+          <div class="sec">
+            <div class="optlbl"><span>Colour: <b>Beige</b></span></div>
+
+            <div style="display:flex;gap:9px;align-items:center;margin-top:8px;border:1px solid var(--line);border-radius:9px;padding:8px">
+              <div style="flex:0 0 62px;height:62px;border-radius:7px;border:1px solid rgba(0,0,0,.08);
+                background:repeating-linear-gradient(90deg,#e3d5bd 0 3px,#d6c6a8 3px 6px)"></div>
+              <div>
+                <b style="font-size:10px;display:block">Beige</b>
+                <span style="font-size:7.6px;color:var(--muted);display:block;line-height:1.35">Corduroy · fabric close-up</span>
+                <span style="font-size:7.4px;color:var(--brand-dk);font-weight:650;display:block;margin-top:3px">Main image updated ✓</span>
+              </div>
+            </div>
+
+            <div class="sw18" style="margin-top:9px">
+              <i class="on" style="background:#e3d5bd"></i><i style="background:#7a5c46"></i><i style="background:#4a6b4f"></i><i style="background:#5b7691"></i><i style="background:#d0743a"></i><i style="background:#d8aeb0"></i>
+              <i style="background:#c3c8cd"></i><i style="background:#8b9198"></i><i style="background:#2a2d31"></i><i style="background:#3f5b8a"></i><i style="background:#a3b39a"></i><i style="background:#7d7f4a"></i>
+              <i style="background:#b5613f"></i><i style="background:#e8c4bd"></i><i style="background:#a4899b"></i><i style="background:#2f6570"></i><i style="background:#d9a441"></i><i style="background:#c8832c"></i>
+            </div>
+            <p style="font-size:7.2px;color:var(--faint);margin:5px 0 0;font-style:italic">All eighteen swatches unchanged</p>
+
+            <div class="band" style="margin-top:9px">
+              <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v9H4zM8 19h8M12 15v4"/></svg> Not sure about the colour? Order a free fabric sample</b>
+            </div>
+
+            <div class="optlbl"><span>Ottoman position (top view)</span></div>
+            <div class="pillrow"><span class="on">Left</span><span>Right</span></div>
+            <div class="optlbl"><span>Material</span></div>
+            <div class="pillrow"><span class="on solo">Corduroy</span></div>
+            <div class="pay"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <a class="atc">Add to cart — €519.00</a>
+          </div>
+        </div></div>
+
+        <div class="changes">
+          <h4>What changed</h4>
+          <ol>
+            <li>Large fabric close-up of the selected colour with the colour name beside it, and a confirmation that the main gallery image has updated to match.</li>
+            <li>All eighteen swatches stay — same count, same size, same position. Only a preview panel is added above them.</li>
+            <li>The fabric-sample offer is promoted from small competing text into its own reassurance band, and moved to after the colour choice where the doubt actually occurs.</li>
+          </ol>
+        </div>
+        <div class="notebox">
+          <h4>Before build</h4>
+          <p><b class="k">Biggest lead-time item in the pipeline.</b> Sitewide scope means macro fabric photography for every colour of every included product — the reference product alone has eighteen. Phase it: launch only on products that already have usable close-up assets, and record which products are in the population so the readout is interpretable.</p>
+          <p><b class="k">Excludes the three PDPs used in test 02</b> so the two do not change the same buy-box region for the same visitor.</p>
+          <p><b class="k">Judge on reversals, not conversion.</b> A better-informed colour choice may reduce raw add-to-cart while improving order quality. A small dip in add-to-cart with a larger drop in reversals is a win when reversals sit at 13.2% of gross sales. Agree that framing before launch.</p>
+          <p><b class="k">Free win alongside it:</b> the material selector has exactly one option. Removing it takes a decision out of the path at no risk — do it outside the test so it does not confound the result.</p>
+        </div>
+        <div class="unchanged">
+          <b>Held constant</b>
+          All eighteen colours remain visible at their current size and position, variant pricing is unchanged across the board, and the ottoman control, payment logos, button label and destination are untouched. Only the preview and the sample prompt are added.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 ============ -->
+  <section class="idea">
+    <div class="idea-head">
+      <span class="idea-tag">Test 05 · Collection · Roadmap C-05</span>
+      <h2><span class="numb">05</span> Sticky Top Filter and Sort Controls</h2>
+      <p class="idea-sub">Make filter and sort visible throughout browsing</p>
+      <div class="chips">
+        <span class="chip">Primary: filter-button click-through</span>
+        <span class="chip">Min. runtime: 2 weeks</span>
+        <span class="chip md">Effort: low-medium</span>
+        <span class="chip hi">Confidence: high</span>
+        <span class="chip hi">Backed by a measured interaction signal</span>
+      </div>
+      <p class="srcline"><b>Source wireframe:</b> collection deck → Collection Test 05</p>
+    </div>
+
+    <div class="psh">
+      <div class="prob">
+        <h3>Problem</h3>
+        <p>The combined filter-and-sort button is fixed to the <b>bottom</b> of the mobile viewport, where it competes with browser chrome, the messaging widget and other fixed elements.</p>
+        <p>Heatmap analysis by the CRO Manager shows it is the least-noticed control on the page by a wide margin — consistent with poor discoverability, though click share alone cannot separate visitors who missed it from visitors who did not need it.</p>
+        <p>With 157 products across eight pages, refinement is the main path to a suitable bed, and the control for it is the element people are least likely to see.</p>
+      </div>
+      <div class="sol">
+        <h3>Solution</h3>
+        <p>Remove the bottom control in the variant. Place <b>two equal-width buttons</b> directly below the collection title — filters and sort — and make the row sticky beneath the site header while the visitor scrolls.</p>
+        <p>Show the number of active filters dynamically in a badge. Keep the row compact so it does not obstruct product imagery, and add a subtle shadow when it enters its sticky state.</p>
+        <p>Preserve the existing drawers, their options and their logic. Make sure the messaging widget does not overlap either control, and remove the old bottom button so the variant tests placement rather than duplication.</p>
+      </div>
+      <div class="hyp">
+        <h3>Hypothesis</h3>
+        <p><span class="if">If</span> separate filter and sort controls move above the product grid and stay visible while visitors scroll, <span class="if">then</span> filter engagement, successful refinement and qualified product-page visits will increase, <span class="if">because</span> the controls become easier to discover and use during browsing.</p>
+        <div class="metric">
+          <b>Evidence:</b> CRO Manager heatmap analysis — the current filter button attracts a very small share of recorded clicks; live audit — filter and sort share one bottom control; collection structure — 157 products make refinement essential; the collection grew 61% and generated 11,957 landing sessions.
+        </div>
+      </div>
+    </div>
+
+    <div class="frames">
+      <div class="frame-col">
+        <div class="frame-label before"><span class="pill">Before</span><span class="note">One combined control, pinned to the bottom</span></div>
+        <div class="phone"><div class="screen">
+          <div class="statusbar"><span>9:41</span><span class="r"><i class="bars"></i><i class="batt"></i></span></div>
+          <div class="announce"><span class="arw">‹</span> Free delivery <span class="arw">›</span></div>
+          <div class="nav">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#2b3644" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            <div class="logo">Luxusbetten24</div>
+            <div class="icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+            </div>
+          </div>
+          <div class="crumb">Home / Bedroom / Box-spring beds</div>
+          <div class="sec" style="padding-bottom:8px">
+            <h1 class="h1c">Box-spring beds</h1>
+            <p class="count"><b>157 products</b></p>
+          </div>
+          <div class="sec" style="padding-top:0">
+            <div class="pc">
+              <span class="bdg">Extra −5%</span>
+              <div class="pc-img img"></div>
+              <div class="pc-b">
+                <span class="pc-n">Cozy box-spring bed in velvet with storage</span>
+                <span class="pc-rv"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 72 reviews</span>
+                <span class="pc-p">from €639.00 <s>€929.00</s></span>
+                <div class="pc-sw"><i style="background:#e8dcc8"></i><i style="background:#9aa1a8"></i><i style="background:#2a2d31"></i><i style="background:#7a5c46"></i><em>+3</em></div>
+                <a class="pc-cta">View product</a>
+              </div>
+            </div>
+            <div class="pc">
+              <span class="bdg">Extra −5%</span>
+              <div class="pc-img img"></div>
+              <div class="pc-b">
+                <span class="pc-n">Luxor box-spring bed in velvet with storage</span>
+                <span class="pc-rv"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 132 reviews</span>
+                <span class="pc-p">from €659.00 <s>€969.00</s></span>
+                <div class="pc-sw"><i style="background:#9aa1a8"></i><i style="background:#e8dcc8"></i><i style="background:#2a2d31"></i><i style="background:#41567a"></i><em>+2</em></div>
+                <a class="pc-cta">View product</a>
+              </div>
+            </div>
+            <div class="pc">
+              <span class="bdg">Extra −5%</span><span class="bdg new">New</span>
+              <div class="pc-img img"></div>
+              <div class="pc-b">
+                <span class="pc-n">Cozy II box-spring bed in corduroy with storage</span>
+                <span class="pc-rv"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 72 reviews</span>
+                <span class="pc-p">from €519.00 <s>€929.00</s></span>
+                <div class="pc-sw"><i style="background:#e8dcc8"></i><i style="background:#2a2d31"></i><i style="background:#9aa1a8"></i><i style="background:#d8aeb0"></i><em>+14</em></div>
+                <a class="pc-cta">View product</a>
+              </div>
+            </div>
+          </div>
+          <div class="wa"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1a12 12 0 0 1-5.6-4.9c-.4-.7-.8-1.6-.8-2.4 0-.9.5-1.4.7-1.6.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.2 0 .4-.1.5l-.3.4c-.1.1-.3.3-.1.6a8 8 0 0 0 3.5 3c.3.1.5.1.6-.1l.7-.8c.2-.2.3-.2.6-.1l1.6.8c.3.2.5.2.5.4z"/></svg></div>
+          <div class="bottombar">
+            <div class="onebtn">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg>
+              Filter and sort
+            </div>
+            <div style="text-align:center;font-size:7.4px;color:var(--muted);font-weight:650;margin-top:5px">Competes with the messaging widget and the browser bar</div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="frame-col">
+        <div class="frame-label after"><span class="pill">After</span><span class="note">Two controls, sticky under the header</span></div>
+        <div class="phone">
+          <div class="anno" style="top:150px;left:-8px">1</div>
+          <div class="anno" style="top:190px;left:-8px">2</div>
+          <div class="anno" style="top:620px;left:-8px">3</div>
+          <div class="screen">
+          <div class="statusbar"><span>9:41</span><span class="r"><i class="bars"></i><i class="batt"></i></span></div>
+          <div class="announce"><span class="arw">‹</span> Free delivery <span class="arw">›</span></div>
+          <div class="nav">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#2b3644" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            <div class="logo">Luxusbetten24</div>
+            <div class="icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+            </div>
+          </div>
+          <div class="crumb">Home / Bedroom / Box-spring beds</div>
+          <div class="sec" style="padding-bottom:8px">
+            <h1 class="h1c">Box-spring beds</h1>
+            <p class="count"><b>157 products</b></p>
+          </div>
+          <div class="topbar">
+            <div class="twobtn">
+              <div class="tb">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></svg>
+                <span>Filters <span class="cnt">2</span></span>
+              </div>
+              <div class="tb">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h13M4 12h9M4 17h5M19 8v9M16 14l3 3 3-3"/></svg>
+                <span>Sort</span>
+              </div>
+            </div>
+          </div>
+          <div class="sec" style="padding-top:11px">
+            <div class="pc">
+              <span class="bdg">Extra −5%</span>
+              <div class="pc-img img"></div>
+              <div class="pc-b">
+                <span class="pc-n">Cozy box-spring bed in velvet with storage</span>
+                <span class="pc-rv"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 72 reviews</span>
+                <span class="pc-p">from €639.00 <s>€929.00</s></span>
+                <div class="pc-sw"><i style="background:#e8dcc8"></i><i style="background:#9aa1a8"></i><i style="background:#2a2d31"></i><i style="background:#7a5c46"></i><em>+3</em></div>
+                <a class="pc-cta">View product</a>
+              </div>
+            </div>
+            <div class="pc">
+              <span class="bdg">Extra −5%</span>
+              <div class="pc-img img"></div>
+              <div class="pc-b">
+                <span class="pc-n">Luxor box-spring bed in velvet with storage</span>
+                <span class="pc-rv"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 132 reviews</span>
+                <span class="pc-p">from €659.00 <s>€969.00</s></span>
+                <div class="pc-sw"><i style="background:#9aa1a8"></i><i style="background:#e8dcc8"></i><i style="background:#2a2d31"></i><i style="background:#41567a"></i><em>+2</em></div>
+                <a class="pc-cta">View product</a>
+              </div>
+            </div>
+            <div class="pc">
+              <span class="bdg">Extra −5%</span><span class="bdg new">New</span>
+              <div class="pc-img img"></div>
+              <div class="pc-b">
+                <span class="pc-n">Cozy II box-spring bed in corduroy with storage</span>
+                <span class="pc-rv"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 72 reviews</span>
+                <span class="pc-p">from €519.00 <s>€929.00</s></span>
+                <div class="pc-sw"><i style="background:#e8dcc8"></i><i style="background:#2a2d31"></i><i style="background:#9aa1a8"></i><i style="background:#d8aeb0"></i><em>+14</em></div>
+                <a class="pc-cta">View product</a>
+              </div>
+            </div>
+          </div>
+          <div class="wa low"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-1.7-.1a12 12 0 0 1-5.6-4.9c-.4-.7-.8-1.6-.8-2.4 0-.9.5-1.4.7-1.6.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.2 0 .4-.1.5l-.3.4c-.1.1-.3.3-.1.6a8 8 0 0 0 3.5 3c.3.1.5.1.6-.1l.7-.8c.2-.2.3-.2.6-.1l1.6.8c.3.2.5.2.5.4z"/></svg></div>
+          <div class="deep" style="background:var(--green-soft);color:#256b45">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>
+            Bottom bar removed · messaging widget moved to the freed corner
+          </div>
+        </div></div>
+
+        <div class="changes">
+          <h4>What changed</h4>
+          <ol>
+            <li>One combined control becomes two equal-width buttons placed directly below the title, where the eye already is after reading the product count.</li>
+            <li>The row sticks beneath the header on scroll and gains a shadow in its sticky state. The active filter count renders in a badge.</li>
+            <li>The bottom bar is removed entirely so the test measures placement rather than duplication, and the messaging widget drops to the freed corner.</li>
+          </ol>
+        </div>
+        <div class="notebox">
+          <h4>Read the result carefully</h4>
+          <p><b class="k">The primary metric will almost certainly go up.</b> Moving a control from the least-looked-at corner to directly under the page title raises clicks close to by construction — that alone is not a win.</p>
+          <p>Judge it on the secondary metrics: <b class="k">completed filter applications, collection-to-product click-through and add-to-cart</b>. If filter opens rise but completions do not, the drawer is the problem rather than the button.</p>
+          <p><b class="k">The drawer is a known weak point.</b> A separate audit found five filter groups named after raw database fields, a delivery-time group with no values, a duplicated colour entry and two naming schemes for firmness. None of that is in scope here, but it is the likely reason completions would lag.</p>
+        </div>
+        <div class="unchanged">
+          <b>Held constant</b>
+          Filter and sort drawers, their options and logic, product order, product cards, page size and the full result set. Only the placement and the split of the entry control change.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 ============ -->
+  <section class="idea">
+    <div class="idea-head">
+      <span class="idea-tag">Test 06 · Collection · Roadmap C-03</span>
+      <h2><span class="numb">06</span> Delivery and Feature Signals on Product Cards</h2>
+      <p class="idea-sub">Add decision support to product cards</p>
+      <div class="chips">
+        <span class="chip">Primary: collection-to-product click-through</span>
+        <span class="chip">Min. runtime: 4 weeks</span>
+        <span class="chip md">Effort: medium</span>
+        <span class="chip">Confidence: medium</span>
+        <span class="chip lo">Needs delivery-time data populated</span>
+      </div>
+      <p class="srcline"><b>Source wireframe:</b> collection deck → Collection Test 03</p>
+    </div>
+
+    <div class="psh">
+      <div class="prob">
+        <h3>Problem</h3>
+        <p>Cards show an image, a discount badge, title, review count, sale price with the original struck through, four colour swatches with an overflow count, and a view button. Delivery speed and major functions are absent.</p>
+        <p>The consequence is visible in the default results themselves. The first five positions are <b>five near-identical beds</b> — four of them variants of the same model, four sharing the same review count, all of them with storage, differing mainly in fabric and price. Nothing on the card explains which one to open.</p>
+        <p>Sales reversals run at roughly 13.2% of gross sales, so poorly informed clicks carry a real cost further down the funnel.</p>
+      </div>
+      <div class="sol">
+        <h3>Solution</h3>
+        <p>Add a maximum of <b>two dynamic, text-based signals below the price</b>:</p>
+        <ul>
+          <li>A delivery message, for example a working-day lead time</li>
+          <li>The single strongest verified feature for that product — storage type, firmness range, or integrated lighting</li>
+        </ul>
+        <p>Use only accurate product data and cap the module at two lines so cards stay scannable. Keep price, discount, review and colour presentation unchanged.</p>
+      </div>
+      <div class="hyp">
+        <h3>Hypothesis</h3>
+        <p><span class="if">If</span> each product card displays delivery timing and one differentiating feature, <span class="if">then</span> more collection visitors will click suitable products, <span class="if">because</span> they can compare meaningful purchase criteria before opening multiple product pages.</p>
+        <div class="metric">
+          <b>Evidence:</b> live card audit — no delivery or functional information present, and the first five default results are near-duplicate variants; competitor comparison — Betten.de surfaces delivery visibility; reversal data suggests better pre-click information may improve purchase qualification.
+        </div>
+      </div>
+    </div>
+
+    <div class="frames">
+      <div class="frame-col">
+        <div class="frame-label before"><span class="pill">Before</span><span class="note">Five near-identical beds, nothing to tell them apart</span></div>
+        <div class="phone"><div class="screen">
+          <div class="statusbar"><span>9:41</span><span class="r"><i class="bars"></i><i class="batt"></i></span></div>
+          <div class="announce"><span class="arw">‹</span> Free delivery <span class="arw">›</span></div>
+          <div class="nav">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#2b3644" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            <div class="logo">Luxusbetten24</div>
+            <div class="icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+            </div>
+          </div>
+          <div class="crumb">Home / Bedroom / Box-spring beds</div>
+          <div class="sec" style="padding-bottom:8px">
+            <h1 class="h1c">Box-spring beds</h1>
+            <p class="count"><b>157 products</b> · Most relevant</p>
+          </div>
+          <div class="sec" style="padding-top:0">
+            <div class="pc">
+              <span class="bdg">Extra −5%</span><div class="pc-img img"></div>
+              <div class="pc-b"><span class="pc-n">Cozy box-spring bed in velvet with storage</span>
+                <span class="pc-rv"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 72 reviews</span>
+                <span class="pc-p">from €639.00 <s>€929.00</s></span>
+                <div class="pc-sw"><i style="background:#e8dcc8"></i><i style="background:#9aa1a8"></i><i style="background:#2a2d31"></i><i style="background:#7a5c46"></i><em>+3</em></div>
+                <a class="pc-cta">View product</a></div>
+            </div>
+            <div class="pc">
+              <span class="bdg">Extra −5%</span><span class="bdg new">New</span><div class="pc-img img"></div>
+              <div class="pc-b"><span class="pc-n">Cozy II box-spring bed in corduroy with storage</span>
+                <span class="pc-rv"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 72 reviews</span>
+                <span class="pc-p">from €519.00 <s>€929.00</s></span>
+                <div class="pc-sw"><i style="background:#e8dcc8"></i><i style="background:#2a2d31"></i><i style="background:#9aa1a8"></i><i style="background:#d8aeb0"></i><em>+14</em></div>
+                <a class="pc-cta">View product</a></div>
+            </div>
+            <div class="pc">
+              <span class="bdg">Extra −5%</span><span class="bdg new">New</span><div class="pc-img img"></div>
+              <div class="pc-b"><span class="pc-n">Cozy box-spring bed in corduroy with storage</span>
+                <span class="pc-rv"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 72 reviews</span>
+                <span class="pc-p">from €639.00 <s>€929.00</s></span>
+                <div class="pc-sw"><i style="background:#e8dcc8"></i><i style="background:#2a2d31"></i><i style="background:#9aa1a8"></i><i style="background:#d8aeb0"></i><em>+14</em></div>
+                <a class="pc-cta">View product</a></div>
+            </div>
+          </div>
+          <div class="deep">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+            Three variants of one model, same review count, no differentiator
+          </div>
+        </div></div>
+      </div>
+
+      <div class="frame-col">
+        <div class="frame-label after"><span class="pill">After</span><span class="note">Two signals maximum, below the price</span></div>
+        <div class="phone">
+          <div class="anno" style="top:262px;left:-8px">1</div>
+          <div class="anno" style="top:292px;left:-8px">2</div>
+          <div class="screen">
+          <div class="statusbar"><span>9:41</span><span class="r"><i class="bars"></i><i class="batt"></i></span></div>
+          <div class="announce"><span class="arw">‹</span> Free delivery <span class="arw">›</span></div>
+          <div class="nav">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#2b3644" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            <div class="logo">Luxusbetten24</div>
+            <div class="icons">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+            </div>
+          </div>
+          <div class="crumb">Home / Bedroom / Box-spring beds</div>
+          <div class="sec" style="padding-bottom:8px">
+            <h1 class="h1c">Box-spring beds</h1>
+            <p class="count"><b>157 products</b> · Most relevant</p>
+          </div>
+          <div class="sec" style="padding-top:0">
+            <div class="pc">
+              <span class="bdg">Extra −5%</span><div class="pc-img img"></div>
+              <div class="pc-b"><span class="pc-n">Cozy box-spring bed in velvet with storage</span>
+                <span class="pc-rv"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 72 reviews</span>
+                <span class="pc-p">from €639.00 <s>€929.00</s></span>
+                <div class="pc-sig">
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 8h11v8H1zM12 11h5l4 3v2h-9z"/><circle cx="6" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg> Delivery time: 10 working days</span>
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M3 13h18M9 16h6"/></svg> Lift-up base with storage</span>
+                </div>
+                <div class="pc-sw"><i style="background:#e8dcc8"></i><i style="background:#9aa1a8"></i><i style="background:#2a2d31"></i><i style="background:#7a5c46"></i><em>+3</em></div>
+                <a class="pc-cta">View product</a></div>
+            </div>
+            <div class="pc">
+              <span class="bdg">Extra −5%</span><span class="bdg new">New</span><div class="pc-img img"></div>
+              <div class="pc-b"><span class="pc-n">Cozy II box-spring bed in corduroy with storage</span>
+                <span class="pc-rv"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 72 reviews</span>
+                <span class="pc-p">from €519.00 <s>€929.00</s></span>
+                <div class="pc-sig">
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 8h11v8H1zM12 11h5l4 3v2h-9z"/><circle cx="6" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg> Delivery time: 3–4 weeks</span>
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 4v6c0 4-3 7-7 8-4-1-7-4-7-8V7z"/><path d="M9 12l2 2 4-4"/></svg> Firmness H2–H4 available</span>
+                </div>
+                <div class="pc-sw"><i style="background:#e8dcc8"></i><i style="background:#2a2d31"></i><i style="background:#9aa1a8"></i><i style="background:#d8aeb0"></i><em>+14</em></div>
+                <a class="pc-cta">View product</a></div>
+            </div>
+            <div class="pc">
+              <span class="bdg">Extra −5%</span><span class="bdg new">New</span><div class="pc-img img"></div>
+              <div class="pc-b"><span class="pc-n">Cozy box-spring bed in corduroy with storage</span>
+                <span class="pc-rv"><span class="mini-stars"><i></i><i></i><i></i><i></i><i></i></span> 72 reviews</span>
+                <span class="pc-p">from €639.00 <s>€929.00</s></span>
+                <div class="pc-sig">
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 8h11v8H1zM12 11h5l4 3v2h-9z"/><circle cx="6" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg> Delivery time: 3–4 weeks</span>
+                  <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v3M5 8l2 2M19 8l-2 2M9 16a5 5 0 1 1 6 0v2H9z"/></svg> With LED lighting</span>
+                </div>
+                <div class="pc-sw"><i style="background:#e8dcc8"></i><i style="background:#2a2d31"></i><i style="background:#9aa1a8"></i><i style="background:#d8aeb0"></i><em>+14</em></div>
+                <a class="pc-cta">View product</a></div>
+            </div>
+          </div>
+        </div></div>
+
+        <div class="changes">
+          <h4>What changed</h4>
+          <ol>
+            <li>A two-line signal block below the price, separated by a hairline rule. Line one is always delivery; line two is the single strongest verified feature for that product.</li>
+            <li>The feature line varies per product — storage type, firmness range, lighting — which is what finally distinguishes three variants of the same model in the feed.</li>
+          </ol>
+        </div>
+        <div class="notebox">
+          <h4>Do not ship on incomplete data</h4>
+          <p><b class="k">The delivery times shown above are illustrative.</b> The delivery-time facet currently renders with no values on this collection, so per-product delivery data has to be populated and verified before this test runs. A wrong delivery promise on a collection card is a return and a support contact, not a conversion.</p>
+          <p><b class="k">The feature line must read from clean data.</b> The storage field currently contains a misspelled duplicate value, so at least one product would render the wrong signal or none at all. Fix that first.</p>
+          <p><b class="k">Watch page speed.</b> Two extra field reads per card across a full page of results — this sits on the guardrail list for a reason.</p>
+          <p><b class="k">Do not run alongside test 05.</b> Both live on the same collection, they share a limited weekly audience, and test 05 changes which products get seen — which contaminates this test's primary metric.</p>
+        </div>
+        <div class="unchanged">
+          <b>Held constant</b>
+          Image, badges, title, review count, price, discount, colour swatches, overflow count and the view button. Product order, filters and sorting are untouched. The module is capped at two lines so card height stays predictable.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 ============ -->
+  <section class="idea">
+    <div class="idea-head">
+      <span class="idea-tag">Test 07 · Cart · Roadmap Cart-02</span>
+      <h2><span class="numb">07</span> Checkout-First Simplified Cart</h2>
+      <p class="idea-sub">Remove pre-checkout distractions</p>
+      <div class="chips">
+        <span class="chip">Primary: cart-to-checkout rate</span>
+        <span class="chip">Min. runtime: 2 weeks</span>
+        <span class="chip md">Effort: medium</span>
+        <span class="chip">Confidence: medium-high</span>
+        <span class="chip lo">Decide on revenue per cart session</span>
+      </div>
+      <p class="srcline"><b>Source wireframe:</b> cart deck → Cart Test 02</p>
+    </div>
+
+    <div class="psh">
+      <div class="prob">
+        <h3>Problem</h3>
+        <p>Before a visitor reaches the order summary and the lower checkout options, the page presents an app-install banner, a full navigation header, a rotating promotional strip, a chat banner, the upper checkout button, the product details and a cross-sell carousel.</p>
+        <p>Heatmap analysis by the CRO Manager shows real interaction on all four of those pre-checkout layers, and together they attract more clicks than the checkout button itself. The cross-sell module occupies substantial vertical space before the order summary while attracting almost none.</p>
+        <p>Those numbers show competing interaction. They do not prove that every click is harmful.</p>
+      </div>
+      <div class="sol">
+        <h3>Solution</h3>
+        <p>Build a checkout-focused variant:</p>
+        <ul>
+          <li>Remove the app-install banner from the cart</li>
+          <li>Replace the full navigation header with the logo and a secure-cart label</li>
+          <li>Remove the wishlist and redundant cart-navigation icons</li>
+          <li>Remove the rotating promotional strip</li>
+          <li>Remove the large chat banner and retain a small support link below the primary checkout area</li>
+          <li>Move the cross-sell module below the standard checkout, express payments and purchase reassurance</li>
+        </ul>
+        <p>Keep the cart item, price, discount, delivery information, payment methods and all underlying offers unchanged.</p>
+      </div>
+      <div class="hyp">
+        <h3>Hypothesis</h3>
+        <p><span class="if">If</span> non-essential promotional, navigation, support and cross-sell elements are removed or moved below the checkout actions, <span class="if">then</span> more cart visitors will proceed to checkout, <span class="if">because</span> the page will contain fewer competing exits and decisions.</p>
+        <div class="metric">
+          <b>Evidence:</b> CRO Manager cart audit — multiple promotional and navigation layers appear before core cart content; heatmap — measurable interaction on the app banner, navigation region, promotional strip and chat banner, with very little on cross-sell; funnel data — roughly 68% of add-to-cart sessions progress to checkout.
+        </div>
+      </div>
+    </div>
+
+    <div class="frames">
+      <div class="frame-col">
+        <div class="frame-label before"><span class="pill">Before</span><span class="note">Four exit layers before the buy action</span></div>
+        <div class="phone"><div class="screen">
+          <div class="statusbar"><span>9:41</span><span class="r"><i class="bars"></i><i class="batt"></i></span></div>
+          <div class="appbar">
+            <span class="ic"></span>
+            <span><b>Luxusbetten24 app</b><em>Install now</em></span>
+            <span class="go">Open</span><span class="x">✕</span>
+          </div>
+          <div class="nav">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#2b3644" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+            <div class="logo">Luxusbetten24</div>
+            <div class="icons">
+              <span class="cc">DE €</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.6-7-9.3A3.9 3.9 0 0 1 12 8a3.9 3.9 0 0 1 7 2.7C19 15.4 12 20 12 20z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="3.4"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+            </div>
+          </div>
+          <div class="promostrip"><span class="arw">‹</span> Limited time: 5% off with code SUN5 <span class="arw">›</span></div>
+          <div class="sec" style="padding-bottom:0"><h1 class="h1c">Your cart</h1></div>
+          <div class="chatban">
+            <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z"/></svg></span>
+            <span><b>Questions? Message us on WhatsApp</b><em>Mon–Fri, 9am–5pm</em></span>
+          </div>
+          <div class="deep">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>
+            Four competing layers sit above the buy action
+          </div>
+          <div class="sec" style="padding-top:9px;padding-bottom:0">
+            <a class="ctaY">Checkout — €519.00</a>
+          </div>
+          <div class="sec" style="padding-bottom:0">
+            <div class="citem">
+              <span class="ph img warm"></span>
+              <span class="bd">
+                <span class="n">Designer Sofa Roma in corduroy</span>
+                <span class="del">Delivery time: 2–3 weeks</span>
+                <span class="p">€519.00</span>
+                <span class="foot"><span class="qty"><span>−</span><span class="mid">1</span><span>+</span></span><span class="rm">Remove</span></span>
+              </span>
+            </div>
+          </div>
+          <div class="sec" style="padding-bottom:0">
+            <p class="sec-t" style="font-size:10px;margin-bottom:0">Goes well with this</p>
+            <div class="xsell">
+              <div class="c"><span class="ph img"></span><b>Cushion set</b><em>€49.00</em></div>
+              <div class="c"><span class="ph img"></span><b>Fabric cleaner</b><em>€19.90</em></div>
+              <div class="c"><span class="ph img"></span><b>Nora rug</b><em>€129.00</em></div>
+            </div>
+          </div>
+          <div class="fold"><span>Fold ≈ 844 px</span></div>
+          <div class="sec">
+            <div class="totals">
+              <div class="r"><span>Subtotal</span><span>€519.00</span></div>
+              <div class="r"><span>Shipping</span><span>Free</span></div>
+              <div class="r big"><span>Total</span><span>€519.00 <span class="sm">incl. VAT</span></span></div>
+            </div>
+            <div class="datefield">
+              <label>Earliest preferred delivery date</label>
+              <div class="box"><span>DD.MM.YYYY</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+            </div>
+            <a class="ctaT" style="margin-top:10px">Checkout — €519.00</a>
+            <div class="orsep">or</div>
+            <div class="express"><span class="b sp">Shop Pay</span><span class="b gp">Google Pay</span></div>
+            <div class="reicons">
+              <div class="u"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 8h11v8H1zM12 11h5l4 3v2h-9z"/></svg></div><b>Free delivery</b></div>
+              <div class="u"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 4v6c0 4-3 7-7 8-4-1-7-4-7-8V7z"/></svg></div><b>Secure payment</b></div>
+              <div class="u"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 20v-6h6"/></svg></div><b>30-day returns</b></div>
+            </div>
+            <div class="pay" style="justify-content:center"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="frame-col">
+        <div class="frame-label after"><span class="pill">After</span><span class="note">Logo, cart, buy — in that order</span></div>
+        <div class="phone">
+          <div class="anno" style="top:56px;left:-8px">1</div>
+          <div class="anno" style="top:104px;left:-8px">2</div>
+          <div class="anno" style="top:184px;left:-8px">3</div>
+          <div class="anno" style="top:560px;left:-8px">4</div>
+          <div class="screen">
+          <div class="statusbar"><span>9:41</span><span class="r"><i class="bars"></i><i class="batt"></i></span></div>
+          <div class="navmini">
+            <span class="logo">Luxusbetten24</span>
+            <span style="color:var(--line)">|</span>
+            <span class="lock">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+              Secure cart
+            </span>
+          </div>
+          <div class="sec" style="padding-bottom:0"><h1 class="h1c">Your cart</h1></div>
+          <div class="sec" style="padding-top:9px;padding-bottom:0">
+            <a class="ctaD"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> Checkout securely — €519.00</a>
+          </div>
+          <div class="sec" style="padding-bottom:0">
+            <div class="citem">
+              <span class="ph img warm"></span>
+              <span class="bd">
+                <span class="n">Designer Sofa Roma in corduroy</span>
+                <span class="del">Delivery time: 2–3 weeks</span>
+                <span class="p">€519.00</span>
+                <span class="foot"><span class="qty"><span>−</span><span class="mid">1</span><span>+</span></span><span class="rm">Remove</span></span>
+              </span>
+            </div>
+          </div>
+          <div class="sec">
+            <div class="totals">
+              <div class="r"><span>Subtotal</span><span>€519.00</span></div>
+              <div class="r"><span>Shipping</span><span>Free</span></div>
+              <div class="r big"><span>Total</span><span>€519.00 <span class="sm">incl. VAT</span></span></div>
+            </div>
+            <a class="ctaD" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> Checkout securely — €519.00</a>
+            <div class="orsep">or</div>
+            <div class="express"><span class="b sp">Shop Pay</span><span class="b gp">Google Pay</span></div>
+            <div class="reicons">
+              <div class="u"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 8h11v8H1zM12 11h5l4 3v2h-9z"/></svg></div><b>Free delivery</b></div>
+              <div class="u"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 4v6c0 4-3 7-7 8-4-1-7-4-7-8V7z"/></svg></div><b>Secure payment</b></div>
+              <div class="u"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 1 3 6.7"/><path d="M3 20v-6h6"/></svg></div><b>30-day returns</b></div>
+            </div>
+            <div class="pay" style="justify-content:center"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <p style="text-align:center;margin:11px 0 0">
+              <span style="font-size:8.6px;font-weight:700;color:var(--brand-dk);text-decoration:underline;text-underline-offset:2px">Questions about your order?</span>
+            </p>
+          </div>
+          <div class="sec" style="background:#f7f8fa;margin-top:8px">
+            <p class="sec-t" style="font-size:10px;margin-bottom:0">Goes well with this</p>
+            <p style="font-size:7.4px;color:var(--muted);margin:1px 0 0">Now placed after the checkout area</p>
+            <div class="xsell">
+              <div class="c"><span class="ph img"></span><b>Cushion set</b><em>€49.00</em></div>
+              <div class="c"><span class="ph img"></span><b>Fabric cleaner</b><em>€19.90</em></div>
+              <div class="c"><span class="ph img"></span><b>Nora rug</b><em>€129.00</em></div>
+            </div>
+          </div>
+          <div class="deep" style="background:var(--green-soft);color:#256b45">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg>
+            App banner, navigation, promotional strip and chat banner removed
+          </div>
+        </div></div>
+
+        <div class="changes">
+          <h4>What changed</h4>
+          <ol>
+            <li>Full navigation replaced by the logo and a secure-cart label. Menu, search, wishlist, account and the country selector are gone — none of them lead anywhere useful from a cart.</li>
+            <li>App-install banner and rotating promotional strip removed entirely.</li>
+            <li>The chat banner becomes a small support link placed below the checkout area — help stays available, it just stops interrupting.</li>
+            <li>Cross-sell moves below the standard checkout, express payments and reassurance. Every product and price is kept; it simply stops standing between the cart and the total.</li>
+          </ol>
+        </div>
+        <div class="notebox">
+          <h4>What this test can and cannot prove</h4>
+          <p><b class="k">Do not optimise checkout clicks in isolation.</b> Cart-to-checkout will very likely rise when four competing targets are deleted — that is close to arithmetic. <b class="k">Revenue per cart session is the metric that decides it.</b></p>
+          <p><b class="k">Cross-sell attachment will probably fall</b>, and those clicks carry order value. If attachment drops more than checkout rate gains, the change loses money. Track both.</p>
+          <p><b class="k">App installs belong to someone else's target.</b> The cart is a real acquisition surface for whoever owns the app. Agree the trade internally before launch, not after the readout.</p>
+          <p><b class="k">Five changes at once.</b> A legitimate concept test, but if it wins you will not know which removal did the work. Consider a follow-up that restores only the promotional strip — the most-clicked of the removed elements and the one most likely to be doing real promotional work.</p>
+          <p><b class="k">Localisation note for the German store:</b> the live cart renders the delivery-time string in English. Correct it in both arms before launch, or the test measures translation quality as well as layout.</p>
+        </div>
+        <div class="unchanged">
+          <b>Held constant</b>
+          Cart item, quantity control, price, discounts, delivery information, order totals, payment methods, express-payment buttons and all underlying offers. Nothing is removed from the catalogue or the promotion — only from this page.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    Luxusbetten24 · August 2026 Testing Pipeline · Mobile-only scope · Prepared by Maison Commerce
+  </footer>
+
+</div>
+</body>
+</html>
