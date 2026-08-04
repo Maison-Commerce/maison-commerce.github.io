@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<!-- saved from url=(0232)file:///Users/baris/Library/Application%20Support/Claude/local-agent-mode-sessions/cacd158d-d471-4162-8ae0-77c4faabab40/4deb5b7f-fbf5-457a-8d45-07e771d9c391/local_d4eaf2c8-6f2e-461d-b382-740136cd0640/outputs/AZIN_master_roadmap.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AZIN — Master A/B Testing Roadmap (with wireframes)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./AZIN — Master A_B Testing Roadmap (with wireframes)_files/css2" rel="stylesheet">
+<style>
+:root{
+  --bg:#FBF8F3; --paper:#FFFFFF; --cream:#F3ECE1; --sand:#EADFCD; --taupe:#D8C8B0;
+  --ink:#2C2823; --muted:#8C8272; --line:#E4DACA; --line2:#D9CCB6;
+  --accent:#B4623F; --accent-soft:#F0DED4; --tp:#00B67A; --ok:#3C7A5A;
+  --ph:#E9E0D2; --ph2:#DFD4C1; --ph-line:#CFC3AC;
+  --shadow:0 12px 34px rgba(44,40,35,.10);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:'Jost',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif}
+a{color:var(--accent);text-decoration:none}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+
+/* page header */
+.page-head{background:var(--cream);border-bottom:1px solid var(--line);padding:48px 0 40px}
+.brandline{letter-spacing:.42em;font-size:12px;color:var(--muted);font-weight:500;text-transform:uppercase}
+.page-head h1{font-size:46px;line-height:1.04;margin:12px 0 8px;font-weight:600}
+.page-head p{max-width:720px;color:#5f574b;margin:6px 0 0;font-size:15px}
+.meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;background:var(--paper);border:1px solid var(--line2);border-radius:100px;padding:5px 12px;font-size:12.5px;color:#6a6153}
+
+/* master table */
+.section-lab{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin:0 0 4px}
+.block{padding:40px 0;border-bottom:1px solid var(--line)}
+.mtable{width:100%;border-collapse:collapse;font-size:13px;margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.mtable th,.mtable td{text-align:left;padding:10px 11px;border-bottom:1px solid var(--line)}
+.mtable th{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#8c8272;font-weight:600;background:#FaF6F0}
+.mtable tr:last-child td{border-bottom:0}
+.mtable td.r{text-align:right;white-space:nowrap}
+.mtable .mno{font-weight:600;color:var(--accent)}
+.mtable a{font-weight:500}
+.callout{background:#fff;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:14px 16px;margin-top:18px}
+.callout h3{margin:0 0 6px;font-size:16px;font-weight:600}
+.callout ol{margin:0;padding-left:18px;font-size:13.5px;color:#4f473c}
+.callout li{margin:4px 0}
+
+.pgbadge{font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;border-radius:6px;padding:3px 8px}
+.pgbadge.pdp{background:#EAF1EE;color:#3C6A54}
+.pgbadge.cart{background:#F1E4D8;color:#8a5a3a}
+.pgbadge.home{background:#ECE7F1;color:#6a5a7c}
+.pgbadge.col{background:#F2ECDF;color:#7c6a38}
+
+/* test block */
+.test{padding:52px 0;border-bottom:1px solid var(--line)}
+.test:nth-child(even){background:#FDFBF7}
+.thead{display:flex;flex-wrap:wrap;align-items:center;gap:11px;margin-bottom:4px}
+.hid{font-size:13px;font-weight:700;letter-spacing:.06em;color:#fff;background:var(--ink);border-radius:6px;padding:4px 10px}
+.test h2{font-size:27px;font-weight:600;margin:0}
+.idref{font-size:11px;color:#a99c85;font-weight:400;letter-spacing:.02em}
+.tsub{color:#6a6153;font-size:15px;margin:8px 0 0;max-width:780px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 22px}
+.tag{font-size:12px;color:#6a6153;background:var(--paper);border:1px solid var(--line2);border-radius:100px;padding:4px 11px}
+.tag b{color:var(--ink);font-weight:600}
+.tag.metric{background:#F2ECE0;border-color:var(--taupe)}
+.tag.qa{background:#FBF1DA;border-color:#E4C77E;color:#8a6a1e}
+.tag.mob{background:#EAF1EE;border-color:#BcD6C9;color:#3C6A54}
+.tag.star{background:#F4E3DA;border-color:var(--accent);color:var(--accent);font-weight:600}
+
+.ps{display:grid;grid-template-columns:1fr 1fr;gap:16px 20px;margin-bottom:24px}
+.ps .box{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.ps .box h4{margin:0 0 4px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.ps .box p{margin:0;font-size:14px;color:#4f473c}
+.hyp{background:#fff;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:12px 16px;margin:0 0 26px}
+.hyp-lbl{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:3px}
+.hyp p{margin:0;font-size:13.5px;color:#4f473c;line-height:1.5}
+.hyp b{color:var(--ink);font-weight:600}
+
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start;justify-items:center}
+.col{min-width:0;width:100%;max-width:320px}
+.col-h{display:flex;align-items:center;gap:9px;margin:0 auto 12px;justify-content:center}
+.state{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:100px}
+.state.before{background:#EFE7DA;color:#7c7061}
+.state.after{background:var(--ok);color:#fff}
+.col-h .lab{font-size:13px;color:#6a6153}
+.note{margin:12px 4px 0;font-size:12.5px;color:#6a6153;display:flex;gap:8px}
+.note .dot{color:var(--accent);font-weight:700}
+
+/* phone */
+.phone-wrap{display:flex;justify-content:center}
+.phone{width:292px;border:9px solid #2C2823;border-radius:36px;overflow:hidden;background:#2C2823;box-shadow:var(--shadow)}
+.phone .notch{height:22px;background:#2C2823;position:relative}
+.phone .notch::after{content:"";position:absolute;left:50%;top:7px;transform:translateX(-50%);width:84px;height:6px;border-radius:6px;background:#4a453e}
+.screen{background:var(--paper);position:relative}
+.screen.cart{display:flex;flex-direction:column;min-height:430px}
+
+.anno{background:#2C2823;color:#F3ECE1;font-size:10px;letter-spacing:.05em;text-align:center;padding:6px 8px}
+.head{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--line)}
+.logo{font-family:'Cormorant Garamond',serif;font-weight:700;letter-spacing:.28em;font-size:18px}
+.ico{color:#9a9082;font-size:14px;letter-spacing:3px}
+.img{background:repeating-linear-gradient(135deg,var(--ph) 0 11px,var(--ph2) 11px 22px);border:1px solid var(--ph-line);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#a99c85;font-size:10px;text-align:center;padding:6px}
+
+/* homepage */
+.hero{position:relative;margin:12px;height:180px;border-radius:10px;overflow:hidden}
+.hero .ov{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:8px;padding:14px}
+.hero h3{font-family:'Cormorant Garamond',serif;color:#fff;font-weight:600;margin:0;text-shadow:0 1px 8px rgba(0,0,0,.4);line-height:1.1}
+.btn{background:#fff;color:#2C2823;font-size:11px;font-weight:500;border-radius:100px;padding:7px 16px;display:inline-block;letter-spacing:.04em}
+.btn.sm{font-size:10px;padding:6px 13px}
+.inspo{display:grid;grid-template-columns:1fr;gap:10px;padding:12px}
+.inspo .img{height:84px}
+.badge-q{position:absolute;top:8px;left:8px;background:rgba(255,255,255,.85);border-radius:6px;font-size:10px;padding:2px 7px;color:#9a9082}
+.story{display:flex;gap:9px;padding:12px;overflow:hidden}
+.story .t{flex:none;width:72px;text-align:center;font-size:9.5px;color:#5f574b}
+.story .t .img{height:72px;border-radius:10px;margin-bottom:5px}
+.story .t.peek{width:32px;opacity:.6}
+.drawer{padding:4px 0}
+.mrow{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;border-bottom:1px solid var(--line);font-size:13px}
+.mrow .car{color:#b3a996}
+.mrow.util{color:#9a9082}
+.mrow.pri{font-weight:500}
+.mrow.head-lbl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:0;padding:12px 16px 4px}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line)}
+.drawer-top .x{color:#9a9082}
+.tp-bar{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:7px;background:#EAF6F0;border:1px solid #BfE5D3;border-radius:8px;margin:10px 12px 0;padding:8px 10px;font-size:11px}
+.tp-bar .stars{color:var(--tp);letter-spacing:1px;font-size:12px}
+.tp-bar b{font-weight:600}.tp-bar .cnt{color:#7c7061}
+.tp-badge{background:var(--tp);color:#fff;font-size:9.5px;font-weight:600;border-radius:4px;padding:2px 6px}
+
+/* PDP */
+.gallery{position:relative;margin:0}
+.gallery .img{height:150px;border-radius:0;border-left:0;border-right:0;border-top:0}
+.gdots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px}
+.gdots i{width:6px;height:6px;border-radius:50%;background:rgba(44,40,35,.3)}
+.gdots i.on{background:var(--ink)}
+.pdp{padding:12px 14px}
+.p-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;margin:0 0 4px}
+.p-rate{font-size:10px;color:#B4623F;letter-spacing:.5px;margin-bottom:6px}
+.p-price{font-size:16px;font-weight:600;margin:2px 0 10px}
+.p-price s{color:#a99c85;font-weight:400;font-size:12px;margin-left:6px}
+.lblrow{font-size:11px;color:#6a6153;margin:0 0 6px;font-weight:500}
+.bullets{display:flex;flex-direction:column;gap:6px;margin:0 0 12px}
+.bl{display:flex;align-items:center;gap:8px;font-size:11px;color:#4f473c}
+.bl .ic{width:16px;height:16px;border-radius:50%;background:var(--cream);border:1px solid var(--taupe);display:flex;align-items:center;justify-content:center;font-size:9px;flex:none}
+.bl.sec{color:#9a9082;font-size:10px}
+.bl.sec .ic{background:#f4f0e8;border-color:var(--line)}
+.atc{background:#2C2823;color:#fff;text-align:center;font-size:12px;font-weight:500;border-radius:100px;padding:11px;letter-spacing:.03em}
+.descnote{font-size:10px;color:#a99c85;text-align:center;padding:10px;border-top:1px dashed var(--line);margin-top:8px}
+.maat{display:flex;gap:8px;margin:0 0 12px}
+.maat .opt{flex:1;border:1px solid var(--line2);border-radius:9px;padding:8px 6px;font-size:10px;text-align:center;color:#5f574b;line-height:1.3}
+.maat .opt.sel{border-color:var(--ink);background:var(--cream)}
+.maat .opt b{display:block;font-size:11px;color:var(--ink)}
+.maat .opt .sub{font-size:9px;color:#9a9082}
+.sizeline{display:inline-flex;align-items:center;gap:7px;background:var(--cream);border:1px solid var(--taupe);border-radius:8px;padding:7px 11px;font-size:11px;color:#4f473c;margin:0 0 12px}
+.sizeline b{font-weight:600}
+.benef{display:flex;flex-direction:column;gap:7px;margin:0 0 12px}
+.benef .b{display:flex;gap:8px;align-items:flex-start;font-size:11px;color:#4f473c}
+.benef .b .ic{width:20px;height:20px;border-radius:50%;background:var(--cream);border:1px solid var(--taupe);display:flex;align-items:center;justify-content:center;font-size:11px;flex:none}
+.benef .b b{font-weight:600}
+.strike-note{position:relative}
+.bundle{border:1px solid var(--line2);border-radius:11px;padding:11px;margin:0 0 12px;background:#fff}
+.bundle h5{margin:0 0 3px;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:600}
+.bundle .hint{font-size:9.5px;color:#9a9082;margin:0 0 9px}
+.slot{margin-bottom:9px}
+.slot .sl-lbl{font-size:10px;color:#6a6153;margin-bottom:5px;font-weight:500}
+.slot .picks{display:flex;gap:6px}
+.slot .pk{width:30px;height:30px;border-radius:7px;background:var(--ph);border:1px solid var(--ph-line)}
+.slot .pk.sel{outline:2px solid var(--accent);outline-offset:1px}
+.bsum{display:flex;justify-content:space-between;align-items:baseline;font-size:11px;border-top:1px dashed var(--line);padding-top:8px;margin-top:4px}
+.bsum .save{color:var(--accent);font-weight:600}
+.bsum s{color:#a99c85}
+
+/* collection */
+.cbread{font-size:9px;color:#9a9082;padding:8px 12px 0}
+.ctitle{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;padding:2px 12px 6px}
+.filterbar{display:flex;gap:8px;padding:8px 12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:10px;color:#6a6153;align-items:center}
+.filterbar .fb{border:1px solid var(--line2);border-radius:100px;padding:4px 10px;display:inline-flex;gap:5px;align-items:center}
+.filterbar .res{margin-left:auto;color:#a99c85;font-size:9px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;padding:8px 12px}
+.chip{border:1px solid var(--line2);border-radius:100px;padding:4px 10px;font-size:9.5px;color:#5f574b}
+.chip.on{background:var(--cream);border-color:var(--ink);color:var(--ink);font-weight:500}
+.chip .x{color:var(--accent);margin-left:3px}
+.clear{font-size:9px;color:var(--accent);padding:0 12px 6px}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px}
+.ccard{min-width:0}
+.ccard .img{height:92px;margin-bottom:5px;position:relative}
+.ccard .nm{font-size:10.5px;line-height:1.25}
+.ccard .pr{font-size:10.5px;color:#5f574b;font-weight:500}
+.ccard .pr s{color:#a99c85;font-weight:400;font-size:9px;margin-left:4px}
+.badge{position:absolute;top:6px;left:6px;background:var(--accent);color:#fff;font-size:8px;font-weight:600;border-radius:5px;padding:2px 5px}
+.clabel{position:absolute;top:6px;left:6px;background:#2C2823;color:#fff;font-size:8px;font-weight:600;border-radius:5px;padding:2px 6px;letter-spacing:.02em}
+.clabel.fav{background:var(--accent)}
+
+/* cart */
+.dhead{display:flex;align-items:center;justify-content:space-between;padding:13px 15px;border-bottom:1px solid var(--line)}
+.dhead .t{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600}
+.dhead .x{color:#9a9082;font-size:15px}
+.ship{padding:10px 15px;border-bottom:1px solid var(--line)}
+.ship .msg{font-size:11px;color:var(--ok);display:flex;align-items:center;gap:6px;font-weight:500}
+.ship .bar{height:5px;border-radius:100px;background:var(--sand);margin-top:7px;overflow:hidden}
+.ship .bar i{display:block;height:100%;width:100%;background:var(--ok)}
+.deliv{font-size:10.5px;color:#4f473c;margin-top:7px;display:flex;align-items:center;gap:6px}
+.deliv b{font-weight:600}
+.litem{display:flex;gap:10px;padding:13px 15px;border-bottom:1px solid var(--line)}
+.litem .img{width:58px;height:58px;border-radius:8px;flex:none}
+.litem .info{flex:1;min-width:0}
+.litem .nm{font-size:12px;line-height:1.3}
+.litem .pr{font-size:11.5px;color:#5f574b;font-weight:500;margin-top:2px}
+.litem .rm{font-size:9px;color:#9a9082;text-decoration:underline;margin-top:4px;display:inline-block}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line2);border-radius:100px;margin-top:6px;font-size:11px}
+.qty span{padding:3px 9px}.qty b{padding:3px 8px;border-left:1px solid var(--line2);border-right:1px solid var(--line2)}
+.emptyspace{flex:1;min-height:70px;display:flex;align-items:center;justify-content:center;color:#c3b7a1;font-size:10px;text-align:center}
+.foot-cart{border-top:1px solid var(--line2);background:#fff;padding:11px 15px 13px}
+.subrow{display:flex;justify-content:space-between;align-items:baseline;font-size:12px;margin-bottom:3px}
+.subrow.tot{font-size:14px;font-weight:600;margin-bottom:9px}
+.subrow.disc{color:var(--accent)}
+.subrow s{color:#a99c85;font-weight:400;font-size:11px}
+.contd{font-size:9px;color:var(--ok);margin:-4px 0 9px;display:flex;align-items:center;gap:5px}
+.cta-checkout{background:#2C2823;color:#fff;text-align:center;font-size:12.5px;font-weight:500;border-radius:100px;padding:12px;letter-spacing:.03em}
+.cart-tp{display:flex;align-items:center;justify-content:center;gap:6px;font-size:9px;color:#7c7061;margin-top:8px}
+.cart-tp .stars{color:var(--tp)}
+.paylogos{display:flex;gap:4px;justify-content:center;margin-top:7px}
+.paylogos i{width:22px;height:14px;border-radius:3px;background:#EDE6D9;border:1px solid var(--line);display:block}
+.guarantee{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:10.5px;color:#4f473c;background:var(--cream);border:1px solid var(--taupe);border-radius:8px;padding:7px 10px;margin-bottom:10px}
+.guarantee .l{display:flex;align-items:center;gap:6px}
+.guarantee b{font-weight:600}.guarantee .terms{color:var(--accent);font-size:9.5px}
+
+.hl{outline:2px dashed var(--accent);outline-offset:2px;border-radius:10px;background:rgba(180,98,63,.05)}
+.hl.pad{outline-offset:-1px}
+.tagnum{position:absolute;z-index:5;background:var(--accent);color:#fff;font-size:10px;font-weight:600;border-radius:100px;width:19px;height:19px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+
+/* phases */
+.phases{display:grid;gap:12px;margin-top:16px}
+.phase{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.phase h4{margin:0 0 4px;font-size:14px;font-weight:600}
+.phase p{margin:0;font-size:13.5px;color:#4f473c}
+.phase .ph-lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600}
+
+.foot{padding:38px 0 60px;color:#8c8272;font-size:13px}
+.foot b{color:var(--ink)}
+
+@media(max-width:760px){
+  .compare{grid-template-columns:1fr;gap:34px}
+  .ps{grid-template-columns:1fr}
+  .page-head h1{font-size:34px}
+  .mtable{font-size:12px}
+  .mtable th:nth-child(5),.mtable td:nth-child(5){display:none}
+}
+@media print{ body{background:#fff} .test{break-inside:avoid} .phone{box-shadow:none} }
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <div class="wrap">
+    <div class="brandline">AZIN · shop-azin.nl</div>
+    <h1>Master A/B Testing Roadmap</h1>
+    <p>Nine selected tests across homepage, product, collection, and mobile cart drawer — each with its problem, solution, hypothesis, and the mobile before/after wireframe. Focus: the mobile experience (80.6% of traffic). Results judged on Shopify order data.</p>
+    <div class="meta">
+      <span class="pill">9 selected tests</span>
+      <span class="pill">📱 mobile wireframes embedded</span>
+      <span class="pill">ranked M1 → M9 by priority</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===== overview ===== -->
+<div class="block"><div class="wrap">
+  <div class="section-lab">Overview</div>
+  <h2 class="serif" style="margin:0 0 2px;font-size:26px;font-weight:600">Selected tests — priority order</h2>
+  <table class="mtable">
+    <thead><tr><th>#</th><th>Page</th><th>Test</th><th>Original ID</th><th>Primary metric</th><th class="r">Priority</th></tr></thead>
+    <tbody>
+      <tr><td class="mno">M1</td><td><span class="pgbadge pdp">PDP</span></td><td><a href="file:///Users/baris/Library/Application%20Support/Claude/local-agent-mode-sessions/cacd158d-d471-4162-8ae0-77c4faabab40/4deb5b7f-fbf5-457a-8d45-07e771d9c391/local_d4eaf2c8-6f2e-461d-b382-740136cd0640/outputs/AZIN_master_roadmap.html#m1">Mix colors and keep the two-pack discount ★</a></td><td>HYP-PDP-00</td><td>Two-pack bundle ATC</td><td class="r">9.9</td></tr>
+      <tr><td class="mno">M2</td><td><span class="pgbadge cart">Cart</span></td><td><a href="file:///Users/baris/Library/Application%20Support/Claude/local-agent-mode-sessions/cacd158d-d471-4162-8ae0-77c4faabab40/4deb5b7f-fbf5-457a-8d45-07e771d9c391/local_d4eaf2c8-6f2e-461d-b382-740136cd0640/outputs/AZIN_master_roadmap.html#m2">Automatically apply the sitewide discount</a></td><td>HYP-CART-01</td><td>Cart-to-checkout</td><td class="r">9.8 *</td></tr>
+      <tr><td class="mno">M3</td><td><span class="pgbadge pdp">PDP</span></td><td><a href="file:///Users/baris/Library/Application%20Support/Claude/local-agent-mode-sessions/cacd158d-d471-4162-8ae0-77c4faabab40/4deb5b7f-fbf5-457a-8d45-07e771d9c391/local_d4eaf2c8-6f2e-461d-b382-740136cd0640/outputs/AZIN_master_roadmap.html#m3">Minimal size information above the fold</a></td><td>HYP-PDP-01</td><td>PDP add-to-cart</td><td class="r">9.7</td></tr>
+      <tr><td class="mno">M4</td><td><span class="pgbadge pdp">PDP</span></td><td><a href="file:///Users/baris/Library/Application%20Support/Claude/local-agent-mode-sessions/cacd158d-d471-4162-8ae0-77c4faabab40/4deb5b7f-fbf5-457a-8d45-07e771d9c391/local_d4eaf2c8-6f2e-461d-b382-740136cd0640/outputs/AZIN_master_roadmap.html#m4">Product-benefit summary under the price</a></td><td>HYP-PDP-07</td><td>PDP add-to-cart</td><td class="r">9.3</td></tr>
+      <tr><td class="mno">M5</td><td><span class="pgbadge home">Home</span></td><td><a href="file:///Users/baris/Library/Application%20Support/Claude/local-agent-mode-sessions/cacd158d-d471-4162-8ae0-77c4faabab40/4deb5b7f-fbf5-457a-8d45-07e771d9c391/local_d4eaf2c8-6f2e-461d-b382-740136cd0640/outputs/AZIN_master_roadmap.html#m5">Story-style collection navigation above the hero</a></td><td>HYP-HOME-03</td><td>Homepage-to-collection</td><td class="r">8.9</td></tr>
+      <tr><td class="mno">M6</td><td><span class="pgbadge col">Collection</span></td><td><a href="file:///Users/baris/Library/Application%20Support/Claude/local-agent-mode-sessions/cacd158d-d471-4162-8ae0-77c4faabab40/4deb5b7f-fbf5-457a-8d45-07e771d9c391/local_d4eaf2c8-6f2e-461d-b382-740136cd0640/outputs/AZIN_master_roadmap.html#m6">Trustpilot proof above the collection title</a></td><td>HYP-COL-13</td><td>Collection-to-PDP</td><td class="r">8.9</td></tr>
+      <tr><td class="mno">M7</td><td><span class="pgbadge home">Home</span></td><td><a href="file:///Users/baris/Library/Application%20Support/Claude/local-agent-mode-sessions/cacd158d-d471-4162-8ae0-77c4faabab40/4deb5b7f-fbf5-457a-8d45-07e771d9c391/local_d4eaf2c8-6f2e-461d-b382-740136cd0640/outputs/AZIN_master_roadmap.html#m7">Category-first mobile menu</a></td><td>HYP-HOME-04</td><td>Menu-to-collection CTR</td><td class="r">8.8</td></tr>
+      <tr><td class="mno">M8</td><td><span class="pgbadge col">Collection</span></td><td><a href="file:///Users/baris/Library/Application%20Support/Claude/local-agent-mode-sessions/cacd158d-d471-4162-8ae0-77c4faabab40/4deb5b7f-fbf5-457a-8d45-07e771d9c391/local_d4eaf2c8-6f2e-461d-b382-740136cd0640/outputs/AZIN_master_roadmap.html#m8">Evidence-based product-card labels</a></td><td>HYP-COL-03</td><td>Labeled-card CTR</td><td class="r">8.3</td></tr>
+      <tr><td class="mno">M9</td><td><span class="pgbadge col">Collection</span></td><td><a href="file:///Users/baris/Library/Application%20Support/Claude/local-agent-mode-sessions/cacd158d-d471-4162-8ae0-77c4faabab40/4deb5b7f-fbf5-457a-8d45-07e771d9c391/local_d4eaf2c8-6f2e-461d-b382-740136cd0640/outputs/AZIN_master_roadmap.html#m9">Decision filters and useful sorting</a></td><td>HYP-COL-01</td><td>Collection-to-PDP</td><td class="r">6.8</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px;color:#9a9082;margin:8px 2px 0">★ = client-flagged priority (+1). &nbsp; * = priority after functional QA.</p>
+
+  <div class="callout">
+    <h3>Resolve first — cross-cutting dependencies</h3>
+    <ol>
+      <li><b>Free-shipping threshold (€70 vs €75).</b> Blocks any free-shipping-dependent behaviour in <b>M2</b> until standardized and drawer/checkout totals are proven identical.</li>
+      <li><b>Discount margin.</b> Deductions rose 75% vs gross +32% — judge M1 &amp; M2 on contribution margin, not just conversion.</li>
+      <li><b>Auditable product data.</b> M8 (labels) needs real qualification rules; M9 (filters) needs standardized colour/height/type/vase attributes.</li>
+      <li><b>Mobile-first.</b> Design and evaluate every test on mobile; report mobile and desktop separately.</li>
+    </ol>
+  </div>
+</div></div>
+
+<!-- ================= M1 ================= -->
+<section class="test" id="m1">
+  <div class="wrap">
+    <div class="thead"><span class="hid">M1</span><span class="pgbadge pdp">PDP</span><h2>Mix colors and keep the two-pack discount</h2><span class="idref">HYP-PDP-00</span><span class="tag star">★ Client priority</span></div>
+    <p class="tsub">Let shoppers build a two-pack from two <em>different</em> colours and still get the bundle price — instead of forcing two of the same colour.</p>
+    <div class="tags"><span class="tag metric"><b>Primary:</b> Two-pack bundle ATC</span><span class="tag"><b>Lever:</b> Bundling / offer clarity</span><span class="tag"><b>Effort:</b> High</span><span class="tag"><b>Priority:</b> 9.9/10</span></div>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>The 2-pack is a single SKU ("2 Boeketten") of one colour. Wanting two colours means losing the offer or guessing whether the cart will still discount.</p></div>
+      <div class="box"><h4>Solution</h4><p>Bundle builder: choose colour 1 + colour 2, live summary, original vs bundle price + saving, one "Voeg 2-pack toe" CTA that adds two single SKUs at the approved price.</p></div>
+    </div>
+    <div class="hyp"><span class="hyp-lbl">Hypothesis</span><p><b>If</b> AZIN lets customers select two different colors while automatically preserving the two-pack discount, <b>then</b> two-pack bundle add-to-cart rate, units per order, and purchase CVR will increase, <b>because</b> shoppers can receive both variety and the advertised multi-buy value without discount-code uncertainty.</p></div>
+    <div class="compare">
+      <div class="col">
+        <div class="col-h"><span class="state before">Before</span><span class="lab">2-pack = same colour ×2</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+          <div class="anno">15% KORTING · ZOMER15</div>
+          <div class="head"><span class="ico">≡</span><span class="logo">AZIN</span><span class="ico">⌕⛒</span></div>
+          <div class="gallery"><div class="img">Zijden Klaprozen – Roze Mix</div><div class="gdots"><i class="on"></i><i></i><i></i></div></div>
+          <div class="pdp">
+            <div class="p-title">Zijden Klaprozen – Roze Mix</div>
+            <div class="p-rate">★★★★☆ 41 reviews</div>
+            <div class="p-price">€71,95 <s>€103,90</s></div>
+            <div class="lblrow">Maat</div>
+            <div class="maat">
+              <div class="opt"><b>1 Boeket</b><span class="sub">€51,95</span></div>
+              <div class="opt sel"><b>2 Boeketten</b><span class="sub">€71,95 · zelfde kleur</span></div>
+            </div>
+            <div class="atc">Toevoegen aan winkelwagen</div>
+          </div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>"2 Boeketten" is one SKU — the discount only applies to <b>two of the same colour</b>.</span></div>
+      </div>
+      <div class="col">
+        <div class="col-h"><span class="state after">After</span><span class="lab">build a 2-colour 2-pack</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+          <div class="anno">15% KORTING · ZOMER15</div>
+          <div class="head"><span class="ico">≡</span><span class="logo">AZIN</span><span class="ico">⌕⛒</span></div>
+          <div class="gallery"><div class="img">Zijden Klaprozen – Roze Mix</div><div class="gdots"><i class="on"></i><i></i><i></i></div></div>
+          <div class="pdp">
+            <div class="p-title">Zijden Klaprozen – Roze Mix</div>
+            <div class="p-rate">★★★★☆ 41 reviews</div>
+            <div class="hl strike-note" style="position:relative;margin-bottom:12px">
+              <span class="tagnum" style="top:-9px;left:-9px">①</span>
+              <div class="bundle" style="margin:0">
+                <h5>Stel je 2-pack samen</h5>
+                <div class="hint">Combineer 2 kleuren — zelfde 2-pack prijs</div>
+                <div class="slot"><div class="sl-lbl">Kleur 1 · Roze</div><div class="picks"><div class="pk sel"></div><div class="pk"></div><div class="pk"></div><div class="pk"></div></div></div>
+                <div class="slot"><div class="sl-lbl">Kleur 2 · Wit</div><div class="picks"><div class="pk"></div><div class="pk"></div><div class="pk sel"></div><div class="pk"></div></div></div>
+                <div class="bsum"><span>2-pack prijs</span><span><s>€103,90</s> <b>€71,95</b> · <span class="save">bespaar €31,95</span></span></div>
+              </div>
+            </div>
+            <div class="atc">Voeg 2-pack toe — €71,95</div>
+          </div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>Two colour slots, live saving, one CTA — adds two single SKUs at the approved bundle price, no code needed.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= M2 ================= -->
+<section class="test" id="m2">
+  <div class="wrap">
+    <div class="thead"><span class="hid">M2</span><span class="pgbadge cart">Cart drawer</span><h2>Automatically apply the sitewide discount</h2><span class="idref">HYP-CART-01</span><span class="tag qa">⚠ After QA</span></div>
+    <p class="tsub">Show the promised ZOMER15 saving inside the drawer automatically, so shoppers see the final price without remembering or entering a code.</p>
+    <div class="tags"><span class="tag metric"><b>Primary:</b> Cart-to-checkout rate</span><span class="tag"><b>Lever:</b> Price transparency</span><span class="tag"><b>Effort:</b> Medium</span><span class="tag"><b>Priority:</b> 9.8/10 (post-QA)</span></div>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>The banner promotes 15% off with ZOMER15, but the drawer shows the original €79,95 — no discount state, saving, or final total. The advertised saving is invisible at the cart stage.</p></div>
+      <div class="box"><h4>Solution</h4><p>Auto-apply the active sitewide discount on eligible items: original subtotal, a clear discount line, updated subtotal, and "continues into checkout" — no code entry, using Shopify's real discount logic.</p></div>
+    </div>
+    <div class="hyp"><span class="hyp-lbl">Hypothesis</span><p><b>If</b> AZIN automatically applies and displays the active sitewide discount in the cart drawer, <b>then</b> cart-to-checkout and purchase rates will increase, <b>because</b> shoppers will see the promised saving without remembering or entering a code.</p></div>
+    <div class="compare">
+      <div class="col">
+        <div class="col-h"><span class="state before">Before</span><span class="lab">original subtotal, no discount</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen cart">
+          <div class="dhead"><span class="t">Je winkelwagen (1)</span><span class="x">✕</span></div>
+          <div class="ship"><div class="msg">✓ Je komt in aanmerking voor gratis verzending</div><div class="bar"><i></i></div></div>
+          <div class="litem"><div class="img"></div><div class="info"><div class="nm">Wax Arrangement – Mix</div><div class="pr">€79,95</div><div class="qty"><span>−</span><b>1</b><span>+</span></div><br><span class="rm">Verwijderen</span></div></div>
+          <div class="emptyspace">leeg</div>
+          <div class="foot-cart">
+            <div style="position:relative"><span class="tagnum" style="top:-9px;left:-4px">①</span>
+              <div class="subrow tot hl pad" style="padding:6px 8px"><span>Subtotaal</span><span>€79,95</span></div>
+            </div>
+            <div class="cta-checkout">Afrekenen · €79,95</div>
+            <div class="cart-tp"><span class="stars">★★★★☆</span> Trustpilot 4,4/5</div>
+            <div class="paylogos"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>Drawer shows the full €79,95 — the promoted ZOMER15 saving is nowhere in sight.</span></div>
+      </div>
+      <div class="col">
+        <div class="col-h"><span class="state after">After</span><span class="lab">discount auto-applied &amp; shown</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen cart">
+          <div class="dhead"><span class="t">Je winkelwagen (1)</span><span class="x">✕</span></div>
+          <div class="ship"><div class="msg">✓ Je komt in aanmerking voor gratis verzending</div><div class="bar"><i></i></div></div>
+          <div class="litem"><div class="img"></div><div class="info"><div class="nm">Wax Arrangement – Mix</div><div class="pr">€79,95</div><div class="qty"><span>−</span><b>1</b><span>+</span></div><br><span class="rm">Verwijderen</span></div></div>
+          <div class="emptyspace">leeg</div>
+          <div class="foot-cart">
+            <div style="position:relative"><span class="tagnum" style="top:-9px;left:-4px">①</span>
+              <div class="hl pad" style="padding:8px 8px 6px">
+                <div class="subrow"><span>Subtotaal</span><span>€79,95</span></div>
+                <div class="subrow disc"><span>Zomeractie (ZOMER15) −15%</span><span>−€11,99</span></div>
+                <div class="subrow tot"><span>Totaal</span><span>€67,96</span></div>
+                <div class="contd">✓ Korting blijft actief in de checkout</div>
+              </div>
+            </div>
+            <div class="cta-checkout">Afrekenen · €67,96</div>
+            <div class="cart-tp"><span class="stars">★★★★☆</span> Trustpilot 4,4/5</div>
+            <div class="paylogos"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>Original subtotal, explicit discount line, new total, and "continues into checkout". Totals must match checkout exactly.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= M3 ================= -->
+<section class="test" id="m3">
+  <div class="wrap">
+    <div class="thead"><span class="hid">M3</span><span class="pgbadge pdp">PDP</span><h2>Minimal size information above the fold</h2><span class="idref">HYP-PDP-01</span></div>
+    <p class="tsub">Surface the two facts shoppers most need — height and stem count — in one compact line above the CTA, instead of only in the description.</p>
+    <div class="tags"><span class="tag metric"><b>Primary:</b> PDP ATC rate</span><span class="tag"><b>Lever:</b> Product clarity</span><span class="tag"><b>Effort:</b> Low</span><span class="tag"><b>Priority:</b> 9.7/10</span></div>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>&lt;20% of visitors scroll to the sizing info. The ~60 cm length and 20-stem count sit in the lower description, so most decide without them.</p></div>
+      <div class="box"><h4>Solution</h4><p>One verified line above the CTA: "± 60 cm hoog · 20 stelen". No vase dims or unmaintained attributes; kept visually secondary to price.</p></div>
+    </div>
+    <div class="hyp"><span class="hyp-lbl">Hypothesis</span><p><b>If</b> AZIN shows verified height and stem count in one compact line above the CTA, <b>then</b> PDP add-to-cart rate will increase, <b>because</b> visitors can validate basic scale and quantity without scrolling or adding visual clutter.</p></div>
+    <div class="compare">
+      <div class="col">
+        <div class="col-h"><span class="state before">Before</span><span class="lab">size buried in description</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+          <div class="anno">15% KORTING · ZOMER15</div>
+          <div class="head"><span class="ico">≡</span><span class="logo">AZIN</span><span class="ico">⌕⛒</span></div>
+          <div class="gallery"><div class="img">Wax Arrangement – Mix</div><div class="gdots"><i class="on"></i><i></i><i></i></div></div>
+          <div class="pdp">
+            <div class="p-title">Wax Arrangement – Mix</div>
+            <div class="p-rate">★★★★☆ 128 reviews</div>
+            <div class="p-price">€79,95</div>
+            <div class="bullets">
+              <div class="bl"><span class="ic">🚚</span> Vandaag besteld = morgen in huis</div>
+              <div class="bl"><span class="ic">✓</span> Levenslange garantie</div>
+            </div>
+            <div class="atc">Toevoegen aan winkelwagen</div>
+            <div class="descnote">↓ ± 60 cm · 20 stelen only appears here,<br>far down in the description</div>
+          </div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>Height &amp; stem count are below the fold — most visitors never see them before deciding.</span></div>
+      </div>
+      <div class="col">
+        <div class="col-h"><span class="state after">After</span><span class="lab">one size line above CTA</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+          <div class="anno">15% KORTING · ZOMER15</div>
+          <div class="head"><span class="ico">≡</span><span class="logo">AZIN</span><span class="ico">⌕⛒</span></div>
+          <div class="gallery"><div class="img">Wax Arrangement – Mix</div><div class="gdots"><i class="on"></i><i></i><i></i></div></div>
+          <div class="pdp">
+            <div class="p-title">Wax Arrangement – Mix</div>
+            <div class="p-rate">★★★★☆ 128 reviews</div>
+            <div class="p-price">€79,95</div>
+            <div style="position:relative;display:inline-block"><span class="tagnum" style="top:-9px;left:-9px">①</span>
+              <div class="sizeline hl" style="margin:0 0 12px">📏 <b>± 60 cm hoog</b> · <b>20 stelen</b></div>
+            </div>
+            <div class="bullets">
+              <div class="bl"><span class="ic">🚚</span> Vandaag besteld = morgen in huis</div>
+              <div class="bl"><span class="ic">✓</span> Levenslange garantie</div>
+            </div>
+            <div class="atc">Toevoegen aan winkelwagen</div>
+          </div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>Verified height + stem count validated at a glance, no scrolling, minimal clutter.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= M4 ================= -->
+<section class="test" id="m4">
+  <div class="wrap">
+    <div class="thead"><span class="hid">M4</span><span class="pgbadge pdp">PDP</span><h2>Product-benefit summary under the price</h2><span class="idref">HYP-PDP-07</span></div>
+    <p class="tsub">Explain <em>why</em> the flowers are worth it — realism, longevity, no maintenance — where today only delivery/pay-later/guarantee appear.</p>
+    <div class="tags"><span class="tag metric"><b>Primary:</b> PDP ATC rate</span><span class="tag"><b>Lever:</b> Value proposition</span><span class="tag"><b>Effort:</b> Low</span><span class="tag"><b>Priority:</b> 9.3/10</span></div>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>First-view bullets cover delivery, pay later and guarantee — transactional risk, not why premium artificial flowers beat fresh ones (realism was the #1 motivation).</p></div>
+      <div class="box"><h4>Solution</h4><p>Three product benefits below the price (realistic / years / no maintenance); transactional reassurance demoted to a secondary row.</p></div>
+    </div>
+    <div class="hyp"><span class="hyp-lbl">Hypothesis</span><p><b>If</b> AZIN summarizes realism, longevity, and no-maintenance value below the price, <b>then</b> PDP add-to-cart rate will increase, <b>because</b> visitors will understand the product's value before evaluating the purchase action.</p></div>
+    <div class="compare">
+      <div class="col">
+        <div class="col-h"><span class="state before">Before</span><span class="lab">transactional bullets only</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+          <div class="anno">15% KORTING · ZOMER15</div>
+          <div class="head"><span class="ico">≡</span><span class="logo">AZIN</span><span class="ico">⌕⛒</span></div>
+          <div class="gallery"><div class="img">Wax Arrangement – Mix</div><div class="gdots"><i class="on"></i><i></i><i></i></div></div>
+          <div class="pdp">
+            <div class="p-title">Wax Arrangement – Mix</div>
+            <div class="p-price">€79,95</div>
+            <div class="bullets">
+              <div class="bl"><span class="ic">🚚</span> Vandaag besteld = morgen in huis</div>
+              <div class="bl"><span class="ic">💳</span> Bestel nu, betaal later</div>
+              <div class="bl"><span class="ic">✓</span> Levenslange garantie</div>
+            </div>
+            <div class="atc">Toevoegen aan winkelwagen</div>
+          </div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>Nothing here says why the product is worth choosing over fresh flowers.</span></div>
+      </div>
+      <div class="col">
+        <div class="col-h"><span class="state after">After</span><span class="lab">product benefits first</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+          <div class="anno">15% KORTING · ZOMER15</div>
+          <div class="head"><span class="ico">≡</span><span class="logo">AZIN</span><span class="ico">⌕⛒</span></div>
+          <div class="gallery"><div class="img">Wax Arrangement – Mix</div><div class="gdots"><i class="on"></i><i></i><i></i></div></div>
+          <div class="pdp">
+            <div class="p-title">Wax Arrangement – Mix</div>
+            <div class="p-price">€79,95</div>
+            <div style="position:relative"><span class="tagnum" style="top:-9px;left:-9px">①</span>
+              <div class="benef hl" style="padding:10px;margin-bottom:10px">
+                <div class="b"><span class="ic">🌸</span><span><b>Natuurlijk realistisch</b> — levensechte, gevarieerde bloemen</span></div>
+                <div class="b"><span class="ic">♾️</span><span><b>Jaren mooi</b> — geen verwelken of vervangen</span></div>
+                <div class="b"><span class="ic">💧</span><span><b>Geen onderhoud</b> — geen water, minimale zorg</span></div>
+              </div>
+            </div>
+            <div class="bullets">
+              <div class="bl sec"><span class="ic">🚚</span> Morgen in huis · betaal later · garantie</div>
+            </div>
+            <div class="atc">Toevoegen aan winkelwagen</div>
+          </div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>Realism / longevity / no-maintenance lead; delivery &amp; guarantee kept but visually secondary.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= M5 ================= -->
+<section class="test" id="m5">
+  <div class="wrap">
+    <div class="thead"><span class="hid">M5</span><span class="pgbadge home">Homepage</span><h2>Story-style collection navigation above the hero</h2><span class="idref">HYP-HOME-03</span></div>
+    <p class="tsub">Labelled category shortcuts before the campaign hero, instead of scrolling to unlabeled image links.</p>
+    <div class="tags"><span class="tag metric"><b>Primary:</b> Homepage → collection rate</span><span class="tag"><b>Lever:</b> Navigation</span><span class="tag"><b>Effort:</b> Medium</span><span class="tag"><b>Priority:</b> 8.9/10</span></div>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>Visitors land on a campaign hero and must open the menu or keep scrolling before seeing clear category choices; the first image links have no visible labels.</p></div>
+      <div class="box"><h4>Solution</h4><p>A horizontally scrollable, labelled collection strip under the header and above the hero, with a peek of the next tile.</p></div>
+    </div>
+    <div class="hyp"><span class="hyp-lbl">Hypothesis</span><p><b>If</b> AZIN shows large, labeled collection shortcuts above the hero, <b>then</b> homepage-to-collection rate and collection-link engagement will increase, <b>because</b> shoppers can immediately self-select the category that matches their intent.</p></div>
+    <div class="compare">
+      <div class="col">
+        <div class="col-h"><span class="state before">Before</span><span class="lab">hero first, categories hidden</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+          <div class="anno">15% KORTING · ZOMER15</div>
+          <div class="head"><span class="ico">≡</span><span class="logo">AZIN</span><span class="ico">⌕⛒</span></div>
+          <div class="hero img" style="height:180px"><div class="ov"><h3 style="font-size:23px">Altijd in bloei.</h3><span class="btn sm">Shop Nu</span></div></div>
+          <div class="inspo"><div class="img" style="height:78px;position:relative"><span class="badge-q">? unlabeled link</span></div></div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>No category choices until you scroll — first tiles carry no label or CTA.</span></div>
+      </div>
+      <div class="col">
+        <div class="col-h"><span class="state after">After</span><span class="lab">labelled strip above the hero</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+          <div class="anno">15% KORTING · ZOMER15</div>
+          <div class="head"><span class="ico">≡</span><span class="logo">AZIN</span><span class="ico">⌕⛒</span></div>
+          <div class="hl" style="margin:10px;position:relative"><span class="tagnum" style="top:-9px;left:-9px">①</span>
+            <div class="story" style="padding:10px 8px">
+              <div class="t"><div class="img"></div>Zomer</div>
+              <div class="t"><div class="img"></div>Bestsellers</div>
+              <div class="t"><div class="img"></div>Boeketten</div>
+              <div class="t peek"><div class="img"></div>Mono</div>
+            </div>
+          </div>
+          <div class="hero img" style="height:140px;margin:8px 12px 12px"><div class="ov"><h3 style="font-size:21px">Altijd in bloei.</h3><span class="btn sm">Shop Nu</span></div></div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>Big labelled tiles (Zomer, Bestsellers, Boeketten, Mono, Vazen, Alle); the peeking tile signals horizontal scroll.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= M6 ================= -->
+<section class="test" id="m6">
+  <div class="wrap">
+    <div class="thead"><span class="hid">M6</span><span class="pgbadge col">Collection</span><h2>Trustpilot proof above the collection title</h2><span class="idref">HYP-COL-13</span></div>
+    <p class="tsub">Give collection landers store-level reassurance — score + review volume — before they start judging individual products.</p>
+    <div class="tags"><span class="tag metric"><b>Primary:</b> Collection-to-PDP rate</span><span class="tag"><b>Lever:</b> Trust / social proof</span><span class="tag"><b>Effort:</b> Low–Med</span><span class="tag"><b>Priority:</b> 8.9/10</span></div>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>Visitors landing straight on a collection see product-card ratings but no overall AZIN reputation or total review volume.</p></div>
+      <div class="box"><h4>Solution</h4><p>A compact Trustpilot widget above the title — branding, live score, stars, total reviews, "read all" — using the live figures, kept compact.</p></div>
+    </div>
+    <div class="hyp"><span class="hyp-lbl">Hypothesis</span><p><b>If</b> AZIN shows its Trustpilot score and total review count above the collection title, <b>then</b> collection-to-PDP and purchase CVR will increase, <b>because</b> first-time visitors will receive credible store-level reassurance before browsing.</p></div>
+    <div class="compare">
+      <div class="col">
+        <div class="col-h"><span class="state before">Before</span><span class="lab">no store proof</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+          <div class="anno">15% KORTING · ZOMER15</div>
+          <div class="head"><span class="ico">≡</span><span class="logo">AZIN</span><span class="ico">⌕⛒</span></div>
+          <div class="cbread">Thuis · Verzameling · Bestsellers</div>
+          <div class="ctitle">Bestsellers</div>
+          <div class="cgrid">
+            <div class="ccard"><div class="img">Wax Arrangement</div><div class="nm">Wax Arrangement – Mix</div><div class="pr">€79,95</div></div>
+            <div class="ccard"><div class="img">Boeket Flora</div><div class="nm">Boeket Flora</div><div class="pr">€114,95</div></div>
+          </div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>Nothing communicates AZIN's overall reputation to a first-time collection lander.</span></div>
+      </div>
+      <div class="col">
+        <div class="col-h"><span class="state after">After</span><span class="lab">Trustpilot bar above title</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+          <div class="anno">15% KORTING · ZOMER15</div>
+          <div class="head"><span class="ico">≡</span><span class="logo">AZIN</span><span class="ico">⌕⛒</span></div>
+          <div style="position:relative"><span class="tagnum" style="top:12px;left:6px">①</span>
+            <div class="tp-bar"><span class="tp-badge">★ Trustpilot</span><span class="stars">★★★★☆</span><b>4,4/5</b><span class="cnt">· 2.612 reviews</span></div>
+          </div>
+          <div class="cbread" style="padding-top:10px">Thuis · Verzameling · Bestsellers</div>
+          <div class="ctitle">Bestsellers</div>
+          <div class="cgrid">
+            <div class="ccard"><div class="img">Wax Arrangement</div><div class="nm">Wax Arrangement – Mix</div><div class="pr">€79,95</div></div>
+            <div class="ccard"><div class="img">Boeket Flora</div><div class="nm">Boeket Flora</div><div class="pr">€114,95</div></div>
+          </div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>Live score + review volume seen before browsing; compact enough not to push the grid far down.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= M7 ================= -->
+<section class="test" id="m7">
+  <div class="wrap">
+    <div class="thead"><span class="hid">M7</span><span class="pgbadge home">Homepage</span><h2>Category-first mobile menu</h2><span class="idref">HYP-HOME-04</span></div>
+    <p class="tsub">Surface Summer Collection, Bestsellers and categories without a "Shop" expansion tap; drop the redundant Home link and duplicates.</p>
+    <div class="tags"><span class="tag metric"><b>Primary:</b> Menu-open → collection CTR</span><span class="tag"><b>Lever:</b> Information architecture</span><span class="tag"><b>Effort:</b> Medium</span><span class="tag"><b>Priority:</b> 8.8/10</span></div>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>Menu opens on Home, then collapsed Shop and Explore groups. High-intent destinations are hidden behind an extra tap; Explore duplicates some links.</p></div>
+      <div class="box"><h4>Solution</h4><p>Open, shopping-first order: Summer Collection, Bestsellers, All Categories, then categories, then utility links last. No Home; no duplicates.</p></div>
+    </div>
+    <div class="hyp"><span class="hyp-lbl">Hypothesis</span><p><b>If</b> AZIN exposes Summer Collection, Bestsellers, All Categories, and product-category links before utility content in the mobile menu, <b>then</b> menu-to-collection CTR and PDP progression will increase, <b>because</b> shoppers can reach a relevant shopping destination with fewer decisions and taps.</p></div>
+    <div class="compare">
+      <div class="col">
+        <div class="col-h"><span class="state before">Before</span><span class="lab">utility-first, collapsed groups</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+          <div class="drawer-top"><span class="logo" style="font-size:16px">AZIN</span><span class="x">✕</span></div>
+          <div class="drawer">
+            <div class="mrow">Home</div>
+            <div class="mrow">Shop <span class="car">▾</span></div>
+            <div class="mrow">Verkennen <span class="car">▾</span></div>
+            <div class="mrow util">Over Ons</div>
+            <div class="mrow util">Contact</div>
+          </div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>Bestsellers, Zomer Collectie, product types &amp; Alle Producten all hide inside the collapsed "Shop" group.</span></div>
+      </div>
+      <div class="col">
+        <div class="col-h"><span class="state after">After</span><span class="lab">shopping destinations exposed</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+          <div class="drawer-top"><span class="logo" style="font-size:16px">AZIN</span><span class="x">✕</span></div>
+          <div class="drawer hl" style="margin:0;position:relative"><span class="tagnum" style="top:8px;left:12px">①</span>
+            <div class="mrow pri" style="padding-left:44px">Zomer Collectie</div>
+            <div class="mrow pri">Bestsellers</div>
+            <div class="mrow pri">Alle Categorieën</div>
+            <div class="mrow">Boeketten</div>
+            <div class="mrow">Mono Arrangementen</div>
+            <div class="mrow">Vazen</div>
+            <div class="mrow">Cadeaus</div>
+            <div class="mrow head-lbl">Info</div>
+            <div class="mrow util">Over Ons · Contact · Levering · Retour</div>
+          </div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>Three priority destinations visible immediately, no accordion; utility links at the bottom, Home removed.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= M8 ================= -->
+<section class="test" id="m8">
+  <div class="wrap">
+    <div class="thead"><span class="hid">M8</span><span class="pgbadge col">Collection</span><h2>Evidence-based product-card labels</h2><span class="idref">HYP-COL-03</span><span class="tag qa">Needs auditable rules</span></div>
+    <p class="tsub">Help uncertain shoppers spot the socially-validated options in a mixed grid with accurate, auditable labels.</p>
+    <div class="tags"><span class="tag metric"><b>Primary:</b> Labeled-card CTR</span><span class="tag"><b>Lever:</b> Social proof / merchandising</span><span class="tag"><b>Effort:</b> Low</span><span class="tag"><b>Priority:</b> 8.3/10</span></div>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>The Bestsellers grid mixes many products but doesn't show which are the strongest sellers — weakening the social-validation value of the collection.</p></div>
+      <div class="box"><h4>Solution</h4><p>One concise, data-backed label per qualifying card (#1 Bestseller, Meest beoordeeld, Klantfavoriet). Only auditable claims; consistent position; no fake urgency.</p></div>
+    </div>
+    <div class="hyp"><span class="hyp-lbl">Hypothesis</span><p><b>If</b> AZIN adds accurate popularity labels to qualifying product cards, <b>then</b> labeled-card CTR and collection-assisted purchase CVR will increase, <b>because</b> shoppers can identify socially validated options without interpreting the whole assortment.</p></div>
+    <div class="compare">
+      <div class="col">
+        <div class="col-h"><span class="state before">Before</span><span class="lab">undifferentiated cards</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+          <div class="anno">15% KORTING · ZOMER15</div>
+          <div class="head"><span class="ico">≡</span><span class="logo">AZIN</span><span class="ico">⌕⛒</span></div>
+          <div class="ctitle">Bestsellers</div>
+          <div class="cgrid">
+            <div class="ccard"><div class="img">Wax Arrangement</div><div class="nm">Wax Arrangement – Mix</div><div class="pr">€79,95</div></div>
+            <div class="ccard"><div class="img">Boeket Flora</div><div class="nm">Boeket Flora</div><div class="pr">€114,95</div></div>
+            <div class="ccard"><div class="img">Terra vaas</div><div class="nm">Terra vaas – Beige</div><div class="pr">€89,95</div></div>
+            <div class="ccard"><div class="img">Pioenrozen</div><div class="nm">Zijden Pioenrozen</div><div class="pr">€89,95</div></div>
+          </div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>Every card looks equal — nothing signals which items are genuinely the strongest sellers.</span></div>
+      </div>
+      <div class="col">
+        <div class="col-h"><span class="state after">After</span><span class="lab">accurate popularity labels</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+          <div class="anno">15% KORTING · ZOMER15</div>
+          <div class="head"><span class="ico">≡</span><span class="logo">AZIN</span><span class="ico">⌕⛒</span></div>
+          <div class="ctitle">Bestsellers</div>
+          <div class="hl" style="position:relative"><span class="tagnum" style="top:-9px;left:12px">①</span>
+            <div class="cgrid">
+              <div class="ccard"><div class="img"><span class="clabel">#1 Bestseller</span>Wax Arrangement</div><div class="nm">Wax Arrangement – Mix</div><div class="pr">€79,95</div></div>
+              <div class="ccard"><div class="img">Boeket Flora</div><div class="nm">Boeket Flora</div><div class="pr">€114,95</div></div>
+              <div class="ccard"><div class="img"><span class="clabel fav">Klantfavoriet</span>Terra vaas</div><div class="nm">Terra vaas – Beige</div><div class="pr">€89,95</div></div>
+              <div class="ccard"><div class="img"><span class="clabel">Meest beoordeeld</span>Pioenrozen</div><div class="nm">Zijden Pioenrozen</div><div class="pr">€89,95</div></div>
+            </div>
+          </div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>One auditable label per qualifying card (#1 Bestseller, Klantfavoriet, Meest beoordeeld) — consistent position, no fake urgency.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= M9 ================= -->
+<section class="test" id="m9">
+  <div class="wrap">
+    <div class="thead"><span class="hid">M9</span><span class="pgbadge col">Collection</span><h2>Decision filters and useful sorting</h2><span class="idref">HYP-COL-01</span><span class="tag qa">Needs clean data</span></div>
+    <p class="tsub">Let shoppers narrow big collections by the attributes they actually choose on — colour, height, type, vase fit — once the product data is clean.</p>
+    <div class="tags"><span class="tag metric"><b>Primary:</b> Collection-to-PDP rate</span><span class="tag"><b>Lever:</b> Findability</span><span class="tag"><b>Effort:</b> Med–High</span><span class="tag"><b>Priority:</b> 6.8/10</span></div>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>Current filters only cover availability and price, while shoppers choose on colour, height, fullness, type and vase fit. Depends on clean product attributes.</p></div>
+      <div class="box"><h4>Solution</h4><p>A compact filter + sort system: colour family, type, height, look, vase included, price; active filters, result counts, "Wis alles", state preserved after a PDP.</p></div>
+    </div>
+    <div class="hyp"><span class="hyp-lbl">Hypothesis</span><p><b>If</b> AZIN lets shoppers narrow a large collection using relevant visual and fit attributes, <b>then</b> collection-to-PDP rate will increase, <b>because</b> visitors can reduce the range to products that better match their needs.</p></div>
+    <div class="compare">
+      <div class="col">
+        <div class="col-h"><span class="state before">Before</span><span class="lab">availability + price only</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+          <div class="anno">15% KORTING · ZOMER15</div>
+          <div class="head"><span class="ico">≡</span><span class="logo">AZIN</span><span class="ico">⌕⛒</span></div>
+          <div class="ctitle">Bestsellers</div>
+          <div class="filterbar"><span class="fb">Beschikbaarheid ▾</span><span class="fb">Prijs ▾</span></div>
+          <div class="cgrid">
+            <div class="ccard"><div class="img">Wax Arrangement</div><div class="nm">Wax Arrangement – Mix</div><div class="pr">€79,95</div></div>
+            <div class="ccard"><div class="img">Boeket Flora</div><div class="nm">Boeket Flora</div><div class="pr">€114,95</div></div>
+          </div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>Only availability and price — none of the visual/fit attributes shoppers actually decide on.</span></div>
+      </div>
+      <div class="col">
+        <div class="col-h"><span class="state after">After</span><span class="lab">decision filters + sort</span></div>
+        <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+          <div class="anno">15% KORTING · ZOMER15</div>
+          <div class="head"><span class="ico">≡</span><span class="logo">AZIN</span><span class="ico">⌕⛒</span></div>
+          <div class="ctitle">Bestsellers</div>
+          <div class="hl" style="position:relative"><span class="tagnum" style="top:-9px;left:12px">①</span>
+            <div class="filterbar"><span class="fb">Filter ▾</span><span class="fb">Sorteer ▾</span><span class="res">64 producten</span></div>
+            <div class="chips">
+              <span class="chip on">Kleur: Roze <span class="x">✕</span></span>
+              <span class="chip on">Type: Boeket <span class="x">✕</span></span>
+              <span class="chip">Hoogte</span>
+              <span class="chip">Vaas inbegrepen</span>
+            </div>
+            <div class="clear">Wis alles</div>
+          </div>
+          <div class="cgrid">
+            <div class="ccard"><div class="img">Boeket Flora</div><div class="nm">Boeket Flora</div><div class="pr">€114,95</div></div>
+            <div class="ccard"><div class="img">Boeket Maïa</div><div class="nm">Boeket Maïa</div><div class="pr">€87,95</div></div>
+          </div>
+        </div></div></div>
+        <div class="note"><span class="dot">①</span><span>Colour / type / height / vase-fit filters with active chips, result count and "Wis alles". Gated on clean product data.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== execution order ===== -->
+<div class="block"><div class="wrap">
+  <div class="section-lab">Execution</div>
+  <h2 class="serif" style="margin:0 0 2px;font-size:26px;font-weight:600">Recommended order</h2>
+  <div class="phases">
+    <div class="phase"><span class="ph-lbl">Phase 0 · QA (unblocks gated tests)</span><h4>Fix before building</h4><p>Standardize the free-shipping threshold and prove drawer/checkout totals match (unblocks <b>M2</b>); define auditable label rules (unblocks <b>M8</b>); standardize height/stem-count &amp; filter attributes (supports <b>M3, M9</b>); confirm the mix-and-match discount rule, eligible families &amp; stacking (supports <b>M1</b>).</p></div>
+    <div class="phase"><span class="ph-lbl">Phase 1 · Cheap PDP clarity</span><h4>M3 · M4</h4><p>Low-effort wins on the biggest leak (85.7% PDP→cart). Run separately — both add content above the CTA.</p></div>
+    <div class="phase"><span class="ph-lbl">Phase 2 · Commercial levers</span><h4>M1 · M2</h4><p>Mix-colors two-pack (your priority) and auto-discount (after Phase 0 QA). Judge both on contribution margin.</p></div>
+    <div class="phase"><span class="ph-lbl">Phase 3 · Navigation &amp; trust</span><h4>M5 · M7 · M6</h4><p>Homepage collection strip and mobile menu, plus Trustpilot on collection. Keep M5 and M7 separate to preserve attribution.</p></div>
+    <div class="phase"><span class="ph-lbl">Phase 4 · Data-gated merchandising</span><h4>M8 · M9</h4><p>Labels and filters, once the underlying product data is clean and auditable.</p></div>
+  </div>
+</div></div>
+
+<footer class="foot">
+  <div class="wrap">
+    <b>Measurement:</b> use unique sessions per surface as the denominator; treat clicks/impressions as diagnostic and decide on purchase CVR, revenue, and contribution margin per eligible session. Report mobile vs desktop and new vs returning separately. Shopify is the source of truth for orders/revenue; GA4 for directional journey analysis only. <b>Wireframes</b> are schematic — spacing, imagery and exact copy are finalized in design; illustrative figures (ratings, discount amounts, review counts, delivery dates) must be validated against real data before build.
+  </div>
+</footer>
+
+
+
+</body></html>
