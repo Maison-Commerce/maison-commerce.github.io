@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smooche — Mobile PDP A/B Testing Roadmap (8 tests)</title>
+<link rel="preconnect" href="https://fonts.cdnfonts.com">
+<link href="https://fonts.cdnfonts.com/css/gt-america-trial" rel="stylesheet">
+<style>
+/* ---------- Maison Commerce type ---------- */
+@font-face{font-family:"GT Sectra";font-weight:400;font-style:normal;font-display:swap;
+  src:url("../fonts/GTSectra-Book.woff2") format("woff2");}
+@font-face{font-family:"GT Sectra";font-weight:500;font-style:normal;font-display:swap;
+  src:url("../fonts/GTSectra-Medium.woff2") format("woff2");}
+@font-face{font-family:"GT Sectra";font-weight:700;font-style:normal;font-display:swap;
+  src:url("../fonts/GTSectra-Bold.woff2") format("woff2");}
+@font-face{font-family:"GT Sectra";font-weight:400;font-style:italic;font-display:swap;
+  src:url("../fonts/GTSectra-BookItalic.woff2") format("woff2");}
+
+/* ---------- design.md tokens ---------- */
+:root{
+  --espresso:#0A0A0A;
+  --espresso-soft:#55554F;
+  --sand:#8A8A83;
+  --olive:#001B05;
+  --cream:#FDFDFB;
+  --oat:#F1F1EF;
+  --linen:#E8E8E4;
+  --paper:#FFFFFF;
+  --grey:#8A8A83;
+  --sale:#A4443A;
+  --line:rgba(10,10,10,.12);
+  --line-soft:rgba(10,10,10,.07);
+  --ph:#ECECE7; --ph2:#E8E8E4; --ph-line:#CFCFC8;
+  --shadow:0 1px 2px rgba(10,10,10,.04),0 30px 60px -42px rgba(10,10,10,.25);
+  --font:"GT America Trial",-apple-system,"Helvetica Neue","Segoe UI",Arial,sans-serif;
+  --font-serif:"GT Sectra",Georgia,"Times New Roman",serif;
+  --font-mono:"GT America Mono Trial",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --green:#001B05;
+  --gutter:clamp(20px,3.4vw,60px);
+  --max:1840px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --topbar-h:72px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--espresso);font-family:var(--font);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,h5{font-family:var(--font-serif);font-style:italic;font-weight:400;margin:0;letter-spacing:-.015em}
+a{color:var(--espresso);text-decoration:none;border-bottom:1px solid var(--sand)}
+a:hover{border-bottom-color:var(--espresso)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+
+/* ---------- production-only template download ---------- */
+.template-download[hidden]{display:none!important}
+.template-download{background:var(--espresso);color:var(--paper)}
+.template-download-inner{max-width:var(--max);margin:0 auto;padding:11px var(--gutter)}
+.template-download a{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--paper);border:0;font-size:13px;font-weight:500;letter-spacing:.02em;text-align:center}
+.template-download a:hover{color:var(--paper)}
+.template-download a:focus-visible{outline:2px solid var(--paper);outline-offset:3px}
+.template-download-arrow{font-size:17px;line-height:1;transition:transform .3s var(--ease)}
+.template-download a:hover .template-download-arrow{transform:translateY(2px)}
+
+/* ---------- sticky topbar ---------- */
+.topbar{position:sticky;top:0;z-index:40;background:rgba(247,245,241,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1560px;margin:0 auto;padding:0 40px;height:var(--topbar-h);display:flex;align-items:center;gap:22px}
+.brand{display:flex;align-items:center;gap:12px;border:0;flex:none}
+.brand img{height:26px;width:auto;display:block}
+.brand .sub{font-size:11px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--espresso-soft);border-left:1px solid var(--line);padding-left:12px}
+.pager{position:relative;display:flex;align-items:center;gap:2px;margin-left:auto;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.pager::-webkit-scrollbar{display:none}
+.pager button{position:relative;z-index:2;appearance:none;background:transparent;border:0;font-family:inherit;font-size:12.5px;font-weight:500;color:var(--espresso-soft);letter-spacing:.3px;padding:7px 13px;border-radius:60px;cursor:pointer;white-space:nowrap;transition:color .22s ease}
+.pager button:hover{color:var(--espresso)}
+.pager button[aria-current="page"]{color:var(--paper)}
+.pager .divider{width:1px;height:16px;background:var(--line);margin:0 7px;flex:none}
+.ink{position:absolute;z-index:1;top:0;height:100%;background:var(--espresso);border-radius:60px;transition:transform .34s cubic-bezier(.32,.72,0,1),width .34s cubic-bezier(.32,.72,0,1);pointer-events:none;left:0;width:0}
+.ink.noanim{transition:none}
+.arrows{display:flex;gap:4px;flex:none}
+.arrows button{appearance:none;background:transparent;border:1px solid var(--line);color:var(--espresso);width:30px;height:30px;border-radius:60px;font-size:15px;line-height:1;cursor:pointer;font-family:inherit;transition:background .15s ease,border-color .15s ease}
+.arrows button:hover:not(:disabled){background:var(--oat);border-color:var(--sand)}
+.arrows button:disabled{opacity:.32;cursor:default}
+
+/* ---------- pages ---------- */
+.page{display:none}
+.page.active{display:block;animation:pageIn .3s cubic-bezier(.16,1,.3,1) both}
+@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- overview hero ---------- */
+.page-head{background:var(--oat);border-bottom:1px solid var(--line);padding:52px 0 44px}
+.brandline{font-size:12px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--espresso-soft)}
+.page-head h1{font-size:40px;line-height:110%;letter-spacing:.8px;margin:14px 0 10px}
+.page-head p{max-width:800px;color:var(--espresso-soft);margin:8px 0 0;font-size:14px;line-height:1.6}
+.hmeta{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;background:var(--paper);border:1px solid var(--line);border-radius:60px;padding:5px 14px;font-size:12px;font-weight:500;color:var(--espresso-soft)}
+
+.block{padding:44px 0}
+.section-lab{font-size:12px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--sand);margin:0 0 6px}
+.block h2.sec{font-size:24px;line-height:110%;letter-spacing:.5px;margin:0 0 4px}
+.block .lede{color:var(--espresso-soft);font-size:13.5px;margin:6px 0 0;max-width:860px}
+
+/* ---------- master table ---------- */
+.mtable{width:100%;border-collapse:collapse;font-size:13px;margin-top:18px;background:var(--paper);border:1px solid var(--line)}
+.mtable th,.mtable td{text-align:left;padding:12px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+.mtable th{font-size:11px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:var(--espresso-soft);background:var(--cream)}
+.mtable tr:last-child td{border-bottom:0}
+.mtable tbody tr{cursor:pointer;transition:background .15s ease}
+.mtable tbody tr:hover{background:var(--cream)}
+.mtable .mno{font-weight:700;white-space:nowrap}
+.mtable .tid{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:var(--espresso-soft);letter-spacing:-.2px}
+.tablenote{font-size:12px;color:var(--grey);margin:10px 2px 0}
+
+.callout{background:var(--paper);border:1px solid var(--line);padding:18px 20px;margin-top:24px}
+.callout h3{margin:0 0 8px;font-size:16px}
+.callout ol{margin:0;padding-left:18px;font-size:13.5px;color:var(--espresso-soft)}
+.callout li{margin:6px 0}
+.callout b{color:var(--espresso);font-weight:500}
+
+/* ---------- badges ---------- */
+.pgbadge{font-size:10px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;border-radius:2px;padding:4px 8px;white-space:nowrap}
+.pgbadge--pdp{background:var(--oat);color:#7A6448}
+.pgbadge--cart{background:#F1EFDA;color:#6E682F}
+.pgbadge--coll{background:#F7EBEB;color:#8A5F60}
+.stbadge{font-size:10px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;border-radius:2px;padding:4px 8px;background:#F1EFDA;color:#6E682F;white-space:nowrap}
+.kpi{display:inline-block;font-size:10.5px;font-weight:500;border:1px solid var(--line);border-radius:60px;padding:2px 9px;color:var(--espresso-soft);white-space:nowrap;margin:0 3px 3px 0}
+
+/* ---------- test page ---------- */
+.test{padding:44px 0 56px}
+.test-grid{display:grid;grid-template-columns:minmax(360px,450px) minmax(0,1fr);gap:60px;align-items:start}
+.thead{display:flex;flex-wrap:wrap;align-items:center;gap:0}
+/* chamfered outline tags, joined by a hairline */
+.thead .hid,.thead .pgbadge,.thead .stbadge{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  height:34px;
+  padding:0 20px;
+  background:transparent;
+  border:0;
+  border-radius:0;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.7px;
+  text-transform:uppercase;
+  color:var(--espresso-soft);
+  white-space:nowrap;
+}
+.thead .hid{color:var(--espresso);font-weight:700;letter-spacing:.6px}
+.thead .hid::before,.thead .hid::after,
+.thead .pgbadge::before,.thead .pgbadge::after,
+.thead .stbadge::before,.thead .stbadge::after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  clip-path:polygon(13px 0,calc(100% - 13px) 0,100% 50%,calc(100% - 13px) 100%,13px 100%,0 50%);
+}
+/* outline layer */
+.thead .hid::before,.thead .pgbadge::before,.thead .stbadge::before{inset:0;background:var(--sand);z-index:-2}
+/* inner fill, 1px in — leaves a hairline rim */
+.thead .hid::after,.thead .pgbadge::after,.thead .stbadge::after{inset:1px;background:var(--cream);z-index:-1}
+/* connector between tags */
+.thead .lnk{flex:none;width:17px;height:1px;background:var(--sand)}
+.hid{font-size:12px;font-weight:700;letter-spacing:.6px;color:var(--paper);background:var(--espresso);border-radius:2px;padding:5px 10px}
+.test h2{font-size:26px;line-height:110%;letter-spacing:.4px;margin:14px 0 0}
+.tid-ref{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:var(--grey);letter-spacing:-.2px;overflow-wrap:anywhere}
+.tsub{color:var(--espresso-soft);font-size:14.5px;margin:14px 0 0}
+
+/* meta as a list, not pills */
+.mlist{margin:22px 0 22px;padding:0;border-top:1px solid var(--line-soft)}
+.mlist>div{display:flex;gap:16px;padding:8px 0;border-bottom:1px solid var(--line-soft)}
+.mlist dt{flex:none;width:92px;font-size:11px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:var(--sand);padding-top:2px}
+.mlist dd{margin:0;font-size:13.5px;color:var(--espresso)}
+
+.ps{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:16px}
+.ps .box{background:var(--paper);border:1px solid var(--line);padding:15px 17px}
+.ps .box h4{margin:0 0 5px;font-size:12px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--sand)}
+.ps .box p{margin:0;font-size:13px;color:var(--espresso-soft);line-height:1.55}
+.hyp{background:var(--paper);border:1px solid var(--line);padding:15px 17px}
+.hyp-lbl{display:block;font-size:11px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--sand);margin-bottom:9px}
+.hyp .hline{margin:0 0 8px;font-size:13px;color:var(--espresso-soft);line-height:1.55;padding-left:62px;text-indent:-62px}
+.hyp .hline:last-child{margin-bottom:0}
+.hyp .hline b{display:inline-block;width:62px;text-indent:0;color:var(--espresso);font-weight:700;font-size:11px;letter-spacing:.6px;vertical-align:baseline}
+
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start;justify-items:center}
+.col{min-width:0;width:100%;max-width:390px}
+.col-h{display:flex;align-items:center;gap:8px;margin:0 auto 12px;justify-content:center;flex-wrap:wrap}
+.state{font-size:11px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;padding:4px 11px;border-radius:60px}
+.state.before{background:var(--linen);color:var(--espresso-soft)}
+.state.after{background:var(--espresso);color:var(--paper)}
+.col-h .lab{font-size:12px;color:var(--espresso-soft)}
+.note{margin:13px 2px 0;font-size:12.5px;color:var(--espresso-soft);display:flex;gap:8px;line-height:1.5}
+.note .dot{color:var(--sand);font-weight:700;flex:none}
+.note b{color:var(--espresso);font-weight:500}
+
+/* page-to-page footer nav */
+.pagenav{display:flex;justify-content:space-between;gap:16px;margin-top:44px;padding-top:22px;border-top:1px solid var(--line-soft)}
+.pagenav button{appearance:none;background:transparent;border:1px solid var(--line);font-family:inherit;font-size:13px;color:var(--espresso);padding:10px 16px;cursor:pointer;text-align:left;transition:background .15s ease,border-color .15s ease;max-width:47%}
+.pagenav button:hover{background:var(--paper);border-color:var(--sand)}
+.pagenav button span{display:block;font-size:10.5px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:var(--sand);margin-bottom:2px}
+.pagenav button.nx{text-align:right;margin-left:auto}
+.pagenav button:disabled{visibility:hidden}
+
+/* ---------- phone: iPhone-like 9:19.2 ---------- */
+.phone-wrap{display:flex;justify-content:center}
+.phone{width:334px;border:9px solid var(--espresso);border-radius:44px;overflow:hidden;background:var(--espresso);box-shadow:var(--shadow)}
+.phone .notch{height:18px;background:var(--espresso);position:relative}
+.phone .notch::after{content:"";position:absolute;left:50%;top:5px;transform:translateX(-50%);width:76px;height:6px;border-radius:6px;background:#2C2C29}
+.screen{background:var(--paper);position:relative;aspect-ratio:9/19.2;overflow:hidden;display:flex;flex-direction:column}
+.anno{background:var(--espresso);color:var(--oat);font-size:8.5px;font-weight:500;letter-spacing:.7px;text-align:center;padding:6px 8px;text-transform:uppercase;flex:none}
+.head{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;border-bottom:1px solid var(--line-soft);flex:none}
+.logo{font-weight:700;letter-spacing:.2em;font-size:14px}
+.ico{color:var(--espresso);font-size:12px;letter-spacing:3px}
+.img{background:repeating-linear-gradient(135deg,var(--ph) 0 11px,var(--ph2) 11px 22px);border:1px solid var(--ph-line);display:flex;align-items:center;justify-content:center;color:#A79781;font-size:9px;text-align:center;padding:6px;line-height:1.3}
+
+.gallery{position:relative;flex:none}
+.gallery .img{height:150px;border-left:0;border-right:0;border-top:0}
+.gdots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px;align-items:center}
+.gdots i{width:4px;height:4px;border-radius:60px;background:rgba(10,10,10,.2)}
+.gdots i.on{width:16px;border-radius:4px;background:var(--sand)}
+.pdp{padding:12px 13px;flex:none}
+.p-title{font-size:15px;font-weight:700;line-height:1.1;letter-spacing:.4px;margin:0 0 5px;text-transform:uppercase}
+.p-rate{font-size:9.5px;color:var(--espresso-soft);letter-spacing:.2px;margin-bottom:7px}
+.p-rate .st{color:var(--sand);letter-spacing:1px}
+.p-price{font-size:14px;font-weight:500;letter-spacing:.32px;margin:2px 0 11px}
+.lblrow{font-size:9.5px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--espresso-soft);margin:0 0 7px}
+.swatches{display:flex;gap:7px;margin:0 0 12px}
+.sw{width:24px;height:24px;border-radius:32px;border:1px solid var(--line);background:#E8B7B7}
+.sw.b{background:#C9736F}.sw.c{background:#B8746A}
+.sw.sel{outline:1px solid var(--espresso);outline-offset:2px}
+.benefits{margin:0 0 12px}
+.benefits .b{display:flex;gap:7px;align-items:center;font-size:9.5px;color:var(--espresso-soft);padding:4px 0}
+.benefits .b i{width:14px;height:14px;border-radius:32px;background:var(--oat);border:1px solid var(--sand);flex:none}
+.atc{background:var(--espresso);color:var(--paper);text-align:center;font-size:11px;font-weight:500;padding:11px;letter-spacing:.3px}
+.atc.ghost{background:transparent;color:var(--espresso);border:1px solid var(--espresso)}
+.atc.sand{background:var(--sand);color:var(--paper)}
+.mini{font-size:8.5px;color:var(--grey);text-align:center;padding:8px 6px 0}
+.tabs{display:flex;flex-direction:column;flex:none}
+.tabs .tb{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;border-top:1px solid var(--line-soft);font-size:10px}
+.tabs .tb .cx{color:var(--sand);font-size:12px}
+.sectlbl{font-size:11px;font-weight:700;letter-spacing:.3px;color:var(--espresso);padding:13px 13px 6px;flex:none}
+.divider{border-top:1px solid var(--line-soft);flex:none}
+.scrollhint{font-size:8.5px;color:var(--grey);text-align:center;padding:8px;letter-spacing:.3px;flex:none}
+.grow{flex:1 1 auto;min-height:0}
+
+.acc{border-top:1px solid var(--line-soft);flex:none}
+.acc .q{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 13px;font-size:10px;border-bottom:1px solid var(--line-soft)}
+.acc .q .cx{color:var(--sand);font-size:12px;flex:none}
+.acc .a{padding:0 13px 10px;font-size:9px;color:var(--espresso-soft);line-height:1.5;border-bottom:1px solid var(--line-soft)}
+
+.usprow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:11px;border-bottom:1px solid var(--line-soft);background:var(--cream);flex:none}
+.usprow .u{text-align:center;font-size:8px;color:var(--espresso-soft);line-height:1.35}
+.usprow .u i{display:block;width:18px;height:18px;border-radius:32px;background:var(--oat);border:1px solid var(--sand);margin:0 auto 5px}
+.usprow .u b{display:block;font-weight:500;color:var(--espresso);font-size:8.5px}
+.checks{display:flex;flex-direction:column;gap:3px;margin:5px 0 0}
+.checks .c{display:flex;gap:5px;align-items:center;font-size:9px;color:var(--espresso-soft)}
+.checks .c b{color:var(--sand);font-weight:700}
+
+.paylogos{display:flex;gap:5px;flex-wrap:wrap;margin:9px 0 0}
+.paylogos i{width:25px;height:15px;border-radius:2px;background:var(--linen);border:1px solid var(--line);display:block}
+.klarna{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--oat);border:1px solid var(--sand);padding:8px 10px;margin:9px 0 0;font-size:10px;color:var(--espresso)}
+.klarna b{font-weight:500}
+.klarna .info{color:var(--sand);font-size:9px;white-space:nowrap}
+
+.ugc{display:flex;gap:7px;padding:8px 13px 12px;overflow:hidden;flex:none}
+.ugc .t{flex:none;width:72px}
+.ugc .t .img{height:100px;margin-bottom:5px}
+.ugc .t .cap{font-size:8px;color:var(--espresso-soft);line-height:1.3}
+.ugc .t.peek{width:30px;opacity:.55}
+.playdot{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--paper);font-size:14px}
+
+.xsell{display:flex;gap:8px;padding:4px 13px 12px;overflow:hidden;flex:none}
+.xsell .x{flex:none;width:76px}
+.xsell .x .img{height:70px;margin-bottom:5px}
+.xsell .x .nm{font-size:8.5px;font-weight:500;line-height:1.25;text-transform:uppercase}
+.xsell .x .pr{font-size:8.5px;color:var(--espresso-soft)}
+.xsell .x .bt{font-size:8px;border:1px solid var(--espresso);text-align:center;padding:3px;margin-top:4px}
+
+.dhead{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-bottom:1px solid var(--line-soft);flex:none}
+.dhead .t{font-size:14px;font-weight:700}
+.dhead .x{color:var(--espresso);font-size:13px}
+.ship{padding:11px 14px;border-bottom:1px solid var(--line-soft);flex:none}
+.ship .msg{font-size:10px;color:var(--espresso);font-weight:500}
+.ship .bar{height:4px;border-radius:60px;background:var(--linen);margin-top:8px;overflow:hidden;display:flex}
+.ship .bar i{display:block;height:100%;background:var(--sand)}
+.ship .bar i.on{background:var(--espresso)}
+.ship .ticks{display:flex;justify-content:space-between;font-size:8px;color:var(--grey);margin-top:6px}
+.segbar{display:flex;gap:7px;align-items:center}
+.segbar .seg{flex:1;position:relative;display:block;height:4px}
+.segbar .seg::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--sand);opacity:.55;transform:translateY(-50%)}
+.segbar .seg i{position:relative;z-index:1;display:block;height:4px;border-radius:60px;background:var(--sand)}
+.segbar .seg i.done{background:var(--espresso)}
+.msg2{font-size:10px;color:var(--espresso);margin-top:9px;line-height:1.45}
+.msg2 b{font-weight:500}
+.litem{display:flex;gap:9px;padding:11px 14px;border-bottom:1px solid var(--line-soft);flex:none}
+.litem .img{width:48px;height:48px;flex:none}
+.litem .info{flex:1;min-width:0}
+.litem .nm{font-size:10.5px;line-height:1.3;font-weight:500;text-transform:uppercase}
+.litem .pr{font-size:10px;color:var(--espresso-soft);margin-top:2px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:2px;margin-top:5px;font-size:10px}
+.qty span{padding:2px 7px;color:var(--sand)}
+.qty b{padding:2px 7px;border-left:1px solid var(--line);border-right:1px solid var(--line);font-weight:500}
+.ups{padding:10px 14px;border-bottom:1px solid var(--line-soft);background:var(--cream);flex:none}
+.ups .h{display:flex;align-items:center;justify-content:space-between;font-size:10px;font-weight:700;margin-bottom:8px}
+.ups .h .nav{color:var(--sand);font-size:10px;letter-spacing:2px}
+.upitem{display:flex;gap:8px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);padding:8px}
+.upitem .img{width:40px;height:40px;flex:none}
+.upitem .nm{font-size:10px;font-weight:500;line-height:1.3;text-transform:uppercase}
+.upitem .pr{font-size:9.5px;color:var(--espresso-soft)}
+.upitem .add{flex:none;width:22px;height:22px;border:1px solid var(--espresso);display:flex;align-items:center;justify-content:center;font-size:12px}
+.more{font-size:9px;color:var(--sand);border-bottom:1px solid var(--sand);display:inline-block;margin-top:5px}
+.foot-cart{border-top:1px solid var(--line);background:var(--paper);padding:11px 14px 13px;margin-top:auto;flex:none}
+.subrow{display:flex;justify-content:space-between;align-items:baseline;font-size:11px;margin-bottom:4px}
+.subrow.tot{font-size:12.5px;font-weight:500;margin-bottom:6px}
+.taxnote{font-size:8px;color:var(--grey);margin:0 0 9px;line-height:1.4}
+
+.cfilters{display:flex;gap:6px;padding:9px 12px;overflow:hidden;border-bottom:1px solid var(--line-soft);flex:none}
+.cfilters .f{font-size:8.5px;border:1px solid var(--line);border-radius:60px;padding:4px 9px;color:var(--espresso-soft);white-space:nowrap}
+.cfilters .f.on{background:var(--espresso);border-color:var(--espresso);color:var(--paper)}
+.cbar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;font-size:8.5px;color:var(--espresso-soft);border-bottom:1px solid var(--line-soft);letter-spacing:.5px;flex:none}
+.banner{position:relative;flex:none}
+.banner .img{height:130px;border-left:0;border-right:0}
+.hotspot{position:absolute;width:20px;height:20px;border-radius:32px;background:var(--paper);border:1px solid var(--sand);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--espresso);box-shadow:0 2px 6px rgba(10,10,10,.18)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:11px 12px;flex:none}
+.ccard .img{height:82px;margin-bottom:5px;position:relative}
+.ccard .bdg{position:absolute;top:5px;left:5px;background:var(--olive);color:var(--paper);font-size:7px;font-weight:500;letter-spacing:.5px;padding:2px 5px;border-radius:2px}
+.ccard .pr{font-size:9.5px;color:var(--espresso);font-weight:500}
+.ccard .nm{font-size:9px;line-height:1.25;font-weight:700;text-transform:uppercase;margin-top:1px}
+.ccard .sub{font-size:8px;color:var(--espresso-soft);line-height:1.3;margin-top:2px}
+
+.overlay{position:absolute;inset:0;background:rgba(10,10,10,.35);display:none;align-items:flex-end;z-index:8}
+.overlay.open{display:flex}
+.sheet{background:var(--paper);width:100%;border-top:2px solid var(--sand);padding:12px 13px 15px;max-height:88%;overflow:hidden}
+.sheet .sh-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
+.sheet .sh-h .t{font-size:12px;font-weight:700}
+.sheet .sh-h .x{color:var(--sand);font-size:12px;white-space:nowrap}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:9px}
+.ba .img{height:96px}
+.ba .cap{font-size:8px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:var(--espresso-soft);text-align:center;margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font-size:8px;border:1px solid var(--line);border-radius:60px;padding:3px 8px;color:var(--espresso-soft)}
+
+/* ---------- interactivity ---------- */
+.tap{cursor:pointer;transition:background .15s ease}
+.tap:hover{background:rgba(10,10,10,.06)}
+.tap:focus-visible{outline:2px solid var(--sand);outline-offset:2px}
+.atc.tap:hover{background:#002A08;color:var(--paper)}
+.atc.ghost.tap:hover{background:rgba(0,27,5,.08);color:var(--espresso)}
+.hotspot.tap:hover{background:var(--sand);color:var(--paper)}
+.sheet .x{cursor:pointer}
+.acc .q{cursor:pointer;user-select:none}
+.acc .q:hover{background:rgba(10,10,10,.04)}
+.ugc .t.tap:hover .img{border-color:var(--sand)}
+.hotcard{position:absolute;display:none;background:var(--paper);border:1px solid var(--sand);padding:7px 8px;width:116px;box-shadow:0 4px 14px rgba(10,10,10,.22);z-index:6}
+.hotcard.open{display:block}
+.hotcard .nm{font-size:9px;font-weight:700;line-height:1.25;text-transform:uppercase}
+.hotcard .pr{font-size:9px;color:var(--espresso-soft);margin-top:1px}
+.hotcard .go{font-size:8px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:var(--sand);margin-top:5px;display:block}
+.col-h .live{font-size:10px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:var(--sand);border:1px solid var(--sand);border-radius:60px;padding:3px 9px;white-space:nowrap}
+
+.hl{outline:1px dashed var(--sand);outline-offset:2px;background:rgba(0,27,5,.05)}
+.tagnum{position:absolute;z-index:5;background:var(--sand);color:var(--paper);font-size:9px;font-weight:700;border-radius:60px;width:17px;height:17px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(10,10,10,.25)}
+
+/* ---------- plan page ---------- */
+.phases{display:grid;gap:12px;margin-top:18px}
+.phase{background:var(--paper);border:1px solid var(--line);padding:16px 19px}
+.phase h4{margin:2px 0 5px;font-size:15px}
+.phase p{margin:0;font-size:13.5px;color:var(--espresso-soft);line-height:1.55}
+.phase p b{color:var(--espresso);font-weight:500}
+.phase .ph-lbl{font-size:11px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--sand)}
+.foot{padding:34px 0 64px;color:var(--espresso-soft);font-size:13px;line-height:1.6;border-top:1px solid var(--line-soft);margin-top:36px}
+.foot b{color:var(--espresso);font-weight:500}
+.foot .src{margin-top:14px;font-size:12px;color:var(--grey)}
+
+/* ---------- Maison Commerce presentation layer ---------- */
+::selection{background:var(--espresso);color:var(--paper)}
+.topbar{background:rgba(253,253,251,.92);border-bottom-color:var(--line-soft)}
+.topbar-inner{max-width:var(--max);padding:0 var(--gutter);gap:20px}
+.brand{gap:16px}
+.brand-logo{display:block;height:26px;width:auto}
+.brand .sub{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--faint,var(--grey));border-left-color:var(--line);padding-left:16px}
+.pager button{font-size:12px;padding:8px 12px;border-radius:999px;transition:color .3s var(--ease)}
+.ink{background:var(--green);border-radius:999px;transition:transform .4s var(--ease),width .4s var(--ease)}
+.arrows{gap:8px}
+.arrows button{width:32px;height:32px;border-radius:999px;font-size:16px;transition:background .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)}
+.arrows button:hover:not(:disabled){background:var(--espresso);border-color:var(--espresso);color:var(--paper);transform:scale(1.04)}
+
+.page-head{background:linear-gradient(180deg,var(--paper) 0%,var(--cream) 100%);border-bottom-color:var(--line-soft);padding:64px 0 56px}
+.brandline,.section-lab,.ph-lbl,.hyp-lbl,.mlist dt,.service-index{font-family:var(--font-mono)}
+.brandline{font-size:11px;letter-spacing:.08em;color:var(--faint,var(--grey))}
+.page-head h1{font-size:clamp(40px,4.2vw,72px);line-height:1.01;letter-spacing:-.02em;margin:16px 0 12px;width:100%;max-width:none}
+.page-head p{max-width:64ch;color:var(--espresso-soft);margin:12px 0 0;font-size:16px;line-height:1.65}
+.hmeta{margin-top:24px;gap:8px}
+.pill{border-color:var(--line-soft);border-radius:999px;padding:8px 16px;font-size:12px;color:var(--espresso-soft);box-shadow:0 1px 2px rgba(10,10,10,.04)}
+
+.block{padding:64px 0 80px}
+.section-lab{font-size:11px;letter-spacing:.08em;color:var(--faint,var(--grey));margin-bottom:8px}
+.block h2.sec{font-size:clamp(32px,2.8vw,48px);line-height:1.04;letter-spacing:-.015em;margin-bottom:8px;max-width:20ch}
+.block .lede{color:var(--espresso-soft);font-size:16px;line-height:1.65;margin-top:8px;max-width:64ch}
+
+.mtable{margin-top:32px;border-collapse:separate;border-spacing:0;border-color:var(--line-soft);border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(10,10,10,.04)}
+.mtable th,.mtable td{padding:16px;border-bottom-color:var(--line-soft)}
+.mtable th{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--grey);background:var(--surface,var(--oat))}
+.mtable tbody tr{transition:background .3s var(--ease)}
+.mtable tbody tr:hover{background:var(--cream)}
+.mtable .mno,.mtable .tid,.tid-ref{font-family:var(--font-mono)}
+.tablenote{font-size:12px;color:var(--grey);margin:12px 4px 0}
+.callout{background:var(--paper);border-color:var(--line-soft);border-radius:12px;padding:24px;margin-top:32px;box-shadow:0 1px 2px rgba(10,10,10,.04)}
+.callout h3{font-size:20px;margin-bottom:12px}
+.callout ol{font-size:14px;line-height:1.65}
+.callout li{margin:8px 0}
+
+.pgbadge,.stbadge,.kpi{border-radius:999px;background:var(--oat);color:var(--espresso-soft);border:1px solid var(--line-soft)}
+.pgbadge--pdp,.pgbadge--cart,.pgbadge--coll{background:var(--oat);color:var(--espresso-soft)}
+.test{padding:64px 0 80px}
+.test-grid{grid-template-columns:minmax(360px,480px) minmax(0,1fr);gap:clamp(48px,5vw,96px)}
+.test-info,.test-frames{min-width:0}
+.thead{gap:8px}
+.thead .hid,.thead .pgbadge,.thead .stbadge{height:32px;padding:0 12px;border:1px solid var(--line-soft);border-radius:999px;background:var(--paper);font-family:var(--font-mono);font-size:10px;color:var(--espresso-soft)}
+.thead .hid{background:var(--green);border-color:var(--green);color:var(--paper)}
+.thead .hid::before,.thead .hid::after,.thead .pgbadge::before,.thead .pgbadge::after,.thead .stbadge::before,.thead .stbadge::after{display:none}
+.thead .lnk{width:12px;background:var(--line)}
+.test h2{font-size:clamp(32px,2.4vw,44px);line-height:1.04;letter-spacing:-.015em;margin-top:20px;max-width:18ch}
+.tid-ref{font-size:10px;color:var(--grey);margin:0;overflow-wrap:anywhere}
+.tsub{font-size:16px;line-height:1.65;color:var(--espresso-soft);margin-top:20px}
+.mlist{margin:24px 0;border-top-color:var(--line-soft)}
+.mlist>div{padding:12px 0;border-bottom-color:var(--line-soft)}
+.mlist dt{width:96px;font-size:10px;letter-spacing:.08em;color:var(--grey)}
+.mlist dd{font-size:14px;flex:1;min-width:0}
+.mlist dd.tid-ref{font-size:10px;line-height:1.55;color:var(--grey)}
+.ps{gap:12px;margin-bottom:12px}
+.ps .box,.hyp{background:var(--paper);border-color:var(--line-soft);border-radius:12px;padding:20px;box-shadow:0 1px 2px rgba(10,10,10,.04)}
+.ps .box h4,.hyp-lbl{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--grey)}
+.ps .box p,.hyp .hline{font-size:14px;line-height:1.65;color:var(--espresso-soft)}
+.hyp .hline b{font-family:var(--font-mono);font-size:10px;color:var(--espresso)}
+
+.state{font-family:var(--font-mono);font-size:10px;border-radius:999px;padding:4px 12px}
+.state.before{background:var(--oat);color:var(--espresso-soft)}
+.state.after{background:var(--green);color:var(--paper)}
+.col-h .live{font-family:var(--font-mono);color:var(--green);border-color:var(--green);border-radius:999px}
+.phone{border-color:var(--espresso);background:var(--espresso);box-shadow:var(--shadow)}
+.phone .notch{background:var(--espresso)}
+.phone .notch::after{background:#2C2C29}
+.anno{background:var(--green);color:var(--paper)}
+.atc,.state.after{background:var(--green)}
+.atc.tap:hover{background:#002A08}
+.hl{outline-color:var(--green);background:rgba(0,27,5,.05)}
+.tagnum{background:var(--green)}
+.tap:focus-visible{outline-color:var(--green)}
+.hotspot.tap:hover{background:var(--green)}
+.note{font-size:12px;line-height:1.55}
+
+.pagenav{margin-top:48px;padding-top:24px;border-top-color:var(--line-soft)}
+.pagenav button{border-color:var(--line);border-radius:4px;font-size:13px;padding:12px 20px;transition:background .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)}
+.pagenav button:hover{background:var(--green);border-color:var(--green);color:var(--paper);transform:scale(1.02)}
+.pagenav button:hover span{color:rgba(255,255,255,.68)}
+.pagenav button span{font-family:var(--font-mono);font-size:10px;color:var(--grey)}
+
+.phases{gap:12px;margin-top:32px}
+.phase{background:var(--paper);border-color:var(--line-soft);border-radius:12px;padding:24px;box-shadow:0 1px 2px rgba(10,10,10,.04)}
+.phase h4{font-size:20px;margin:4px 0 8px}
+.phase p{font-size:14px;line-height:1.65}
+.phase .ph-lbl{font-size:10px;letter-spacing:.08em;color:var(--grey)}
+.foot{padding:40px 0 64px;margin-top:48px;border-top-color:var(--line-soft);font-size:14px;line-height:1.65}
+.foot .src{margin-top:16px;font-size:12px;line-height:1.65}
+
+
+/* ==========================================================================
+   Smooche storefront layer — tokens read from the live site
+   https://smooche.com/products/ccf2  ·  /collections/the-hits
+   text #151515 · rose #DF8096 · deep rose #A94E63 · surface #F7F7F7
+   tint #FDF6F7 · ok green #16A34A · buttons #000 radius 10px, uppercase 1.6px
+   type: futura-pt (Adobe) — falls back to Futura / Jost / Century Gothic
+   ========================================================================== */
+:root{
+  --sm-ink:#151515;
+  --sm-rose:#DF8096;
+  --sm-rose-deep:#A94E63;
+  --sm-rose-soft:#EFB3C1;
+  --sm-surface:#F7F7F7;
+  --sm-tint:#FDF6F7;
+  --sm-mut:#777777;
+  --sm-mut2:#555555;
+  --sm-ok:#16A34A;
+  --sm-line:#E6E6E6;
+  --sm-font:"futura-pt","Futura","Jost","Century Gothic","Avenir Next",-apple-system,"Segoe UI",sans-serif;
+}
+.sm{font-family:var(--sm-font);color:var(--sm-ink);background:#fff;letter-spacing:0}
+.sm *{font-family:inherit}
+.sm .g{background:var(--sm-surface)}
+
+/* announcement + header */
+.sm-ann{background:var(--sm-surface);color:var(--sm-ink);font-size:8px;text-align:center;padding:5px 8px;flex:none;letter-spacing:0;text-transform:none}
+.sm-ann b{font-weight:600}
+.sm-hd{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;flex:none;border-bottom:1px solid var(--sm-line)}
+.sm-hd .wm{font-size:13px;font-weight:700;font-style:italic;letter-spacing:.5px}
+.sm-hd .ic{font-size:11px;color:var(--sm-ink);letter-spacing:2px}
+
+/* gallery */
+.sm-gal{position:relative;flex:none;background:var(--sm-surface)}
+.sm-gal .ph{height:150px;background:var(--sm-surface);display:flex;align-items:center;justify-content:center;color:#B9AEB1;font-size:8.5px;text-align:center;line-height:1.35;padding:8px}
+.sm-gal .ph.tone{background:linear-gradient(100deg,#F4E3DA 0%,#E9C9B6 35%,#D8AC90 70%,#C08F6E 100%)}
+.sm-gal .ph.face,.sm-gal .ph.ba{background:#EFE6E1}
+.sm-thumbs{display:flex;gap:4px;padding:6px 12px;flex:none;overflow:hidden}
+.sm-thumbs i{flex:none;width:30px;height:30px;border-radius:5px;border:1px solid var(--sm-line);display:block;
+  background:linear-gradient(150deg,#F3EDEA,#E7DAD3)}
+.sm-thumbs i:nth-child(3n){background:linear-gradient(150deg,#F7EFF1,#EBD6DC)}
+.sm-thumbs i:nth-child(4n){background:linear-gradient(150deg,#F1F1F1,#E2E2E2)}
+.sm-thumbs i.on{border-color:var(--sm-ink)}
+.sm-dots{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);display:flex;gap:4px}
+.sm-dots i{width:4px;height:4px;border-radius:60px;background:rgba(21,21,21,.22)}
+.sm-dots i.on{background:var(--sm-rose);width:14px;border-radius:4px}
+.sm-ovbadge{position:absolute;border-radius:60px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.05;font-weight:600}
+.sm-ovbadge.korea{top:7px;right:7px;width:38px;height:38px;background:#fff;border:1px solid var(--sm-line);font-size:5.5px;color:var(--sm-ink)}
+.sm-ovbadge.sold{bottom:26px;right:9px;width:40px;height:40px;background:#8E8BD8;color:#fff;font-size:7px}
+.sm-clin{position:absolute;top:7px;left:0;background:#fff;border:1px solid var(--sm-line);border-left:0;padding:4px 8px 4px 7px;font-size:6px;line-height:1.25;max-width:132px}
+.sm-clin b{font-weight:600;font-size:6.5px;display:block}
+
+/* buy box */
+.sm-bb{padding:9px 12px 0;flex:none}
+.sm-korea{background:var(--sm-surface);border-radius:7px;text-align:center;font-size:8px;padding:5px;margin-bottom:7px}
+.sm-social{display:flex;align-items:center;gap:5px;font-size:8px;color:var(--sm-ink);margin-bottom:5px}
+.sm-social .av{display:flex}
+.sm-social .av i{width:12px;height:12px;border-radius:60px;background:#E6D6CF;border:1.5px solid #fff;margin-left:-4px;display:block}
+.sm-social .av i:first-child{margin-left:0}
+.sm-rate{display:flex;align-items:center;gap:5px;font-size:8.5px;margin-bottom:5px}
+.sm-rate .st{color:var(--sm-rose);letter-spacing:.5px;font-size:9px}
+.sm-h1{font-size:16px;font-weight:600;line-height:1.08;margin:0 0 6px;letter-spacing:0}
+.sm-prow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px}
+.sm-was{font-size:11px;font-weight:600;color:var(--sm-rose-deep);text-decoration:line-through}
+.sm-now{font-size:11.5px;font-weight:600}
+.sm-tag{background:var(--sm-rose);color:#fff;font-size:6.5px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;border-radius:60px;padding:2.5px 7px;white-space:nowrap}
+.sm-tag.grey{background:var(--sm-surface);color:var(--sm-mut2)}
+.sm-tag.sq{border-radius:5px}
+.sm-after{font-size:7.5px;color:var(--sm-mut2);display:flex;align-items:center;gap:4px;margin-bottom:8px}
+.sm-after i{display:inline-block;width:26px;height:9px;border-radius:60px;background:#B2FCE4}
+.sm-chips{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px}
+.sm-chip{background:var(--sm-surface);border-radius:8px;padding:6px 7px;font-size:7px;line-height:1.2;display:flex;align-items:center;gap:5px}
+.sm-chip i{flex:none;width:10px;height:10px;border-radius:60px;background:var(--sm-rose-soft);display:block}
+.sm-desc{font-size:7.5px;line-height:1.55;color:var(--sm-ink);margin:0 0 9px}
+
+/* bundle cards */
+.sm-opts{display:flex;flex-direction:column;gap:6px;margin-bottom:9px}
+.sm-opt{border:1px solid var(--sm-line);border-radius:10px;background:var(--sm-surface);padding:8px 9px}
+.sm-opt.sel{background:#fff;border-color:var(--sm-rose);border-width:1.5px}
+.sm-opt .top{display:flex;align-items:flex-start;gap:7px}
+.sm-opt .rad{flex:none;width:11px;height:11px;border-radius:60px;border:1px solid #C9C9C9;background:#fff;margin-top:1px}
+.sm-opt.sel .rad{border:1px solid var(--sm-rose);box-shadow:inset 0 0 0 2px #fff;background:var(--sm-rose)}
+.sm-opt .nm{flex:1;min-width:0;font-size:9px;font-weight:600;line-height:1.2}
+.sm-opt .sb{font-size:7px;color:var(--sm-mut);font-weight:400;margin-top:1px;display:block}
+.sm-opt .pr{flex:none;text-align:right}
+.sm-opt .pr b{display:block;font-size:9.5px;font-weight:600}
+.sm-opt .pr s{display:block;font-size:7px;color:var(--sm-rose-deep)}
+.sm-gift{display:flex;align-items:center;gap:6px;font-size:7px;margin-top:6px;padding-left:1px}
+.sm-gift i{flex:none;width:13px;height:13px;border-radius:3px;background:var(--sm-rose-soft);display:block}
+.sm-gift s{margin-left:auto;color:var(--sm-rose-deep);font-size:6.5px}
+
+/* CTA + reassurance */
+.sm-cta{background:#000;color:#fff;border-radius:10px;text-align:center;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1.4px;padding:11px 10px}
+.sm-cta.ghost{background:#fff;color:#000;border:1.5px solid #000}
+.sm-cta.rose{background:var(--sm-rose)}
+.sm-ship{display:flex;align-items:center;justify-content:space-between;font-size:7.5px;margin-top:7px;color:var(--sm-ink)}
+.sm-ship .ok{color:var(--sm-ok);font-weight:500;display:flex;align-items:center;gap:4px}
+.sm-ship .ok::before{content:"";width:5px;height:5px;border-radius:60px;background:var(--sm-ok)}
+.sm-ship u{text-decoration:underline}
+
+/* scarcity */
+.sm-scar{padding:10px 12px 0;flex:none}
+.sm-scar .h{font-size:8.5px;font-weight:600}
+.sm-scar .s{font-size:7.5px;color:var(--sm-ink);margin-top:1px}
+.sm-bar{height:4px;border-radius:60px;background:#EDEDED;margin:7px 0 4px;overflow:hidden}
+.sm-bar i{display:block;height:100%;background:var(--sm-rose)}
+.sm-scar .r{display:flex;justify-content:space-between;font-size:7.5px}
+.sm-scar .r b{font-weight:500}
+.sm-scar .r span{color:var(--sm-rose);font-weight:500}
+.sm-stock{font-size:8.5px;font-weight:600;display:flex;align-items:center;gap:5px}
+.sm-stock::before{content:"";width:6px;height:6px;border-radius:60px;background:var(--sm-rose)}
+.sm-expiry{font-size:8.5px;font-weight:600}
+
+/* guarantee */
+.sm-guar{margin:10px 12px 0;border:1px solid var(--sm-rose);border-radius:10px;padding:8px 9px;flex:none}
+.sm-guar .h{display:flex;align-items:center;gap:6px;font-size:9px;font-weight:600}
+.sm-guar .h i{flex:none;width:16px;height:16px;border-radius:60px;background:var(--sm-rose-soft);display:block}
+.sm-guar p{margin:5px 0 0;font-size:7px;line-height:1.5;color:var(--sm-mut2)}
+
+/* trust strip */
+.sm-trust{display:flex;flex-direction:column;gap:4px;margin:0 0 9px}
+.sm-trust .t{display:flex;gap:6px;align-items:flex-start;font-size:7.5px;line-height:1.35}
+.sm-trust .t b{color:var(--sm-rose);font-weight:700;flex:none}
+.sm-trust .t em{font-style:normal;color:var(--sm-mut)}
+
+/* accordions */
+.sm-acc{margin:9px 12px 0;flex:none}
+.sm-acc .q{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:8px;padding:8px 0;border-bottom:1px solid var(--sm-line)}
+.sm-acc .q .x{color:var(--sm-mut);font-size:10px;flex:none}
+.sm-acc .a{font-size:7px;line-height:1.55;color:var(--sm-mut2);padding:0 0 8px;border-bottom:1px solid var(--sm-line)}
+.sm-faq{margin:9px 12px 0;display:flex;flex-direction:column;gap:5px;flex:none}
+.sm-faq .q{background:var(--sm-surface);border-radius:8px;padding:8px 9px;font-size:7.5px;display:flex;justify-content:space-between;gap:8px}
+.sm-faq .q .x{color:var(--sm-mut);flex:none}
+
+/* section headings */
+.sm-sec{padding:12px 12px 0;flex:none}
+.sm-h2{font-size:13px;font-weight:600;text-align:center;line-height:1.1;margin:0}
+.sm-h2 .mark{background:var(--sm-rose-soft);border-radius:4px;padding:0 5px}
+.sm-h2 .ell{border:1.5px solid var(--sm-rose);border-radius:60px;padding:1px 8px;display:inline-block}
+.sm-sub{font-size:7.5px;color:var(--sm-mut);text-align:center;margin:4px 0 0}
+
+/* review cards */
+.sm-revs{display:flex;gap:7px;padding:9px 12px 0;flex:none;overflow:hidden}
+.sm-rev{flex:none;width:104px;background:var(--sm-tint);border-radius:9px;overflow:hidden}
+.sm-rev .im{height:74px;position:relative;overflow:hidden;background:linear-gradient(165deg,#F0E3DC,#DDC6BC)}
+.sm-rev .im::before{content:"";position:absolute;left:50%;top:17px;transform:translateX(-50%);
+  width:30px;height:28px;border-radius:50% 50% 38% 38%;background:#8C7469}
+.sm-rev .im::after{content:"";position:absolute;left:50%;top:22px;transform:translateX(-50%);
+  width:24px;height:33px;border-radius:46%;background:linear-gradient(165deg,#EFD7C9,#DFBDAB)}
+.sm-rev .bd{padding:6px 7px 8px}
+.sm-rev .nm{font-size:7.5px;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:4px}
+.sm-rev .nm .st{color:var(--sm-rose);font-size:6px;letter-spacing:.3px}
+.sm-rev .vp{font-size:5.5px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:var(--sm-rose);margin-top:3px;display:flex;align-items:center;gap:3px}
+.sm-rev .tx{font-size:6px;line-height:1.5;color:var(--sm-mut2);margin-top:4px}
+.sm-rev .more{font-size:6px;color:var(--sm-rose);text-align:center;margin-top:5px;font-weight:500}
+.sm-rev.peek{width:34px;opacity:.5}
+
+/* stats */
+.sm-stats{display:flex;gap:6px;padding:9px 12px 0;flex:none}
+.sm-stat{flex:1;background:var(--sm-surface);border-radius:9px;padding:9px 6px;text-align:center}
+.sm-stat b{display:block;font-size:17px;font-weight:600;color:var(--sm-rose);line-height:1}
+.sm-stat span{display:block;font-size:6px;line-height:1.35;margin-top:4px;font-weight:500}
+.sm-stat em{display:block;font-size:5px;color:var(--sm-mut);font-style:normal;margin-top:3px}
+
+/* tone proof */
+.sm-toneband{height:26px;border-radius:7px;margin:0 0 6px;background:linear-gradient(90deg,#F6E4D8,#EBCDB6,#DDB294,#C99B7A)}
+.sm-tonelbl{display:flex;justify-content:space-between;font-size:6.5px;color:var(--sm-mut);margin-bottom:8px}
+.sm-mosaic{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sm-tile{border:1px solid var(--sm-line);border-radius:8px;overflow:hidden;background:#fff}
+.sm-tile .ims{display:flex;height:52px}
+.sm-tile .ims i{flex:1;display:block;position:relative}
+.sm-tile .ims i:nth-child(1){background:#EADDD6}
+.sm-tile .ims i:nth-child(2){background:#E2CBBF}
+.sm-tile .ims i:nth-child(3){background:#D9BCA9}
+.sm-tile .ims i::after{content:attr(data-l);position:absolute;bottom:2px;left:0;right:0;text-align:center;font-size:4.5px;color:#8A7268;text-transform:uppercase;letter-spacing:.3px}
+.sm-tile .bd{padding:5px 6px 6px}
+.sm-tile .nm{font-size:6.5px;font-weight:600}
+.sm-tile .tn{font-size:5.5px;color:var(--sm-mut);margin-top:2px}
+
+/* verified caption on imagery */
+.sm-cap{position:absolute;left:6px;bottom:6px;z-index:4;background:rgba(255,255,255,.94);border-radius:60px;padding:3px 8px;font-size:6.5px;font-weight:600;display:flex;align-items:center;gap:4px}
+.sm-cap .vp{color:var(--sm-rose);font-weight:600}
+.sm-cap.up{bottom:22px}
+
+/* sticky purchase bar */
+.sm-sticky{position:absolute;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--sm-line);box-shadow:0 -4px 14px rgba(21,21,21,.08);padding:7px 9px;display:flex;align-items:center;gap:8px;z-index:7}
+.sm-sticky .th{flex:none;width:30px;height:30px;border-radius:6px;background:var(--sm-surface);border:1px solid var(--sm-line)}
+.sm-sticky .info{flex:1;min-width:0}
+.sm-sticky .nm{font-size:7.5px;font-weight:600;line-height:1.2}
+.sm-sticky .pr{font-size:7.5px;font-weight:600;margin-top:1px}
+.sm-sticky .pr s{color:var(--sm-rose-deep);font-weight:500;margin-left:3px}
+.sm-sticky .bt{flex:none;background:#000;color:#fff;border-radius:8px;font-size:7.5px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:8px 11px}
+.sm-sticky.tall{padding:10px 9px}
+.sm-sticky .chg{font-size:6px;color:var(--sm-mut);text-decoration:underline;margin-top:2px;display:block}
+
+/* scratch-to-win modal */
+.sm-scratch{position:absolute;top:25px;left:0;right:0;bottom:0;background:rgba(21,21,21,.55);display:flex;align-items:center;justify-content:center;padding:16px;z-index:9}
+.sm-scratch .card{background:#fff;border-radius:14px;padding:14px 12px;text-align:center;width:100%}
+.sm-scratch .card .h{font-size:11px;font-weight:600;line-height:1.15}
+.sm-scratch .card p{font-size:7px;color:var(--sm-mut2);margin:5px 0 9px;line-height:1.5}
+.sm-scratch .panel{height:56px;border-radius:9px;background:repeating-linear-gradient(45deg,#E9C9D2 0 6px,#DFB8C4 6px 12px);display:flex;align-items:center;justify-content:center;font-size:7px;color:#fff;font-weight:600;letter-spacing:.5px;margin-bottom:9px}
+.sm-scratch .x{position:absolute;top:10px;right:11px;color:#fff;font-size:12px}
+.sm-tab{position:absolute;left:0;top:33%;background:var(--sm-rose);color:#fff;font-size:6px;font-weight:600;padding:7px 4px;border-radius:0 6px 6px 0;writing-mode:vertical-rl;letter-spacing:.5px;z-index:6}
+
+/* collection page */
+.sm-chero{position:relative;height:112px;flex:none;background:linear-gradient(120deg,#E9D9D2,#DCC3BA 50%,#E4CFC6)}
+.sm-chero .t{position:absolute;left:12px;bottom:10px;color:#fff;font-size:20px;font-weight:600;letter-spacing:0}
+.sm-usp{display:flex;background:var(--sm-surface);padding:8px 6px;flex:none}
+.sm-usp .u{flex:1;text-align:center;font-size:6.5px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:3px}
+.sm-usp .u i{width:11px;height:11px;border-radius:60px;background:var(--sm-rose-soft);display:block}
+.sm-cbar{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;font-size:7.5px;color:var(--sm-ink);flex:none}
+.sm-cgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:2px 12px 0;flex:none}
+.sm-pc .im{position:relative;height:88px;border-radius:9px;background:var(--sm-surface);overflow:hidden}
+.sm-pc .im .bdg{position:absolute;top:5px;left:5px;background:var(--sm-rose);color:#fff;font-size:5.5px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;border-radius:5px;padding:2.5px 5px}
+.sm-pc .im .aw{position:absolute;top:5px;right:5px;width:20px;height:20px;border-radius:60px;background:#8E8BD8}
+.sm-pc .nm{font-size:7.5px;font-weight:600;margin-top:5px;line-height:1.2}
+.sm-pc .pr{font-size:7px;font-weight:500;margin-top:2px}
+.sm-pc .pr s{color:var(--sm-rose-deep);margin-left:3px}
+.sm-pc .st{color:var(--sm-rose);font-size:6px;letter-spacing:.4px;margin-top:2px}
+.sm-pc .sm-sw{display:flex;gap:3px;margin-top:3px}
+.sm-pc .sm-sw i{width:7px;height:7px;border-radius:60px;background:#B98C74;border:0;display:block}
+.sm-prod{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+.sm-prod.bottle{width:26px;height:44px;border-radius:5px 5px 6px 6px;
+  background:linear-gradient(150deg,#BE5A67,#A83F4C);box-shadow:8px 6px 12px -6px rgba(21,21,21,.2)}
+.sm-prod.bottle::before{content:"";position:absolute;left:50%;top:-6px;transform:translateX(-50%);
+  width:12px;height:7px;border-radius:3px 3px 1px 1px;background:#A83F4C}
+.sm-prod.jar{width:24px;height:34px;border-radius:5px;
+  background:linear-gradient(150deg,#E7B7C6,#D294A8);box-shadow:8px 6px 12px -6px rgba(21,21,21,.18)}
+.sm-prod.jar::before{content:"";position:absolute;left:50%;top:-7px;transform:translateX(-50%);
+  width:14px;height:8px;border-radius:3px 3px 1px 1px;background:#C9869C}
+.sm-prod.tube{width:14px;height:46px;border-radius:7px 7px 3px 3px;
+  background:linear-gradient(150deg,#8F4A45,#6E3430);box-shadow:7px 6px 11px -6px rgba(21,21,21,.2)}
+.sm-prod.tube::before{content:"";position:absolute;left:50%;top:-9px;transform:translateX(-50%);
+  width:5px;height:11px;border-radius:2px;background:#2C2C29}
+.sm-prod.wand{width:12px;height:44px;border-radius:6px 6px 3px 3px;
+  background:linear-gradient(150deg,#FBFBFB,#E7E7E7);border:1px solid #DFDFDF;
+  box-shadow:7px 6px 11px -6px rgba(21,21,21,.14)}
+.sm-prod.wand::before{content:"";position:absolute;left:50%;top:-8px;transform:translateX(-50%);
+  width:5px;height:10px;border-radius:2px;background:#E7B7C6}
+.sm-pc.sub .im{background:var(--sm-tint);border:1.5px solid var(--sm-rose)}
+.sm-cad{border:1.5px solid var(--sm-rose);border-radius:9px;padding:7px;background:var(--sm-tint);margin-top:5px}
+.sm-cad .r{display:flex;align-items:center;gap:5px;font-size:6.5px;padding:2px 0}
+.sm-cad .r i{width:9px;height:9px;border-radius:60px;border:1px solid var(--sm-rose);flex:none;display:block}
+.sm-cad .r i.on{background:var(--sm-rose)}
+.sm-cad .hd{font-size:7px;font-weight:600;margin-bottom:3px}
+
+/* misc helpers */
+.sm-hint{font-size:7px;color:var(--sm-mut);text-align:center;padding:7px 8px;flex:none;letter-spacing:.2px}
+.sm-hint.warn{color:var(--sm-rose-deep)}
+.sm-grow{flex:1 1 auto;min-height:0}
+.sm-div{border-top:1px solid var(--sm-line);flex:none;margin-top:10px}
+.sm-sheet{background:#fff;border-radius:12px 12px 0 0;padding:11px 12px 14px;width:100%}
+.sm-sheet .sh{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.sm-sheet .sh b{font-size:9px;font-weight:600}
+.sm-sheet .sh .x{color:var(--sm-mut);font-size:11px}
+.sm-sheet p{font-size:7px;line-height:1.55;color:var(--sm-mut2);margin:0 0 8px}
+.sm-fitlist{margin:0;padding:0;list-style:none}
+.sm-fitlist li{font-size:7px;line-height:1.4;display:flex;gap:5px;padding:3px 0;color:var(--sm-ink)}
+.sm-fitlist li b{color:var(--sm-rose);font-weight:700;flex:none}
+
+/* ---- corrections: keep the Smooche layer out of the template's type rules ---- */
+.sm h1,.sm h2,.sm h3,.sm h4,.sm h5,.sm .sm-h1,.sm .sm-h2{
+  font-style:normal;font-family:var(--sm-font);letter-spacing:0;font-weight:600}
+.sm-hd .wm{font-style:italic}
+.sm-sticky .nm,.sm-sticky .pr,.sm-sticky .chg{display:block}
+.sm-sticky .info{display:block}
+.sm-social .av{display:inline-flex}
+
+/* annotation footer strip — sits over the viewport so page content can fill it */
+.sm-hintbar{position:absolute;left:0;right:0;background:rgba(255,255,255,.95);
+  border-top:1px solid var(--sm-line);font-size:6.8px;color:var(--sm-mut2);text-align:center;
+  padding:6px 9px;line-height:1.45;z-index:8;letter-spacing:.1px}
+.sm-hintbar.warn{color:var(--sm-rose-deep)}
+
+/* product silhouettes so the frames read hi-fi rather than empty */
+.sm-gal .ph{position:relative;overflow:hidden}
+.sm-bottle{position:absolute;left:50%;top:50%;transform:translate(-88%,-44%);
+  width:50px;height:84px;border-radius:8px 8px 10px 10px;
+  background:linear-gradient(150deg,#BE5A67 0%,#A83F4C 55%,#93333F 100%);
+  box-shadow:14px 10px 18px -8px rgba(21,21,21,.22)}
+.sm-bottle::before{content:"";position:absolute;left:50%;top:-9px;transform:translateX(-50%);
+  width:20px;height:11px;border-radius:5px 5px 2px 2px;background:#A83F4C}
+.sm-bottle::after{content:"SMOOCHE";position:absolute;left:0;right:0;top:30px;text-align:center;
+  color:rgba(255,255,255,.9);font-size:5.5px;font-weight:700;font-style:italic;letter-spacing:0}
+.sm-lid{position:absolute;left:50%;top:50%;transform:translate(28%,-4%);
+  width:32px;height:38px;border-radius:5px;background:linear-gradient(150deg,#B44F5C,#9A3743);
+  box-shadow:9px 7px 14px -7px rgba(21,21,21,.2)}
+.sm-face{position:absolute;inset:0;overflow:hidden;
+  background:linear-gradient(165deg,#F4EBE6 0%,#E6D6CE 100%)}
+.sm-face i{position:absolute;display:block;left:50%}
+.sm-face i.shoulders{bottom:-8px;transform:translateX(-50%);width:80px;height:34px;
+  border-radius:40px 40px 0 0;background:#F1ECE8;z-index:3}
+.sm-face i.shoulders::before{content:"";position:absolute;left:50%;top:-9px;transform:translateX(-50%);
+  width:15px;height:14px;border-radius:4px;background:#E3C0AE}
+.sm-face i.hair{top:21px;transform:translateX(-50%);width:43px;height:41px;
+  border-radius:50% 50% 38% 38%;background:#8C7469}
+.sm-face i.head{top:28px;transform:translateX(-50%);width:34px;height:45px;
+  border-radius:46% 46% 46% 46%;background:linear-gradient(165deg,#EFD7C9,#DFBDAB)}
+.sm-face i.head::after,.sm-face i.head::before{z-index:2}
+.sm-face i.head::before,.sm-face i.head::after{content:"";position:absolute;top:18px;
+  width:4px;height:1.5px;border-radius:2px;background:rgba(90,68,58,.45)}
+.sm-face i.head::before{left:7px}
+.sm-face i.head::after{right:7px}
+.sm-face.dark i.head{background:linear-gradient(165deg,#C79B7C,#B0805F)}
+.sm-face.dark i.hair{background:#4E3B33}
+.sm-ba{position:absolute;inset:0;display:flex}
+.sm-ba > span{position:relative;flex:1;overflow:hidden}
+.sm-ba > span:first-child{border-right:1px solid rgba(255,255,255,.7)}
+.sm-ba .sm-face{background:linear-gradient(165deg,#E8DCD5,#D6C3B9)}
+.sm-ba > span:last-child .sm-face{background:linear-gradient(165deg,#F6EDE8,#E9D6CC)}
+.sm-ba > span:last-child .sm-face i.head{background:linear-gradient(165deg,#F2DCCE,#E4C3B2)}
+.sm-splitlbl{position:absolute;bottom:5px;left:0;right:0;display:flex;z-index:2}
+.sm-splitlbl span{flex:1;text-align:center;color:#fff;font-size:7px;font-weight:600;
+  letter-spacing:.3px;text-shadow:0 1px 2px rgba(21,21,21,.75),0 0 8px rgba(21,21,21,.5)}
+
+/* zoomed detail frames */
+.sm-zoom{transform-origin:top left;flex:none}
+
+/* illustrated suitability rows */
+.sm-fitrow{display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--sm-line)}
+.sm-fitrow:last-child{border-bottom:0}
+.sm-ft{flex:none;width:42px;height:42px;border-radius:7px;position:relative;overflow:hidden;
+  background:var(--sm-surface);border:1px solid var(--sm-line)}
+.sm-ft.face{background:
+  radial-gradient(12px 15px at 50% 44%,#EFD7C9 0%,#DFBDAB 72%,transparent 73%),
+  radial-gradient(17px 12px at 50% 104%,#F1ECE8 0%,#F1ECE8 70%,transparent 71%),
+  linear-gradient(160deg,#F5ECE7,#E7D7CF)}
+.sm-ft.cover{background:
+  radial-gradient(7px 6px at 33% 38%,rgba(206,120,120,.5),transparent 72%),
+  radial-gradient(6px 5px at 62% 60%,rgba(206,120,120,.42),transparent 72%),
+  linear-gradient(160deg,#F8EDE8,#E9D2C8)}
+.sm-ft.cover::after{content:"";position:absolute;left:0;right:0;bottom:0;height:52%;
+  background:linear-gradient(160deg,rgba(240,214,200,.96),rgba(228,195,178,.96))}
+.sm-ft.tone{background:linear-gradient(100deg,#F6E4D8 0%,#EBCDB6 34%,#DDB294 68%,#C99B7A 100%)}
+.sm-ft.tone::after{content:"";position:absolute;inset:auto 4px 4px 4px;height:9px;border-radius:5px;
+  background:rgba(255,255,255,.62)}
+.sm-ft.apply{background:linear-gradient(160deg,#F2E8E3,#DFCBC2)}
+.sm-ft.apply::after{content:"";position:absolute;left:8px;top:6px;width:9px;height:26px;
+  border-radius:5px 5px 2px 2px;transform:rotate(16deg);
+  background:linear-gradient(160deg,#E7B7C6,#CE8DA1)}
+.sm-fitrow .tx{min-width:0;font-size:6.8px;line-height:1.42;color:var(--sm-mut2)}
+.sm-fitrow .tx b{display:block;font-size:7.8px;font-weight:600;color:var(--sm-ink);margin-bottom:1px}
+.sm-fitnote{font-size:6.2px;color:var(--sm-mut);margin-top:5px;line-height:1.4}
+.sm-trust .t em.fine{display:block;font-size:6.2px;color:var(--sm-mut);margin-top:2px}
+.sm-note-lbl{font-size:6.5px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--sm-mut);margin:8px 0 4px}
+
+@media(max-width:1180px){
+  .test-grid{grid-template-columns:1fr;gap:30px}
+  .brand .sub{display:none}
+}
+@media(max-width:900px){
+  .wrap,.topbar-inner{padding:0 20px}
+  .compare{grid-template-columns:1fr;gap:34px}
+  .page-head h1{font-size:30px}
+  .mtable th:nth-child(4),.mtable td:nth-child(4){display:none}
+  .topbar-inner{gap:12px}
+}
+@media(max-width:640px){
+  .topbar{overflow:hidden}
+  .topbar-inner{min-width:0}
+  .brand-logo{height:20px}
+  .pager{min-width:0;flex:1;margin-left:0}
+  .arrows{display:none}
+  .page-head{padding:48px 0}
+  .page-head h1{font-size:36px;width:100%;max-width:none}
+  .page-head p{display:block;font-size:14px;line-height:1.6}
+  .hmeta{margin-top:20px}
+  .pill{padding:8px 12px}
+  .block{padding:48px 0 64px}
+  .block h2.sec{font-size:32px}
+  .block .lede{font-size:14px}
+  .mtable{margin-top:24px;table-layout:fixed}
+  .mtable th,.mtable td{padding:16px 12px}
+  .mtable th:nth-child(2),.mtable td:nth-child(2),
+  .mtable th:nth-child(4),.mtable td:nth-child(4),
+  .mtable th:nth-child(5),.mtable td:nth-child(5),
+  .mtable th:nth-child(6),.mtable td:nth-child(6){display:none}
+  .mtable th:first-child,.mtable td:first-child{width:48px}
+  .callout{padding:20px}
+  .test{padding:48px 0 64px}
+  .test h2{font-size:32px}
+  .pagenav button{padding:12px 16px}
+}
+@media print{
+  body{background:#fff}
+  .topbar,.pagenav,.arrows{display:none}
+  .page{display:block!important;animation:none;break-after:page}
+  .overlay{display:flex!important}
+  .phone{box-shadow:none}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#overview" data-go="overview">
+      <img class="brand-logo" src="../images/logo-maison-commerce.png" alt="Maison Commerce" width="1206" height="154" decoding="async">
+      <span class="sub">Smooche · A/B Testing Roadmap</span>
+    </a>
+    <nav class="pager" id="pager" aria-label="Tests">
+      <span class="ink" id="ink"></span>
+      <button data-go="overview">Overview</button>
+      <span class="divider"></span>
+      <button data-go="b1">T1</button>
+      <button data-go="b2">T2</button>
+      <button data-go="b3">T3</button>
+      <button data-go="b4">T4</button>
+      <button data-go="b5">T5</button>
+      <button data-go="b6">T6</button>
+      <button data-go="b7">T7</button>
+      <span class="divider"></span>
+      <button data-go="ba">A</button>
+      <span class="divider"></span>
+      <button data-go="plan">Planning</button>
+    </nav>
+    <div class="arrows">
+      <button id="prevBtn" aria-label="Previous">‹</button>
+      <button id="nextBtn" aria-label="Next">›</button>
+    </div>
+  </div>
+</header>
+
+<main id="app">
+
+<!-- ==================== OVERVIEW ==================== -->
+<section class="page" id="page-overview">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="brandline">Conversion research · Agreed shortlist · 8 tests</div>
+      <h1>Master A/B Testing Roadmap for Smooche</h1>
+      <p>The agreed shortlist: seven mobile PDP experiments plus one separated returning-customer test for the Reverse-aging Adaptive Foundation. Each test carries its own problem, solution, hypothesis, KPI set and guardrails, and is judged on sessions that reach the product page rather than blended sitewide conversion.</p>
+      <div class="hmeta"><span class="pill">Mobile PDP · /products/ccf2</span><span class="pill">Reverse-aging Adaptive Foundation</span><span class="pill">~96% of sessions are mobile</span><span class="pill">7 PDP tests + 1 adjacent</span></div>
+    </div>
+  </div>
+
+  <div class="block"><div class="wrap">
+    <div class="section-lab">Overview</div>
+    <h2 class="sec">All briefed tests</h2>
+    <p class="lede">Names, IDs, priorities, targeting and KPIs sit together in one reviewable system. <b>T1–T7 follow the agreed run order, not priority</b> — each row also carries its number in the research brief and in the extended roadmap, so all three documents stay cross-referenceable. Test A is an explicitly separated returning-customer collection experiment. Click any row to open the test.</p>
+    <table class="mtable">
+      <thead><tr><th>#</th><th>Surface</th><th>Test</th><th>Test ID</th><th>Priority</th><th>KPIs</th></tr></thead>
+      <tbody>
+        <tr data-go="b1">
+          <td class="mno">T1</td><td><span class="pgbadge pgbadge--pdp">PDP</span></td>
+          <td>Add an optional live face preview / virtual try-on<br><span style="font-size:11.5px;color:var(--espresso-soft)">Mobile PDP — /products/ccf2 · Test 10</span></td>
+          <td class="tid">MC_PDP_VIRTUAL_FACE_PREVIEW_SMOOCHE</td>
+          <td>P2 exploratory</td>
+          <td><span class="kpi">ATC</span><span class="kpi">RPV</span><span class="kpi">CVR</span></td>
+        </tr>
+        <tr data-go="b2">
+          <td class="mno">T2</td><td><span class="pgbadge pgbadge--pdp">PDP</span></td>
+          <td>Use one credible scarcity mechanism<br><span style="font-size:11.5px;color:var(--espresso-soft)">Mobile PDP — /products/ccf2 · Test 9</span></td>
+          <td class="tid">MC_PDP_SINGLE_CREDIBLE_SCARCITY_SMOOCHE</td>
+          <td>P2</td>
+          <td><span class="kpi">CP/V</span><span class="kpi">CVR</span><span class="kpi">ATC</span></td>
+        </tr>
+        <tr data-go="b3">
+          <td class="mno">T3</td><td><span class="pgbadge pgbadge--pdp">PDP</span></td>
+          <td>Add identity-led verified-buyer captions to customer imagery<br><span style="font-size:11.5px;color:var(--espresso-soft)">Mobile PDP — /products/ccf2 · Test 8</span></td>
+          <td class="tid">MC_PDP_VERIFIED_BUYER_CAPTIONS_SMOOCHE</td>
+          <td>P1</td>
+          <td><span class="kpi">ATC</span><span class="kpi">RPV</span><span class="kpi">CVR</span></td>
+        </tr>
+        <tr data-go="b4">
+          <td class="mno">T4</td><td><span class="pgbadge pgbadge--pdp">PDP</span></td>
+          <td>Add an “Is This Product Right for Me?” section below the ATC<br><span style="font-size:11.5px;color:var(--espresso-soft)">Mobile PDP — /products/ccf2 · Test 11</span></td>
+          <td class="tid">MC_PDP_IS_THIS_RIGHT_FOR_ME_SMOOCHE</td>
+          <td>P1</td>
+          <td><span class="kpi">ReV</span><span class="kpi">CVR</span><span class="kpi">ATC</span></td>
+        </tr>
+        <tr data-go="b5">
+          <td class="mno">T5</td><td><span class="pgbadge pgbadge--pdp">PDP</span></td>
+          <td>Make a mature-skin before/after the first gallery asset<br><span style="font-size:11.5px;color:var(--espresso-soft)">Mobile PDP — /products/ccf2 · Test 2</span></td>
+          <td class="tid">MC_PDP_GALLERY_BEFOREAFTER_FIRST_SLIDE_SMOOCHE</td>
+          <td>P1</td>
+          <td><span class="kpi">ATC</span><span class="kpi">RPV</span></td>
+        </tr>
+        <tr data-go="b6">
+          <td class="mno">T6</td><td><span class="pgbadge pgbadge--pdp">PDP</span></td>
+          <td>Turn the existing sticky card into a direct Add to Cart bar<br><span style="font-size:11.5px;color:var(--espresso-soft)">Mobile PDP — /products/ccf2 · Test 3</span></td>
+          <td class="tid">MC_PDP_STICKY_DIRECT_ATC_SMOOCHE</td>
+          <td>P1</td>
+          <td><span class="kpi">ATC</span><span class="kpi">CVR</span><span class="kpi">RPV</span></td>
+        </tr>
+        <tr data-go="b7">
+          <td class="mno">T7</td><td><span class="pgbadge pgbadge--pdp">PDP</span></td>
+          <td>Prove the shade match across real supported skin tones<br><span style="font-size:11.5px;color:var(--espresso-soft)">Mobile PDP — /products/ccf2 · Test 5</span></td>
+          <td class="tid">MC_PDP_SHADE_PROOF_REAL_TONES_SMOOCHE</td>
+          <td>P2</td>
+          <td><span class="kpi">ATC</span><span class="kpi">ReV</span><span class="kpi">RPV</span></td>
+        </tr>
+        <tr data-go="ba">
+          <td class="mno">A</td><td><span class="pgbadge pgbadge--coll">Collection</span></td>
+          <td>Offer an optional subscription to identified returning purchasers<br><span style="font-size:11.5px;color:var(--espresso-soft)">Relevant collection page / replenishment collection · Adjacent Test A</span></td>
+          <td class="tid">MC_COLL_OPTIONAL_SUBSCRIPTION_RETURNING_SMOOCHE</td>
+          <td>P3 exploratory</td>
+          <td><span class="kpi">NC90</span><span class="kpi">AOV</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="tablenote">ATC = add to cart · CVR = purchase conversion rate · RPV = revenue per PDP visitor · CP/V = contribution profit per PDP visitor · ReV = refund-adjusted revenue · NC90 = 60/90-day net contribution. Priority and effort are from the research brief. <b>Sequence is the agreed run order</b> and does not track priority — a P1 can sit behind a P2.</p>
+      <div class="callout">
+        <h3>Measurement rules</h3>
+        <ol>
+          <li>Evaluate every test on <b>sessions that reach this PDP</b>. Do not use blended sitewide conversion as the denominator.</li>
+          <li>Mobile is the decision-making segment — approximately <b>96% of sessions are mobile</b>.</li>
+          <li>For persuasion and UX tests, use <b>mobile PDP-to-add-to-cart</b> as the leading metric and <b>revenue per PDP visitor</b> as the commercial guardrail.</li>
+          <li>For pricing and offer tests, prioritise <b>contribution profit per PDP visitor</b>; fall back to revenue per PDP visitor only if contribution data is unavailable.</li>
+          <li>Segment by <b>advertorial/Meta versus direct traffic</b> and by <b>new versus returning</b> visitors where sample size permits.</li>
+          <li>Read shade-fit, guarantee, virtual-preview and expectation-setting tests <b>through the full return window</b>.</li>
+          <li>For the adjacent collection-page subscription experiment, use <b>eligible identified prior purchasers</b> as the denominator and read net contribution through at least the second billing. Do not blend that result with PDP experiments.</li>
+        </ol>
+      </div>
+  </div></div>
+
+  <div class="block" style="padding-top:0"><div class="wrap">
+    <div class="section-lab">Research basis</div>
+    <h2 class="sec">What the audit and the research found</h2>
+    <p class="lede">This roadmap combines live mobile inspection of the current PDP, Shopify quantitative analysis, new- and returning-customer survey analysis, competitor PDP research, moderated usability-test findings, and stakeholder input on revenue strategy and test feasibility. The two supplied survey-insight files are duplicates and are treated as one evidence source.</p>
+    <div class="callout">
+      <h3>Live-page findings that shaped the roadmap</h3>
+      <ol>
+        <li>Scratch-to-Win appears very early on a first eligible exposure and is subject to session/frequency rules.</li>
+        <li>One bottle is already selected by default.</li>
+        <li>Selecting two bottles changes the bundle card to $49 while the main product price and sticky card remain at $39. <b>This is prerequisite QA, not a treatment.</b></li>
+        <li>A sticky mobile purchase card already exists, but its CTA says “Shop Now” and scrolls back to the offer rather than adding the selected pack.</li>
+        <li>The guarantee, mechanism explanation, mature-skin testimonials, before/afters and results statistics already exist, but are not always placed or presented optimally.</li>
+        <li>The gallery contains approximately 15+ assets.</li>
+        <li>The tone claim is contradictory: one area says “all skin tones”, another says fair-to-medium tones.</li>
+        <li>Scarcity is <b>intentionally retained</b> as a revenue mechanism.</li>
+        <li>The Mystery Gift is <b>intentionally retained</b> as part of the bundle value.</li>
+      </ol>
+    </div>
+  <div class="pagenav">
+    <button disabled></button>
+    <button class="nx" data-go="b1"><span>Next</span>T1 · Optional live face preview / virtual try-on →</button>
+  </div>
+  </div></div>
+</section>
+
+<!-- ==================== T1 ==================== -->
+<section class="page" id="page-b1"><div class="test"><div class="wrap"><div class="test-grid">
+  <div class="test-info">
+    <div class="thead"><span class="hid">T1</span><span class="lnk"></span><span class="pgbadge pgbadge--pdp">PDP</span><span class="lnk"></span><span class="stbadge">P2 exploratory</span><span class="lnk"></span><span class="stbadge">High effort</span></div>
+    <h2>Add an optional live face preview / virtual try-on</h2>
+    <p class="tsub">The page can show the adaptive mechanism on other people. A shopper still cannot see the likely finish on her own face — but a camera filter is a visual aid, never a guaranteed match.</p>
+    <dl class="mlist">
+      <div><dt>Primary KPI</dt><dd>Mobile PDP→ATC (intent-to-treat)</dd></div>
+      <div><dt>Secondary</dt><dd>Revenue / PDP visitor · purchase CVR · preview start rate · successful preview completion · ATC after preview</dd></div>
+      <div><dt>Guardrails</dt><dd>LCP/INP · JavaScript errors · camera denial or failure rate · privacy complaints · shade-related returns and refunds · “result did not match preview” contacts</dd></div>
+      <div><dt>Targeting</dt><dd>Mobile PDP — /products/ccf2</dd></div>
+      <div><dt>Segment</dt><dd>Shade-anxious mobile visitors, especially those who actively opt in</dd></div>
+      <div><dt>Tool</dt><dd>Shopify-compatible virtual try-on app + experiment platform</dd></div>
+      <div><dt>Evidence</dt><dd>Shade mismatch was a prior-foundation frustration for 34% of surveyed buyers, and “perfect match” was the second-strongest reported ad element.</dd></div>
+      <div><dt>Prerequisites</dt><dd>Validate the app’s visual output across the verified supported tone range, mature skin, lighting conditions, older devices and Meta/Facebook/Instagram in-app browsers. Confirm camera, image-processing, storage, deletion, consent and privacy practices. Run after lower-risk real-user tone proof (T7) has established the credible supported range. Do not run concurrently with T7B or T4.</dd></div>
+      <div><dt>Brief ref</dt><dd>Test 10 in the research brief · T1 in the extended roadmap</dd></div>
+      <div><dt>A/B test ID</dt><dd class="tid-ref">MC_PDP_VIRTUAL_FACE_PREVIEW_SMOOCHE · generated id MC_PDP_FACEPREVIEWTRYON</dd></div>
+    </dl>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>A shopper cannot visualise the likely finish on her own face before buying. A virtual preview could reduce that uncertainty, but it is exploratory: a camera filter may not reproduce an adaptive formula, lighting, texture or final shade precisely.</p></div>
+      <div class="box"><h4>Solution</h4><p>One optional “Preview it on your face” launcher near the gallery and price, without displacing the offer or primary ATC. Request camera access only after an explicit tap, with a still-photo or model-preview fallback when access is declined or unavailable. Label it clearly: “Visual preview — your result may vary with lighting, camera, screen, application and the adaptive formula.” Never call the output an exact match. Keep it non-blocking and easy to close, and lazy-load the app after intent so scripts do not slow the initial product view. Retain no image unless the shopper explicitly agrees.</p></div>
+    </div>
+    <div class="hyp">
+      <span class="hyp-lbl">Hypothesis</span>
+      <p class="hline"><b>IF</b> mobile shoppers can optionally preview the likely cosmetic effect on their own face,</p>
+      <p class="hline"><b>THEN</b> mobile PDP ATC and revenue per PDP visitor will increase,</p>
+      <p class="hline"><b>BECAUSE</b> personal visualisation will reduce uncertainty about how the product may look on them before purchase.</p>
+    </div>
+  </div>
+
+  <div class="test-frames"><div class="compare">
+    <div class="col">
+      <div class="col-h"><span class="state before">Before</span><span class="lab">no preview entry point</span></div>
+<div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen sm"><div class="anno">zoomed · no preview entry point</div><div class="sm-zoom" style="width:69.4444%;transform:scale(1.44)"><div class="sm-gal"><div class="ph pack"><span class="sm-bottle"></span><span class="sm-lid"></span></div><span class="sm-ovbadge korea">#1 Foundation<br>in South Korea</span><span class="sm-ovbadge sold">1m+<br>Sold</span><span class="sm-clin"><b>Clinicians’ Choice</b>259 clinicians share this on FrontrowMD</span><div class="sm-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="sm-thumbs"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="sm-bb"><div class="sm-rate"><span class="st">★★★★★</span>4.8/5 (351,837 reviews)</div><h3 class="sm-h1">Reverse-aging Adaptive Foundation</h3><div class="sm-prow"><span class="sm-was">$59 USD</span><span class="sm-now">$39 USD</span><span class="sm-tag">Bestseller</span></div><div class="sm-chips"><div class="sm-chip"><i></i>Adapts to your skin tone</div><div class="sm-chip"><i></i>Hides imperfections</div><div class="sm-chip"><i></i>Natural look for 16+ hours</div><div class="sm-chip"><i></i>With SPF 15</div></div><div class="sm-opts"><div class="sm-opt sel"><div class="top"><span class="rad"></span><span class="nm">1 bottle<span class="sb">Regular price</span></span><span class="pr"><b>$39</b><s>$59</s></span></div></div><div class="sm-opt"><div class="top"><span class="rad"></span><span class="nm">2 bottles <span class="sm-tag" style="font-size:5.5px;padding:2px 5px">Save $69</span><span class="sb">Temporary deal</span></span><span class="pr"><b>$49</b><s>$118</s></span></div><div class="sm-gift"><i></i>+ FREE Smooche Blender<s>$19</s></div><div class="sm-gift"><i></i>+ FREE Mystery Gift<s>$15</s></div><div class="sm-gift"><i></i>+ FREE Shipping</div></div></div><div class="sm-cta ">Add to Cart</div></div></div><div class="sm-hintbar warn" style="bottom:0px">Between the price and the offer there is nothing that answers “how will this look on my face?”</div></div></div></div>
+      <div class="note"><span class="dot">①</span><span>The gallery and price block as they are today. The adaptive mechanism is shown on other people, and nothing answers “how will this look on me?” at the decision point.</span></div>
+    </div>
+    <div class="col">
+      <div class="col-h"><span class="state after">After</span><span class="lab">opt-in face preview</span></div>
+<div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen sm"><div class="anno">zoomed · opt-in face preview</div><div class="sm-zoom" style="width:69.4444%;transform:scale(1.44)"><div class="sm-gal"><div class="ph pack"><span class="sm-bottle"></span><span class="sm-lid"></span></div><span class="sm-ovbadge korea">#1 Foundation<br>in South Korea</span><span class="sm-ovbadge sold">1m+<br>Sold</span><span class="sm-clin"><b>Clinicians’ Choice</b>259 clinicians share this on FrontrowMD</span><div class="sm-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="sm-thumbs"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="sm-bb"><div class="sm-rate"><span class="st">★★★★★</span>4.8/5 (351,837 reviews)</div><h3 class="sm-h1">Reverse-aging Adaptive Foundation</h3><div class="sm-prow"><span class="sm-was">$59 USD</span><span class="sm-now">$39 USD</span><span class="sm-tag">Bestseller</span></div><div class="hl" style="position:relative;"><span class="tagnum" style="top:-9px;right:12px">①</span><div class="sm-cta ghost tap" tabindex="0" role="button" data-opens="ov-b10">Preview it on your face</div></div><div style="height:8px"></div><div class="sm-chips"><div class="sm-chip"><i></i>Adapts to your skin tone</div><div class="sm-chip"><i></i>Hides imperfections</div><div class="sm-chip"><i></i>Natural look for 16+ hours</div><div class="sm-chip"><i></i>With SPF 15</div></div><div class="sm-opts"><div class="sm-opt sel"><div class="top"><span class="rad"></span><span class="nm">1 bottle<span class="sb">Regular price</span></span><span class="pr"><b>$39</b><s>$59</s></span></div></div><div class="sm-opt"><div class="top"><span class="rad"></span><span class="nm">2 bottles <span class="sm-tag" style="font-size:5.5px;padding:2px 5px">Save $69</span><span class="sb">Temporary deal</span></span><span class="pr"><b>$49</b><s>$118</s></span></div><div class="sm-gift"><i></i>+ FREE Smooche Blender<s>$19</s></div><div class="sm-gift"><i></i>+ FREE Mystery Gift<s>$15</s></div><div class="sm-gift"><i></i>+ FREE Shipping</div></div></div><div class="sm-cta ">Add to Cart</div></div></div><div class="overlay" id="ov-b10" style="align-items:center;padding:12px"><div class="sm-sheet"><div class="sh"><b>Preview it on your face</b><span class="x" tabindex="0" role="button" data-close>✕</span></div><div style="height:56px;border-radius:9px;background:linear-gradient(160deg,#EFE1DB,#DFC9C1);display:flex;align-items:center;justify-content:center;font-size:7px;color:#8A7268">CAMERA PREVIEW</div><p style="margin-top:8px"><b>Visual preview</b> — your result may vary with lighting, camera, screen, application and the adaptive formula. Not an exact shade match.</p><p>Camera access is requested only on tap. Nothing is stored unless you agree. Still-photo and model fallbacks available.</p><div class="sm-cta tap" tabindex="0" role="button" data-close>Allow camera</div></div></div><div class="sm-hintbar" style="bottom:0px">① A secondary, clearly optional launcher between price and benefits — the offer and the primary CTA keep their positions. Tap it for the permission step and the variability disclaimer.</div></div></div></div>
+      <div class="note"><span class="dot">①</span><span>One optional launcher near the gallery and price, without displacing the offer or the primary CTA. Tap it for the permission step, the variability disclaimer and the declined-camera fallback.</span></div>
+    </div>
+  </div>
+  <div class="pagenav">
+    <button data-go="overview"><span>Previous</span>← Overview</button>
+    <button class="nx" data-go="b2"><span>Next</span>T2 · One credible scarcity mechanism →</button>
+  </div>
+  </div>
+</div></div></div></section>
+
+<!-- ==================== T2 ==================== -->
+<section class="page" id="page-b2"><div class="test"><div class="wrap"><div class="test-grid">
+  <div class="test-info">
+    <div class="thead"><span class="hid">T2</span><span class="lnk"></span><span class="pgbadge pgbadge--pdp">PDP</span><span class="lnk"></span><span class="stbadge">P2</span><span class="lnk"></span><span class="stbadge">Medium effort</span></div>
+    <h2>Use one credible scarcity mechanism</h2>
+    <p class="tsub">Scarcity stays as a revenue mechanism, but it has to communicate one real constraint. Stock pressure plus time pressure — or a resetting timer — makes the whole offer feel less credible.</p>
+    <dl class="mlist">
+      <div><dt>Primary KPI</dt><dd>Contribution profit / mobile PDP visitor (revenue per visitor if contribution data is unavailable)</dd></div>
+      <div><dt>Secondary</dt><dd>Purchase CVR · mobile ATC · checkout completion · time to ATC</dd></div>
+      <div><dt>Guardrails</dt><dd>Bounce rate · cancellations and refunds · support complaints · offer-expiry failures</dd></div>
+      <div><dt>Targeting</dt><dd>Mobile PDP — /products/ccf2</dd></div>
+      <div><dt>Segment</dt><dd>Mobile visitors who reach the purchase box</dd></div>
+      <div><dt>Tool</dt><dd>Experiment platform + inventory or offer-scheduling data</dd></div>
+      <div><dt>Evidence</dt><dd>Usability test — the participant could not tell whether the message meant inventory or a deadline. Survey — timer pressure can backfire with an older, careful-reading audience.</dd></div>
+      <div><dt>Prerequisites</dt><dd>Do not launch the stock variant without synchronised sellable inventory, or the expiry variant without an enforceable deadline and a verified post-expiry state. Run separately from the purchase-reassurance test (extended edition only) and other purchase-box changes.</dd></div>
+      <div><dt>Brief ref</dt><dd>Test 9 in the research brief · T2 in the extended roadmap</dd></div>
+      <div><dt>A/B test ID</dt><dd class="tid-ref">MC_PDP_SINGLE_CREDIBLE_SCARCITY_SMOOCHE · generated id MC_PDP_ONESCARCITYMECHANISM</dd></div>
+    </dl>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>The current module combines an abstract “89% sold” meter with a countdown, so the shopper cannot tell what is actually limited. Combining stock and time pressure — or using a resetting timer or simulated decrement — undermines the credibility of the whole offer.</p></div>
+      <div class="box"><h4>Solution</h4><p>Ship exactly one truthful constraint, chosen to match the real operational reality. Never display both. If traffic permits, run a four-cell design: current urgency stack vs no urgency vs genuine stock vs genuine expiry. If only an A/B is possible, compare the control with the one operationally valid mechanism.</p></div>
+      <div class="box"><h4>Variant A — genuine low stock, no timer</h4><p>Only when inventory is genuinely constrained. Remove the countdown, percentage and progress meter. Show an absolute inventory message below a real pre-agreed threshold (“Only 18 bottles left at this price”), pulled from actual sellable Shopify inventory or a documented promotional allocation. Refresh every 10–15 seconds and animate a reduction only when the verified response is lower — never force a decrement because time has passed. Define the unit precisely: a two-bottle order consumes two bottles. If stock rises on a restock or released reservation, update honestly or hide the module.</p></div>
+      <div class="box"><h4>Variant B — genuine time-limited offer, no stock claim</h4><p>Only when the price, gift or shipping offer genuinely changes at a fixed deadline. Remove the stock percentage, meter and “selling out” language. State exactly what expires and when (“$39 Summer price ends Sunday at 11:59 PM ET”). A countdown may support the explicit deadline, but the end timestamp must persist across refreshes and devices, the stated price must actually change at zero, and the deadline must not reset for a new session unless the offer is genuinely session-specific and labelled as such.</p></div>
+    </div>
+    <div class="hyp">
+      <span class="hyp-lbl">Hypothesis</span>
+      <p class="hline"><b>IF</b> we replace the mixed, fake-feeling scarcity stack with one concrete and truthful constraint,</p>
+      <p class="hline"><b>THEN</b> contribution profit and purchase CVR per PDP visitor will increase,</p>
+      <p class="hline"><b>BECAUSE</b> shoppers can understand what is limited without reconciling competing urgency claims or distrusting a resetting mechanism.</p>
+    </div>
+  </div>
+
+  <div class="test-frames"><div class="compare">
+    <div class="col">
+      <div class="col-h"><span class="state before">Before</span><span class="lab">“89% sold” + countdown</span></div>
+<div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen sm"><div class="anno">zoomed · stock and time together</div><div class="sm-zoom" style="width:70.4225%;transform:scale(1.42)"><div class="sm-bb" style="padding-top:10px"><div class="sm-opts"><div class="sm-opt sel"><div class="top"><span class="rad"></span><span class="nm">1 bottle<span class="sb">Regular price</span></span><span class="pr"><b>$39</b><s>$59</s></span></div></div><div class="sm-opt"><div class="top"><span class="rad"></span><span class="nm">2 bottles <span class="sm-tag" style="font-size:5.5px;padding:2px 5px">Save $69</span><span class="sb">Temporary deal</span></span><span class="pr"><b>$49</b><s>$118</s></span></div><div class="sm-gift"><i></i>+ FREE Smooche Blender<s>$19</s></div><div class="sm-gift"><i></i>+ FREE Mystery Gift<s>$15</s></div><div class="sm-gift"><i></i>+ FREE Shipping</div></div></div><div class="sm-cta ">Add to Cart</div><div class="sm-ship"><span class="ok">Shipped today</span><span>🇹🇷 Free shipping to <u>TR</u></span></div></div><div class="hl" style="position:relative;"><span class="tagnum" style="top:6px;right:8px">①</span><div class="sm-scar"><div class="h">Selling out fast</div><div class="s">Due to high demand, limited quantities available</div><div class="sm-bar"><i style="width:89%"></i></div><div class="r"><b>89% sold</b><span>Ends in 10:04:39</span></div></div></div><div class="sm-guar"><div class="h"><i></i>30-day money-back guarantee</div><p>Try it worry-free. If our skin-adapting foundation doesn’t blend seamlessly with your tone, you’ll get your money back*</p></div></div><div class="sm-hintbar warn" style="bottom:0px">Two constraints in one module. The meter implies inventory, the countdown implies a deadline, and the timer restarts with the session.</div></div></div></div>
+      <div class="note"><span class="dot">①</span><span>“Selling out fast”, an 89% meter and a countdown in one module, so the shopper cannot tell whether stock or time is the constraint — and the timer resets with the session.</span></div>
+    </div>
+    <div class="col">
+      <div class="col-h"><span class="state after">After</span><span class="lab">one real constraint</span></div>
+<div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen sm"><div class="anno">zoomed · one real constraint</div><div class="sm-zoom" style="width:70.4225%;transform:scale(1.42)"><div class="sm-bb" style="padding-top:10px"><div class="sm-opts"><div class="sm-opt sel"><div class="top"><span class="rad"></span><span class="nm">1 bottle<span class="sb">Regular price</span></span><span class="pr"><b>$39</b><s>$59</s></span></div></div><div class="sm-opt"><div class="top"><span class="rad"></span><span class="nm">2 bottles <span class="sm-tag" style="font-size:5.5px;padding:2px 5px">Save $69</span><span class="sb">Temporary deal</span></span><span class="pr"><b>$49</b><s>$118</s></span></div><div class="sm-gift"><i></i>+ FREE Smooche Blender<s>$19</s></div><div class="sm-gift"><i></i>+ FREE Mystery Gift<s>$15</s></div><div class="sm-gift"><i></i>+ FREE Shipping</div></div></div><div class="sm-cta ">Add to Cart</div><div class="sm-ship"><span class="ok">Shipped today</span><span>🇹🇷 Free shipping to <u>TR</u></span></div></div><div class="sm-note-lbl" style="padding:9px 12px 0">Variant A · genuine low stock</div><div class="hl" style="position:relative;"><span class="tagnum" style="top:-9px;right:10px">①</span><div class="sm-scar" style="padding-top:4px"><div class="sm-stock">Only 18 bottles left at this price</div><div class="s" style="margin-top:3px">From sellable Shopify inventory, refreshed every 10–15s. A 2-bottle order consumes 2.</div></div></div><div class="sm-note-lbl" style="padding:9px 12px 0">Variant B · genuine offer expiry</div><div class="hl" style="position:relative;"><span class="tagnum" style="top:6px;right:8px">②</span><div class="sm-scar" style="padding-top:4px"><div class="sm-expiry">$39 Summer price ends Sunday at 11:59 PM ET</div><div class="r" style="margin-top:5px"><b>Deadline persists across devices</b><span>02:14:39</span></div></div></div></div><div class="sm-hintbar" style="bottom:0px">① or ② — never both. Ship the one that matches the real operational constraint.</div></div></div></div>
+      <div class="note"><span class="dot">①</span><span>Two mutually exclusive variants. ① absolute stock from sellable inventory with no timer. ② an explicit dated offer expiry with no stock claim. Ship the one that matches the real operational constraint — never both.</span></div>
+    </div>
+  </div>
+  <div class="pagenav">
+    <button data-go="b1"><span>Previous</span>← T1 · Optional live face preview / virtual try-on</button>
+    <button class="nx" data-go="b3"><span>Next</span>T3 · Identity-led verified-buyer captions on imagery →</button>
+  </div>
+  </div>
+</div></div></div></section>
+
+<!-- ==================== T3 ==================== -->
+<section class="page" id="page-b3"><div class="test"><div class="wrap"><div class="test-grid">
+  <div class="test-info">
+    <div class="thead"><span class="hid">T3</span><span class="lnk"></span><span class="pgbadge pgbadge--pdp">PDP</span><span class="lnk"></span><span class="stbadge">P1</span><span class="lnk"></span><span class="stbadge">Low–Medium effort</span></div>
+    <h2>Add identity-led verified-buyer captions to customer imagery</h2>
+    <p class="tsub">Defending an image with “Real Photo” or “No AI” invites the doubt it tries to answer. Naming the person and linking the result to a verified order is the natural signal.</p>
+    <dl class="mlist">
+      <div><dt>Primary KPI</dt><dd>Mobile PDP→ATC</dd></div>
+      <div><dt>Secondary</dt><dd>Revenue / PDP visitor · gallery engagement · caption and full-review interaction · purchase CVR</dd></div>
+      <div><dt>Guardrails</dt><dd>Mobile bounce rate · page performance · trust-related support complaints</dd></div>
+      <div><dt>Targeting</dt><dd>Mobile PDP — /products/ccf2</dd></div>
+      <div><dt>Segment</dt><dd>Skeptical first-time mobile visitors, especially Meta/advertorial traffic</dd></div>
+      <div><dt>Tool</dt><dd>Experiment platform</dd></div>
+      <div><dt>Evidence</dt><dd>Usability test — the participant described some imagery as synthetic and reported a “this might be a scam” reaction. Survey — “before and after on real skin” was the strongest ad element (4,092 selections); “did not look like the ads” tied as the leading reason in the small disappointed-customer subgroup.</dd></div>
+      <div><dt>Prerequisites</dt><dd>Audit identity, consent, source and purchase status for every on-skin image in the test. Freeze the qualifying image set first. Any image without documented identity, consent and purchase status stays unbadged or is removed. Control and variant must use the same approved set. Priority is conditional on that verification.</dd></div>
+      <div><dt>Brief ref</dt><dd>Test 8 in the research brief · T4 in the extended roadmap</dd></div>
+      <div><dt>A/B test ID</dt><dd class="tid-ref">MC_PDP_VERIFIED_BUYER_CAPTIONS_SMOOCHE · generated id MC_PDP_IDENTITYLEDCAPTIONS</dd></div>
+    </dl>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>Some customer imagery reads as synthetic, and that perception spills onto the whole offer. Directly defending an image with “Real Photo” or “No AI” can introduce or amplify the concern rather than resolve it.</p></div>
+      <div class="box"><h4>Solution</h4><p>Add one compact identity-led caption to qualifying customer images — for example “Karen, 49 · Verified Purchase”. Use the approved first name or first name plus last initial, age with explicit permission and documented accuracy, and “Verified Purchase” only when the image links to a genuine order in the source system. A tap may open the full review with skin concern, supported tone/undertone and specific result. Position the caption away from the face and visible skin texture. No defensive authenticity language. Images, gallery order, crop, copy and offer stay unchanged.</p></div>
+    </div>
+    <div class="hyp">
+      <span class="hyp-lbl">Hypothesis</span>
+      <p class="hline"><b>IF</b> we identify people in customer imagery by approved name, age and verified-purchase status,</p>
+      <p class="hline"><b>THEN</b> mobile PDP ATC and revenue per PDP visitor will increase,</p>
+      <p class="hline"><b>BECAUSE</b> shoppers will perceive the result as attributable to a specific customer rather than anonymous or overly manufactured marketing creative.</p>
+    </div>
+  </div>
+
+  <div class="test-frames"><div class="compare">
+    <div class="col">
+      <div class="col-h"><span class="state before">Before</span><span class="lab">uncaptioned customer imagery</span></div>
+<div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen sm"><div class="anno">zoomed · gallery, uncaptioned</div><div class="sm-zoom" style="width:61.7284%;transform:scale(1.62)"><div class="sm-gal"><div class="ph face"><span class="sm-face"><i class="shoulders"></i><i class="hair"></i><i class="head"></i></span></div><span class="sm-ovbadge korea">#1 Foundation<br>in South Korea</span><span class="sm-ovbadge sold">1m+<br>Sold</span><div class="sm-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="sm-thumbs"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div><div class="sm-bb"><div class="sm-korea">🇰🇷 The #1 foundation in Korea</div><div class="sm-social"><span class="av"><i></i><i></i><i></i></span>Lisa ✓ and 1M+ others purchased</div><div class="sm-rate"><span class="st">★★★★★</span>4.8/5 (351,837 reviews)</div><h3 class="sm-h1">Reverse-aging Adaptive Foundation</h3><div class="sm-prow"><span class="sm-was">$59 USD</span><span class="sm-now">$39 USD</span><span class="sm-tag">Bestseller</span></div><div class="sm-chips"><div class="sm-chip"><i></i>Adapts to your skin tone</div><div class="sm-chip"><i></i>Hides imperfections</div><div class="sm-chip"><i></i>Natural look for 16+ hours</div><div class="sm-chip"><i></i>With SPF 15</div></div><p class="sm-desc">Created with Korean beauty innovation, and designed for 50+. It softens wrinkles, disguise age spots, and revive tired-looking skin… then finishes with a perfect, self-adjusting shade match.</p></div></div><div class="sm-hintbar warn" style="bottom:0px">At full size this reads as an anonymous stock image. Nothing ties the face to a person or a purchase — which is exactly what triggered the “this might be a scam” reaction.</div></div></div></div>
+      <div class="note"><span class="dot">①</span><span>The gallery image carries no identity. The usability participant read imagery like this as synthetic and reported a “this might be a scam” reaction.</span></div>
+    </div>
+    <div class="col">
+      <div class="col-h"><span class="state after">After</span><span class="lab">named, verified captions</span></div>
+<div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen sm"><div class="anno">zoomed · identity-led caption</div><div class="sm-zoom" style="width:61.7284%;transform:scale(1.62)"><div class="sm-gal"><div class="ph face"><span class="sm-face"><i class="shoulders"></i><i class="hair"></i><i class="head"></i></span></div><span class="sm-ovbadge korea">#1 Foundation<br>in South Korea</span><span class="sm-ovbadge sold">1m+<br>Sold</span><span class="tagnum" style="top:auto;bottom:26px;left:8px">①</span><span class="sm-cap up hl tap" tabindex="0" role="button" data-opens="ov-b8">Karen, 49 <span class="vp">· Verified Purchase</span></span><div class="sm-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="sm-thumbs"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div><div class="sm-bb"><div class="sm-korea">🇰🇷 The #1 foundation in Korea</div><div class="sm-social"><span class="av"><i></i><i></i><i></i></span>Lisa ✓ and 1M+ others purchased</div><div class="sm-rate"><span class="st">★★★★★</span>4.8/5 (351,837 reviews)</div><h3 class="sm-h1">Reverse-aging Adaptive Foundation</h3><div class="sm-prow"><span class="sm-was">$59 USD</span><span class="sm-now">$39 USD</span><span class="sm-tag">Bestseller</span></div><div class="sm-chips"><div class="sm-chip"><i></i>Adapts to your skin tone</div><div class="sm-chip"><i></i>Hides imperfections</div><div class="sm-chip"><i></i>Natural look for 16+ hours</div><div class="sm-chip"><i></i>With SPF 15</div></div><p class="sm-desc">Created with Korean beauty innovation, and designed for 50+. It softens wrinkles, disguise age spots, and revive tired-looking skin… then finishes with a perfect, self-adjusting shade match.</p></div></div><div class="overlay" id="ov-b8" style="align-items:center;padding:12px"><div class="sm-sheet"><div class="sh"><b>Karen, 49 · Verified Purchase</b><span class="x" tabindex="0" role="button" data-close>✕</span></div><p>Light skin, neutral undertone. Concern: age spots across the cheekbones. “It evened out my tone without sitting in my lines.” Order verified in Shopify; name and age used with written permission.</p><div class="sm-cta tap" tabindex="0" role="button" data-close>Close</div></div></div><div class="sm-hintbar" style="bottom:0px">① One caption, same image and crop — the name and verified-purchase link are the entire change. Tap it for the linked review.</div></div></div></div>
+      <div class="note"><span class="dot">①</span><span>The identical image, crop and order, with one compact caption naming the person and tying the result to a verified order — placed clear of the face and visible skin texture. Tap it for the linked review.</span></div>
+    </div>
+  </div>
+  <div class="pagenav">
+    <button data-go="b2"><span>Previous</span>← T2 · One credible scarcity mechanism</button>
+    <button class="nx" data-go="b4"><span>Next</span>T4 · “Is This Product Right for Me?” below the ATC →</button>
+  </div>
+  </div>
+</div></div></div></section>
+
+<!-- ==================== T4 ==================== -->
+<section class="page" id="page-b4"><div class="test"><div class="wrap"><div class="test-grid">
+  <div class="test-info">
+    <div class="thead"><span class="hid">T4</span><span class="lnk"></span><span class="pgbadge pgbadge--pdp">PDP</span><span class="lnk"></span><span class="stbadge">P1</span><span class="lnk"></span><span class="stbadge">Low–Medium effort</span></div>
+    <h2>Add an “Is This Product Right for Me?” section below the ATC</h2>
+    <p class="tsub">Fit, tone guidance, application advice and risk reversal all exist — spread across a long mobile page. At the moment of decision the shopper still has to work out whether it suits her, and what result is realistic.</p>
+    <dl class="mlist">
+      <div><dt>Primary KPI</dt><dd>Refund-adjusted revenue or contribution profit / mobile PDP visitor, read through the return window</dd></div>
+      <div><dt>Secondary</dt><dd>Purchase CVR · mobile PDP→ATC · section engagement · application-guide clicks</dd></div>
+      <div><dt>Guardrails</dt><dd>Shade-, coverage- and expectation-related returns, refunds and support contacts · page length and performance</dd></div>
+      <div><dt>Targeting</dt><dd>Mobile PDP — /products/ccf2</dd></div>
+      <div><dt>Segment</dt><dd>First-time mobile visitors, especially mature and skeptical shoppers</dd></div>
+      <div><dt>Tool</dt><dd>Experiment platform</dd></div>
+      <div><dt>Evidence</dt><dd>Survey and usability findings — unclear expectations create hesitation before purchase and disappointment after it, particularly where advertising may read as a promise to erase wrinkles or every shade-fit limitation.</dd></div>
+      <div><dt>Prerequisites</dt><dd>Resolve the supported-tone contradiction and the guarantee-policy conflict before launch. Judge on intent-to-treat, not section viewers — viewing the module is post-assignment behaviour. Do not run concurrently with T7B or T1.</dd></div>
+      <div><dt>Brief ref</dt><dd>Test 11 in the research brief · T5 in the extended roadmap</dd></div>
+      <div><dt>A/B test ID</dt><dd class="tid-ref">MC_PDP_IS_THIS_RIGHT_FOR_ME_SMOOCHE · generated id MC_PDP_SUITABILITYBELOWATC</dd></div>
+    </dl>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>The PDP contains benefits, tone guidance, application advice and risk reversal, but the answers are distributed across a long mobile page. At the purchase decision, shoppers still have to decide whether the product fits their skin goals and what result is realistic.</p></div>
+      <div class="box"><h4>Solution</h4><p>One concise section immediately below the primary ATC and purchase reassurance, titled “Is This Product Right for Me?”, structured around self-selection. “It may be right for you if you want”: a more even, radiant, younger-looking appearance without a heavy mask-like finish; natural, buildable coverage that softens visible redness and imperfections; a simpler shade-selection experience within the verified supported range; a skin-like finish designed for mature-skin preparation and application. “Know what to expect”: the verified coverage level, finish, adaptation time, wear expectation and supported tone range; a clear statement that makeup softens the appearance of uneven tone and fine lines but will not erase wrinkles or natural texture; a link to the mature-skin preparation and application guide; and the policy-accurate guarantee with a route to full terms. Key points visible and concise on mobile, supporting detail in progressively disclosed rows.</p></div>
+    </div>
+    <div class="hyp">
+      <span class="hyp-lbl">Hypothesis</span>
+      <p class="hline"><b>IF</b> we place a concise suitability and realistic-expectations section directly below the ATC,</p>
+      <p class="hline"><b>THEN</b> refund-adjusted revenue per PDP visitor and purchase CVR will increase,</p>
+      <p class="hline"><b>BECAUSE</b> skeptical shoppers can quickly confirm the product fits their goals, understand its limits, and buy with more accurate expectations.</p>
+    </div>
+  </div>
+
+  <div class="test-frames"><div class="compare">
+    <div class="col">
+      <div class="col-h"><span class="state before">Before</span><span class="lab">fit answers scattered down the page</span></div>
+<div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen sm"><div class="anno">immediately below Add to Cart</div><div class="sm-bb" style="padding-top:12px"><div class="sm-cta ">Add to Cart</div><div class="sm-ship"><span class="ok">Shipped today</span><span>🇹🇷 Free shipping to <u>TR</u></span></div></div><div class="sm-scar"><div class="h">Selling out fast</div><div class="s">Due to high demand, limited quantities available</div><div class="sm-bar"><i style="width:89%"></i></div><div class="r"><b>89% sold</b><span>Ends in 10:04:39</span></div></div><div class="sm-guar"><div class="h"><i></i>30-day money-back guarantee</div><p>Try it worry-free. If our skin-adapting foundation doesn’t blend seamlessly with your tone, you’ll get your money back*</p></div><div class="sm-acc"><div class="q"><span>What makes it different?</span><span class="x cx">+</span></div><div class="q"><span>Does it work on my skin?</span><span class="x cx">+</span></div><div class="q"><span>How do I use it?</span><span class="x cx">+</span></div><div class="q"><span>How does the money back guarantee work?</span><span class="x cx">+</span></div><div class="q"><span>Ingredients</span><span class="x cx">+</span></div><div class="q"><span>Shipping and returns</span><span class="x cx">+</span></div></div><div class="sm-sec"><div class="sm-h2">Loved by <span class="ell">300.000+</span></div></div><div class="sm-revs"><div class="sm-rev"><div class="im"></div><div class="bd"><div class="nm">Margaret, 61<span class="st">★★★★★</span></div><div class="vp">✓ Verified Purchase</div><div class="tx">“I honestly thought my foundation days were over. At 61, everything…</div><div class="more">Read More</div></div></div><div class="sm-rev"><div class="im"></div><div class="bd"><div class="nm">Jennifer, 58<span class="st">★★★★★</span></div><div class="vp">✓ Verified Purchase</div><div class="tx">“In 25 years, I’ve spent thousands on foundation. High-end…</div><div class="more">Read More</div></div></div><div class="sm-rev peek"><div class="im"></div></div></div><div class="sm-sec"><div class="sm-h2">Real results</div></div><div class="sm-stats"><div class="sm-stat"><b>97%</b><span>Said it instantly matched their skin tone</span><em>Based on an eight-week independent customer panel</em></div><div class="sm-stat"><b>98%</b><span>Said their blemishes became invisible</span><em>Based on an eight-week independent customer panel</em></div><div class="sm-stat"><b>95%</b><span>Loved that it didn’t feel heavy</span><em>Based on an eight-week independent customer panel</em></div></div><div class="sm-hintbar warn" style="bottom:0px">Fit, tone range, application and the guarantee are all further down, spread across six text-only accordion rows — nothing shows what the result actually looks like.</div></div></div></div>
+      <div class="note"><span class="dot">①</span><span>The area immediately below Add to Cart as it is today. Fit, tone range, application advice and the guarantee are all further down, spread across six separate accordion rows.</span></div>
+    </div>
+    <div class="col">
+      <div class="col-h"><span class="state after">After</span><span class="lab">suitability block under the CTA</span></div>
+<div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen sm"><div class="anno">immediately below Add to Cart</div><div class="sm-bb" style="padding-top:12px"><div class="sm-cta ">Add to Cart</div><div class="sm-ship"><span class="ok">Shipped today</span><span>🇹🇷 Free shipping to <u>TR</u></span></div><div class="hl" style="position:relative;"><span class="tagnum" style="top:56px;right:8px">①</span><div style="margin-top:10px"><div class="sm-h2" style="text-align:left;font-size:11px">Is This Product Right for Me?</div><div class="sm-note-lbl">It may be right for you if you want</div><div class="sm-fitrow"><span class="sm-ft face"></span><span class="tx"><b>An even, radiant look</b>Younger-looking, without a heavy mask-like finish</span></div><div class="sm-fitrow"><span class="sm-ft cover"></span><span class="tx"><b>Buildable coverage</b>Softens the visible look of redness and imperfections</span></div><div class="sm-fitrow"><span class="sm-ft tone"></span><span class="tx"><b>One shade, verified range</b>Simpler shade selection within fair-to-tan</span></div><div class="sm-fitrow"><span class="sm-ft apply"></span><span class="tx"><b>Built for mature skin</b>Skin-like finish designed for mature-skin preparation</span></div></div></div></div><div class="sm-acc acc"><div class="q open" tabindex="0" role="button"><span>Know what to expect</span><span class="x cx">−</span></div><div class="a">Medium buildable coverage, natural finish, adapts within seconds, wears 16+ hours, verified for fair to tan tones. Makeup softens the appearance of uneven tone and fine lines — it will not erase wrinkles or natural texture.</div><div class="q" tabindex="0" role="button"><span>Mature-skin preparation and application guide</span><span class="x cx">+</span></div><div class="a" style="display:none">Four steps, under two minutes.</div><div class="q" tabindex="0" role="button"><span>30-day money-back guarantee and full terms</span><span class="x cx">+</span></div><div class="a" style="display:none">Policy-accurate wording, one tap to terms.</div></div><div class="sm-sec"><div class="sm-h2">Loved by <span class="ell">300.000+</span></div></div><div class="sm-revs"><div class="sm-rev"><div class="im"></div><div class="bd"><div class="nm">Margaret, 61<span class="st">★★★★★</span></div><div class="vp">✓ Verified Purchase</div><div class="tx">“I honestly thought my foundation days were over. At 61, everything…</div><div class="more">Read More</div></div></div><div class="sm-rev"><div class="im"></div><div class="bd"><div class="nm">Jennifer, 58<span class="st">★★★★★</span></div><div class="vp">✓ Verified Purchase</div><div class="tx">“In 25 years, I’ve spent thousands on foundation. High-end…</div><div class="more">Read More</div></div></div><div class="sm-rev peek"><div class="im"></div></div></div><div class="sm-hintbar" style="bottom:0px">① Every pointer carries its own image, so the claim is shown rather than asserted. Detail stays in progressive rows below — they are tappable.</div></div></div></div>
+      <div class="note"><span class="dot">①</span><span>A concise suitability block directly under the CTA: a short “right for you if” list, then realistic expectations, the application guide and the policy-accurate guarantee in progressively disclosed rows. Rows are tappable.</span></div>
+    </div>
+  </div>
+  <div class="pagenav">
+    <button data-go="b3"><span>Previous</span>← T3 · Identity-led verified-buyer captions on imagery</button>
+    <button class="nx" data-go="b5"><span>Next</span>T5 · Mature-skin before/after as the first gallery asset →</button>
+  </div>
+  </div>
+</div></div></div></section>
+
+<!-- ==================== T5 ==================== -->
+<section class="page" id="page-b5"><div class="test"><div class="wrap"><div class="test-grid">
+  <div class="test-info">
+    <div class="thead"><span class="hid">T5</span><span class="lnk"></span><span class="pgbadge pgbadge--pdp">PDP</span><span class="lnk"></span><span class="stbadge">P1</span><span class="lnk"></span><span class="stbadge">Low–Medium effort</span></div>
+    <h2>Make a mature-skin before/after the first gallery asset</h2>
+    <p class="tsub">The first gallery asset is a product packshot. The mature-skin before/after — the single strongest reported ad element — appears much later. Continue the story that earned the click.</p>
+    <dl class="mlist">
+      <div><dt>Primary KPI</dt><dd>Mobile PDP→ATC</dd></div>
+      <div><dt>Secondary</dt><dd>Revenue / PDP visitor · first-slide engagement · gallery swipes</dd></div>
+      <div><dt>Guardrails</dt><dd>Mobile bounce rate</dd></div>
+      <div><dt>Targeting</dt><dd>Mobile PDP — /products/ccf2</dd></div>
+      <div><dt>Segment</dt><dd>Meta / advertorial mobile visitors</dd></div>
+      <div><dt>Tool</dt><dd>Experiment platform</dd></div>
+      <div><dt>Evidence</dt><dd>Survey — “before and after on real skin” was the strongest reported ad element with 4,092 selections. Live audit — first slide is currently a packshot.</dd></div>
+      <div><dt>Prerequisites</dt><dd>Controlled shoot with identical lighting, angle, expression, framing and white balance; visible skin texture, no retouching that reads as AI-generated. Do not run concurrently with the gallery-reduction test (extended edition only), T7 or T3, which also change visual proof.</dd></div>
+      <div><dt>Brief ref</dt><dd>Test 2 in the research brief · T7 in the extended roadmap</dd></div>
+      <div><dt>A/B test ID</dt><dd class="tid-ref">MC_PDP_GALLERY_BEFOREAFTER_FIRST_SLIDE_SMOOCHE · generated id MC_PDP_BEFOREAFTERFIRST</dd></div>
+    </dl>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>The first gallery asset is currently a product packshot. A mature-skin before/after appears later, even though survey respondents identified real-skin before/afters as the strongest ad element.</p></div>
+      <div class="box"><h4>Solution</h4><p>Use a controlled mature-skin before/after as the first slide and keep the product packshot second. Identical lighting, angle, expression, framing and white balance across both frames, with visible skin texture preserved.</p></div>
+    </div>
+    <div class="hyp">
+      <span class="hyp-lbl">Hypothesis</span>
+      <p class="hline"><b>IF</b> the first gallery asset shows a credible mature-skin result,</p>
+      <p class="hline"><b>THEN</b> mobile PDP ATC will increase,</p>
+      <p class="hline"><b>BECAUSE</b> the page will immediately continue the visual transformation story that motivated the ad click.</p>
+    </div>
+  </div>
+
+  <div class="test-frames"><div class="compare">
+    <div class="col">
+      <div class="col-h"><span class="state before">Before</span><span class="lab">packshot first</span></div>
+<div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen sm"><div class="anno">gallery · slide 1 of 15+</div><div class="sm-ann">Summer Sale: <b>60% OFF + FREE Mystery Gift</b></div><div class="sm-hd"><span class="ic">≡</span><span class="wm">SMOOCHE</span><span class="ic">○ ⬡</span></div><div class="sm-gal"><div class="ph pack"><span class="sm-bottle"></span><span class="sm-lid"></span></div><span class="sm-ovbadge korea">#1 Foundation<br>in South Korea</span><span class="sm-ovbadge sold">1m+<br>Sold</span><span class="sm-clin"><b>Clinicians’ Choice</b>259 clinicians share this on FrontrowMD</span><div class="sm-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="sm-thumbs"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="sm-bb"><div class="sm-korea">🇰🇷 The #1 foundation in Korea</div><div class="sm-social"><span class="av"><i></i><i></i><i></i></span>Lisa ✓ and 1M+ others purchased</div><div class="sm-rate"><span class="st">★★★★★</span>4.8/5 (351,837 reviews)</div><h3 class="sm-h1">Reverse-aging Adaptive Foundation</h3><div class="sm-prow"><span class="sm-was">$59 USD</span><span class="sm-now">$39 USD</span><span class="sm-tag">Bestseller</span></div><div class="sm-chips"><div class="sm-chip"><i></i>Adapts to your skin tone</div><div class="sm-chip"><i></i>Hides imperfections</div><div class="sm-chip"><i></i>Natural look for 16+ hours</div><div class="sm-chip"><i></i>With SPF 15</div></div><p class="sm-desc">Created with Korean beauty innovation, and designed for 50+. It softens wrinkles, disguise age spots, and revive tired-looking skin… then finishes with a perfect, self-adjusting shade match.</p><div class="sm-opts"><div class="sm-opt sel"><div class="top"><span class="rad"></span><span class="nm">1 bottle<span class="sb">Regular price</span></span><span class="pr"><b>$39</b><s>$59</s></span></div></div><div class="sm-opt"><div class="top"><span class="rad"></span><span class="nm">2 bottles <span class="sm-tag" style="font-size:5.5px;padding:2px 5px">Save $69</span><span class="sb">Temporary deal</span></span><span class="pr"><b>$49</b><s>$118</s></span></div><div class="sm-gift"><i></i>+ FREE Smooche Blender<s>$19</s></div><div class="sm-gift"><i></i>+ FREE Mystery Gift<s>$15</s></div><div class="sm-gift"><i></i>+ FREE Shipping</div></div></div><div class="sm-cta ">Add to Cart</div><div class="sm-ship"><span class="ok">Shipped today</span><span>🇹🇷 Free shipping to <u>TR</u></span></div></div><div class="sm-hintbar warn" style="bottom:0px">Slide 1 is packaging. The mature-skin before/after sits four swipes deeper.</div></div></div></div>
+      <div class="note"><span class="dot">①</span><span>Slide 1 is packaging on grey. The dot row shows 15+ assets and the mature-skin before/after sits four swipes deeper.</span></div>
+    </div>
+    <div class="col">
+      <div class="col-h"><span class="state after">After</span><span class="lab">before/after first</span></div>
+<div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen sm"><div class="anno">gallery · slide 1 of 15+</div><div class="sm-ann">Summer Sale: <b>60% OFF + FREE Mystery Gift</b></div><div class="sm-hd"><span class="ic">≡</span><span class="wm">SMOOCHE</span><span class="ic">○ ⬡</span></div><div class="hl" style="position:relative;"><span class="tagnum" style="top:100px;left:6px">①</span><div class="sm-gal"><div class="ph ba"><span class="sm-ba"><span><span class="sm-face"><i class="shoulders"></i><i class="hair"></i><i class="head"></i></span></span><span><span class="sm-face"><i class="shoulders"></i><i class="hair"></i><i class="head"></i></span></span></span><span class="sm-splitlbl"><span>Before</span><span>After</span></span></div><span class="sm-ovbadge korea">#1 Foundation<br>in South Korea</span><span class="sm-ovbadge sold">1m+<br>Sold</span><span class="sm-cap">Margaret, 61 · 4 weeks</span><div class="sm-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div><div class="sm-thumbs"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="sm-bb"><div class="sm-korea">🇰🇷 The #1 foundation in Korea</div><div class="sm-social"><span class="av"><i></i><i></i><i></i></span>Lisa ✓ and 1M+ others purchased</div><div class="sm-rate"><span class="st">★★★★★</span>4.8/5 (351,837 reviews)</div><h3 class="sm-h1">Reverse-aging Adaptive Foundation</h3><div class="sm-prow"><span class="sm-was">$59 USD</span><span class="sm-now">$39 USD</span><span class="sm-tag">Bestseller</span></div><div class="sm-chips"><div class="sm-chip"><i></i>Adapts to your skin tone</div><div class="sm-chip"><i></i>Hides imperfections</div><div class="sm-chip"><i></i>Natural look for 16+ hours</div><div class="sm-chip"><i></i>With SPF 15</div></div><p class="sm-desc">Created with Korean beauty innovation, and designed for 50+. It softens wrinkles, disguise age spots, and revive tired-looking skin… then finishes with a perfect, self-adjusting shade match.</p><div class="sm-opts"><div class="sm-opt sel"><div class="top"><span class="rad"></span><span class="nm">1 bottle<span class="sb">Regular price</span></span><span class="pr"><b>$39</b><s>$59</s></span></div></div><div class="sm-opt"><div class="top"><span class="rad"></span><span class="nm">2 bottles <span class="sm-tag" style="font-size:5.5px;padding:2px 5px">Save $69</span><span class="sb">Temporary deal</span></span><span class="pr"><b>$49</b><s>$118</s></span></div><div class="sm-gift"><i></i>+ FREE Smooche Blender<s>$19</s></div><div class="sm-gift"><i></i>+ FREE Mystery Gift<s>$15</s></div><div class="sm-gift"><i></i>+ FREE Shipping</div></div></div><div class="sm-cta ">Add to Cart</div><div class="sm-ship"><span class="ok">Shipped today</span><span>🇹🇷 Free shipping to <u>TR</u></span></div></div><div class="sm-hintbar" style="bottom:0px">① Controlled mature-skin before/after leads. Packshot moves to slide 2; nothing else changes.</div></div></div></div>
+      <div class="note"><span class="dot">①</span><span>The controlled mature-skin before/after leads, shot as a two-up with identical lighting and framing. The packshot moves to slide 2 and nothing else on the page changes.</span></div>
+    </div>
+  </div>
+  <div class="pagenav">
+    <button data-go="b4"><span>Previous</span>← T4 · “Is This Product Right for Me?” below the ATC</button>
+    <button class="nx" data-go="b6"><span>Next</span>T6 · Sticky card becomes a direct Add to Cart bar →</button>
+  </div>
+  </div>
+</div></div></div></section>
+
+<!-- ==================== T6 ==================== -->
+<section class="page" id="page-b6"><div class="test"><div class="wrap"><div class="test-grid">
+  <div class="test-info">
+    <div class="thead"><span class="hid">T6</span><span class="lnk"></span><span class="pgbadge pgbadge--pdp">PDP</span><span class="lnk"></span><span class="stbadge">P1</span><span class="lnk"></span><span class="stbadge">Medium effort</span></div>
+    <h2>Turn the existing sticky card into a direct Add to Cart bar</h2>
+    <p class="tsub">The sticky mobile card already exists, but “Shop Now” scrolls the visitor back to the offer instead of adding the selected pack — and it eats a large share of the viewport doing it.</p>
+    <dl class="mlist">
+      <div><dt>Primary KPI</dt><dd>Mobile PDP→ATC</dd></div>
+      <div><dt>Secondary</dt><dd>Purchase CVR · revenue / PDP visitor · sticky-bar interaction</dd></div>
+      <div><dt>Guardrails</dt><dd>Cart removals · incorrect-pack additions</dd></div>
+      <div><dt>Targeting</dt><dd>Mobile PDP — /products/ccf2</dd></div>
+      <div><dt>Segment</dt><dd>Mobile PDP scrollers</dd></div>
+      <div><dt>Tool</dt><dd>Experiment platform + theme change</dd></div>
+      <div><dt>Evidence</dt><dd>Live audit — sticky CTA reads “Shop Now” and anchors back to the offer; selecting two bottles shows $49 on the bundle card while the main and sticky price stay at $39.</dd></div>
+      <div><dt>Prerequisites</dt><dd>Mandatory pre-launch QA: synchronise the selected pack, quantity and price across the main buy box, sticky bar, cart payload and cart state. Price correctness is prerequisite QA, never part of the variant.</dd></div>
+      <div><dt>Brief ref</dt><dd>Test 3 in the research brief · T8 in the extended roadmap</dd></div>
+      <div><dt>A/B test ID</dt><dd class="tid-ref">MC_PDP_STICKY_DIRECT_ATC_SMOOCHE · generated id MC_PDP_STICKYDIRECTATC</dd></div>
+    </dl>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>The sticky mobile product card already exists, but “Shop Now” scrolls the visitor back to the main offer. It does not add the selected pack, and it occupies a relatively large portion of the mobile viewport.</p></div>
+      <div class="box"><h4>Solution</h4><p>Show the selected pack and synchronised total price in the bar, replace “Shop Now” with a direct Add to Cart action, add a compact “Change pack” control if needed, and reduce the bar height so it stops covering reviews and lower-page content. Add the pack without returning the shopper to the buy box.</p></div>
+    </div>
+    <div class="hyp">
+      <span class="hyp-lbl">Hypothesis</span>
+      <p class="hline"><b>IF</b> the sticky bar directly adds the selected offer to cart,</p>
+      <p class="hline"><b>THEN</b> mobile PDP ATC will increase,</p>
+      <p class="hline"><b>BECAUSE</b> purchase-ready visitors can act immediately without repeating navigation.</p>
+    </div>
+  </div>
+
+  <div class="test-frames"><div class="compare">
+    <div class="col">
+      <div class="col-h"><span class="state before">Before</span><span class="lab">“Shop Now” anchor</span></div>
+<div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen sm"><div class="anno">2 bottles selected · mid-page</div><div class="sm-ann">Summer Sale: <b>60% OFF + FREE Mystery Gift</b></div><div class="sm-hd"><span class="ic">≡</span><span class="wm">SMOOCHE</span><span class="ic">○ ⬡</span></div><div class="sm-gal"><div class="ph pack"><span class="sm-bottle"></span><span class="sm-lid"></span></div><span class="sm-ovbadge korea">#1 Foundation<br>in South Korea</span><span class="sm-ovbadge sold">1m+<br>Sold</span><div class="sm-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="sm-bb"><h3 class="sm-h1">Reverse-aging Adaptive Foundation</h3><div class="sm-prow"><span class="sm-was">$59 USD</span><span class="sm-now">$39 USD</span><span class="sm-tag">Bestseller</span></div><div class="sm-opts"><div class="sm-opt"><div class="top"><span class="rad"></span><span class="nm">1 bottle<span class="sb">Regular price</span></span><span class="pr"><b>$39</b><s>$59</s></span></div></div><div class="sm-opt sel"><div class="top"><span class="rad"></span><span class="nm">2 bottles <span class="sm-tag" style="font-size:5.5px;padding:2px 5px">Save $69</span><span class="sb">Temporary deal</span></span><span class="pr"><b>$49</b><s>$118</s></span></div><div class="sm-gift"><i></i>+ FREE Smooche Blender<s>$19</s></div><div class="sm-gift"><i></i>+ FREE Mystery Gift<s>$15</s></div><div class="sm-gift"><i></i>+ FREE Shipping</div></div></div><div class="sm-cta ">Add to Cart</div><div class="sm-ship"><span class="ok">Shipped today</span><span>🇹🇷 Free shipping to <u>TR</u></span></div></div><div class="sm-scar"><div class="h">Selling out fast</div><div class="s">Due to high demand, limited quantities available</div><div class="sm-bar"><i style="width:89%"></i></div><div class="r"><b>89% sold</b><span>Ends in 10:04:39</span></div></div><div class="sm-guar"><div class="h"><i></i>30-day money-back guarantee</div><p>Try it worry-free. If our skin-adapting foundation doesn’t blend seamlessly with your tone, you’ll get your money back*</p></div><span class="tagnum" style="bottom:52px;left:8px">①</span><div class="sm-sticky tall"><span class="th"></span><span class="info"><span class="nm">Reverse-aging Adaptive Foundation</span><span class="pr">$39 <s>$59</s></span></span><span class="bt">Shop Now</span></div><div class="sm-hintbar warn" style="bottom:47px">“Shop Now” scrolls back to the offer. The bundle card says $49 while the bar still says $39.</div></div></div></div>
+      <div class="note"><span class="dot">①</span><span>The tall sticky card is pinned with a “Shop Now” label that anchors back to the offer. Two bottles are selected, so the bundle card reads $49 while the bar still reads $39.</span></div>
+    </div>
+    <div class="col">
+      <div class="col-h"><span class="state after">After</span><span class="lab">direct add to cart</span></div>
+<div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen sm"><div class="anno">2 bottles selected · mid-page</div><div class="sm-ann">Summer Sale: <b>60% OFF + FREE Mystery Gift</b></div><div class="sm-hd"><span class="ic">≡</span><span class="wm">SMOOCHE</span><span class="ic">○ ⬡</span></div><div class="sm-gal"><div class="ph pack"><span class="sm-bottle"></span><span class="sm-lid"></span></div><span class="sm-ovbadge korea">#1 Foundation<br>in South Korea</span><span class="sm-ovbadge sold">1m+<br>Sold</span><div class="sm-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><div class="sm-bb"><h3 class="sm-h1">Reverse-aging Adaptive Foundation</h3><div class="sm-prow"><span class="sm-was">$59 USD</span><span class="sm-now">$39 USD</span><span class="sm-tag">Bestseller</span></div><div class="sm-opts"><div class="sm-opt"><div class="top"><span class="rad"></span><span class="nm">1 bottle<span class="sb">Regular price</span></span><span class="pr"><b>$39</b><s>$59</s></span></div></div><div class="sm-opt sel"><div class="top"><span class="rad"></span><span class="nm">2 bottles <span class="sm-tag" style="font-size:5.5px;padding:2px 5px">Save $69</span><span class="sb">Temporary deal</span></span><span class="pr"><b>$49</b><s>$118</s></span></div><div class="sm-gift"><i></i>+ FREE Smooche Blender<s>$19</s></div><div class="sm-gift"><i></i>+ FREE Mystery Gift<s>$15</s></div><div class="sm-gift"><i></i>+ FREE Shipping</div></div></div><div class="sm-cta ">Add to Cart</div><div class="sm-ship"><span class="ok">Shipped today</span><span>🇹🇷 Free shipping to <u>TR</u></span></div></div><div class="sm-scar"><div class="h">Selling out fast</div><div class="s">Due to high demand, limited quantities available</div><div class="sm-bar"><i style="width:89%"></i></div><div class="r"><b>89% sold</b><span>Ends in 10:04:39</span></div></div><div class="sm-guar"><div class="h"><i></i>30-day money-back guarantee</div><p>Try it worry-free. If our skin-adapting foundation doesn’t blend seamlessly with your tone, you’ll get your money back*</p></div><span class="tagnum" style="bottom:44px;left:8px">①</span><div class="sm-sticky"><span class="th"></span><span class="info"><span class="nm">2 bottles · $49</span><span class="chg">Change pack</span></span><span class="bt" class="bt tap" tabindex="0" role="button" data-add>Add to Cart</span></div><div class="sm-hintbar" style="bottom:41px">① Shorter bar, selected pack and synchronised total, adds in place. Price sync is prerequisite QA.</div></div></div></div>
+      <div class="note"><span class="dot">①</span><span>A shorter bar carries the selected pack, the synchronised total and a compact “Change pack” control. Add to Cart fires in place — tap it. Price synchronisation ships as prerequisite QA, not as part of this variant.</span></div>
+    </div>
+  </div>
+  <div class="pagenav">
+    <button data-go="b5"><span>Previous</span>← T5 · Mature-skin before/after as the first gallery asset</button>
+    <button class="nx" data-go="b7"><span>Next</span>T7 · Prove the shade match on real supported tones →</button>
+  </div>
+  </div>
+</div></div></div></section>
+
+<!-- ==================== T7 ==================== -->
+<section class="page" id="page-b7"><div class="test"><div class="wrap"><div class="test-grid">
+  <div class="test-info">
+    <div class="thead"><span class="hid">T7</span><span class="lnk"></span><span class="pgbadge pgbadge--pdp">PDP</span><span class="lnk"></span><span class="stbadge">P2</span><span class="lnk"></span><span class="stbadge">Medium effort</span></div>
+    <h2>Prove the shade match across real supported skin tones</h2>
+    <p class="tsub">The current tone spectrum is passive and abstract. It does not answer “what will this look like on someone with my tone and mature skin?” — and shoppers who have repeatedly bought the wrong shade will not infer fit from a colour strip.</p>
+    <dl class="mlist">
+      <div><dt>Primary KPI</dt><dd>Mobile PDP→ATC (intent-to-treat)</dd></div>
+      <div><dt>Secondary</dt><dd>Revenue / PDP visitor · mosaic interactions · purchase CVR · sticky-ATC use after module exposure</dd></div>
+      <div><dt>Guardrails</dt><dd>Shade-related returns, refunds and support contacts</dd></div>
+      <div><dt>Targeting</dt><dd>Mobile PDP — /products/ccf2</dd></div>
+      <div><dt>Segment</dt><dd>Shade-anxious mobile visitors</dd></div>
+      <div><dt>Tool</dt><dd>Experiment platform</dd></div>
+      <div><dt>Evidence</dt><dd>Wrong shade was a prior-foundation frustration for 34% of surveyed buyers. “Perfect match” was the second-strongest ad element with 2,725 selections. Shade match was valued by 46% of returning respondents.</dd></div>
+      <div><dt>Prerequisites</dt><dd>Resolve the “all skin tones” vs “fair-to-medium” contradiction and document one substantiated supported range before launch. Verify image provenance and licensing. Do not run concurrently with T5, the gallery-reduction test (extended edition only) or T3.</dd></div>
+      <div><dt>Brief ref</dt><dd>Test 5 in the research brief · T10 in the extended roadmap</dd></div>
+      <div><dt>A/B test ID</dt><dd class="tid-ref">MC_PDP_SHADE_PROOF_REAL_TONES_SMOOCHE · generated id MC_PDP_SHADEPROOFMOSAIC</dd></div>
+    </dl>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>The current tone spectrum is passive and abstract. Shoppers who have repeatedly bought the wrong shade need to see the formula on real people. “Suntan anxiety” was not directly measured, but the proof should visibly demonstrate that the finish blends into the wearer’s existing tone rather than making the face look artificially darker.</p></div>
+      <div class="box"><h4>Solution</h4><p>Replace the static spectrum in its current location with a compact two-column mosaic of four to six real mature users across the accurately supported tone range. Each tile: a real customer or permissioned model; before, application and finished-result evidence rather than a portrait alone; tone and undertone label; age and relevant skin concern where permitted; consistent lighting, angle and white balance with visible skin texture; and brief guidance on the expected finish. Heading: “See it adapt on real skin tones”.</p></div>
+      <div class="box"><h4>T7A — prove the content in its current location</h4><p>Swap the abstract spectrum for the real-user mosaic without moving it. Do not use “all skin tones”, “any skin colour” or tanning/seasonal-adaptation claims unless the product has been validated for them.</p></div>
+      <div class="box"><h4>Follow-up 5B — test the below-ATC placement</h4><p>If the mosaic wins, move the identical winning module directly below the primary ATC and risk-reversal line without changing its images, labels or copy. This isolates placement from content. Do not test new content and a new placement at the same time.</p></div>
+    </div>
+    <div class="hyp">
+      <span class="hyp-lbl">Hypothesis</span>
+      <p class="hline"><b>IF</b> shoppers can see controlled results on real mature users across Smooche’s verified supported tone range,</p>
+      <p class="hline"><b>THEN</b> mobile PDP ATC and refund-adjusted revenue will increase,</p>
+      <p class="hline"><b>BECAUSE</b> they can evaluate personal fit and confirm the formula blends with the wearer’s tone rather than relying on an abstract or universal claim.</p>
+    </div>
+  </div>
+
+  <div class="test-frames"><div class="compare">
+    <div class="col">
+      <div class="col-h"><span class="state before">Before</span><span class="lab">abstract tone spectrum</span></div>
+<div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen sm"><div class="anno">↓ scrolled · does it work on my skin?</div><div class="sm-sec"><div class="sm-h2">Does it work on my skin?</div></div><div class="sm-bb"><div class="sm-toneband"></div><div class="sm-tonelbl"><span>Fair</span><span>Light</span><span>Medium</span><span>Tan</span></div><p class="sm-desc">Suitable for all skin tones above and in between. One shade, endless confidence.</p></div><div class="sm-acc"><div class="q"><span>What makes it different?</span><span class="x cx">+</span></div><div class="q"><span>Does it work on my skin?</span><span class="x cx">+</span></div><div class="q"><span>How do I use it?</span><span class="x cx">+</span></div><div class="q"><span>Ingredients</span><span class="x cx">+</span></div></div><div class="sm-sec"><div class="sm-h2">Loved by <span class="ell">300.000+</span></div></div><div class="sm-revs"><div class="sm-rev"><div class="im"></div><div class="bd"><div class="nm">Margaret, 61<span class="st">★★★★★</span></div><div class="vp">✓ Verified Purchase</div><div class="tx">“I honestly thought my foundation days were over. At 61, everything…</div><div class="more">Read More</div></div></div><div class="sm-rev"><div class="im"></div><div class="bd"><div class="nm">Jennifer, 58<span class="st">★★★★★</span></div><div class="vp">✓ Verified Purchase</div><div class="tx">“In 25 years, I’ve spent thousands on foundation. High-end…</div><div class="more">Read More</div></div></div><div class="sm-rev peek"><div class="im"></div></div></div><div class="sm-sec"><div class="sm-h2">Real results</div></div><div class="sm-stats"><div class="sm-stat"><b>97%</b><span>Said it instantly matched their skin tone</span><em>Based on an eight-week independent customer panel</em></div><div class="sm-stat"><b>98%</b><span>Said their blemishes became invisible</span><em>Based on an eight-week independent customer panel</em></div><div class="sm-stat"><b>95%</b><span>Loved that it didn’t feel heavy</span><em>Based on an eight-week independent customer panel</em></div></div><div class="sm-hintbar warn" style="bottom:0px">An abstract strip. “All skin tones” here contradicts “fair to medium” elsewhere on the page.</div></div></div></div>
+      <div class="note"><span class="dot">①</span><span>The abstract tone strip in its current position, above the accordion that hides the rest of the answer. “Suitable for all skin tones” here contradicts “fair to medium” elsewhere on the page.</span></div>
+    </div>
+    <div class="col">
+      <div class="col-h"><span class="state after">After</span><span class="lab">real-user tone mosaic</span></div>
+<div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen sm"><div class="anno">↓ scrolled · same position, real proof</div><div class="sm-sec"><div class="sm-h2">See it adapt on <span class="mark">real skin tones</span></div></div><div class="sm-bb"><div class="hl" style="position:relative;"><span class="tagnum" style="top:4px;right:6px">①</span><div class="tap" tabindex="0" role="button" data-opens="ov-b5"><div class="sm-mosaic"><div class="sm-tile"><div class="ims"><i data-l="Before"></i><i data-l="Applying"></i><i data-l="Result"></i></div><div class="bd"><div class="nm">Margaret, 61</div><div class="tn">Fair · neutral undertone</div></div></div><div class="sm-tile"><div class="ims"><i data-l="Before"></i><i data-l="Applying"></i><i data-l="Result"></i></div><div class="bd"><div class="nm">Jennifer, 58</div><div class="tn">Light · warm undertone</div></div></div><div class="sm-tile"><div class="ims"><i data-l="Before"></i><i data-l="Applying"></i><i data-l="Result"></i></div><div class="bd"><div class="nm">Deborah, 63</div><div class="tn">Medium · olive undertone</div></div></div><div class="sm-tile"><div class="ims"><i data-l="Before"></i><i data-l="Applying"></i><i data-l="Result"></i></div><div class="bd"><div class="nm">Mia, 56</div><div class="tn">Tan · warm undertone</div></div></div></div></div></div><p class="sm-desc" style="margin-top:8px">Verified supported range: fair to tan. Expect a skin-like finish that blends into your own tone.</p></div><div class="sm-sec"><div class="sm-h2">Loved by <span class="ell">300.000+</span></div></div><div class="sm-revs"><div class="sm-rev"><div class="im"></div><div class="bd"><div class="nm">Margaret, 61<span class="st">★★★★★</span></div><div class="vp">✓ Verified Purchase</div><div class="tx">“I honestly thought my foundation days were over. At 61, everything…</div><div class="more">Read More</div></div></div><div class="sm-rev"><div class="im"></div><div class="bd"><div class="nm">Jennifer, 58<span class="st">★★★★★</span></div><div class="vp">✓ Verified Purchase</div><div class="tx">“In 25 years, I’ve spent thousands on foundation. High-end…</div><div class="more">Read More</div></div></div><div class="sm-rev peek"><div class="im"></div></div></div><div class="sm-sec"><div class="sm-h2">Real results</div></div><div class="sm-stats"><div class="sm-stat"><b>97%</b><span>Said it instantly matched their skin tone</span><em>Based on an eight-week independent customer panel</em></div><div class="sm-stat"><b>98%</b><span>Said their blemishes became invisible</span><em>Based on an eight-week independent customer panel</em></div><div class="sm-stat"><b>95%</b><span>Loved that it didn’t feel heavy</span><em>Based on an eight-week independent customer panel</em></div></div><div class="overlay" id="ov-b5" style="align-items:center;padding:12px"><div class="sm-sheet"><div class="sh"><b>Margaret, 61 · fair, neutral</b><span class="x" tabindex="0" role="button" data-close>✕</span></div><div class="sm-tile" style="border:0"><div class="ims" style="height:64px"><i data-l="Before"></i><i data-l="Applying"></i><i data-l="Result"></i></div></div><p style="margin-top:8px">Verified purchase. Concern: uneven tone and fine lines around the smile line. Finish photographed in daylight, no retouching. Your result varies with undertone and application.</p><div class="sm-cta tap" tabindex="0" role="button" data-close>Close</div></div></div><div class="sm-hintbar" style="bottom:0px">① Four real mature users, each with before → applying → result, tone and undertone labelled. Tap a tile.</div></div></div></div>
+      <div class="note"><span class="dot">①</span><span>Four real mature users in the same position, each tile carrying before → applying → result with tone and undertone labelled, under a substantiated range statement. Tap a tile for the full record.</span></div>
+    </div>
+  </div>
+  <div class="pagenav">
+    <button data-go="b6"><span>Previous</span>← T6 · Sticky card becomes a direct Add to Cart bar</button>
+    <button class="nx" data-go="ba"><span>Next</span>A · Optional collection-page subscription for returning buyers →</button>
+  </div>
+  </div>
+</div></div></div></section>
+
+<!-- ==================== A ==================== -->
+<section class="page" id="page-ba"><div class="test"><div class="wrap"><div class="test-grid">
+  <div class="test-info">
+    <div class="thead"><span class="hid">A</span><span class="lnk"></span><span class="pgbadge pgbadge--coll">Collection</span><span class="lnk"></span><span class="stbadge">P3 exploratory</span><span class="lnk"></span><span class="stbadge">High effort</span></div>
+    <h2>Offer an optional subscription to identified returning purchasers</h2>
+    <p class="tsub">Outside the core PDP roadmap: a separate page, a separate eligible audience and a long-term metric. It must not be blended with the PDP experiments.</p>
+    <dl class="mlist">
+      <div><dt>Primary KPI</dt><dd>60/90-day net contribution per eligible returning visitor, through at least the second billing</dd></div>
+      <div><dt>Secondary</dt><dd>Repeat-purchase CVR · subscription enrolment · AOV · second-shipment retention</dd></div>
+      <div><dt>Guardrails</dt><dd>One-time purchase cannibalisation · collection CVR · pre-second-shipment cancellations · refunds · chargebacks · support contacts · gross margin</dd></div>
+      <div><dt>Targeting</dt><dd>Relevant collection page / replenishment collection</dd></div>
+      <div><dt>Segment</dt><dd>Identified prior foundation purchasers approaching a validated depletion window</dd></div>
+      <div><dt>Tool</dt><dd>Subscription app + experiment platform + customer data</dd></div>
+      <div><dt>Evidence</dt><dd>Returning-customer satisfaction is strong in the survey sample while repeat purchasing is thin. Only ~6% of returning respondents came back because they ran out and restocked, and first-time buyers explicitly feared hidden subscriptions. Demand skews toward better bundles, larger sizes and refills.</dd></div>
+      <div><dt>Prerequisites</dt><dd>Do not target generic cookie-based returning browsers. Eligibility requires an identified prior foundation purchase, no active subscription, and elapsed time near an evidence-based depletion window. Confirm demand and consumption timing through order-gap analysis or a structured returning-customer survey before launch. Use eligible identified prior purchasers as the denominator and read net contribution through at least the second billing.</dd></div>
+      <div><dt>Brief ref</dt><dd>Adjacent Test A in the research brief · A in the extended roadmap</dd></div>
+      <div><dt>A/B test ID</dt><dd class="tid-ref">MC_COLL_OPTIONAL_SUBSCRIPTION_RETURNING_SMOOCHE · generated id MC_COLL_RETURNINGSUBSCRIPTION</dd></div>
+    </dl>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>Returning-customer satisfaction is strong while repeat purchasing is thin. A carefully targeted replenishment offer could make repeat purchasing easier for satisfied buyers, but the idea is not supported strongly enough for new visitors, who explicitly fear hidden subscriptions.</p></div>
+      <div class="box"><h4>Solution</h4><p>Add one clearly optional “Subscribe & Save” product card to the relevant collection page for eligible customers only. Keep one-time purchase visible and selected by default. Show the recurring price, discount, delivery cadence, next-charge timing and what is included before the customer clicks. Let the customer choose a cadence rather than forcing an interval. State “Skip, pause, or cancel” only when each action is operationally available and easy. Do not show the card to anonymous or new visitors in the first experiment.</p></div>
+      <div class="box"><h4>Interaction note</h4><p>If subscriptions become available, the purchase-reassurance test (extended edition only) must stay offer-specific: “This selected pack is a one-time purchase · no recurring charge.” It must not imply that Smooche never offers subscriptions elsewhere.</p></div>
+    </div>
+    <div class="hyp">
+      <span class="hyp-lbl">Hypothesis</span>
+      <p class="hline"><b>IF</b> identified past purchasers approaching depletion see a transparent, optional subscription product on the relevant collection page,</p>
+      <p class="hline"><b>THEN</b> 60/90-day net contribution per eligible returning visitor will increase,</p>
+      <p class="hline"><b>BECAUSE</b> satisfied customers gain a convenient, structured way to replenish without confusing first-time buyers or removing one-time purchase choice.</p>
+    </div>
+  </div>
+
+  <div class="test-frames"><div class="compare">
+    <div class="col">
+      <div class="col-h"><span class="state before">Before</span><span class="lab">one-time products only</span></div>
+<div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen sm"><div class="anno">collection · eligible returning customer</div><div class="sm-ann">Summer Sale: <b>60% OFF + FREE Mystery Gift</b></div><div class="sm-hd"><span class="ic">≡</span><span class="wm">SMOOCHE</span><span class="ic">○ ⬡</span></div><div class="sm-chero"><span class="t">Bestsellers</span></div><div class="sm-usp"><span class="u"><i></i>Proven results</span><span class="u"><i></i>100% natural</span><span class="u"><i></i>Free shipping</span></div><div class="sm-cbar"><span>Sort by ⌄</span><span>20 products</span></div><div class="sm-cgrid"><div class="sm-pc"><div class="im"><span class="sm-prod bottle"></span><span class="bdg">Bestseller</span><span class="aw"></span></div><div class="nm">Color Changing Foundation</div><div class="pr">$39 USD<s>$59 USD</s></div><div class="st">★★★★★</div></div><div class="sm-pc"><div class="im"><span class="sm-prod jar"></span><span class="bdg">Save 27%</span></div><div class="nm">Reverse-time Peptide Serum</div><div class="pr">$43 USD<s>$59 USD</s></div><div class="st">★★★★★</div></div><div class="sm-pc"><div class="im"><span class="sm-prod tube"></span><span class="bdg">Viral</span></div><div class="nm">Peel-off Lip Stain</div><div class="pr">$29 USD</div><div class="sm-sw"><i></i><i></i><i></i><i></i></div><div class="st">★★★★★</div></div><div class="sm-pc"><div class="im"><span class="sm-prod wand"></span><span class="bdg">1+1 Free</span></div><div class="nm">Extreme Lip Plumper</div><div class="pr">$39 USD<s>$49 USD</s></div><div class="sm-sw"><i></i><i></i></div><div class="st">★★★★★</div></div><div class="sm-pc"><div class="im"><span class="sm-prod wand"></span><span class="bdg">Sale</span></div><div class="nm">Eyebrow Growth Serum</div><div class="pr">$39 USD<s>$59 USD</s></div><div class="st">★★★★★</div></div><div class="sm-pc"><div class="im"><span class="sm-prod tube"></span><span class="bdg">Sale</span></div><div class="nm">2-in-1 Serum Mascara</div><div class="pr">$39 USD<s>$49 USD</s></div><div class="st">★★★★★</div></div></div><div class="sm-hintbar warn" style="bottom:0px">One-time purchase products only. Nothing makes replenishment easier for a satisfied buyer.</div></div></div></div>
+      <div class="note"><span class="dot">①</span><span>The current collection grid for an eligible returning customer — one-time purchase cards only, with nothing that makes replenishment easier for a satisfied buyer.</span></div>
+    </div>
+    <div class="col">
+      <div class="col-h"><span class="state after">After</span><span class="lab">optional subscribe & save card</span></div>
+<div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen sm"><div class="anno">collection · eligible returning customer</div><div class="sm-ann">Summer Sale: <b>60% OFF + FREE Mystery Gift</b></div><div class="sm-hd"><span class="ic">≡</span><span class="wm">SMOOCHE</span><span class="ic">○ ⬡</span></div><div class="sm-chero"><span class="t">Bestsellers</span></div><div class="sm-usp"><span class="u"><i></i>Proven results</span><span class="u"><i></i>100% natural</span><span class="u"><i></i>Free shipping</span></div><div class="sm-cbar"><span>Sort by ⌄</span><span>21 products</span></div><div class="sm-cgrid"><div class="sm-pc"><div class="im"><span class="sm-prod bottle"></span><span class="bdg">Bestseller</span><span class="aw"></span></div><div class="nm">Color Changing Foundation</div><div class="pr">$39 USD<s>$59 USD</s></div><div class="st">★★★★★</div></div><div class="hl" style="position:relative;"><span class="tagnum" style="top:4px;right:6px">①</span><div class="sm-pc sub"><div class="im"><span class="sm-prod bottle"></span><span class="bdg">Subscribe &amp; Save</span></div><div class="nm">Reverse-aging Adaptive Foundation</div><div class="pr">$33.15 / delivery <s>$39</s></div><div class="sm-cad"><div class="hd">Choose your cadence</div><div class="r"><i></i>Every 4 weeks</div><div class="r"><i class="on"></i>Every 8 weeks</div><div class="r"><i></i>Every 12 weeks</div></div><div class="sm-cta rose tap" tabindex="0" role="button" data-opens="ov-ba" style="margin-top:6px;font-size:7px;padding:8px">See subscription terms</div></div></div></div><div class="sm-cgrid" style="padding-top:9px"><div class="sm-pc"><div class="im"><span class="sm-prod tube"></span><span class="bdg">Viral</span></div><div class="nm">Peel-off Lip Stain</div><div class="pr">$29 USD</div><div class="sm-sw"><i></i><i></i><i></i><i></i></div><div class="st">★★★★★</div></div><div class="sm-pc"><div class="im"><span class="sm-prod wand"></span><span class="bdg">1+1 Free</span></div><div class="nm">Extreme Lip Plumper</div><div class="pr">$39 USD<s>$49 USD</s></div><div class="sm-sw"><i></i><i></i></div><div class="st">★★★★★</div></div></div><div class="overlay" id="ov-ba" style="align-items:center;padding:12px"><div class="sm-sheet"><div class="sh"><b>Subscribe & Save terms</b><span class="x" tabindex="0" role="button" data-close>✕</span></div><p>$33.15 per delivery (15% off $39). First charge today, next charge in 8 weeks. Includes the Smooche Blender on the first delivery.</p><p>Skip, pause or cancel from your account at any time — each action is available before the next billing. One-time purchase remains selected by default.</p><div class="sm-cta tap" tabindex="0" role="button" data-close>Close</div></div></div><div class="sm-hintbar" style="bottom:0px">① One optional card, shown only to identified prior purchasers near depletion. One-time purchase stays default.</div></div></div></div>
+      <div class="note"><span class="dot">①</span><span>One additional Subscribe & Save card, shown only to identified prior purchasers near a validated depletion window. Recurring price, discount, cadence selector and next-charge timing are visible before the click, and one-time purchase stays selected by default.</span></div>
+    </div>
+  </div>
+  <div class="pagenav">
+    <button data-go="b7"><span>Previous</span>← T7 · Prove the shade match on real supported tones</button>
+    <button class="nx" data-go="plan"><span>Next</span>Planning →</button>
+  </div>
+  </div>
+</div></div></div></section>
+
+<!-- ==================== PLAN ==================== -->
+<section class="page" id="page-plan">
+  <div class="block"><div class="wrap">
+    <div class="section-lab">Execution</div>
+    <h2 class="sec">Recommended sequencing</h2>
+    <p class="lede">The agreed run order for the shortlist, not a priority ranking. Four tests from the extended roadmap were removed, so the constraints below cover only what actually ships here — where a surviving constraint still refers to a removed test, that test is named in full.</p>
+    <div class="phases">
+      <div class="phase"><span class="ph-lbl">Phase 0 · Prerequisite QA — not experiments</span><h4>Fix these before the sequence starts</h4><p>Synchronise the selected pack and price across the buy box, sticky bar, cart payload and cart — required before <b>T6</b>. <b>Document one substantiated supported tone range</b> and resolve the “all tones” versus “fair-to-medium” contradiction; this sits in Phase 0 because the order puts <b>T1</b> ahead of <b>T7</b>. Reconcile the 30-day guarantee with the separate 14-day/new-and-unused language before <b>T4</b>. Verify customer identities, ages, purchase status and image consent before <b>T3</b>, and any live inventory or offer-expiry data before <b>T2</b>. <b>None of this is a test variant.</b></p></div>
+      <div class="phase"><span class="ph-lbl">Sequence 1 · T1 – T4</span><h4>T1 · T2 · T3 · T4</h4><p><b>T1</b> virtual face preview — ships only after output, privacy, compatibility and performance validation, and after Phase 0 has documented the supported tone range. <b>T2</b> one credible scarcity mechanism, run separately from <b>T6</b> and any other purchase-box change. <b>T3</b> verified-buyer captions on a frozen image set — not concurrent with T5 or T7, which also alter proof imagery. <b>T4</b> the illustrated suitability section below the ATC, kept clear of T1 and T7B.</p></div>
+      <div class="phase"><span class="ph-lbl">Sequence 2 · T5 – T7</span><h4>T5 · T6 · T7</h4><p><b>T5</b> mature-skin transformation as the first gallery slide. <b>T6</b> direct sticky Add to Cart, launched only after price-correctness QA. <b>T7A</b> proves real-user tone content in place and <b>T7B</b> then moves the winning module below the ATC, so content and placement stay separable.</p></div>
+      <div class="phase"><span class="ph-lbl">Adjacent returning-customer lane</span><h4>Test A</h4><p><b>Test A</b> runs only after replenishment cadence and demand validation. It uses a separate page, a separate eligible audience and a long-term metric, so it sits outside the PDP sequence and its result is never blended with the PDP experiments.</p></div>
+    </div>
+
+      <div class="callout">
+        <h3>Interaction notes</h3>
+        <ol>
+          <li><b>The order puts T1 ahead of T7.</b> The brief made the virtual preview conditional on real-user tone proof establishing a credible supported range. That prerequisite has moved into Phase 0 as documentation work — T1 must not launch until the substantiated range is signed off, even though T7 runs later.</li>
+          <li><b>T3</b> must use the exact same approved imagery in control and variant. Do not run it alongside <b>T5</b> or <b>T7</b>, which alter the same images, order or proof surface.</li>
+          <li>Do not run <b>T7B</b>, <b>T1</b> and <b>T4</b> concurrently — each addresses fit confidence near or immediately below the ATC.</li>
+          <li>Run <b>T7A</b> before <b>T7B</b> so proof content and placement effects stay separable.</li>
+          <li>Fix selected-pack and price synchronisation before <b>T6</b>. Price correctness is prerequisite QA, not a variant.</li>
+          <li>Run <b>T2</b> separately from <b>T6</b> and any other purchase-box change, so urgency and purchase-action effects stay interpretable.</li>
+          <li>Verify identity, age, purchase status, licensing and consent before <b>T3</b>; validate camera consent, data retention, output accuracy and app performance before <b>T1</b>; substantiate live stock or offer expiry before <b>T2</b>.</li>
+          <li>Resolve inaccurate shade claims before <b>T1</b>, <b>T4</b> and <b>T7</b>, and contradictory guarantee terms before <b>T4</b>.</li>
+          <li><b>T4</b> may intentionally reduce low-fit purchases — evaluate it on refund-adjusted revenue or contribution through the return window, not ATC alone.</li>
+          <li><b>Removed from this edition:</b> the Scratch-to-Win timing test, the gallery-reduction test, the proof-system audit and its badge-source follow-up, and the purchase-reassurance test. Where a constraint above or on a test page still refers to one of them, it is named in full rather than numbered. If any are reinstated, re-check the gallery and first-image conflicts before scheduling.</li>
+        </ol>
+      </div>
+
+    <div class="foot">
+      <b>Measurement:</b> use sessions that reach the PDP as the denominator, with mobile read separately. Treat clicks, impressions and module engagement as diagnostic and decide on purchase CVR, revenue per PDP visitor and contribution profit per eligible session. Read shade-fit, guarantee, preview and expectation tests through the full return window, and use intent-to-treat assignment wherever exposure to a module is itself post-assignment behaviour. Shopify is the source of truth for orders and revenue; analytics tools provide directional journey analysis.
+      <div class="src">
+        <b>Edition:</b> this is the agreed 8-test shortlist, cut down from the extended 12-test roadmap. Removed from this edition: the Scratch-to-Win timing test, the gallery-reduction test, the proof-system audit and its badge-source follow-up, and the purchase-reassurance test. They remain fully specified in the extended file.<br><br><b>Wireframes:</b> every control frame replicates the live mobile PDP or collection page — type (futura-pt), palette (#151515 ink, #DF8096 rose, #F7F7F7 surface), 10px button radius, bundle cards, scarcity module, sticky bar and proof modules are read from the storefront. Variant frames keep Smooche's brand styling and change only the element under test; the dashed outline, numbered marker and dark annotation bars are the Maison Commerce annotation layer, not proposed design. Layout is schematic — validate spacing, imagery and copy against the live theme before build.<br><br>
+        <b>Before build:</b> every figure quoted in a treatment (review totals, customer counts, the 97% tone-match panel claim, inventory and offer-expiry data) must be verified against the source system, and every supported-tone or guarantee statement reconciled with the substantiated policy.
+      </div>
+    </div>
+
+  <div class="pagenav">
+    <button data-go="ba"><span>Previous</span>← A · Optional collection-page subscription for returning buyers</button>
+    <button class="nx" data-go="overview"><span>Back to</span>Overview →</button>
+  </div>
+  </div></div>
+</section>
+
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  /* Show the download only on the public Maison Commerce template route. */
+  var downloadBanner = document.getElementById('template-download');
+  var isPublicTemplate = location.hostname === 'www.maisoncommerce.co' &&
+    /^\/cro-wireframes-template(?:\/|$)/.test(location.pathname);
+  if (downloadBanner && isPublicTemplate) downloadBanner.hidden = false;
+
+  /* ---------------- router ---------------- */
+  var ORDER = ['overview', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'ba', 'plan'];
+  var pager = document.getElementById('pager');
+  var ink = document.getElementById('ink');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var current = null;
+
+  function pageEl(id) { return document.getElementById('page-' + id); }
+  function navBtn(id) { return pager.querySelector('button[data-go="' + id + '"]'); }
+
+  function moveInk(id, animate) {
+    var b = navBtn(id);
+    if (!b) { ink.style.width = '0px'; return; }
+    if (!animate) ink.classList.add('noanim');
+    ink.style.width = b.offsetWidth + 'px';
+    ink.style.transform = 'translateX(' + b.offsetLeft + 'px)';
+    if (!animate) requestAnimationFrame(function () { ink.classList.remove('noanim'); });
+  }
+
+  function show(id, push) {
+    if (!pageEl(id)) id = 'overview';
+    if (id === current) return;
+
+    ORDER.forEach(function (k) {
+      var el = pageEl(k);
+      if (el) el.classList.toggle('active', k === id);
+      var b = navBtn(k);
+      if (b) { if (k === id) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); }
+    });
+
+    /* reset any open popups on the page we leave */
+    document.querySelectorAll('.overlay.open').forEach(function (o) { o.classList.remove('open'); });
+    document.querySelectorAll('.hotcard.open').forEach(function (c) { c.classList.remove('open'); });
+
+    var first = current === null;
+    current = id;
+    moveInk(id, !first);
+
+    var i = ORDER.indexOf(id);
+    prevBtn.disabled = i <= 0;
+    nextBtn.disabled = i >= ORDER.length - 1;
+
+    /* keep the active nav item in view on narrow screens */
+    var b = navBtn(id);
+    if (b && pager.scrollWidth > pager.clientWidth) {
+      pager.scrollTo({ left: b.offsetLeft - pager.clientWidth / 2 + b.offsetWidth / 2, behavior: first ? 'auto' : 'smooth' });
+    }
+
+    if (push && location.hash !== '#' + id) history.pushState(null, '', '#' + id);
+    if (!first) window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function go(id) { show(id, true); }
+
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t || !t.closest) return;
+
+    /* ---- navigation ---- */
+    var nav = t.closest('[data-go]');
+    if (nav) { e.preventDefault(); go(nav.getAttribute('data-go')); return; }
+
+    /* ---- wireframe interactions ---- */
+    var add = t.closest('[data-add]');
+
+    var closer = t.closest('[data-close]');
+    if (closer) {
+      e.preventDefault();
+      var ov = closer.closest('.overlay');
+      if (ov) ov.classList.remove('open');
+      if (add) flashAdd(add);
+      return;
+    }
+
+    if (add) { e.preventDefault(); e.stopPropagation(); flashAdd(add); return; }
+
+    var trig = t.closest('[data-opens]');
+    if (trig) {
+      e.preventDefault();
+      var target = document.getElementById(trig.getAttribute('data-opens'));
+      if (target) {
+        var screen = target.closest('.screen');
+        if (screen) screen.querySelectorAll('.overlay.open').forEach(function (o) { o.classList.remove('open'); });
+        if (trig.dataset.title) {
+          var tt = target.querySelector('.sh-h .t');
+          if (tt) tt.textContent = trig.dataset.title;
+        }
+        if (trig.dataset.body) {
+          var bb = target.querySelector('.sh-body');
+          if (bb) bb.textContent = trig.dataset.body;
+        }
+        target.classList.add('open');
+      }
+      return;
+    }
+
+    var overlay = t.closest('.overlay');
+    if (overlay) {
+      if (!t.closest('.sheet')) overlay.classList.remove('open');
+      return;
+    }
+
+    var q = t.closest('.acc .q');
+    if (q) {
+      var isOpen = q.classList.toggle('open');
+      var a = q.nextElementSibling;
+      if (a && a.classList.contains('a')) a.style.display = isOpen ? 'block' : 'none';
+      var cx = q.querySelector('.cx');
+      if (cx) cx.textContent = isOpen ? '−' : '+';
+      return;
+    }
+
+    var hs = t.closest('.hotspot');
+    if (hs) {
+      var card = document.getElementById(hs.getAttribute('data-card'));
+      var wasOpen = card && card.classList.contains('open');
+      hs.closest('.banner').querySelectorAll('.hotcard').forEach(function (c) { c.classList.remove('open'); });
+      if (card && !wasOpen) card.classList.add('open');
+      return;
+    }
+
+    document.querySelectorAll('.hotcard.open').forEach(function (c) { c.classList.remove('open'); });
+  });
+
+  function flashAdd(el) {
+    if (el.dataset.busy) return;
+    el.dataset.busy = '1';
+    var prev = el.textContent;
+    el.textContent = el.classList.contains('add') ? '✓' : 'Added ✓';
+    setTimeout(function () { el.textContent = prev; delete el.dataset.busy; }, 1100);
+  }
+
+  prevBtn.addEventListener('click', function () { var i = ORDER.indexOf(current); if (i > 0) go(ORDER[i - 1]); });
+  nextBtn.addEventListener('click', function () { var i = ORDER.indexOf(current); if (i < ORDER.length - 1) go(ORDER[i + 1]); });
+
+  window.addEventListener('popstate', function () { show((location.hash || '#overview').slice(1), false); });
+  window.addEventListener('resize', function () { moveInk(current, false); });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.overlay.open').forEach(function (o) { o.classList.remove('open'); });
+      document.querySelectorAll('.hotcard.open').forEach(function (c) { c.classList.remove('open'); });
+      return;
+    }
+    var el = document.activeElement;
+    var typing = el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA');
+    if (!typing && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+      var i = ORDER.indexOf(current);
+      if (e.key === 'ArrowLeft' && i > 0) { e.preventDefault(); go(ORDER[i - 1]); }
+      if (e.key === 'ArrowRight' && i < ORDER.length - 1) { e.preventDefault(); go(ORDER[i + 1]); }
+      return;
+    }
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    if (el && el.matches && el.matches('[data-opens],[data-close],[data-add],.acc .q,.hotspot')) {
+      e.preventDefault();
+      el.click();
+    }
+  });
+
+  /* label every After column that has something to click */
+  document.querySelectorAll('.col').forEach(function (col) {
+    if (!col.querySelector('.state.after')) return;
+    if (!col.querySelector('[data-opens],.acc .q,.hotspot')) return;
+    var head = col.querySelector('.col-h');
+    if (!head) return;
+    var chip = document.createElement('span');
+    chip.className = 'live';
+    chip.textContent = 'Interactive';
+    head.appendChild(chip);
+  });
+
+  /* boot */
+  function boot() { show((location.hash || '#overview').slice(1), false); }
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { moveInk(current, false); }); }
+  boot();
+})();
+</script>
+
+</body>
+</html>
+
+
+</body>
+</html>
