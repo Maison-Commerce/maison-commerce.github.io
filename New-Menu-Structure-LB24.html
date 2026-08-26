@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="de" data-lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luxusbetten24 Menu Wireframes</title>
+<meta name="description" content="Vorher/Nachher-Wireframes der neuen Menustruktur fur Luxusbetten24 — Maison Commerce.">
+<link rel="preconnect" href="https://fonts.cdnfonts.com">
+<link href="https://fonts.cdnfonts.com/css/gt-america-trial" rel="stylesheet">
+<style>
+/* ---------- Maison Commerce type ---------- */
+@font-face{font-family:"GT Sectra";font-weight:400;font-style:normal;font-display:swap;
+  src:url("../fonts/GTSectra-Book.woff2") format("woff2");}
+@font-face{font-family:"GT Sectra";font-weight:500;font-style:normal;font-display:swap;
+  src:url("../fonts/GTSectra-Medium.woff2") format("woff2");}
+@font-face{font-family:"GT Sectra";font-weight:700;font-style:normal;font-display:swap;
+  src:url("../fonts/GTSectra-Bold.woff2") format("woff2");}
+@font-face{font-family:"GT Sectra";font-weight:400;font-style:italic;font-display:swap;
+  src:url("../fonts/GTSectra-BookItalic.woff2") format("woff2");}
+
+/* ---------- design.md tokens ---------- */
+:root{
+  --espresso:#0A0A0A;
+  --espresso-soft:#55554F;
+  --sand:#8A8A83;
+  --olive:#001B05;
+  --cream:#FDFDFB;
+  --oat:#F1F1EF;
+  --linen:#E8E8E4;
+  --paper:#FFFFFF;
+  --grey:#8A8A83;
+  --sale:#A4443A;
+  --line:rgba(10,10,10,.12);
+  --line-soft:rgba(10,10,10,.07);
+  --ph:#ECECE7; --ph2:#E8E8E4; --ph-line:#CFCFC8;
+  --shadow:0 1px 2px rgba(10,10,10,.04),0 30px 60px -42px rgba(10,10,10,.25);
+  --font:"GT America Trial",-apple-system,"Helvetica Neue","Segoe UI",Arial,sans-serif;
+  --font-serif:"GT Sectra",Georgia,"Times New Roman",serif;
+  --font-mono:"GT America Mono Trial",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --green:#001B05;
+  --gutter:clamp(20px,3.4vw,60px);
+  --max:1840px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --topbar-h:72px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--espresso);font-family:var(--font);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,h5{font-family:var(--font-serif);font-style:italic;font-weight:400;margin:0;letter-spacing:-.015em;text-wrap:balance}
+a{color:var(--espresso);text-decoration:none;border-bottom:1px solid var(--sand)}
+a:hover{border-bottom-color:var(--espresso)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+
+/* ---------- production-only template download ---------- */
+.template-download[hidden]{display:none!important}
+.template-download{background:var(--espresso);color:var(--paper)}
+.template-download-inner{max-width:var(--max);margin:0 auto;padding:11px var(--gutter)}
+.template-download a{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--paper);border:0;font-size:13px;font-weight:500;letter-spacing:.02em;text-align:center}
+.template-download a:hover{color:var(--paper)}
+.template-download a:focus-visible{outline:2px solid var(--paper);outline-offset:3px}
+.template-download-arrow{font-size:17px;line-height:1;transition:transform .3s var(--ease)}
+.template-download a:hover .template-download-arrow{transform:translateY(2px)}
+
+/* ---------- sticky topbar ---------- */
+.topbar{position:sticky;top:0;z-index:40;background:rgba(247,245,241,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1560px;margin:0 auto;padding:0 40px;height:var(--topbar-h);display:flex;align-items:center;gap:22px}
+.brand{display:flex;align-items:center;gap:12px;border:0;flex:none}
+.brand img{height:26px;width:auto;display:block}
+.brand .sub{font-size:11px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--espresso-soft);border-left:1px solid var(--line);padding-left:12px}
+.pager{position:relative;display:flex;align-items:center;gap:2px;margin-left:auto;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.pager::-webkit-scrollbar{display:none}
+.pager button{position:relative;z-index:2;appearance:none;background:transparent;border:0;font-family:inherit;font-size:12.5px;font-weight:500;color:var(--espresso-soft);letter-spacing:.3px;padding:7px 13px;border-radius:60px;cursor:pointer;white-space:nowrap;transition:color .22s ease}
+.pager button:hover{color:var(--espresso)}
+.pager button[aria-current="page"]{color:var(--paper)}
+.pager .divider{width:1px;height:16px;background:var(--line);margin:0 7px;flex:none}
+.ink{position:absolute;z-index:1;top:0;height:100%;background:var(--espresso);border-radius:60px;transition:transform .34s cubic-bezier(.32,.72,0,1),width .34s cubic-bezier(.32,.72,0,1);pointer-events:none;left:0;width:0}
+.ink.noanim{transition:none}
+.arrows{display:flex;gap:4px;flex:none}
+.arrows button{appearance:none;background:transparent;border:1px solid var(--line);color:var(--espresso);width:30px;height:30px;border-radius:60px;font-size:15px;line-height:1;cursor:pointer;font-family:inherit;transition:background .15s ease,border-color .15s ease}
+.arrows button:hover:not(:disabled){background:var(--oat);border-color:var(--sand)}
+.arrows button:disabled{opacity:.32;cursor:default}
+
+/* ---------- pages ---------- */
+.page{display:none}
+.page.active{display:block;animation:pageIn .3s cubic-bezier(.16,1,.3,1) both}
+@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- overview hero ---------- */
+.page-head{background:var(--oat);border-bottom:1px solid var(--line);padding:52px 0 44px}
+.brandline{font-size:12px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--espresso-soft)}
+.page-head h1{font-size:40px;line-height:110%;letter-spacing:.8px;margin:14px 0 10px}
+.page-head p{max-width:800px;color:var(--espresso-soft);margin:8px 0 0;font-size:14px;line-height:1.6}
+.hmeta{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;background:var(--paper);border:1px solid var(--line);border-radius:60px;padding:5px 14px;font-size:12px;font-weight:500;color:var(--espresso-soft)}
+
+.block{padding:44px 0}
+.section-lab{font-size:12px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--sand);margin:0 0 6px}
+.block h2.sec{font-size:24px;line-height:110%;letter-spacing:.5px;margin:0 0 4px}
+.block .lede{color:var(--espresso-soft);font-size:13.5px;margin:6px 0 0;max-width:860px}
+
+/* ---------- master table ---------- */
+.mtable{width:100%;border-collapse:collapse;font-size:13px;margin-top:18px;background:var(--paper);border:1px solid var(--line)}
+.mtable th,.mtable td{text-align:left;padding:12px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+.mtable th{font-size:11px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:var(--espresso-soft);background:var(--cream)}
+.mtable tr:last-child td{border-bottom:0}
+.mtable tbody tr{cursor:pointer;transition:background .15s ease}
+.mtable tbody tr:hover{background:var(--cream)}
+.mtable .mno{font-weight:700;white-space:nowrap}
+.mtable .tid{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:var(--espresso-soft);letter-spacing:-.2px}
+.tablenote{font-size:12px;color:var(--grey);margin:10px 2px 0}
+
+.callout{background:var(--paper);border:1px solid var(--line);padding:18px 20px;margin-top:24px}
+.callout h3{margin:0 0 8px;font-size:16px}
+.callout ol{margin:0;padding-left:18px;font-size:13.5px;color:var(--espresso-soft)}
+.callout li{margin:6px 0}
+.callout b{color:var(--espresso);font-weight:500}
+
+/* ---------- badges ---------- */
+.pgbadge{font-size:10px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;border-radius:2px;padding:4px 8px;white-space:nowrap}
+.pgbadge--pdp{background:var(--oat);color:#7A6448}
+.pgbadge--cart{background:#F1EFDA;color:#6E682F}
+.pgbadge--coll{background:#F7EBEB;color:#8A5F60}
+.stbadge{font-size:10px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;border-radius:2px;padding:4px 8px;background:#F1EFDA;color:#6E682F;white-space:nowrap}
+.kpi{display:inline-block;font-size:10.5px;font-weight:500;border:1px solid var(--line);border-radius:60px;padding:2px 9px;color:var(--espresso-soft);white-space:nowrap;margin:0 3px 3px 0}
+
+/* ---------- test page ---------- */
+.test{padding:44px 0 56px}
+.test-grid{display:grid;grid-template-columns:minmax(360px,450px) minmax(0,1fr);gap:60px;align-items:start}
+.thead{display:flex;flex-wrap:wrap;align-items:center;gap:0}
+/* chamfered outline tags, joined by a hairline */
+.thead .hid,.thead .pgbadge,.thead .stbadge{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  height:34px;
+  padding:0 20px;
+  background:transparent;
+  border:0;
+  border-radius:0;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.7px;
+  text-transform:uppercase;
+  color:var(--espresso-soft);
+  white-space:nowrap;
+}
+.thead .hid{color:var(--espresso);font-weight:700;letter-spacing:.6px}
+.thead .hid::before,.thead .hid::after,
+.thead .pgbadge::before,.thead .pgbadge::after,
+.thead .stbadge::before,.thead .stbadge::after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  clip-path:polygon(13px 0,calc(100% - 13px) 0,100% 50%,calc(100% - 13px) 100%,13px 100%,0 50%);
+}
+/* outline layer */
+.thead .hid::before,.thead .pgbadge::before,.thead .stbadge::before{inset:0;background:var(--sand);z-index:-2}
+/* inner fill, 1px in — leaves a hairline rim */
+.thead .hid::after,.thead .pgbadge::after,.thead .stbadge::after{inset:1px;background:var(--cream);z-index:-1}
+/* connector between tags */
+.thead .lnk{flex:none;width:17px;height:1px;background:var(--sand)}
+.hid{font-size:12px;font-weight:700;letter-spacing:.6px;color:var(--paper);background:var(--espresso);border-radius:2px;padding:5px 10px}
+.test h2{font-size:26px;line-height:110%;letter-spacing:.4px;margin:14px 0 0}
+.tid-ref{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:var(--grey);letter-spacing:-.2px;overflow-wrap:anywhere}
+.tsub{color:var(--espresso-soft);font-size:14.5px;margin:14px 0 0}
+
+/* meta as a list, not pills */
+.mlist{margin:22px 0 22px;padding:0;border-top:1px solid var(--line-soft)}
+.mlist>div{display:flex;gap:16px;padding:8px 0;border-bottom:1px solid var(--line-soft)}
+.mlist dt{flex:none;width:92px;font-size:11px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:var(--sand);padding-top:2px}
+.mlist dd{margin:0;font-size:13.5px;color:var(--espresso)}
+
+.ps{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:16px}
+.ps .box{background:var(--paper);border:1px solid var(--line);padding:15px 17px}
+.ps .box h4{margin:0 0 5px;font-size:12px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--sand)}
+.ps .box p{margin:0;font-size:13px;color:var(--espresso-soft);line-height:1.55}
+.hyp{background:var(--paper);border:1px solid var(--line);padding:15px 17px}
+.hyp-lbl{display:block;font-size:11px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--sand);margin-bottom:9px}
+.hyp .hline{margin:0 0 8px;font-size:13px;color:var(--espresso-soft);line-height:1.55;padding-left:62px;text-indent:-62px}
+.hyp .hline:last-child{margin-bottom:0}
+.hyp .hline b{display:inline-block;width:62px;text-indent:0;color:var(--espresso);font-weight:700;font-size:11px;letter-spacing:.6px;vertical-align:baseline}
+
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start;justify-items:center}
+.col{min-width:0;width:100%;max-width:390px}
+.col-h{display:flex;align-items:center;gap:8px;margin:0 auto 12px;justify-content:center;flex-wrap:wrap}
+.state{font-size:11px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;padding:4px 11px;border-radius:60px}
+.state.before{background:var(--linen);color:var(--espresso-soft)}
+.state.after{background:var(--espresso);color:var(--paper)}
+.col-h .lab{font-size:12px;color:var(--espresso-soft)}
+.note{margin:13px 2px 0;font-size:12.5px;color:var(--espresso-soft);display:flex;gap:8px;line-height:1.5}
+.note .dot{color:var(--sand);font-weight:700;flex:none}
+.note b{color:var(--espresso);font-weight:500}
+
+/* page-to-page footer nav */
+.pagenav{display:flex;justify-content:space-between;gap:16px;margin-top:44px;padding-top:22px;border-top:1px solid var(--line-soft)}
+.pagenav button{appearance:none;background:transparent;border:1px solid var(--line);font-family:inherit;font-size:13px;color:var(--espresso);padding:10px 16px;cursor:pointer;text-align:left;transition:background .15s ease,border-color .15s ease;max-width:47%}
+.pagenav button:hover{background:var(--paper);border-color:var(--sand)}
+.pagenav button span{display:block;font-size:10.5px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:var(--sand);margin-bottom:2px}
+.pagenav button.nx{text-align:right;margin-left:auto}
+.pagenav button:disabled{visibility:hidden}
+
+/* ---------- phone: iPhone-like 9:19.2 ---------- */
+.phone-wrap{display:flex;justify-content:center}
+.phone{width:334px;border:9px solid var(--espresso);border-radius:44px;overflow:hidden;background:var(--espresso);box-shadow:var(--shadow)}
+.phone .notch{height:18px;background:var(--espresso);position:relative}
+.phone .notch::after{content:"";position:absolute;left:50%;top:5px;transform:translateX(-50%);width:76px;height:6px;border-radius:6px;background:#2C2C29}
+.screen{background:var(--paper);position:relative;aspect-ratio:9/19.2;overflow:hidden;display:flex;flex-direction:column}
+.anno{background:var(--espresso);color:var(--oat);font-size:8.5px;font-weight:500;letter-spacing:.7px;text-align:center;padding:6px 8px;text-transform:uppercase;flex:none}
+.head{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;border-bottom:1px solid var(--line-soft);flex:none}
+.logo{font-weight:700;letter-spacing:.2em;font-size:14px}
+.ico{color:var(--espresso);font-size:12px;letter-spacing:3px}
+.img{background:repeating-linear-gradient(135deg,var(--ph) 0 11px,var(--ph2) 11px 22px);border:1px solid var(--ph-line);display:flex;align-items:center;justify-content:center;color:#A79781;font-size:9px;text-align:center;padding:6px;line-height:1.3}
+
+.gallery{position:relative;flex:none}
+.gallery .img{height:150px;border-left:0;border-right:0;border-top:0}
+.gdots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px;align-items:center}
+.gdots i{width:4px;height:4px;border-radius:60px;background:rgba(10,10,10,.2)}
+.gdots i.on{width:16px;border-radius:4px;background:var(--sand)}
+.pdp{padding:12px 13px;flex:none}
+.p-title{font-size:15px;font-weight:700;line-height:1.1;letter-spacing:.4px;margin:0 0 5px;text-transform:uppercase}
+.p-rate{font-size:9.5px;color:var(--espresso-soft);letter-spacing:.2px;margin-bottom:7px}
+.p-rate .st{color:var(--sand);letter-spacing:1px}
+.p-price{font-size:14px;font-weight:500;letter-spacing:.32px;margin:2px 0 11px}
+.lblrow{font-size:9.5px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--espresso-soft);margin:0 0 7px}
+.swatches{display:flex;gap:7px;margin:0 0 12px}
+.sw{width:24px;height:24px;border-radius:32px;border:1px solid var(--line);background:#E8B7B7}
+.sw.b{background:#C9736F}.sw.c{background:#B8746A}
+.sw.sel{outline:1px solid var(--espresso);outline-offset:2px}
+.benefits{margin:0 0 12px}
+.benefits .b{display:flex;gap:7px;align-items:center;font-size:9.5px;color:var(--espresso-soft);padding:4px 0}
+.benefits .b i{width:14px;height:14px;border-radius:32px;background:var(--oat);border:1px solid var(--sand);flex:none}
+.atc{background:var(--espresso);color:var(--paper);text-align:center;font-size:11px;font-weight:500;padding:11px;letter-spacing:.3px}
+.atc.ghost{background:transparent;color:var(--espresso);border:1px solid var(--espresso)}
+.atc.sand{background:var(--sand);color:var(--paper)}
+.mini{font-size:8.5px;color:var(--grey);text-align:center;padding:8px 6px 0}
+.tabs{display:flex;flex-direction:column;flex:none}
+.tabs .tb{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;border-top:1px solid var(--line-soft);font-size:10px}
+.tabs .tb .cx{color:var(--sand);font-size:12px}
+.sectlbl{font-size:11px;font-weight:700;letter-spacing:.3px;color:var(--espresso);padding:13px 13px 6px;flex:none}
+.divider{border-top:1px solid var(--line-soft);flex:none}
+.scrollhint{font-size:8.5px;color:var(--grey);text-align:center;padding:8px;letter-spacing:.3px;flex:none}
+.grow{flex:1 1 auto;min-height:0}
+
+.acc{border-top:1px solid var(--line-soft);flex:none}
+.acc .q{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 13px;font-size:10px;border-bottom:1px solid var(--line-soft)}
+.acc .q .cx{color:var(--sand);font-size:12px;flex:none}
+.acc .a{padding:0 13px 10px;font-size:9px;color:var(--espresso-soft);line-height:1.5;border-bottom:1px solid var(--line-soft)}
+
+.usprow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:11px;border-bottom:1px solid var(--line-soft);background:var(--cream);flex:none}
+.usprow .u{text-align:center;font-size:8px;color:var(--espresso-soft);line-height:1.35}
+.usprow .u i{display:block;width:18px;height:18px;border-radius:32px;background:var(--oat);border:1px solid var(--sand);margin:0 auto 5px}
+.usprow .u b{display:block;font-weight:500;color:var(--espresso);font-size:8.5px}
+.checks{display:flex;flex-direction:column;gap:3px;margin:5px 0 0}
+.checks .c{display:flex;gap:5px;align-items:center;font-size:9px;color:var(--espresso-soft)}
+.checks .c b{color:var(--sand);font-weight:700}
+
+.paylogos{display:flex;gap:5px;flex-wrap:wrap;margin:9px 0 0}
+.paylogos i{width:25px;height:15px;border-radius:2px;background:var(--linen);border:1px solid var(--line);display:block}
+.klarna{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--oat);border:1px solid var(--sand);padding:8px 10px;margin:9px 0 0;font-size:10px;color:var(--espresso)}
+.klarna b{font-weight:500}
+.klarna .info{color:var(--sand);font-size:9px;white-space:nowrap}
+
+.ugc{display:flex;gap:7px;padding:8px 13px 12px;overflow:hidden;flex:none}
+.ugc .t{flex:none;width:72px}
+.ugc .t .img{height:100px;margin-bottom:5px}
+.ugc .t .cap{font-size:8px;color:var(--espresso-soft);line-height:1.3}
+.ugc .t.peek{width:30px;opacity:.55}
+.playdot{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--paper);font-size:14px}
+
+.xsell{display:flex;gap:8px;padding:4px 13px 12px;overflow:hidden;flex:none}
+.xsell .x{flex:none;width:76px}
+.xsell .x .img{height:70px;margin-bottom:5px}
+.xsell .x .nm{font-size:8.5px;font-weight:500;line-height:1.25;text-transform:uppercase}
+.xsell .x .pr{font-size:8.5px;color:var(--espresso-soft)}
+.xsell .x .bt{font-size:8px;border:1px solid var(--espresso);text-align:center;padding:3px;margin-top:4px}
+
+.dhead{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-bottom:1px solid var(--line-soft);flex:none}
+.dhead .t{font-size:14px;font-weight:700}
+.dhead .x{color:var(--espresso);font-size:13px}
+.ship{padding:11px 14px;border-bottom:1px solid var(--line-soft);flex:none}
+.ship .msg{font-size:10px;color:var(--espresso);font-weight:500}
+.ship .bar{height:4px;border-radius:60px;background:var(--linen);margin-top:8px;overflow:hidden;display:flex}
+.ship .bar i{display:block;height:100%;background:var(--sand)}
+.ship .bar i.on{background:var(--espresso)}
+.ship .ticks{display:flex;justify-content:space-between;font-size:8px;color:var(--grey);margin-top:6px}
+.segbar{display:flex;gap:7px;align-items:center}
+.segbar .seg{flex:1;position:relative;display:block;height:4px}
+.segbar .seg::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--sand);opacity:.55;transform:translateY(-50%)}
+.segbar .seg i{position:relative;z-index:1;display:block;height:4px;border-radius:60px;background:var(--sand)}
+.segbar .seg i.done{background:var(--espresso)}
+.msg2{font-size:10px;color:var(--espresso);margin-top:9px;line-height:1.45}
+.msg2 b{font-weight:500}
+.litem{display:flex;gap:9px;padding:11px 14px;border-bottom:1px solid var(--line-soft);flex:none}
+.litem .img{width:48px;height:48px;flex:none}
+.litem .info{flex:1;min-width:0}
+.litem .nm{font-size:10.5px;line-height:1.3;font-weight:500;text-transform:uppercase}
+.litem .pr{font-size:10px;color:var(--espresso-soft);margin-top:2px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:2px;margin-top:5px;font-size:10px}
+.qty span{padding:2px 7px;color:var(--sand)}
+.qty b{padding:2px 7px;border-left:1px solid var(--line);border-right:1px solid var(--line);font-weight:500}
+.ups{padding:10px 14px;border-bottom:1px solid var(--line-soft);background:var(--cream);flex:none}
+.ups .h{display:flex;align-items:center;justify-content:space-between;font-size:10px;font-weight:700;margin-bottom:8px}
+.ups .h .nav{color:var(--sand);font-size:10px;letter-spacing:2px}
+.upitem{display:flex;gap:8px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);padding:8px}
+.upitem .img{width:40px;height:40px;flex:none}
+.upitem .nm{font-size:10px;font-weight:500;line-height:1.3;text-transform:uppercase}
+.upitem .pr{font-size:9.5px;color:var(--espresso-soft)}
+.upitem .add{flex:none;width:22px;height:22px;border:1px solid var(--espresso);display:flex;align-items:center;justify-content:center;font-size:12px}
+.more{font-size:9px;color:var(--sand);border-bottom:1px solid var(--sand);display:inline-block;margin-top:5px}
+.foot-cart{border-top:1px solid var(--line);background:var(--paper);padding:11px 14px 13px;margin-top:auto;flex:none}
+.subrow{display:flex;justify-content:space-between;align-items:baseline;font-size:11px;margin-bottom:4px}
+.subrow.tot{font-size:12.5px;font-weight:500;margin-bottom:6px}
+.taxnote{font-size:8px;color:var(--grey);margin:0 0 9px;line-height:1.4}
+
+.cfilters{display:flex;gap:6px;padding:9px 12px;overflow:hidden;border-bottom:1px solid var(--line-soft);flex:none}
+.cfilters .f{font-size:8.5px;border:1px solid var(--line);border-radius:60px;padding:4px 9px;color:var(--espresso-soft);white-space:nowrap}
+.cfilters .f.on{background:var(--espresso);border-color:var(--espresso);color:var(--paper)}
+.cbar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;font-size:8.5px;color:var(--espresso-soft);border-bottom:1px solid var(--line-soft);letter-spacing:.5px;flex:none}
+.banner{position:relative;flex:none}
+.banner .img{height:130px;border-left:0;border-right:0}
+.hotspot{position:absolute;width:20px;height:20px;border-radius:32px;background:var(--paper);border:1px solid var(--sand);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--espresso);box-shadow:0 2px 6px rgba(10,10,10,.18)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:11px 12px;flex:none}
+.ccard .img{height:82px;margin-bottom:5px;position:relative}
+.ccard .bdg{position:absolute;top:5px;left:5px;background:var(--olive);color:var(--paper);font-size:7px;font-weight:500;letter-spacing:.5px;padding:2px 5px;border-radius:2px}
+.ccard .pr{font-size:9.5px;color:var(--espresso);font-weight:500}
+.ccard .nm{font-size:9px;line-height:1.25;font-weight:700;text-transform:uppercase;margin-top:1px}
+.ccard .sub{font-size:8px;color:var(--espresso-soft);line-height:1.3;margin-top:2px}
+
+.overlay{position:absolute;inset:0;background:rgba(10,10,10,.35);display:none;align-items:flex-end;z-index:8}
+.overlay.open{display:flex}
+.sheet{background:var(--paper);width:100%;border-top:2px solid var(--sand);padding:12px 13px 15px;max-height:88%;overflow:hidden}
+.sheet .sh-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
+.sheet .sh-h .t{font-size:12px;font-weight:700}
+.sheet .sh-h .x{color:var(--sand);font-size:12px;white-space:nowrap}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:9px}
+.ba .img{height:96px}
+.ba .cap{font-size:8px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:var(--espresso-soft);text-align:center;margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font-size:8px;border:1px solid var(--line);border-radius:60px;padding:3px 8px;color:var(--espresso-soft)}
+
+/* ---------- interactivity ---------- */
+.tap{cursor:pointer;transition:background .15s ease}
+.tap:hover{background:rgba(10,10,10,.06)}
+.tap:focus-visible{outline:2px solid var(--sand);outline-offset:2px}
+.atc.tap:hover{background:#002A08;color:var(--paper)}
+.atc.ghost.tap:hover{background:rgba(0,27,5,.08);color:var(--espresso)}
+.hotspot.tap:hover{background:var(--sand);color:var(--paper)}
+.sheet .x{cursor:pointer}
+.acc .q{cursor:pointer;user-select:none}
+.acc .q:hover{background:rgba(10,10,10,.04)}
+.ugc .t.tap:hover .img{border-color:var(--sand)}
+.hotcard{position:absolute;display:none;background:var(--paper);border:1px solid var(--sand);padding:7px 8px;width:116px;box-shadow:0 4px 14px rgba(10,10,10,.22);z-index:6}
+.hotcard.open{display:block}
+.hotcard .nm{font-size:9px;font-weight:700;line-height:1.25;text-transform:uppercase}
+.hotcard .pr{font-size:9px;color:var(--espresso-soft);margin-top:1px}
+.hotcard .go{font-size:8px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:var(--sand);margin-top:5px;display:block}
+.col-h .live{font-size:10px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:var(--sand);border:1px solid var(--sand);border-radius:60px;padding:3px 9px;white-space:nowrap}
+
+.hl{outline:1px dashed var(--sand);outline-offset:2px;background:rgba(0,27,5,.05)}
+.tagnum{position:absolute;z-index:5;background:var(--sand);color:var(--paper);font-size:9px;font-weight:700;border-radius:60px;width:17px;height:17px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(10,10,10,.25)}
+
+/* ---------- plan page ---------- */
+.phases{display:grid;gap:12px;margin-top:18px}
+.phase{background:var(--paper);border:1px solid var(--line);padding:16px 19px}
+.phase h4{margin:2px 0 5px;font-size:15px}
+.phase p{margin:0;font-size:13.5px;color:var(--espresso-soft);line-height:1.55}
+.phase p b{color:var(--espresso);font-weight:500}
+.phase .ph-lbl{font-size:11px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--sand)}
+.foot{padding:34px 0 64px;color:var(--espresso-soft);font-size:13px;line-height:1.6;border-top:1px solid var(--line-soft);margin-top:36px}
+.foot b{color:var(--espresso);font-weight:500}
+.foot .src{margin-top:14px;font-size:12px;color:var(--grey)}
+
+/* ---------- Maison Commerce presentation layer ---------- */
+::selection{background:var(--espresso);color:var(--paper)}
+.topbar{background:rgba(253,253,251,.92);border-bottom-color:var(--line-soft)}
+.topbar-inner{max-width:var(--max);padding:0 var(--gutter);gap:20px}
+.brand{gap:16px}
+.brand-logo{display:block;height:26px;width:auto}
+.brand .sub{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--faint,var(--grey));border-left-color:var(--line);padding-left:16px}
+.pager button{font-size:12px;padding:8px 12px;border-radius:999px;transition:color .3s var(--ease)}
+.ink{background:var(--green);border-radius:999px;transition:transform .4s var(--ease),width .4s var(--ease)}
+.arrows{gap:8px}
+.arrows button{width:32px;height:32px;border-radius:999px;font-size:16px;transition:background .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)}
+.arrows button:hover:not(:disabled){background:var(--espresso);border-color:var(--espresso);color:var(--paper);transform:scale(1.04)}
+
+.page-head{background:linear-gradient(180deg,var(--paper) 0%,var(--cream) 100%);border-bottom-color:var(--line-soft);padding:64px 0 56px}
+.brandline,.section-lab,.ph-lbl,.hyp-lbl,.mlist dt,.service-index{font-family:var(--font-mono)}
+.brandline{font-size:11px;letter-spacing:.08em;color:var(--faint,var(--grey))}
+.page-head h1{font-size:clamp(40px,4.2vw,72px);line-height:1.01;letter-spacing:-.02em;margin:16px 0 12px;width:100%;max-width:none}
+.page-head p{max-width:64ch;color:var(--espresso-soft);margin:12px 0 0;font-size:16px;line-height:1.65}
+.hmeta{margin-top:24px;gap:8px}
+.pill{border-color:var(--line-soft);border-radius:999px;padding:8px 16px;font-size:12px;color:var(--espresso-soft);box-shadow:0 1px 2px rgba(10,10,10,.04)}
+
+.block{padding:64px 0 80px}
+.section-lab{font-size:11px;letter-spacing:.08em;color:var(--faint,var(--grey));margin-bottom:8px}
+.block h2.sec{font-size:clamp(32px,2.8vw,48px);line-height:1.04;letter-spacing:-.015em;margin-bottom:8px;max-width:20ch}
+.block .lede{color:var(--espresso-soft);font-size:16px;line-height:1.65;margin-top:8px;max-width:64ch}
+
+.mtable{margin-top:32px;border-collapse:separate;border-spacing:0;border-color:var(--line-soft);border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(10,10,10,.04)}
+.mtable th,.mtable td{padding:16px;border-bottom-color:var(--line-soft)}
+.mtable th{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--grey);background:var(--surface,var(--oat))}
+.mtable tbody tr{transition:background .3s var(--ease)}
+.mtable tbody tr:hover{background:var(--cream)}
+.mtable .mno,.mtable .tid,.tid-ref{font-family:var(--font-mono)}
+.tablenote{font-size:12px;color:var(--grey);margin:12px 4px 0}
+.callout{background:var(--paper);border-color:var(--line-soft);border-radius:12px;padding:24px;margin-top:32px;box-shadow:0 1px 2px rgba(10,10,10,.04)}
+.callout h3{font-size:20px;margin-bottom:12px}
+.callout ol{font-size:14px;line-height:1.65}
+.callout li{margin:8px 0}
+
+.pgbadge,.stbadge,.kpi{border-radius:999px;background:var(--oat);color:var(--espresso-soft);border:1px solid var(--line-soft)}
+.pgbadge--pdp,.pgbadge--cart,.pgbadge--coll{background:var(--oat);color:var(--espresso-soft)}
+.test{padding:64px 0 80px}
+.test-grid{grid-template-columns:minmax(360px,480px) minmax(0,1fr);gap:clamp(48px,5vw,96px)}
+.test-info,.test-frames{min-width:0}
+.thead{gap:8px}
+.thead .hid,.thead .pgbadge,.thead .stbadge{height:32px;padding:0 12px;border:1px solid var(--line-soft);border-radius:999px;background:var(--paper);font-family:var(--font-mono);font-size:10px;color:var(--espresso-soft)}
+.thead .hid{background:var(--green);border-color:var(--green);color:var(--paper)}
+.thead .hid::before,.thead .hid::after,.thead .pgbadge::before,.thead .pgbadge::after,.thead .stbadge::before,.thead .stbadge::after{display:none}
+.thead .lnk{width:12px;background:var(--line)}
+.test h2{font-size:clamp(32px,2.4vw,44px);line-height:1.04;letter-spacing:-.015em;margin-top:20px;max-width:18ch}
+.tid-ref{font-size:10px;color:var(--grey);margin:0;overflow-wrap:anywhere}
+.tsub{font-size:16px;line-height:1.65;color:var(--espresso-soft);margin-top:20px}
+.mlist{margin:24px 0;border-top-color:var(--line-soft)}
+.mlist>div{padding:12px 0;border-bottom-color:var(--line-soft)}
+.mlist dt{width:96px;font-size:10px;letter-spacing:.08em;color:var(--grey)}
+.mlist dd{font-size:14px;flex:1;min-width:0}
+.mlist dd.tid-ref{font-size:10px;line-height:1.55;color:var(--grey)}
+.ps{gap:12px;margin-bottom:12px}
+.ps .box,.hyp{background:var(--paper);border-color:var(--line-soft);border-radius:12px;padding:20px;box-shadow:0 1px 2px rgba(10,10,10,.04)}
+.ps .box h4,.hyp-lbl{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--grey)}
+.ps .box p,.hyp .hline{font-size:14px;line-height:1.65;color:var(--espresso-soft)}
+.hyp .hline b{font-family:var(--font-mono);font-size:10px;color:var(--espresso)}
+
+.state{font-family:var(--font-mono);font-size:10px;border-radius:999px;padding:4px 12px}
+.state.before{background:var(--oat);color:var(--espresso-soft)}
+.state.after{background:var(--green);color:var(--paper)}
+.col-h .live{font-family:var(--font-mono);color:var(--green);border-color:var(--green);border-radius:999px}
+.phone{border-color:var(--espresso);background:var(--espresso);box-shadow:var(--shadow)}
+.phone .notch{background:var(--espresso)}
+.phone .notch::after{background:#2C2C29}
+.anno{background:var(--green);color:var(--paper)}
+.atc,.state.after{background:var(--green)}
+.atc.tap:hover{background:#002A08}
+.hl{outline-color:var(--green);background:rgba(0,27,5,.05)}
+.tagnum{background:var(--green)}
+.tap:focus-visible{outline-color:var(--green)}
+.hotspot.tap:hover{background:var(--green)}
+.note{font-size:12px;line-height:1.55}
+
+.pagenav{margin-top:48px;padding-top:24px;border-top-color:var(--line-soft)}
+.pagenav button{border-color:var(--line);border-radius:4px;font-size:13px;padding:12px 20px;transition:background .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)}
+.pagenav button:hover{background:var(--green);border-color:var(--green);color:var(--paper);transform:scale(1.02)}
+.pagenav button:hover span{color:rgba(255,255,255,.68)}
+.pagenav button span{font-family:var(--font-mono);font-size:10px;color:var(--grey)}
+
+.phases{gap:12px;margin-top:32px}
+.phase{background:var(--paper);border-color:var(--line-soft);border-radius:12px;padding:24px;box-shadow:0 1px 2px rgba(10,10,10,.04)}
+.phase h4{font-size:20px;margin:4px 0 8px}
+.phase p{font-size:14px;line-height:1.65}
+.phase .ph-lbl{font-size:10px;letter-spacing:.08em;color:var(--grey)}
+.foot{padding:40px 0 64px;margin-top:48px;border-top-color:var(--line-soft);font-size:14px;line-height:1.65}
+.foot .src{margin-top:16px;font-size:12px;line-height:1.65}
+
+@media(max-width:1180px){
+  .test-grid{grid-template-columns:1fr;gap:30px}
+  .brand .sub{display:none}
+}
+@media(max-width:900px){
+  .wrap,.topbar-inner{padding:0 20px}
+  .compare{grid-template-columns:1fr;gap:34px}
+  .page-head h1{font-size:30px}
+  .mtable th:nth-child(4),.mtable td:nth-child(4){display:none}
+  .topbar-inner{gap:12px}
+}
+@media(max-width:640px){
+  .topbar{overflow:hidden}
+  .topbar-inner{min-width:0}
+  .brand-logo{height:20px}
+  .pager{min-width:0;flex:1;margin-left:0}
+  .arrows{display:none}
+  .page-head{padding:48px 0}
+  .page-head h1{font-size:36px;width:100%;max-width:none}
+  .page-head p{display:block;font-size:14px;line-height:1.6}
+  .hmeta{margin-top:20px}
+  .pill{padding:8px 12px}
+  .block{padding:48px 0 64px}
+  .block h2.sec{font-size:32px}
+  .block .lede{font-size:14px}
+  .mtable{margin-top:24px;table-layout:fixed}
+  .mtable th,.mtable td{padding:16px 12px}
+  .mtable th:nth-child(2),.mtable td:nth-child(2),
+  .mtable th:nth-child(4),.mtable td:nth-child(4),
+  .mtable th:nth-child(5),.mtable td:nth-child(5),
+  .mtable th:nth-child(6),.mtable td:nth-child(6){display:none}
+  .mtable th:first-child,.mtable td:first-child{width:48px}
+  .callout{padding:20px}
+  .test{padding:48px 0 64px}
+  .test h2{font-size:32px}
+  .pagenav button{padding:12px 16px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .page.active{animation:none}
+}
+@media print{
+  body{background:#fff}
+  .topbar,.pagenav,.arrows{display:none}
+  .page{display:block!important;animation:none;break-after:page}
+  .overlay{display:flex!important}
+  .phone{box-shadow:none}
+}
+
+/* ==================================================================
+   Luxusbetten24 navigation deliverable — additions
+   ================================================================== */
+
+/* ---------- bilingual layer ---------- */
+html:not([data-lang="en"]) .len{display:none!important}
+html[data-lang="en"] .lde{display:none!important}
+.langtog{display:flex;flex:none;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.langtog button{appearance:none;background:transparent;border:0;font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;padding:7px 12px;cursor:pointer;color:var(--espresso-soft);transition:background .3s var(--ease),color .3s var(--ease)}
+.langtog button:hover{color:var(--espresso)}
+.langtog button[aria-pressed="true"]{background:var(--green);color:var(--paper)}
+.langtog button:focus-visible{outline:2px solid var(--green);outline-offset:-2px}
+
+/* ---------- overview comparison table ---------- */
+.mtable--cmp td:nth-child(1){font-family:var(--font-mono);font-size:11px;letter-spacing:.02em;white-space:nowrap;color:var(--espresso)}
+.mtable--cmp td:nth-child(2){color:var(--espresso-soft)}
+.mtable--cmp td:nth-child(3){color:var(--espresso)}
+.mtable--cmp td:nth-child(4){color:var(--espresso-soft);font-size:12.5px}
+.mtable--cmp tbody tr{cursor:default}
+.mtable--cmp tbody tr:hover{background:transparent}
+.mtable--cmp .del{color:var(--grey);text-decoration:line-through;text-decoration-color:var(--line)}
+.mtable--cmp .keep{color:var(--espresso);font-weight:500}
+
+/* ---------- phone: menu drawer components ---------- */
+.mhead{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;border-bottom:1px solid var(--line);flex:none}
+.mhead .t{font-family:var(--font-mono);font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--espresso-soft)}
+.mhead .x{color:var(--espresso);font-size:13px}
+.mtitle{font-family:var(--font-mono);font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--sand);padding:9px 13px 4px;flex:none}
+.mrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 13px;border-bottom:1px solid var(--line-soft);font-size:10px;color:var(--espresso);flex:none}
+.mrow .cx{color:var(--sand);font-size:12px;flex:none}
+.mrow.lvl1{font-size:11px;font-weight:500}
+.mrow.mut{color:var(--espresso-soft)}
+.mrow.ctx{padding:4px 13px;font-size:9.5px;color:var(--sand)}
+.acc.mnu .a .socrow{padding:8px 13px}
+.mrow.dup{color:var(--grey)}
+.mrow.shout{letter-spacing:.06em}
+.mgrouplbl{font-family:var(--font-mono);font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:var(--sand);padding:9px 13px 3px}
+.msub{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:5.5px 13px 5.5px 22px;font-size:9.5px;color:var(--espresso-soft);border-bottom:1px solid var(--line-soft)}
+.msub.top{color:var(--espresso);font-weight:500}
+.msub .tag{font-family:var(--font-mono);font-size:7px;letter-spacing:.06em;text-transform:uppercase;color:var(--sand);border:1px solid var(--line);border-radius:999px;padding:1px 6px;flex:none}
+.acc.mnu .q{font-size:11px;font-weight:500;padding:8px 13px;border-bottom:1px solid var(--line-soft)}
+.acc.mnu .q.sub{font-size:10px;font-weight:400;color:var(--espresso-soft)}
+.acc.mnu .a{padding:0 0 5px;font-size:9.5px;border-bottom:1px solid var(--line-soft);background:var(--cream)}
+.acc.mnu .a .msub{border-bottom:0;padding-top:4px;padding-bottom:4px}
+.acc.mnu .a .mgrouplbl{padding-top:7px}
+.acc.mnu .a .helper{padding:6px 13px 2px;font-size:9px;color:var(--espresso-soft);line-height:1.45;font-style:italic}
+.promorow{display:flex;gap:6px;padding:6px 13px 8px;border-bottom:1px solid var(--line-soft);flex:none;background:var(--paper)}
+.promorow .pl{flex:1 1 0;min-width:0;display:flex;align-items:center;justify-content:center;gap:4px;font-size:9px;font-weight:500;letter-spacing:.01em;color:var(--espresso);border:1px solid var(--sand);border-radius:999px;padding:5px 4px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dpromo{display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.dpromo .pl{display:inline-flex;align-items:center;font-size:9px;font-weight:500;color:var(--espresso);border:1px solid var(--sand);border-radius:999px;padding:5px 13px;white-space:nowrap}
+.dpromo .lbl{font-family:var(--font-mono);font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:var(--sand);margin-right:2px}
+
+/* ---------- phone: bestseller strip ---------- */
+.bstrip{display:flex;gap:7px;padding:8px 13px 11px;overflow:hidden;flex:none}
+.bstrip .bc{flex:none;width:98px}
+.bstrip .bc .img{height:66px;margin-bottom:4px;position:relative}
+.bstrip .bc .bdg{position:absolute;top:4px;left:4px;background:var(--green);color:var(--paper);font-size:6.5px;font-weight:500;letter-spacing:.05em;padding:2px 5px;border-radius:2px;text-transform:uppercase;line-height:1.3}
+.bstrip .bc .nm{font-size:8.5px;font-weight:700;line-height:1.2;text-transform:uppercase}
+.bstrip .bc .rt{font-size:7.5px;color:var(--espresso-soft);margin-top:2px}
+.bstrip .bc .rt .st{color:var(--sand);letter-spacing:.6px}
+.bstrip .bc.peek{width:30px;opacity:.5}
+
+/* ---------- phone: account, social, language ---------- */
+.acctb{padding:10px 13px 11px;border-top:1px solid var(--line);border-bottom:1px solid var(--line-soft);background:var(--cream);flex:none}
+.acctb .sup{font-size:8.5px;color:var(--espresso-soft);line-height:1.45;margin-top:7px}
+.acctb .sec{font-size:9.5px;color:var(--espresso);border-bottom:1px solid var(--sand);display:inline-block;margin-top:9px}
+.socrow{display:flex;gap:7px;padding:10px 13px;border-top:1px solid var(--line-soft);flex:none}
+.socrow i{width:21px;height:21px;border-radius:999px;border:1px solid var(--sand);background:var(--oat);display:block;flex:none}
+.langrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 13px 12px;border-top:1px solid var(--line);flex:none;background:var(--paper)}
+.langrow .lbl{font-family:var(--font-mono);font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:var(--sand);display:block;margin-bottom:3px}
+.langrow .val{font-size:9.5px;color:var(--espresso)}
+.langrow .cx{color:var(--sand);font-size:12px;flex:none}
+.footcols{display:grid;grid-template-columns:1fr 1fr;gap:9px 12px;padding:11px 13px;flex:none}
+.footcols .h{font-family:var(--font-mono);font-size:7.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--sand);margin-bottom:4px}
+.footcols .l{font-size:8.5px;color:var(--espresso-soft);line-height:1.65;display:block}
+.optrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px solid var(--line-soft);font-size:9.5px}
+.optrow:last-child{border-bottom:0}
+.optrow .rd{width:12px;height:12px;border-radius:999px;border:1px solid var(--sand);flex:none}
+.optrow .rd.on{border-color:var(--green);background:var(--green);box-shadow:inset 0 0 0 2.5px var(--paper)}
+
+/* ---------- stacked (desktop) frames ---------- */
+.compare.stack{grid-template-columns:1fr;gap:44px;justify-items:stretch}
+.compare.stack .col{max-width:none;width:100%}
+.deskframe{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--paper);box-shadow:var(--shadow)}
+.deskbar{display:flex;align-items:center;gap:6px;padding:9px 13px;background:var(--oat);border-bottom:1px solid var(--line-soft)}
+.deskbar i{width:8px;height:8px;border-radius:999px;background:var(--ph-line);display:block;flex:none}
+.deskbar .url{margin-left:10px;font-family:var(--font-mono);font-size:9px;color:var(--grey);background:var(--paper);border:1px solid var(--line-soft);border-radius:999px;padding:4px 12px;flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.dnav{display:flex;align-items:center;gap:13px;padding:12px 18px;border-bottom:1px solid var(--line-soft);font-size:9.5px;white-space:nowrap;overflow:hidden}
+.dnav .lg{font-weight:700;letter-spacing:.16em;font-size:11px;margin-right:8px;flex:none}
+.dnav .it{color:var(--espresso-soft);flex:none}
+.dnav .it.on{color:var(--espresso);font-weight:500;box-shadow:inset 0 -1px 0 var(--espresso);padding-bottom:3px}
+.dnav .it.dim{color:var(--ph-line)}
+.dnav .ic{margin-left:auto;color:var(--sand);letter-spacing:3px;flex:none;font-size:11px}
+.dpanel{padding:18px;border-bottom:1px solid var(--line-soft)}
+.dpanel.tight{padding:14px 18px}
+.dcols{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+.dcols.one{grid-template-columns:minmax(0,240px)}
+.dcol{min-width:0}
+.dcol .ch{font-family:var(--font-mono);font-size:8px;letter-spacing:.09em;text-transform:uppercase;color:var(--sand);margin-bottom:6px}
+.dcol .l + .ch{margin-top:13px}
+.dcol .ct{font-size:10px;font-weight:500;color:var(--espresso);padding:3px 0 5px;border-bottom:1px solid var(--line-soft);margin-bottom:5px}
+.dcol .l{display:block;font-size:9px;color:var(--espresso-soft);padding:2.5px 0;line-height:1.35}
+.dcol .l.hi{color:var(--espresso);font-weight:500}
+.dbs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.dbs .c .img{height:80px;margin-bottom:6px;position:relative}
+.dbs .c .bdg{position:absolute;top:5px;left:5px;background:var(--green);color:var(--paper);font-size:6.5px;font-weight:500;letter-spacing:.05em;padding:2px 5px;border-radius:2px;text-transform:uppercase}
+.dbs .c .nm{font-size:8.5px;font-weight:700;text-transform:uppercase;line-height:1.2}
+.dbs .c .rt{font-size:7.5px;color:var(--espresso-soft);margin-top:2px}
+.dbs .c .rt .st{color:var(--sand);letter-spacing:.6px}
+.dfoot{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 18px;border-top:1px solid var(--line-soft);background:var(--cream);font-size:9.5px;flex-wrap:wrap}
+.dfoot .btn{background:var(--green);color:var(--paper);font-size:9px;font-weight:500;padding:7px 14px;border-radius:4px;flex:none}
+.dfoot .lnk2{font-size:9px;color:var(--espresso-soft);border-bottom:1px solid var(--sand)}
+.dfoot .grp{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.dscroll{overflow-x:auto}
+.dscroll>.deskframe{min-width:640px}
+
+/* ---------- structure reference page ---------- */
+.iagrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px;margin-top:32px}
+.iacard{background:var(--paper);border:1px solid var(--line-soft);border-radius:12px;padding:22px;box-shadow:0 1px 2px rgba(10,10,10,.04)}
+.iacard .n{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--grey)}
+.iacard h4{font-size:21px;margin:6px 0 0}
+.iacard .top{font-size:12px;color:var(--espresso-soft);margin:6px 0 0;line-height:1.55}
+.iagrp{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--sand);margin:16px 0 4px}
+.ialist{margin:0;padding:0;list-style:none}
+.ialist li{padding:5px 0;border-bottom:1px solid var(--line-soft);font-size:13px;line-height:1.45}
+.ialist li:last-child{border-bottom:0}
+.ialist a{border-bottom:0;color:var(--espresso);overflow-wrap:anywhere}
+.ialist a:hover{border-bottom:1px solid var(--espresso)}
+.ialist .m{display:block;font-family:var(--font-mono);font-size:9px;color:var(--grey);margin-top:2px;overflow-wrap:anywhere}
+.iacard.util{background:var(--oat)}
+.iacard.util h4{font-size:19px}
+.rulebox{background:var(--paper);border:1px solid var(--line-soft);border-radius:12px;padding:24px;margin-top:32px;box-shadow:0 1px 2px rgba(10,10,10,.04)}
+.rulebox h3{font-size:20px;margin:0 0 12px}
+.rulebox ul{margin:0;padding-left:18px;font-size:14px;line-height:1.7;color:var(--espresso-soft)}
+.rulebox li{margin:6px 0}
+.rulebox li b{color:var(--espresso);font-weight:500}
+
+/* ---------- misc ---------- */
+.pagenav button span.lde,.pagenav button span.len{font-family:var(--font);font-size:13px;letter-spacing:normal;text-transform:none;color:inherit;margin:0;display:inline}
+.note .n2{color:var(--sale);font-weight:500}
+.frames-lab{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--grey);margin:0 0 18px;padding-bottom:10px;border-bottom:1px solid var(--line-soft)}
+.frames-lab + .compare{margin-top:4px}
+.framegroup{margin-bottom:56px}
+.framegroup:last-child{margin-bottom:0}
+.scrollhint.warn{color:var(--sale)}
+.kpi.on{background:var(--green);color:var(--paper);border-color:var(--green)}
+
+@media(max-width:900px){
+  .mtable--cmp th:nth-child(4),.mtable--cmp td:nth-child(4){display:table-cell}
+}
+@media(max-width:640px){
+  .mtable--cmp{display:block;border:0;box-shadow:none;background:transparent;table-layout:auto}
+  .mtable--cmp thead{display:none}
+  .mtable--cmp tbody{display:block}
+  .mtable--cmp tr{display:block;background:var(--paper);border:1px solid var(--line-soft);border-radius:12px;margin-bottom:10px;padding:6px 0}
+  .mtable--cmp td:nth-child(n){display:block;width:auto;border-bottom:0;padding:8px 16px}
+  .mtable--cmp td:nth-child(n)::before{content:attr(data-l);display:block;font-family:var(--font-mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--grey);margin-bottom:4px}
+  .dcols{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .dbs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .langtog button{padding:7px 9px}
+  .topbar-inner{gap:10px}
+  .brand-logo{height:18px}
+  .pager{padding-left:2px}
+  .framegroup{margin-bottom:40px}
+  .frames-lab{margin-bottom:14px}
+}
+</style>
+<noscript><style>
+.page{display:block!important;border-bottom:1px solid var(--line)}
+.pager,.arrows,.langtog{display:none!important}
+.len{display:none!important}
+</style></noscript>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#overview" data-go="overview">
+      <img class="brand-logo" src="../images/logo-maison-commerce.png" alt="Maison Commerce" width="1206" height="154" decoding="async">
+      <span class="sub"><span class="lde">Navigations-Wireframes</span><span class="len">Navigation Wireframes</span></span>
+    </a>
+    <nav class="pager" id="pager" aria-label="Ansichten">
+      <span class="ink" id="ink"></span>
+      <button data-go="overview"><span class="lde">Übersicht</span><span class="len">Overview</span></button>
+      <span class="divider"></span>
+      <button data-go="b1"><span class="lde">Mobil · Shopping</span><span class="len">Mobile · Shopping</span></button>
+      <button data-go="b2"><span class="lde">Mobil · Service</span><span class="len">Mobile · Service</span></button>
+      <button data-go="b3">Desktop</button>
+      <span class="divider"></span>
+      <button data-go="ia"><span class="lde">Struktur</span><span class="len">Structure</span></button>
+      <button data-go="plan"><span class="lde">Planung</span><span class="len">Planning</span></button>
+    </nav>
+    <div class="langtog" role="group" aria-label="Sprache / Language">
+      <button id="langDe" aria-pressed="true">DE</button>
+      <button id="langEn" aria-pressed="false">EN</button>
+    </div>
+    <div class="arrows">
+      <button id="prevBtn" aria-label="Zurück">‹</button>
+      <button id="nextBtn" aria-label="Weiter">›</button>
+    </div>
+  </div>
+</header>
+
+<main id="app">
+
+<!-- ==================== ÜBERSICHT ==================== -->
+<section class="page" id="page-overview">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="brandline"><span class="lde">Konversionsforschung · Navigationsstruktur · Luxusbetten24</span><span class="len">Conversion research · Navigation structure · Luxusbetten24</span></div>
+      <h1><span class="lde">Neue Menüstruktur für Luxusbetten24</span><span class="len">New Menu Structure for Luxusbetten24</span></h1>
+      <p class="lde">Ein vollständiger Menüentwurf, mobil zuerst gedacht: Bestseller-Karten über allen Links, fünf statt zwölf Einträge auf der ersten Ebene, das Konto im Menü statt als stilles Header-Icon und eine einzige eingeklappte Utility-Gruppe für Service, Unternehmen und Rechtliches. Die Vorher/Nachher-Wireframes auf den folgenden Seiten zeigen denselben Test in drei Ausschnitten: Drawer oben, Drawer unten, Desktop.</p>
+      <p class="len">One complete, mobile-first menu proposal: bestseller cards above every link, five instead of twelve first-level entries, the account action inside the menu rather than as a silent header icon, and a single collapsed utility group for service, company and legal destinations. The before/after wireframes on the following pages show the same test in three cuts: drawer top, drawer bottom, desktop.</p>
+      <div class="hmeta">
+        <span class="pill"><span class="lde">95,5 % Netto-Produktumsatz: Sofas, Betten &amp; Konfiguratoren</span><span class="len">95.5% of net product sales: sofas, beds &amp; configurators</span></span>
+        <span class="pill"><span class="lde">Sofas 48,2 %</span><span class="len">Sofas 48.2%</span></span>
+        <span class="pill"><span class="lde">Betten 36,9 %</span><span class="len">Beds 36.9%</span></span>
+        <span class="pill"><span class="lde">59,6 % der Collection-Sessions: Boxspring, Sofas, Polsterbetten</span><span class="len">59.6% of collection sessions: box spring, sofas, upholstered beds</span></span>
+        <span class="pill"><span class="lde">Erste Ebene: 12 → 5</span><span class="len">First level: 12 → 5</span></span>
+        <span class="pill"><span class="lde">Neuheiten · Flash Sales · Outlet direkt sichtbar</span><span class="len">New Arrivals · Flash Sales · Outlet directly visible</span></span>
+        <span class="pill"><span class="lde">Maximal eine geöffnete Ebene</span><span class="len">Never more than one expanded level</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="block"><div class="wrap">
+    <div class="section-lab"><span class="lde">Übersicht</span><span class="len">Overview</span></div>
+    <h2 class="sec"><span class="lde">Was sich ändert</span><span class="len">What changes</span></h2>
+    <p class="lede lde">Ein Test, sieben Ebenen der Änderung. Die linke Spalte ist der heutige Live-Zustand von luxusbetten24.de, die rechte der Vorschlag. Die Wirkungsspalte nennt den Grund, nicht die Meinung.</p>
+    <p class="lede len">One test, seven layers of change. The middle column is the current live state of luxusbetten24.de, the next one is the proposal. The effect column states the reason, not the opinion.</p>
+    <table class="mtable mtable--cmp">
+      <thead><tr>
+        <th><span class="lde">Ebene</span><span class="len">Layer</span></th>
+        <th><span class="lde">Heute</span><span class="len">Today</span></th>
+        <th><span class="lde">Vorschlag</span><span class="len">Proposal</span></th>
+        <th><span class="lde">Wirkung</span><span class="len">Effect</span></th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td data-l="Ebene"><span class="lde">Erste Ebene</span><span class="len">First level</span></td>
+          <td data-l="Heute"><span class="lde"><span class="del">Home</span>, Garten, Konfiguratoren, Schlafzimmer, Wohnzimmer, Küche, Wohnaccessoires, Kinder, Neuheiten, <span class="del">FLASH SALES</span>, Outlet, Magazin — <b>12 Einträge</b></span><span class="len"><span class="del">Home</span>, Garden, Configurators, Bedroom, Living Room, Kitchen, Home Accessories, Children, New Arrivals, <span class="del">FLASH SALES</span>, Outlet, Magazine — <b>12 entries</b></span></td>
+          <td data-l="Vorschlag"><span class="lde"><span class="keep">Betten · Sofas &amp; Sessel · Konfiguratoren · Möbel &amp; Wohnen · Neu &amp; Angebote</span> — 5 Gruppen, darüber <span class="keep">Neuheiten · Flash Sales · Outlet</span> als Direktlinks</span><span class="len"><span class="keep">Beds · Sofas &amp; Armchairs · Configurators · Furniture &amp; Home · New &amp; Offers</span> — 5 groups, with <span class="keep">New Arrivals · Flash Sales · Outlet</span> as direct links above them</span></td>
+          <td data-l="Wirkung"><span class="lde">Betten und Sofas bekommen erstmals eigene Ersteinträge — heute nennt keiner der zwölf Einträge sie beim Namen. Neuheiten, Flash Sales und Outlet bleiben ohne Akkordeon erreichbar. „Home“ entfällt, weil das Logo schon zur Startseite führt.</span><span class="len">Beds and sofas get first-level entries of their own for the first time — today not one of the twelve entries names them. New Arrivals, Flash Sales and Outlet stay reachable without opening an accordion. “Home” is dropped because the logo already links to the homepage.</span></td>
+        </tr>
+        <tr>
+          <td data-l="Ebene"><span class="lde">Bestseller</span><span class="len">Bestsellers</span></td>
+          <td data-l="Heute"><span class="lde">„Am beliebtesten“ mit zwei Konfigurator-Links; Produktkarten weiter unten, Lazy 3 Sitzer als Aufmacher</span><span class="len">“Am beliebtesten” with two configurator links; product cards further down, Lazy 3 Sitzer as the lead</span></td>
+          <td data-l="Vorschlag"><span class="lde">Vier Bestseller-Karten ganz oben im Drawer: Cozy, Verona, Roma, Boston — mit Bild, Badge, Bewertung</span><span class="len">Four bestseller cards at the very top of the drawer: Cozy, Verona, Roma, Boston — with image, badge and rating</span></td>
+          <td data-l="Wirkung"><span class="lde">Der erste Bildschirm zeigt Produkte statt Kategorien. Auswahl monatlich gegen Umsatz, Bestand und Lieferzeit prüfen; der rückläufige Lazy 3 Sitzer bleibt nicht dauerhaft Aufmacher.</span><span class="len">The first screen shows products, not categories. Review the selection monthly against sales, inventory and delivery time; the declining Lazy 3 Sitzer does not stay the permanent lead.</span></td>
+        </tr>
+        <tr>
+          <td data-l="Ebene"><span class="lde">Gliederungslogik</span><span class="len">Grouping logic</span></td>
+          <td data-l="Heute"><span class="lde">Nach Raum: Schlafzimmer, Wohnzimmer, Küche, Kinder, Garten</span><span class="len">By room: Bedroom, Living Room, Kitchen, Children, Garden</span></td>
+          <td data-l="Vorschlag"><span class="lde">Nach Nachfrage: Betten und Sofas eigenständig, Räume und Zubehör gebündelt in „Möbel &amp; Wohnen“</span><span class="len">By demand: beds and sofas stand alone, rooms and accessories bundled into “Furniture &amp; Home”</span></td>
+          <td data-l="Wirkung"><span class="lde">Boxspringbetten, Sofas und Polsterbetten machen 59,6 % der Collection-Sessions aus, konkurrieren aber heute mit Küche und Geschirr auf derselben Ebene.</span><span class="len">Box spring beds, sofas and upholstered beds account for 59.6% of collection sessions, yet today compete on the same level as kitchen and tableware.</span></td>
+        </tr>
+        <tr>
+          <td data-l="Ebene"><span class="lde">Konto</span><span class="len">Account</span></td>
+          <td data-l="Heute"><span class="lde">Icon im Header, ohne Beschriftung und ohne Kontext</span><span class="len">Header icon, unlabelled and without context</span></td>
+          <td data-l="Vorschlag"><span class="lde">Button „Anmelden / Registrieren“ direkt nach der Shopping-Navigation, dazu Wunschliste als Sekundärlink</span><span class="len">“Log in / Sign up” button directly after the shopping navigation, with Wishlist as a secondary link</span></td>
+          <td data-l="Wirkung"><span class="lde">Konto ist erreichbar, ohne an Service- und Rechtstexten vorbeizuscrollen. Warenkorb bleibt im Header; das Konto-Icon kann nach Validierung entfallen.</span><span class="len">Account is reachable without scrolling past service and legal links. The cart stays in the header; the account icon can be removed once validated.</span></td>
+        </tr>
+        <tr>
+          <td data-l="Ebene"><span class="lde">Service &amp; Content</span><span class="len">Service &amp; content</span></td>
+          <td data-l="Heute"><span class="lde">Im Footer verteilt über „Rechtliches“, „Über uns“ und „Kontakt“ — 13 Links in einer Spalte</span><span class="len">Spread across footer columns “Rechtliches”, “Über uns” and “Kontakt” — 13 links in one column</span></td>
+          <td data-l="Vorschlag"><span class="lde">Eine eingeklappte Gruppe „Our Story“: Direktlinks, Hilfe &amp; Service, Unsere Geschichte, Rechtliches, Social</span><span class="len">One collapsed “Our Story” group: direct links, Help &amp; Service, About Us, Legal, Social</span></td>
+          <td data-l="Wirkung"><span class="lde">Support ist leichter zu finden als Rechtliches, ohne dass die erste Ebene neue Einträge bekommt.</span><span class="len">Support becomes easier to find than legal, without adding entries to the first level.</span></td>
+        </tr>
+        <tr>
+          <td data-l="Ebene"><span class="lde">Navigationstiefe</span><span class="len">Navigation depth</span></td>
+          <td data-l="Heute"><span class="lde">Kategorie → Unterkategorie → weitere Unterebene, Tiefe je Zweig unterschiedlich</span><span class="len">Category → subcategory → further sublevel, depth varies per branch</span></td>
+          <td data-l="Vorschlag"><span class="lde">Genau zwei Ebenen, nur ein Akkordeon gleichzeitig geöffnet, keine dritte Ebene</span><span class="len">Exactly two levels, only one accordion open at a time, no third level</span></td>
+          <td data-l="Wirkung"><span class="lde">Material, Größe und Ausstattung bleiben Filter auf der Collection-Seite — dort gehören sie hin, nicht ins Menü.</span><span class="len">Material, size and feature options stay collection-page filters — that is where they belong, not in the menu.</span></td>
+        </tr>
+        <tr>
+          <td data-l="Ebene"><span class="lde">Sprache &amp; Region</span><span class="len">Language &amp; region</span></td>
+          <td data-l="Heute"><span class="lde">Am Seitenende, nicht im Menü</span><span class="len">At the bottom of the page, not in the menu</span></td>
+          <td data-l="Vorschlag"><span class="lde">Letztes Element im Drawer: „Deutsch · Deutschland (EUR €)“</span><span class="len">Last control in the drawer: “German · Germany (EUR €)”</span></td>
+          <td data-l="Wirkung"><span class="lde">Erwartbare Position, ohne die Shopping-Ebene zu verdrängen.</span><span class="len">The expected position, without displacing the shopping level.</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="tablenote"><span class="lde">Erste Ebene und Footer-Gruppen wurden am 26.08.2026 auf luxusbetten24.de geprüft. Umsatz- und Session-Anteile stammen aus dem Analyse-Briefing.</span><span class="len">First level and footer groups verified on luxusbetten24.de on 26 Aug 2026. Revenue and session shares come from the analysis brief.</span></p>
+
+    <div class="callout">
+      <h3><span class="lde">Nicht verhandelbare Regeln</span><span class="len">Non-negotiable rules</span></h3>
+      <ol class="lde">
+        <li><b>Bestseller-Karten stehen vor allen Kategorielinks.</b> Sie sind das erste Element im Drawer.</li>
+        <li><b>Die Shopping-Navigation ist beim Öffnen ausgeklappt.</b> Innerhalb bleibt nur ein Akkordeon gleichzeitig offen.</li>
+        <li><b>Kein Suchfeld im Menü.</b> Die Suche bleibt über das bestehende Header-Icon erreichbar.</li>
+        <li><b>Keine dritte Navigationsebene.</b> Alles Feinere ist Filter auf der Collection-Seite.</li>
+        <li><b>Neuheiten, Flash Sales und Outlet stehen als Direktlinks über den fünf Gruppen</b> — ohne Akkordeon erreichbar. Magazin behält seinen expliziten Textlink. Schreibweise „Flash Sales“, nicht „FLASH SALES“.</li>
+        <li><b>„Our Story“ startet eingeklappt</b> und steht nach dem Konto-Block.</li>
+        <li><b>Der Sprachumschalter ist das letzte Bedienelement</b> im Menü.</li>
+        <li><b>Support-Links sind leichter zu finden als Rechtstexte.</b> Innerhalb von „Hilfe &amp; Service“ haben FAQ, „Ich brauche Hilfe“ und Einrichtungsberater die höchste Priorität.</li>
+      </ol>
+      <ol class="len">
+        <li><b>Bestseller cards come before every category link.</b> They are the first element in the drawer.</li>
+        <li><b>The shopping navigation is open by default.</b> Inside it, only one accordion stays open at a time.</li>
+        <li><b>No search field inside the menu.</b> Search stays available through the existing header icon.</li>
+        <li><b>No third navigation level.</b> Anything more granular is a collection-page filter.</li>
+        <li><b>New Arrivals, Flash Sales and Outlet sit as direct links above the five groups</b> — reachable without opening an accordion. Magazine keeps its explicit text link. Written “Flash Sales”, not “FLASH SALES”.</li>
+        <li><b>“Our Story” starts collapsed</b> and sits after the account block.</li>
+        <li><b>The language switcher is the last control</b> in the menu.</li>
+        <li><b>Support links are easier to find than legal links.</b> Within “Help &amp; Service”, FAQ, “I need help” and the interior advisor get the highest priority.</li>
+      </ol>
+    </div>
+
+    <div class="pagenav">
+      <button disabled></button>
+      <button class="nx" data-go="b1"><span><span class="lde">Weiter</span><span class="len">Next</span></span><span class="lde">Mobil · Shopping-Navigation →</span><span class="len">Mobile · Shopping navigation →</span></button>
+    </div>
+  </div></div>
+</section>
+
+
+<!-- ==================== B1 · MOBIL SHOPPING ==================== -->
+<section class="page" id="page-b1"><div class="test"><div class="wrap"><div class="test-grid">
+  <div class="test-info">
+    <div class="thead"><span class="hid">T1</span><span class="lnk"></span><span class="pgbadge"><span class="lde">Menü-Drawer</span><span class="len">Menu drawer</span></span><span class="lnk"></span><span class="stbadge"><span class="lde">Briefing</span><span class="len">Briefed</span></span></div>
+    <h2><span class="lde">Bestseller zuerst, fünf Einstiegspunkte</span><span class="len">Bestsellers first, five entry points</span></h2>
+    <p class="tsub lde">Ein einziger Test über das komplette Menü. Vier Bestseller-Karten stehen über allen Links, darunter drei Direktlinks für Neuheiten, Flash Sales und Outlet und genau fünf Einkaufsgruppen — beim Öffnen ausgeklappt, aber ohne geöffnete Unterkategorie. Konto, „Our Story“ und der Sprachumschalter schließen den Drawer ab, sodass die gesamte Navigation ohne Scrollen sichtbar ist.</p>
+      <p class="tsub len">One single test across the whole menu. Four bestseller cards sit above every link, followed by three direct links for New Arrivals, Flash Sales and Outlet and exactly five shopping groups — the section open by default, but with no category expanded. Account, “Our Story” and the language switcher close the drawer, so the entire navigation is visible without scrolling.</p>
+    <dl class="mlist">
+      <div><dt>KPIs</dt><dd><span class="lde">Sessions Converted · Menü-Interaktionsrate · Collection-Einstiege</span><span class="len">Sessions Converted · Menu interaction rate · Collection entries</span></dd></div>
+      <div><dt><span class="lde">Zielgruppe</span><span class="len">Targeting</span></dt><dd><span class="lde">Alle Seiten · Header-Menü, mobil und Desktop</span><span class="len">All pages · header menu, mobile and desktop</span></dd></div>
+      <div><dt>Segment</dt><dd><span class="lde">Alle Besucher; mobil und Desktop getrennt auswerten</span><span class="len">All visitors; report mobile and desktop separately</span></dd></div>
+      <div><dt>Tool</dt><dd><span class="lde">Experiment-Plattform</span><span class="len">Experiment platform</span></dd></div>
+      <div><dt><span class="lde">Datenlage</span><span class="len">Evidence</span></dt><dd><span class="lde">Sofas 48,2 % und Betten 36,9 % des Netto-Produktumsatzes; Boxspringbetten, Sofas und Polsterbetten 59,6 % der Collection-Landing-Sessions</span><span class="len">Sofas 48.2% and beds 36.9% of net product sales; box spring beds, sofas and upholstered beds 59.6% of collection landing sessions</span></dd></div>
+      <div><dt><span class="lde">A/B-Test-ID</span><span class="len">A/B test ID</span></dt><dd class="tid-ref">MC_NAV_MENU_5_GROUPS_BESTSELLERS_FIRST_LUXUSBETTEN24</dd></div>
+    </dl>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4>
+      <p class=" lde">Die erste Menüebene hat zwölf Einträge. „Home“ dupliziert das Logo, Küche, Wohnaccessoires und Garten konkurrieren gleichrangig mit Betten und Sofas, und die Gliederung nach Räumen verteilt die umsatzstärksten Kategorien über mehrere Zweige. Bestseller-Produkte und der Konto-Einstieg liegen unter der Kategorieliste.</p>
+      <p class=" len">The first menu level carries twelve entries. “Home” duplicates the logo; Kitchen, Home Accessories and Garden compete on equal footing with beds and sofas, and grouping by room spreads the highest-revenue categories across several branches. Bestseller products and the account entry point sit below the category list.</p>
+      </div>
+      <div class="box"><h4><span class="lde">Lösung</span><span class="len">Solution</span></h4>
+      <p class=" lde">Vier Bestseller-Karten als erstes Element, dann eine Zeile mit Neuheiten, Flash Sales und Outlet als Direktlinks, darunter fünf Einkaufsgruppen: Betten, Sofas &amp; Sessel, Konfiguratoren, Möbel &amp; Wohnen, Neu &amp; Angebote. Der Abschnitt ist beim Öffnen ausgeklappt, jede Kategorie öffnet höchstens eine weitere Ebene, und nie ist mehr als ein Akkordeon offen. Dieselbe Informationsarchitektur auf mobil und Desktop.</p>
+      <p class=" len">Four bestseller cards as the first element, then a row of New Arrivals, Flash Sales and Outlet as direct links, followed by five shopping groups: Beds, Sofas &amp; Armchairs, Configurators, Furniture &amp; Home, New &amp; Offers. The section is open by default, each category expands at most one further level, and never more than one accordion is open. The same information architecture on mobile and desktop.</p>
+      </div>
+    </div>
+    <div class="hyp">
+      <span class="hyp-lbl"><span class="lde">Hypothese</span><span class="len">Hypothesis</span></span>
+      <div class="lde">
+        <p class="hline"><b>WENN</b> wir das Menü auf vier Bestseller-Karten, drei Direktlinks für Neuheiten, Flash Sales und Outlet und fünf nachfragebasierte Einkaufsgruppen reduzieren, diesen Abschnitt beim Öffnen ausklappen und die Tiefe auf zwei Ebenen begrenzen,</p>
+        <p class="hline"><b>DANN</b> steigen Menü-Interaktionsrate, Collection- und PDP-Einstiege aus dem Menü sowie die Conversion Rate,</p>
+        <p class="hline"><b>WEIL</b> Sofas, Betten und Konfiguratoren 95,5 % des Netto-Produktumsatzes tragen, heute aber nur einen kleinen Teil der ersten Ebene belegen — die Struktur folgt damit dem Kaufverhalten statt der Raumlogik.</p>
+      </div>
+      <div class="len">
+        <p class="hline"><b>IF</b> we reduce the menu to four bestseller cards, three direct links for New Arrivals, Flash Sales and Outlet, and five demand-based shopping groups, keep that section open by default and cap the depth at two levels,</p>
+        <p class="hline"><b>THEN</b> menu interaction rate, collection and PDP entries from the menu, and conversion rate will increase,</p>
+        <p class="hline"><b>BECAUSE</b> sofas, beds and configurators carry 95.5% of net product sales while occupying only a small share of the current first level — the structure would then follow buying behaviour instead of room logic.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="test-frames">
+    <div class="framegroup">
+      <p class="frames-lab"><span class="lde">01 · Drawer beim Öffnen</span><span class="len">01 · Drawer as it opens</span></p>
+      <div class="compare">
+        <div class="col">
+          <div class="col-h"><span class="state before"><span class="lde">Vorher</span><span class="len">Before</span></span><span class="lab"><span class="lde">12 Einträge auf der ersten Ebene</span><span class="len">12 first-level entries</span></span></div>
+          <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+            <div class="anno">Live · luxusbetten24.de</div>
+            <div class="mhead"><span class="t"><span class="lde">Menü</span><span class="len">Menu</span></span><span class="x">✕</span></div>
+            <div class="mtitle"><span class="lde">Am beliebtesten</span><span class="len">Most popular</span></div>
+            <div class="msub"><span class="lde">Boxspringbett Konfigurator</span><span class="len">Box Spring Bed Configurator</span></div>
+            <div class="msub"><span class="lde">Polsterbett Konfigurator</span><span class="len">Upholstered Bed Configurator</span></div>
+            <div class="mrow lvl1 dup"><span>Home</span><span class="cx">›</span></div>
+            <div class="mrow lvl1 "><span><span class="lde">Garten</span><span class="len">Garden</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1 "><span><span class="lde">Konfiguratoren</span><span class="len">Configurators</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1 "><span><span class="lde">Schlafzimmer</span><span class="len">Bedroom</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1 "><span><span class="lde">Wohnzimmer</span><span class="len">Living Room</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1 "><span><span class="lde">Küche</span><span class="len">Kitchen</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1 "><span><span class="lde">Wohnaccessoires</span><span class="len">Home Accessories</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1 "><span><span class="lde">Kinder</span><span class="len">Children</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1 "><span><span class="lde">Neuheiten</span><span class="len">New Arrivals</span></span><span class="cx">›</span></div>
+            <div class="mrow lvl1 shout"><span>FLASH SALES</span><span class="cx">›</span></div>
+            <div class="mrow lvl1 "><span>Outlet</span><span class="cx">›</span></div>
+            <div class="mrow lvl1 "><span><span class="lde">Magazin</span><span class="len">Magazine</span></span><span class="cx">›</span></div>
+            <div class="mtitle"><span class="lde">Bestseller</span><span class="len">Bestsellers</span></div>
+            <div class="bstrip">
+              <div class="bc"><div class="img"><span class="lde">LAZY 3 SITZER</span><span class="len">LAZY 3-SEATER</span></div><div class="nm"><span class="lde">Designer Sofa Lazy 3 Sitzer</span><span class="len">Lazy 3-Seater Designer Sofa</span></div><div class="rt"><span class="st">★★★★☆</span> <span class="lde">4,6</span><span class="len">4.6</span></div></div>
+              <div class="bc"><div class="img">BOSTON</div><div class="nm"><span class="lde">Polsterbett Boston Bouclé</span><span class="len">Boston Bouclé Upholstered Bed</span></div><div class="rt"><span class="st">★★★★★</span> <span class="lde">4,8</span><span class="len">4.8</span></div></div>
+              <div class="bc peek"><div class="img"></div></div>
+            </div>
+          </div></div></div>
+          <div class="note"><span class="dot">①</span><span><span class="lde">Zwölf Einträge auf der ersten Ebene, davon <b>„Home“ als Dublette des Logos</b>. Betten und Sofas haben keinen eigenen Einstieg — sie stecken in „Schlafzimmer“ und „Wohnzimmer“, gleichrangig mit Küche, Wohnaccessoires und Garten.</span><span class="len">Twelve first-level entries, one of which — <b>“Home” — duplicates the logo</b>. Beds and sofas have no entry of their own; they sit inside “Schlafzimmer” and “Wohnzimmer”, ranked equal to kitchen, home accessories and garden.</span></span></div>
+          <div class="note"><span class="dot">②</span><span><span class="lde">Die Bestseller-Karten stehen <b>unter</b> der kompletten Kategorieliste, mit dem rückläufigen Lazy 3 Sitzer als Aufmacher. Konto und Sprache &amp; Region folgen erst weiter unten.</span><span class="len">The bestseller cards sit <b>below</b> the full category list, led by the declining Lazy 3-Seater. Account and language &amp; region only appear further down.</span></span></div>
+          <div class="note"><span class="dot">③</span><span><span class="lde">Die beiden Konfiguratoren erscheinen doppelt: oben als „Am beliebtesten“ und noch einmal als eigener Ersteintrag. <b>FLASH SALES</b> in Großbuchstaben bricht zusätzlich die Typografie.</span><span class="len">Both configurators appear twice: at the top as “Am beliebtesten” and again as their own first-level entry. <b>FLASH SALES</b> in all caps also breaks the typography.</span></span></div>
+        </div>
+
+        <div class="col">
+          <div class="col-h"><span class="state after"><span class="lde">Nachher</span><span class="len">After</span></span><span class="lab"><span class="lde">Bestseller + 5 Gruppen</span><span class="len">Bestsellers + 5 groups</span></span></div>
+          <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+            <div class="anno"><span class="lde">Vorschlag · gesamtes Menü ohne Scrollen</span><span class="len">Proposal · whole menu without scrolling</span></div>
+            <div class="mhead"><span class="t"><span class="lde">Menü</span><span class="len">Menu</span></span><span class="x">✕</span></div>
+            <div class="hl" style="position:relative">
+              <span class="tagnum" style="top:-8px;left:8px">①</span>
+              <div class="mtitle"><span class="lde">Bestseller</span><span class="len">Bestsellers</span></div>
+              <div class="bstrip">
+            <div class="bc"><div class="img"><span class="lde">BOXSPRINGBETT</span><span class="len">BOX SPRING BED</span><span class="bdg">Bestseller</span></div><div class="nm"><span class="lde">Boxspringbett Cozy</span><span class="len">Cozy Box Spring Bed</span></div><div class="rt"><span class="st">★★★★★</span> <span class="lde">4,8</span><span class="len">4.8</span> · 214</div></div>
+            <div class="bc"><div class="img"><span class="lde">ECKSOFA</span><span class="len">CORNER SOFA</span><span class="bdg"><span class="lde">Im Trend</span><span class="len">Trending</span></span></div><div class="nm"><span class="lde">Ecksofa Verona</span><span class="len">Verona Corner Sofa</span></div><div class="rt"><span class="st">★★★★★</span> <span class="lde">4,7</span><span class="len">4.7</span> · 96</div></div>
+            <div class="bc peek"><div class="img"></div></div>
+            </div>
+            </div>
+            <div class="hl" style="position:relative">
+              <span class="tagnum" style="top:-8px;left:8px">②</span>
+              <div class="mtitle"><span class="lde">Einkaufen</span><span class="len">Shop</span></div>
+              <div class="promorow">
+                <span class="pl"><span class="lde">Neuheiten</span><span class="len">New Arrivals</span></span>
+                <span class="pl">Flash Sales</span>
+                <span class="pl">Outlet</span>
+              </div>
+              <div class="acc mnu">
+                <div class="q" tabindex="0" role="button"><span><span class="lde">Betten</span><span class="len">Beds</span></span><span class="cx">+</span></div>
+                <div class="a" style="display:none">
+                <div class="mgrouplbl"><span class="lde">Betten entdecken</span><span class="len">Explore Beds</span></div>
+                <div class="msub"><span class="lde">Alle Betten · Boxspringbetten · Polsterbetten · Sofort lieferbare Betten · Holzbetten · Kinderbetten</span><span class="len">All Beds · Box Spring Beds · Upholstered Beds · Beds Available for Immediate Delivery · Wooden Beds · Children’s Beds</span></div>
+                <div class="mgrouplbl"><span class="lde">Matratzen &amp; Schlafkomfort</span><span class="len">Mattresses &amp; Sleep Comfort</span></div>
+                <div class="msub"><span class="lde">Matratzen · Topper · Lattenroste</span><span class="len">Mattresses · Toppers · Slatted Bed Bases</span></div>
+                <div class="mgrouplbl"><span class="lde">Bett konfigurieren</span><span class="len">Configure a Bed</span></div>
+                <div class="msub"><span class="lde">Boxspringbett konfigurieren · Polsterbett konfigurieren</span><span class="len">Configure a Box Spring Bed · Configure an Upholstered Bed</span></div>
+                </div>
+                <div class="q" tabindex="0" role="button"><span><span class="lde">Sofas &amp; Sessel</span><span class="len">Sofas &amp; Armchairs</span></span><span class="cx">+</span></div>
+                <div class="a" style="display:none">
+                <div class="mgrouplbl"><span class="lde">Sofas entdecken</span><span class="len">Explore Sofas</span></div>
+                <div class="msub"><span class="lde">Alle Sofas · Sofort lieferbare Sofas · Sofas aus Cord · Sofas aus Bouclé · Elektrisch verstellbare Sofas · Sessel</span><span class="len">All Sofas · Sofas Available for Immediate Delivery · Corduroy Sofas · Bouclé Sofas · Electrically Adjustable Sofas · Armchairs</span></div>
+                <div class="mgrouplbl"><span class="lde">Sofa konfigurieren</span><span class="len">Configure a Sofa</span></div>
+                <div class="msub"><span class="lde">Ecksofa konfigurieren · Lazy Sofa konfigurieren</span><span class="len">Configure a Corner Sofa · Configure a Lazy Sofa</span></div>
+                </div>
+                <div class="q" tabindex="0" role="button"><span><span class="lde">Konfiguratoren</span><span class="len">Configurators</span></span><span class="cx">+</span></div>
+                <div class="a" style="display:none">
+                <div class="helper"><span class="lde">„Gestalte dein Möbelstück passend zu deinem Stil, deinen Maßen und deinen Bedürfnissen.“</span><span class="len">“Design your furniture to match your style, dimensions and needs.”</span></div>
+                <div class="mgrouplbl"><span class="lde">Dein Möbel konfigurieren</span><span class="len">Configure Your Furniture</span></div>
+                <div class="msub"><span class="lde">Boxspringbett konfigurieren · Polsterbett konfigurieren · Ecksofa konfigurieren · Lazy Sofa konfigurieren · Kleiderschrank konfigurieren</span><span class="len">Configure a Box Spring Bed · Configure an Upholstered Bed · Configure a Corner Sofa · Configure a Lazy Sofa · Configure a Wardrobe</span></div>
+                </div>
+                <div class="q" tabindex="0" role="button"><span><span class="lde">Möbel &amp; Wohnen</span><span class="len">Furniture &amp; Home</span></span><span class="cx">+</span></div>
+                <div class="a" style="display:none">
+                <div class="mgrouplbl"><span class="lde">Möbel</span><span class="len">Furniture</span></div>
+                <div class="msub"><span class="lde">Kleiderschränke · Nachttische · Esstische · Couchtische · Beistelltische · Stühle</span><span class="len">Wardrobes · Bedside Tables · Dining Tables · Coffee Tables · Side Tables · Chairs</span></div>
+                <div class="mgrouplbl"><span class="lde">Accessoires</span><span class="len">Accessories</span></div>
+                <div class="msub"><span class="lde">Wohnaccessoires · Beleuchtung · Geschirr &amp; Serviergeschirr · Tassen &amp; Gläser · Besteck &amp; Zubehör</span><span class="len">Home Accessories · Lighting · Tableware &amp; Serving Dishes · Cups &amp; Glasses · Cutlery &amp; Accessories</span></div>
+                <div class="mgrouplbl"><span class="lde">Weitere Wohnwelten</span><span class="len">More Living Areas</span></div>
+                <div class="msub"><span class="lde">Garten · Komplett-Kinderzimmer</span><span class="len">Garden · Complete Children’s Rooms</span></div>
+                </div>
+                <div class="q" tabindex="0" role="button"><span><span class="lde">Neu &amp; Angebote</span><span class="len">New &amp; Offers</span></span><span class="cx">+</span></div>
+                <div class="a" style="display:none">
+                <div class="mgrouplbl"><span class="lde">Aktuelle Angebote</span><span class="len">Current Offers</span></div>
+                <div class="msub"><span class="lde">Neuheiten · Flash Sales · Outlet · Sofort lieferbare Betten · Sofort lieferbare Sofas</span><span class="len">New Arrivals · Flash Sales · Outlet · Beds Available for Immediate Delivery · Sofas Available for Immediate Delivery</span></div>
+                </div>
+                </div>
+            </div>
+            <div class="acctb hl" style="position:relative">
+              <span class="tagnum" style="top:-8px;left:8px">③</span>
+              <div class="atc"><span class="lde">Anmelden / Registrieren</span><span class="len">Log in / Sign up</span></div>
+              <div class="sup"><span class="lde">Verwalte deine Anfragen, Bestellungen und gespeicherten Favoriten.</span><span class="len">Manage your enquiries, orders and saved favourites.</span></div>
+              <div class="sec"><span class="lde">Wunschliste</span><span class="len">Wishlist</span></div>
+            </div>
+            <div class="mrow lvl1"><span>Our Story</span><span class="cx">+</span></div>
+            <div class="grow"></div>
+            <div class="langrow hl tap" tabindex="0" role="button" data-opens="ov-lang" style="position:relative">
+              <span class="tagnum" style="top:-8px;left:8px">④</span>
+              <div><span class="lbl"><span class="lde">Sprache &amp; Region</span><span class="len">Language &amp; Region</span></span><span class="val"><span class="lde">Deutsch · Deutschland (EUR €)</span><span class="len">German · Germany (EUR €)</span></span></div>
+              <span class="cx">›</span>
+            </div>
+            <div class="overlay" id="ov-lang"><div class="sheet">
+              <div class="sh-h"><span class="t"><span class="lde">Sprache &amp; Region</span><span class="len">Language &amp; Region</span></span><span class="x" tabindex="0" role="button" data-close>✕</span></div>
+              <div class="optrow"><span>Deutschland · Deutsch · EUR €</span><span class="rd on"></span></div>
+              <div class="optrow"><span>Österreich · Deutsch · EUR €</span><span class="rd"></span></div>
+              <div class="optrow"><span>Schweiz · Deutsch · CHF</span><span class="rd"></span></div>
+              <div class="optrow"><span><span class="lde">Weitere Länder</span><span class="len">Other countries</span></span><span class="rd"></span></div>
+            </div></div>
+          </div></div></div>
+          <div class="note"><span class="dot">①</span><span><span class="lde">Vier Bestseller-Karten als <b>erstes Element im Drawer</b> — mobil eineinhalb Karten sichtbar, damit das horizontale Scrollen erkennbar ist. Mit Bild, Kurzname, Badge, Bewertung und Anzahl. Auswahl monatlich gegen Umsatz, Bestand und Lieferzeit prüfen.</span><span class="len">Four bestseller cards as the <b>first element in the drawer</b> — one and a half cards visible on mobile so the horizontal scroll reads as scrollable. Image, short name, badge, rating and review count. Review the selection monthly against sales, inventory and delivery time.</span></span></div>
+          <div class="note"><span class="dot">②</span><span><span class="lde">Direkt unter der Überschrift stehen <b>Neuheiten, Flash Sales und Outlet als Direktlinks</b> — ein Tap, kein Akkordeon. Darunter die fünf Gruppen, <b>beim Öffnen ausgeklappt</b>, jede Kategorie noch geschlossen. „Home“ ist entfallen, „Flash Sales“ steht in normaler Schreibweise. Tippen öffnet genau eine Kategorie — probiere es aus.</span><span class="len">Directly under the heading sit <b>New Arrivals, Flash Sales and Outlet as direct links</b> — one tap, no accordion. Below them the five groups, <b>the section open by default</b>, every category still closed. “Home” is gone; “Flash Sales” is in normal case. Tapping opens exactly one category — try it.</span></span></div>
+          <div class="note"><span class="dot">③</span><span><span class="lde">Der Konto-Block folgt <b>direkt nach der Shopping-Navigation</b>, nicht nach Service und Rechtlichem. Der Warenkorb bleibt im Header; das Konto-Icon kann nach Validierung entfallen.</span><span class="len">The account block follows <b>directly after the shopping navigation</b>, not after service and legal. The cart stays in the header; the account icon can be removed once validated.</span></span></div>
+          <div class="note"><span class="dot">④</span><span><span class="lde">Sprache &amp; Region als <b>letztes Bedienelement</b> — antippen öffnet Land, Sprache und Währung. Damit passt das komplette Menü in einen Viewport: Bestseller, fünf Gruppen, Konto, Our Story, Sprache.</span><span class="len">Language &amp; region as the <b>last control</b> — tapping it opens country, language and currency. With that, the complete menu fits in one viewport: bestsellers, five groups, account, Our Story, language.</span></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="framegroup">
+      <p class="frames-lab"><span class="lde">02 · Eine Kategorie geöffnet</span><span class="len">02 · One category expanded</span></p>
+      <div class="compare">
+        <div class="col">
+          <div class="col-h"><span class="state before"><span class="lde">Vorher</span><span class="len">Before</span></span><span class="lab"><span class="lde">Raumlogik, dritte Ebene</span><span class="len">Room logic, third level</span></span></div>
+          <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+            <div class="anno"><span class="lde">Live · schematisch</span><span class="len">Live · schematic</span></div>
+            <div class="mhead"><span class="t"><span class="lde">Menü</span><span class="len">Menu</span></span><span class="x">✕</span></div>
+            <div class="mrow lvl1 mut"><span><span class="lde">Garten</span><span class="len">Garden</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1 mut ctx"><span><span class="lde">Konfiguratoren</span><span class="len">Configurators</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1 on"><span><span class="lde">Schlafzimmer</span><span class="len">Bedroom</span></span><span class="cx">−</span></div>
+            <div class="msub"><span><span class="lde">Betten</span><span class="len">Beds</span></span><span class="cx">−</span></div>
+            <div class="msub" style="padding-left:34px"><span><span class="lde">Boxspringbetten</span><span class="len">Box Spring Beds</span></span><span class="tag"><span class="lde">3. Ebene</span><span class="len">3rd level</span></span></div>
+            <div class="msub" style="padding-left:34px"><span><span class="lde">Polsterbetten</span><span class="len">Upholstered Beds</span></span><span class="tag"><span class="lde">3. Ebene</span><span class="len">3rd level</span></span></div>
+            <div class="msub" style="padding-left:34px"><span><span class="lde">Holzbetten</span><span class="len">Wooden Beds</span></span><span class="tag"><span class="lde">3. Ebene</span><span class="len">3rd level</span></span></div>
+            <div class="msub"><span><span class="lde">Matratzen</span><span class="len">Mattresses</span></span><span class="cx">+</span></div>
+            <div class="msub"><span><span class="lde">Lattenroste</span><span class="len">Slatted Bed Bases</span></span></div>
+            <div class="msub"><span><span class="lde">Nachttische</span><span class="len">Bedside Tables</span></span></div>
+            <div class="msub"><span><span class="lde">Kleiderschränke</span><span class="len">Wardrobes</span></span></div>
+            <div class="mrow lvl1 mut"><span><span class="lde">Wohnzimmer</span><span class="len">Living Room</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1 mut"><span><span class="lde">Küche</span><span class="len">Kitchen</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1 mut"><span><span class="lde">Wohnaccessoires</span><span class="len">Home Accessories</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1 mut"><span><span class="lde">Kinder</span><span class="len">Children</span></span><span class="cx">+</span></div>
+            <div class="grow"></div>
+            <div class="scrollhint warn"><span class="lde">Tiefe je Zweig unterschiedlich</span><span class="len">Depth varies per branch</span></div>
+          </div></div></div>
+          <div class="note"><span class="dot">①</span><span><span class="lde">Schematische Darstellung des heutigen Verhaltens: unter „Betten“ folgt <b>eine dritte Ebene</b>, während andere Zweige direkt auf Collections zeigen. <span class="n2">Die genaue Untertiefe je Zweig ist vor dem Build gegen die Theme-Menükonfiguration zu prüfen.</span></span><span class="len">Schematic view of today’s behaviour: under “Betten” a <b>third level</b> follows, while other branches point straight at collections. <span class="n2">Confirm the exact sub-depth per branch against the theme’s menu configuration before build.</span></span></span></div>
+        </div>
+
+        <div class="col">
+          <div class="col-h"><span class="state after"><span class="lde">Nachher</span><span class="len">After</span></span><span class="lab"><span class="lde">Betten geöffnet, zwei Ebenen</span><span class="len">Beds expanded, two levels</span></span></div>
+          <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+            <div class="anno"><span class="lde">Vorschlag · nur ein Akkordeon offen</span><span class="len">Proposal · only one accordion open</span></div>
+            <div class="mhead"><span class="t"><span class="lde">Menü</span><span class="len">Menu</span></span><span class="x">✕</span></div>
+            <div class="promorow">
+              <span class="pl"><span class="lde">Neuheiten</span><span class="len">New Arrivals</span></span>
+              <span class="pl">Flash Sales</span>
+              <span class="pl">Outlet</span>
+            </div>
+            <div class="mrow lvl1 on"><span><span class="lde">Betten</span><span class="len">Beds</span></span><span class="cx">−</span></div>
+            <div class="hl" style="position:relative">
+            <span class="tagnum" style="top:-8px;left:8px">①</span>
+            <div class="mgrouplbl"><span class="lde">Betten entdecken</span><span class="len">Explore Beds</span></div>
+            <div class="msub top"><span><span class="lde">Alle Betten</span><span class="len">All Beds</span></span><span class="tag">Top</span></div>
+            <div class="msub"><span><span class="lde">Boxspringbetten</span><span class="len">Box Spring Beds</span></span></div>
+            <div class="msub"><span><span class="lde">Polsterbetten</span><span class="len">Upholstered Beds</span></span></div>
+            <div class="msub"><span><span class="lde">Sofort lieferbare Betten</span><span class="len">Beds Available for Immediate Delivery</span></span></div>
+            <div class="msub"><span><span class="lde">Holzbetten</span><span class="len">Wooden Beds</span></span></div>
+            <div class="msub"><span><span class="lde">Kinderbetten</span><span class="len">Children’s Beds</span></span></div>
+            <div class="mgrouplbl"><span class="lde">Matratzen &amp; Schlafkomfort</span><span class="len">Mattresses &amp; Sleep Comfort</span></div>
+            <div class="msub"><span><span class="lde">Matratzen</span><span class="len">Mattresses</span></span></div>
+            <div class="msub"><span><span class="lde">Topper</span><span class="len">Toppers</span></span></div>
+            <div class="msub"><span><span class="lde">Lattenroste</span><span class="len">Slatted Bed Bases</span></span></div>
+            <div class="mgrouplbl"><span class="lde">Bett konfigurieren</span><span class="len">Configure a Bed</span></div>
+            <div class="msub"><span><span class="lde">Boxspringbett konfigurieren</span><span class="len">Configure a Box Spring Bed</span></span></div>
+            <div class="msub"><span><span class="lde">Polsterbett konfigurieren</span><span class="len">Configure an Upholstered Bed</span></span></div>
+            </div>
+            <div class="mrow lvl1"><span><span class="lde">Sofas &amp; Sessel</span><span class="len">Sofas &amp; Armchairs</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1"><span><span class="lde">Konfiguratoren</span><span class="len">Configurators</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1"><span><span class="lde">Möbel &amp; Wohnen</span><span class="len">Furniture &amp; Home</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1"><span><span class="lde">Neu &amp; Angebote</span><span class="len">New &amp; Offers</span></span><span class="cx">+</span></div>
+            <div class="grow"></div>
+          </div></div></div>
+          <div class="note"><span class="dot">①</span><span><span class="lde">Zwölf Ziele unter „Betten“ in <b>drei benannten Blöcken</b> statt einer flachen Liste: entdecken, Schlafkomfort, konfigurieren. Keine dritte Ebene — Material, Größe und Ausstattung bleiben Filter auf der Collection-Seite. „Alle Betten“ ist gleichzeitig das Ziel der Gruppenüberschrift.</span><span class="len">Twelve destinations under “Beds” in <b>three named blocks</b> instead of one flat list: explore, sleep comfort, configure. No third level — material, size and feature options stay collection-page filters. “All Beds” doubles as the group heading’s own destination.</span></span></div>
+          <div class="note"><span class="dot">②</span><span><span class="lde">Die drei Direktlinks bleiben oben stehen, auch wenn eine Kategorie geöffnet ist. Die vier anderen Gruppen bleiben sichtbar und geschlossen; wird eine davon geöffnet, schließt „Betten“ — <b>nie mehr als ein Akkordeon</b>.</span><span class="len">The three direct links stay in place even while a category is expanded. The other four groups stay visible and closed; opening one of them closes “Beds” — <b>never more than one accordion</b>.</span></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="pagenav">
+      <button data-go="overview"><span><span class="lde">Zurück</span><span class="len">Previous</span></span><span class="lde">← Übersicht</span><span class="len">← Overview</span></button>
+      <button class="nx" data-go="b2"><span><span class="lde">Weiter</span><span class="len">Next</span></span><span class="lde">Mobil · Konto &amp; Service →</span><span class="len">Mobile · Account &amp; service →</span></button>
+    </div>
+  </div>
+</div></div></div></section>
+<!-- ==================== B2 · MOBIL KONTO &amp; SERVICE ==================== -->
+<section class="page" id="page-b2"><div class="test"><div class="wrap"><div class="test-grid">
+  <div class="test-info">
+    <div class="thead"><span class="hid">T1</span><span class="lnk"></span><span class="pgbadge"><span class="lde">Drawer · unten</span><span class="len">Drawer · lower half</span></span><span class="lnk"></span><span class="stbadge"><span class="lde">Briefing</span><span class="len">Briefed</span></span></div>
+    <h2><span class="lde">Konto im Menü, Service in einer Gruppe</span><span class="len">Account in the menu, service in one group</span></h2>
+    <p class="tsub lde">Derselbe Test, zweite Hälfte des Drawers. Das Konto wandert aus dem Header in das Menü und steht direkt nach der Shopping-Navigation. Alles Übrige — Content, Support, Unternehmen, Rechtliches und Social — liegt in einer einzigen eingeklappten Gruppe „Our Story“, ohne die erste Ebene zu verlängern. Der Sprachumschalter ist das letzte Element.</p>
+      <p class="tsub len">The same test, lower half of the drawer. The account action moves out of the header into the menu, directly after the shopping navigation. Everything else — content, support, company, legal and social — lives in one collapsed “Our Story” group, without extending the first level. The language switcher is the last element.</p>
+    <dl class="mlist">
+      <div><dt>KPIs</dt><dd><span class="lde">Login-/Registrierungsrate · Support-Link-Klicks · Sessions Converted</span><span class="len">Login/sign-up rate · Support link clicks · Sessions Converted</span></dd></div>
+      <div><dt><span class="lde">Zielgruppe</span><span class="len">Targeting</span></dt><dd><span class="lde">Alle Seiten · Menü-Drawer, unterer Bereich</span><span class="len">All pages · menu drawer, lower area</span></dd></div>
+      <div><dt>Segment</dt><dd><span class="lde">Alle Besucher; angemeldete und nicht angemeldete getrennt betrachten</span><span class="len">All visitors; look at logged-in and logged-out separately</span></dd></div>
+      <div><dt>Tool</dt><dd><span class="lde">Experiment-Plattform</span><span class="len">Experiment platform</span></dd></div>
+      <div><dt><span class="lde">Datenlage</span><span class="len">Evidence</span></dt><dd><span class="lde">Service- und Unternehmenslinks liegen heute ausschließlich im Footer, verteilt über drei Spalten mit 13 bzw. 7 gleichrangigen Einträgen.</span><span class="len">Service and company links today live only in the footer, spread across three columns with 13 and 7 equally weighted entries.</span></dd></div>
+      <div><dt><span class="lde">A/B-Test-ID</span><span class="len">A/B test ID</span></dt><dd class="tid-ref">MC_NAV_ACCOUNT_IN_MENU_OUR_STORY_GROUP_LUXUSBETTEN24</dd></div>
+    </dl>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4>
+      <p class=" lde">Das Konto ist ein unbeschriftetes Header-Icon neben Suche, Wunschliste und Warenkorb — vier Icons ohne Kontext. Service, Unternehmen und Rechtliches sind nur im Footer erreichbar: 13 Links unter „Über uns“ und 7 unter „Rechtliches“, alle mit gleicher visueller Gewichtung. Support ist damit genauso schwer zu finden wie das Impressum.</p>
+      <p class=" len">The account is an unlabelled header icon next to search, wishlist and cart — four icons without context. Service, company and legal destinations are only reachable in the footer: 13 links under “Über uns” and 7 under “Rechtliches”, all with the same visual weight. Support is therefore as hard to find as the legal notice.</p>
+      </div>
+      <div class="box"><h4><span class="lde">Lösung</span><span class="len">Solution</span></h4>
+      <p class=" lde">Ein beschrifteter Button „Anmelden / Registrieren“ mit erklärendem Satz und Wunschliste als Sekundärlink, direkt nach der Shopping-Navigation. Danach eine eingeklappte Gruppe „Our Story“ mit zwei Direktlinks und drei Akkordeons — Hilfe &amp; Service, Unsere Geschichte, Rechtliches — plus Social-Icons. Innerhalb von „Hilfe &amp; Service“ haben FAQ, „Ich brauche Hilfe“ und Einrichtungsberater die höchste Priorität.</p>
+      <p class=" len">A labelled “Log in / Sign up” button with a supporting sentence and Wishlist as a secondary link, directly after the shopping navigation. Then a collapsed “Our Story” group with two direct links and three accordions — Help &amp; Service, About Us, Legal — plus social icons. Within “Help &amp; Service”, FAQ, “I need help” and the interior advisor get the highest priority.</p>
+      </div>
+    </div>
+    <div class="hyp">
+      <span class="hyp-lbl"><span class="lde">Hypothese</span><span class="len">Hypothesis</span></span>
+      <div class="lde">
+        <p class="hline"><b>WENN</b> wir das Konto als beschrifteten Button in das Menü holen und alle Service-, Unternehmens- und Rechtslinks in eine eingeklappte Gruppe „Our Story“ mit klarer Priorisierung bündeln,</p>
+        <p class="hline"><b>DANN</b> steigen Logins und Registrierungen sowie die Klicks auf Support-Ziele, ohne dass die Shopping-Navigation Platz verliert,</p>
+        <p class="hline"><b>WEIL</b> ein beschrifteter Button mit Nutzenversprechen erklärt, was hinter dem bisherigen Icon lag, und weil Support-Links nicht länger zwischen 20 gleich aussehenden Footer-Einträgen liegen.</p>
+      </div>
+      <div class="len">
+        <p class="hline"><b>IF</b> we move the account into the menu as a labelled button and bundle every service, company and legal link into a collapsed “Our Story” group with clear priority,</p>
+        <p class="hline"><b>THEN</b> logins and sign-ups will rise along with clicks on support destinations, without the shopping navigation losing space,</p>
+        <p class="hline"><b>BECAUSE</b> a labelled button with a benefit line explains what the icon used to hide, and because support links no longer sit among 20 identical-looking footer entries.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="test-frames">
+    <div class="framegroup">
+      <p class="frames-lab"><span class="lde">01 · Konto und Utility-Ebene</span><span class="len">01 · Account and utility layer</span></p>
+      <div class="compare">
+        <div class="col">
+          <div class="col-h"><span class="state before"><span class="lde">Vorher</span><span class="len">Before</span></span><span class="lab"><span class="lde">Icon im Header, Rest im Footer</span><span class="len">Header icon, the rest in the footer</span></span></div>
+          <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+            <div class="anno"><span class="lde">Live · vier Icons, kein Label</span><span class="len">Live · four icons, no label</span></div>
+            <div class="head hl" style="position:relative">
+              <span class="tagnum" style="top:-8px;left:8px">①</span>
+              <span class="ico">≡</span><span class="logo">LUXUSBETTEN24</span><span class="ico">⌕ ♡ ⛒</span>
+            </div>
+            <div class="scrollhint warn"><span class="lde">↓ Service, Unternehmen und Rechtliches: erst am Seitenende</span><span class="len">↓ service, company and legal: only at the bottom of the page</span></div>
+            <div class="grow"></div>
+            <div class="divider"></div>
+            <div class="footcols hl" style="position:relative">
+              <span class="tagnum" style="top:-8px;left:8px">②</span>
+              <div>
+                <div class="h"><span class="lde">Rechtliches</span><span class="len">Legal</span></div>
+                <span class="l"><span class="lde">AGB &amp; Kundeninformationen</span><span class="len">Terms and Customer Information</span></span>
+                <span class="l"><span class="lde">Datenschutzerklärung</span><span class="len">Privacy Policy</span></span>
+                <span class="l"><span class="lde">Impressum</span><span class="len">Legal Notice</span></span>
+                <span class="l"><span class="lde">Widerrufsbelehrung &amp; Formular</span><span class="len">Withdrawal Policy &amp; Form</span></span>
+                <span class="l"><span class="lde">Cookie-Richtlinie</span><span class="len">Cookie Policy</span></span>
+                <span class="l"><span class="lde">Garantiebedingungen</span><span class="len">Warranty Terms</span></span>
+                <span class="l"><span class="lde">Hier widerrufen / stornieren</span><span class="len">Withdraw / cancel here</span></span>
+              </div>
+              <div>
+                <div class="h"><span class="lde">Über uns</span><span class="len">About us</span></div>
+                <span class="l"><span class="lde">Einrichtungsberater</span><span class="len">Interior advisor</span></span>
+                <span class="l"><span class="lde">Zahlung &amp; Versand</span><span class="len">Payment &amp; shipping</span></span>
+                <span class="l"><span class="lde">Über Uns</span><span class="len">About us</span></span>
+                <span class="l">Showroom</span>
+                <span class="l"><span class="lde">FAQ - Hilfebereich</span><span class="len">FAQ – help centre</span></span>
+                <span class="l"><span class="lde">Gemeinsam einrichten</span><span class="len">Plan together</span></span>
+                <span class="l"><span class="lde">Umzugs Checkliste</span><span class="len">Moving checklist</span></span>
+                <span class="l"><span class="lde">Shop Bewertungen</span><span class="len">Store reviews</span></span>
+                <span class="l"><span class="lde">Nachhaltigkeit</span><span class="len">Sustainability</span></span>
+                <span class="l"><span class="lde">Magazin</span><span class="len">Magazine</span></span>
+                <span class="l"><span class="lde">Influencer Kooperationen</span><span class="len">Influencer partnerships</span></span>
+                <span class="l"><span class="lde">B2B Kooperationen</span><span class="len">B2B partnerships</span></span>
+                <span class="l"><span class="lde">Jobs &amp; Karriere</span><span class="len">Jobs &amp; careers</span></span>
+              </div>
+              <div>
+                <div class="h"><span class="lde">Kontakt</span><span class="len">Contact</span></div>
+                <span class="l">Help Center</span>
+                <span class="l">0511 87989379</span>
+                <span class="l"><span class="lde">Mo–Fr 9–17 Uhr</span><span class="len">Mon–Fri 9am–5pm</span></span>
+                <span class="l">Jathostrasse 11a, 30163 Hannover</span>
+              </div>
+            </div>
+            <div class="socrow"><i></i><i></i><i></i><i></i></div>
+          </div></div></div>
+          <div class="note"><span class="dot">①</span><span><span class="lde">Vier Icons im Header — Suche, Wunschliste, Konto, Warenkorb — <b>keines beschriftet</b>. Was hinter dem Konto-Icon liegt (Anfragen, Bestellungen, Favoriten), erfährt niemand vor dem Klick.</span><span class="len">Four header icons — search, wishlist, account, cart — <b>none of them labelled</b>. What sits behind the account icon (enquiries, orders, favourites) is invisible before the click.</span></span></div>
+          <div class="note"><span class="dot">②</span><span><span class="lde">20 Service-, Unternehmens- und Rechtslinks in <b>gleicher visueller Gewichtung</b> am Seitenende. „FAQ - Hilfebereich“ steht zwischen Showroom und Umzugs-Checkliste; das Impressum wirkt genauso wichtig wie der Einrichtungsberater.</span><span class="len">20 service, company and legal links at the bottom of the page, all in <b>the same visual weight</b>. “FAQ - Hilfebereich” sits between the showroom and the moving checklist; the legal notice looks as important as the interior advisor.</span></span></div>
+        </div>
+
+        <div class="col">
+          <div class="col-h"><span class="state after"><span class="lde">Nachher</span><span class="len">After</span></span><span class="lab"><span class="lde">Konto-Button + „Our Story“</span><span class="len">Account button + “Our Story”</span></span></div>
+          <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+            <div class="anno"><span class="lde">Vorschlag · Our Story geöffnet</span><span class="len">Proposal · Our Story expanded</span></div>
+            <div class="mhead"><span class="t"><span class="lde">Menü</span><span class="len">Menu</span></span><span class="x">✕</span></div>
+            <div class="promorow">
+              <span class="pl"><span class="lde">Neuheiten</span><span class="len">New Arrivals</span></span>
+              <span class="pl">Flash Sales</span>
+              <span class="pl">Outlet</span>
+            </div>
+            <div class="mrow lvl1 mut ctx"><span><span class="lde">Betten</span><span class="len">Beds</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1 mut ctx"><span><span class="lde">Sofas &amp; Sessel</span><span class="len">Sofas &amp; Armchairs</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1 mut"><span><span class="lde">Konfiguratoren</span><span class="len">Configurators</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1 mut ctx"><span><span class="lde">Möbel &amp; Wohnen</span><span class="len">Furniture &amp; Home</span></span><span class="cx">+</span></div>
+            <div class="mrow lvl1 mut ctx"><span><span class="lde">Neu &amp; Angebote</span><span class="len">New &amp; Offers</span></span><span class="cx">+</span></div>
+            <div class="acctb hl" style="position:relative">
+              <span class="tagnum" style="top:-8px;left:8px">①</span>
+              <div class="atc"><span class="lde">Anmelden / Registrieren</span><span class="len">Log in / Sign up</span></div>
+              <div class="sup"><span class="lde">Verwalte deine Anfragen, Bestellungen und gespeicherten Favoriten.</span><span class="len">Manage your enquiries, orders and saved favourites.</span></div>
+              <div class="sec"><span class="lde">Wunschliste</span><span class="len">Wishlist</span></div>
+            </div>
+            <div class="acc mnu hl" style="position:relative">
+              <span class="tagnum" style="top:-8px;left:8px">②</span>
+              <div class="q open" tabindex="0" role="button"><span>Our Story</span><span class="cx">−</span></div>
+              <div class="a">
+                <div class="msub top"><span><span class="lde">Alle Produkte</span><span class="len">All Products</span></span></div>
+                <div class="msub top"><span><span class="lde">Magazin</span><span class="len">Magazine</span></span></div>
+                <div class="q sub" tabindex="0" role="button"><span><span class="lde">Hilfe &amp; Service</span><span class="len">Help &amp; Service</span></span><span class="cx">+</span></div>
+                <div class="a" style="display:none"><div class="msub"><span class="lde">FAQ · Ich brauche Hilfe · Einrichtungsberater · …</span><span class="len">FAQ · I need help · Interior advisor · …</span></div></div>
+                <div class="q sub" tabindex="0" role="button"><span><span class="lde">Unsere Geschichte</span><span class="len">About Us</span></span><span class="cx">+</span></div>
+                <div class="a" style="display:none"><div class="msub"><span class="lde">Über uns · Nachhaltigkeit · Magazin · Jobs · B2B · Influencer</span><span class="len">About us · Sustainability · Magazine · Jobs · B2B · Influencer</span></div></div>
+                <div class="q sub" tabindex="0" role="button"><span><span class="lde">Rechtliches</span><span class="len">Legal</span></span><span class="cx">+</span></div>
+                <div class="a" style="display:none"><div class="msub"><span class="lde">AGB · Datenschutz · Impressum · Widerruf · Cookies · Garantie</span><span class="len">Terms · Privacy · Legal notice · Withdrawal · Cookies · Warranty</span></div></div>
+                <div class="socrow"><i></i><i></i><i></i><i></i></div>
+              </div>
+            </div>
+            <div class="grow"></div>
+            <div class="langrow">
+              <div><span class="lbl"><span class="lde">Sprache &amp; Region</span><span class="len">Language &amp; Region</span></span><span class="val"><span class="lde">Deutsch · Deutschland (EUR €)</span><span class="len">German · Germany (EUR €)</span></span></div>
+              <span class="cx">›</span>
+            </div>
+          </div></div></div>
+          <div class="note"><span class="dot">①</span><span><span class="lde"><b>Ein beschrifteter Button</b> statt eines Icons, mit erklärendem Satz: „Verwalte deine Anfragen, Bestellungen und gespeicherten Favoriten.“ Die Wunschliste bleibt als Sekundärlink darunter. Position: direkt nach der Shopping-Navigation, nicht nach Service und Rechtlichem.</span><span class="len"><b>One labelled button</b> instead of an icon, with a supporting line: “Manage your enquiries, orders and saved favourites.” The wishlist stays below it as a secondary link. Position: directly after the shopping navigation, not after service and legal.</span></span></div>
+          <div class="note"><span class="dot">②</span><span><span class="lde">Eine einzige Utility-Gruppe fasst 25 Ziele zusammen: zwei Direktlinks (Alle Produkte, Magazin) und drei Akkordeons. Die erste Ebene bekommt dadurch <b>keinen einzigen neuen Eintrag</b>. Antippen der Unterpunkte funktioniert im Wireframe.</span><span class="len">A single utility group holds 25 destinations: two direct links (All Products, Magazine) and three accordions. The first level gains <b>not one additional entry</b>. Tapping the sub-items works in this wireframe.</span></span></div>
+          <div class="note"><span class="dot">③</span><span><span class="lde">„Magazin“ erscheint bewusst zweimal — als Direktlink und in „Unsere Geschichte“ — weil es sowohl Content-Ziel als auch Markeninformation ist.</span><span class="len">“Magazine” deliberately appears twice — as a direct link and inside “About Us” — because it works as both a content destination and a brand-information destination.</span></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="framegroup">
+      <p class="frames-lab"><span class="lde">02 · Hilfe &amp; Service geöffnet</span><span class="len">02 · Help &amp; Service expanded</span></p>
+      <div class="compare">
+        <div class="col">
+          <div class="col-h"><span class="state before"><span class="lde">Vorher</span><span class="len">Before</span></span><span class="lab"><span class="lde">13 Links ohne Rangfolge</span><span class="len">13 links, no ranking</span></span></div>
+          <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+            <div class="anno"><span class="lde">Live · Footer „Über uns“</span><span class="len">Live · footer “Über uns”</span></div>
+            <div class="mtitle"><span class="lde">Über uns</span><span class="len">About us</span></div>
+            <div class="msub"><span><span class="lde">Einrichtungsberater</span><span class="len">Interior advisor</span></span></div>
+            <div class="msub"><span><span class="lde">Zahlung &amp; Versand</span><span class="len">Payment &amp; shipping</span></span></div>
+            <div class="msub"><span><span class="lde">Über Uns</span><span class="len">About us</span></span></div>
+            <div class="msub"><span>Showroom</span></div>
+            <div class="msub"><span><span class="lde">FAQ - Hilfebereich</span><span class="len">FAQ – help centre</span></span></div>
+            <div class="msub"><span><span class="lde">Gemeinsam einrichten</span><span class="len">Plan together</span></span></div>
+            <div class="msub"><span><span class="lde">Umzugs Checkliste</span><span class="len">Moving checklist</span></span></div>
+            <div class="msub"><span><span class="lde">Shop Bewertungen</span><span class="len">Store reviews</span></span></div>
+            <div class="msub"><span><span class="lde">Nachhaltigkeit</span><span class="len">Sustainability</span></span></div>
+            <div class="msub"><span><span class="lde">Magazin</span><span class="len">Magazine</span></span></div>
+            <div class="msub"><span><span class="lde">Influencer Kooperationen</span><span class="len">Influencer partnerships</span></span></div>
+            <div class="msub"><span><span class="lde">B2B Kooperationen</span><span class="len">B2B partnerships</span></span></div>
+            <div class="msub"><span><span class="lde">Jobs &amp; Karriere</span><span class="len">Jobs &amp; careers</span></span></div>
+            <div class="mtitle"><span class="lde">Rechtliches</span><span class="len">Legal</span></div>
+            <div class="msub"><span><span class="lde">AGB · Cookies · Datenschutz · Impressum · …</span><span class="len">Terms · Cookies · Privacy · Legal notice · …</span></span></div>
+            <div class="grow"></div>
+            <div class="scrollhint warn"><span class="lde">Support und Rechtliches gleich gewichtet</span><span class="len">Support and legal weighted the same</span></div>
+          </div></div></div>
+          <div class="note"><span class="dot">①</span><span><span class="lde">13 Einträge in <b>Anmeldereihenfolge, nicht in Nutzenreihenfolge</b>. „FAQ - Hilfebereich“ steht auf Platz fünf, Einrichtungsberater auf Platz eins, Jobs und B2B stehen daneben. Support, Marke und Karriere teilen dieselbe Liste.</span><span class="len">13 entries in <b>the order they were added, not the order of usefulness</b>. “FAQ - Hilfebereich” sits in fifth place, the interior advisor in first, jobs and B2B alongside them. Support, brand and careers share one list.</span></span></div>
+        </div>
+
+        <div class="col">
+          <div class="col-h"><span class="state after"><span class="lde">Nachher</span><span class="len">After</span></span><span class="lab"><span class="lde">Support zuerst, Recht zuletzt</span><span class="len">Support first, legal last</span></span></div>
+          <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen">
+            <div class="anno"><span class="lde">Vorschlag · Priorisierung sichtbar</span><span class="len">Proposal · priority made visible</span></div>
+            <div class="mrow lvl1 on"><span>Our Story</span><span class="cx">−</span></div>
+            <div class="acc mnu">
+              <div class="q sub open" tabindex="0" role="button"><span><span class="lde">Hilfe &amp; Service</span><span class="len">Help &amp; Service</span></span><span class="cx">−</span></div>
+              <div class="a">
+                <div class="hl" style="position:relative">
+                  <span class="tagnum" style="top:-8px;left:8px">①</span>
+                  <div class="msub top"><span><span class="lde">FAQ &amp; Hilfebereich</span><span class="len">FAQ &amp; Help Center</span></span><span class="tag"><span class="lde">Priorität</span><span class="len">Priority</span></span></div>
+                  <div class="msub top"><span><span class="lde">Ich brauche Hilfe</span><span class="len">I Need Help</span></span><span class="tag"><span class="lde">Priorität</span><span class="len">Priority</span></span></div>
+                  <div class="msub top"><span><span class="lde">Einrichtungsberater</span><span class="len">Interior Design Advisor</span></span><span class="tag"><span class="lde">Priorität</span><span class="len">Priority</span></span></div>
+                </div>
+                <div class="msub"><span><span class="lde">Gemeinsam einrichten</span><span class="len">Plan Your Interior Together</span></span></div>
+                <div class="msub"><span><span class="lde">Zahlung &amp; Versand</span><span class="len">Payment &amp; Shipping</span></span></div>
+                <div class="msub"><span><span class="lde">Widerrufen oder stornieren</span><span class="len">Cancel or Withdraw an Order</span></span></div>
+                <div class="msub"><span><span class="lde">Garantie &amp; Garantieleistungen</span><span class="len">Warranty &amp; Warranty Services</span></span></div>
+                <div class="msub"><span>Showroom</span></div>
+                <div class="msub"><span><span class="lde">Shop-Bewertungen</span><span class="len">Store Reviews</span></span></div>
+                <div class="msub"><span><span class="lde">Umzugs-Checkliste</span><span class="len">Moving Checklist</span></span></div>
+                <div class="msub"><span><span class="lde">Telefon: 0511 87989379</span><span class="len">Phone: +49 511 87989379</span></span></div>
+              </div>
+              <div class="q sub" tabindex="0" role="button"><span><span class="lde">Unsere Geschichte</span><span class="len">About Us</span></span><span class="cx">+</span></div>
+              <div class="a" style="display:none"><div class="msub"><span class="lde">Über uns · Nachhaltigkeit · Magazin · Jobs · B2B · Influencer</span><span class="len">About us · Sustainability · Magazine · Jobs · B2B · Influencer</span></div></div>
+              <div class="q sub" tabindex="0" role="button"><span><span class="lde">Rechtliches</span><span class="len">Legal</span></span><span class="cx">+</span></div>
+              <div class="a" style="display:none"><div class="msub"><span class="lde">AGB · Datenschutz · Impressum · Widerruf · Cookies · Garantie</span><span class="len">Terms · Privacy · Legal notice · Withdrawal · Cookies · Warranty</span></div></div>
+            </div>
+            <div class="socrow"><i></i><i></i><i></i><i></i></div>
+            <div class="grow"></div>
+            <div class="langrow">
+              <div><span class="lbl"><span class="lde">Sprache &amp; Region</span><span class="len">Language &amp; Region</span></span><span class="val"><span class="lde">Deutsch · Deutschland (EUR €)</span><span class="len">German · Germany (EUR €)</span></span></div>
+              <span class="cx">›</span>
+            </div>
+          </div></div></div>
+          <div class="note"><span class="dot">①</span><span><span class="lde">Dieselben Ziele, aber <b>FAQ &amp; Hilfebereich, „Ich brauche Hilfe“ und Einrichtungsberater stehen oben</b> und visuell stärker. Zahlung, Widerruf, Garantie, Showroom, Bewertungen, Umzugs-Checkliste und die Telefonnummer folgen. Marke und Karriere sitzen in „Unsere Geschichte“, Rechtliches im letzten Akkordeon.</span><span class="len">The same destinations, but <b>FAQ &amp; Help Center, “I need help” and the interior advisor sit at the top</b> and carry more visual weight. Payment, withdrawal, warranty, showroom, reviews, moving checklist and the phone number follow. Brand and careers live in “About Us”, legal in the last accordion.</span></span></div>
+          <div class="note"><span class="dot">②</span><span><span class="lde">Social-Icons ganz unten, direkt nach dem Rechtsblock — und darunter <b>als letztes Bedienelement</b> Sprache &amp; Region. Der Footer behält seine Links; das Menü verdoppelt sie nicht, sondern priorisiert sie.</span><span class="len">Social icons at the very bottom, directly after the legal block — and below them, <b>as the last control</b>, language &amp; region. The footer keeps its links; the menu does not duplicate them, it prioritises them.</span></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="pagenav">
+      <button data-go="b1"><span><span class="lde">Zurück</span><span class="len">Previous</span></span><span class="lde">← Mobil · Shopping</span><span class="len">← Mobile · Shopping</span></button>
+      <button class="nx" data-go="b3"><span><span class="lde">Weiter</span><span class="len">Next</span></span>Desktop →</button>
+    </div>
+  </div>
+</div></div></div></section>
+
+<!-- ==================== B3 · DESKTOP ==================== -->
+<section class="page" id="page-b3"><div class="block"><div class="wrap">
+  <div class="section-lab">Desktop</div>
+  <h2 class="sec"><span class="lde">Gleiche Struktur, andere Darstellung</span><span class="len">Same structure, different presentation</span></h2>
+  <p class="lede lde">Der Desktop nutzt dieselbe Informationsarchitektur wie der mobile Drawer — nur breiter dargestellt. Vier Bestseller-Karten in einer Reihe oben, darunter die fünf Einkaufsgruppen als Spalten mit standardmäßig geöffnetem Panel, dann der Konto-Block, „Our Story“ eingeklappt und der Sprachumschalter zuletzt. Warenkorb, Suche und Favoriten bleiben im Header; die Suche wird im Menü nicht wiederholt.</p>
+      <p class="lede len">Desktop uses the same information architecture as the mobile drawer, just presented wider. Four bestseller cards in a row at the top, the five shopping groups below as columns with the default panel open, then the account block, “Our Story” collapsed, and the language switcher last. Cart, search and favourites stay in the header; search is not duplicated inside the menu.</p>
+  <div class="compare stack" style="margin-top:32px">
+    <div class="col">
+      <div class="col-h" style="justify-content:flex-start"><span class="state before"><span class="lde">Vorher</span><span class="len">Before</span></span><span class="lab"><span class="lde">12 Einträge in der Leiste, eine lange Spalte</span><span class="len">12 entries in the bar, one long column</span></span></div>
+      <div class="dscroll"><div class="deskframe">
+        <div class="deskbar"><i></i><i></i><i></i><span class="url">luxusbetten24.de</span></div>
+        <div class="dnav">
+          <span class="lg">LUXUSBETTEN24</span>
+          <span class="it">Home</span>
+          <span class="it"><span class="lde">Garten</span><span class="len">Garden</span></span>
+          <span class="it"><span class="lde">Konfiguratoren</span><span class="len">Configurators</span></span>
+          <span class="it on"><span class="lde">Schlafzimmer</span><span class="len">Bedroom</span></span>
+          <span class="it"><span class="lde">Wohnzimmer</span><span class="len">Living Room</span></span>
+          <span class="it"><span class="lde">Küche</span><span class="len">Kitchen</span></span>
+          <span class="it"><span class="lde">Wohnaccessoires</span><span class="len">Home Accessories</span></span>
+          <span class="it"><span class="lde">Kinder</span><span class="len">Children</span></span>
+          <span class="it"><span class="lde">Neuheiten</span><span class="len">New Arrivals</span></span>
+          <span class="it">FLASH SALES</span>
+          <span class="it dim">Outlet</span>
+          <span class="it dim"><span class="lde">Magazin</span><span class="len">Magazine</span></span>
+          <span class="ic">⌕ ♡ ⛒</span>
+        </div>
+        <div class="dpanel">
+          <div class="dcols one">
+            <div class="dcol">
+              <div class="ch"><span class="lde">Schlafzimmer</span><span class="len">Bedroom</span></div>
+              <span class="l"><span class="lde">Betten</span><span class="len">Beds</span></span>
+              <span class="l"><span class="lde">Boxspringbetten</span><span class="len">Box Spring Beds</span></span>
+              <span class="l"><span class="lde">Polsterbetten</span><span class="len">Upholstered Beds</span></span>
+              <span class="l"><span class="lde">Holzbetten</span><span class="len">Wooden Beds</span></span>
+              <span class="l"><span class="lde">Kinderbetten</span><span class="len">Children’s Beds</span></span>
+              <span class="l"><span class="lde">Matratzen</span><span class="len">Mattresses</span></span>
+              <span class="l"><span class="lde">Topper</span><span class="len">Toppers</span></span>
+              <span class="l"><span class="lde">Lattenroste</span><span class="len">Slatted Bed Bases</span></span>
+              <span class="l"><span class="lde">Nachttische</span><span class="len">Bedside Tables</span></span>
+              <span class="l"><span class="lde">Kleiderschränke</span><span class="len">Wardrobes</span></span>
+              <span class="l"><span class="lde">Boxspringbett Konfigurator</span><span class="len">Box Spring Bed Configurator</span></span>
+              <span class="l"><span class="lde">Polsterbett Konfigurator</span><span class="len">Upholstered Bed Configurator</span></span>
+            </div>
+          </div>
+        </div>
+      </div></div>
+      <div class="note"><span class="dot">①</span><span><span class="lde">Zwölf Einträge plus Logo und drei Icons füllen die Leiste vollständig aus — bei kleineren Desktop-Breiten bricht sie um oder schneidet ab. Das geöffnete Panel nutzt die Breite nicht: <b>eine Spalte, keine Gruppierung, keine Bestseller</b>.</span><span class="len">Twelve entries plus logo and three icons fill the bar completely — at narrower desktop widths it wraps or clips. The open panel does not use the available width: <b>one column, no grouping, no bestsellers</b>.</span></span></div>
+    </div>
+    <div class="col">
+      <div class="col-h" style="justify-content:flex-start"><span class="state after"><span class="lde">Nachher</span><span class="len">After</span></span><span class="lab"><span class="lde">5 Gruppen, Bestseller-Reihe, Panel offen</span><span class="len">5 groups, bestseller row, panel open</span></span></div>
+      <div class="dscroll"><div class="deskframe">
+        <div class="deskbar"><i></i><i></i><i></i><span class="url">luxusbetten24.de</span></div>
+        <div class="dnav">
+          <span class="lg">LUXUSBETTEN24</span>
+          <span class="it on"><span class="lde">Betten</span><span class="len">Beds</span></span>
+          <span class="it"><span class="lde">Sofas &amp; Sessel</span><span class="len">Sofas &amp; Armchairs</span></span>
+          <span class="it"><span class="lde">Konfiguratoren</span><span class="len">Configurators</span></span>
+          <span class="it"><span class="lde">Möbel &amp; Wohnen</span><span class="len">Furniture &amp; Home</span></span>
+          <span class="it"><span class="lde">Neu &amp; Angebote</span><span class="len">New &amp; Offers</span></span>
+          <span class="ic">⌕ ♡ ⛒</span>
+        </div>
+        <div class="dpanel">
+          <div class="dbs hl" style="position:relative">
+            <span class="tagnum" style="top:-9px;left:-9px">①</span>
+            <div class="c"><div class="img"><span class="lde">BOXSPRINGBETT</span><span class="len">BOX SPRING BED</span><span class="bdg">Bestseller</span></div><div class="nm"><span class="lde">Boxspringbett Cozy</span><span class="len">Cozy Box Spring Bed</span></div><div class="rt"><span class="st">★★★★★</span> <span class="lde">4,8</span><span class="len">4.8</span> · 214</div></div>
+            <div class="c"><div class="img"><span class="lde">ECKSOFA</span><span class="len">CORNER SOFA</span><span class="bdg"><span class="lde">Im Trend</span><span class="len">Trending</span></span></div><div class="nm"><span class="lde">Ecksofa Verona</span><span class="len">Verona Corner Sofa</span></div><div class="rt"><span class="st">★★★★★</span> <span class="lde">4,7</span><span class="len">4.7</span> · 96</div></div>
+            <div class="c"><div class="img"><span class="lde">ECKSOFA</span><span class="len">CORNER SOFA</span><span class="bdg"><span class="lde">Kundenfavorit</span><span class="len">Customer favourite</span></span></div><div class="nm"><span class="lde">Ecksofa Roma</span><span class="len">Roma Corner Sofa</span></div><div class="rt"><span class="st">★★★★★</span> <span class="lde">4,7</span><span class="len">4.7</span> · 141</div></div>
+            <div class="c"><div class="img"><span class="lde">POLSTERBETT</span><span class="len">UPHOLSTERED BED</span><span class="bdg"><span class="lde">Häufig gesucht</span><span class="len">Frequently searched</span></span></div><div class="nm"><span class="lde">Polsterbett Boston</span><span class="len">Boston Upholstered Bed</span></div><div class="rt"><span class="st">★★★★★</span> <span class="lde">4,8</span><span class="len">4.8</span> · 188</div></div>
+          </div>
+          <div class="dpromo">
+            <span class="lbl"><span class="lde">Direkt</span><span class="len">Direct</span></span>
+            <span class="pl"><span class="lde">Neuheiten</span><span class="len">New Arrivals</span></span>
+            <span class="pl">Flash Sales</span>
+            <span class="pl">Outlet</span>
+          </div>
+          <div class="dcols hl" style="position:relative">
+            <span class="tagnum" style="top:-9px;right:-9px">②</span>
+            <div class="dcol">
+              <div class="ct"><span class="lde">Betten</span><span class="len">Beds</span></div>
+              <div class="ch"><span class="lde">Betten entdecken</span><span class="len">Explore Beds</span></div>
+              <span class="l hi"><span class="lde">Alle Betten</span><span class="len">All Beds</span></span>
+              <span class="l"><span class="lde">Boxspringbetten</span><span class="len">Box Spring Beds</span></span>
+              <span class="l"><span class="lde">Polsterbetten</span><span class="len">Upholstered Beds</span></span>
+              <span class="l"><span class="lde">Sofort lieferbare Betten</span><span class="len">Beds Available for Immediate Delivery</span></span>
+              <span class="l"><span class="lde">Holzbetten</span><span class="len">Wooden Beds</span></span>
+              <span class="l"><span class="lde">Kinderbetten</span><span class="len">Children’s Beds</span></span>
+              <div class="ch"><span class="lde">Matratzen &amp; Schlafkomfort</span><span class="len">Mattresses &amp; Sleep Comfort</span></div>
+              <span class="l"><span class="lde">Matratzen</span><span class="len">Mattresses</span></span>
+              <span class="l"><span class="lde">Topper</span><span class="len">Toppers</span></span>
+              <span class="l"><span class="lde">Lattenroste</span><span class="len">Slatted Bed Bases</span></span>
+              <div class="ch"><span class="lde">Bett konfigurieren</span><span class="len">Configure a Bed</span></div>
+              <span class="l"><span class="lde">Boxspringbett konfigurieren</span><span class="len">Configure a Box Spring Bed</span></span>
+              <span class="l"><span class="lde">Polsterbett konfigurieren</span><span class="len">Configure an Upholstered Bed</span></span>
+            </div>
+            <div class="dcol">
+              <div class="ct"><span class="lde">Sofas &amp; Sessel</span><span class="len">Sofas &amp; Armchairs</span></div>
+              <div class="ch"><span class="lde">Sofas entdecken</span><span class="len">Explore Sofas</span></div>
+              <span class="l hi"><span class="lde">Alle Sofas</span><span class="len">All Sofas</span></span>
+              <span class="l"><span class="lde">Sofort lieferbare Sofas</span><span class="len">Sofas Available for Immediate Delivery</span></span>
+              <span class="l"><span class="lde">Sofas aus Cord</span><span class="len">Corduroy Sofas</span></span>
+              <span class="l"><span class="lde">Sofas aus Bouclé</span><span class="len">Bouclé Sofas</span></span>
+              <span class="l"><span class="lde">Elektrisch verstellbare Sofas</span><span class="len">Electrically Adjustable Sofas</span></span>
+              <span class="l"><span class="lde">Sessel</span><span class="len">Armchairs</span></span>
+              <div class="ch"><span class="lde">Sofa konfigurieren</span><span class="len">Configure a Sofa</span></div>
+              <span class="l"><span class="lde">Ecksofa konfigurieren</span><span class="len">Configure a Corner Sofa</span></span>
+              <span class="l"><span class="lde">Lazy Sofa konfigurieren</span><span class="len">Configure a Lazy Sofa</span></span>
+            </div>
+            <div class="dcol">
+              <div class="ct"><span class="lde">Konfiguratoren</span><span class="len">Configurators</span></div>
+              <div class="ch"><span class="lde">Dein Möbel konfigurieren</span><span class="len">Configure Your Furniture</span></div>
+              <span class="l"><span class="lde">Boxspringbett konfigurieren</span><span class="len">Configure a Box Spring Bed</span></span>
+              <span class="l"><span class="lde">Polsterbett konfigurieren</span><span class="len">Configure an Upholstered Bed</span></span>
+              <span class="l"><span class="lde">Ecksofa konfigurieren</span><span class="len">Configure a Corner Sofa</span></span>
+              <span class="l"><span class="lde">Lazy Sofa konfigurieren</span><span class="len">Configure a Lazy Sofa</span></span>
+              <span class="l"><span class="lde">Kleiderschrank konfigurieren</span><span class="len">Configure a Wardrobe</span></span>
+            </div>
+            <div class="dcol">
+              <div class="ct"><span class="lde">Möbel &amp; Wohnen</span><span class="len">Furniture &amp; Home</span></div>
+              <div class="ch"><span class="lde">Möbel</span><span class="len">Furniture</span></div>
+              <span class="l"><span class="lde">Kleiderschränke</span><span class="len">Wardrobes</span></span>
+              <span class="l"><span class="lde">Nachttische</span><span class="len">Bedside Tables</span></span>
+              <span class="l"><span class="lde">Esstische</span><span class="len">Dining Tables</span></span>
+              <span class="l"><span class="lde">Couchtische</span><span class="len">Coffee Tables</span></span>
+              <span class="l"><span class="lde">Beistelltische</span><span class="len">Side Tables</span></span>
+              <span class="l"><span class="lde">Stühle</span><span class="len">Chairs</span></span>
+              <div class="ch"><span class="lde">Accessoires</span><span class="len">Accessories</span></div>
+              <span class="l"><span class="lde">Wohnaccessoires</span><span class="len">Home Accessories</span></span>
+              <span class="l"><span class="lde">Beleuchtung</span><span class="len">Lighting</span></span>
+              <span class="l"><span class="lde">Geschirr &amp; Serviergeschirr</span><span class="len">Tableware &amp; Serving Dishes</span></span>
+              <span class="l"><span class="lde">Tassen &amp; Gläser</span><span class="len">Cups &amp; Glasses</span></span>
+              <span class="l"><span class="lde">Besteck &amp; Zubehör</span><span class="len">Cutlery &amp; Accessories</span></span>
+              <div class="ch"><span class="lde">Weitere Wohnwelten</span><span class="len">More Living Areas</span></div>
+              <span class="l"><span class="lde">Garten</span><span class="len">Garden</span></span>
+              <span class="l"><span class="lde">Komplett-Kinderzimmer</span><span class="len">Complete Children’s Rooms</span></span>
+            </div>
+            <div class="dcol">
+              <div class="ct"><span class="lde">Neu &amp; Angebote</span><span class="len">New &amp; Offers</span></div>
+              <div class="ch"><span class="lde">Aktuelle Angebote</span><span class="len">Current Offers</span></div>
+              <span class="l hi"><span class="lde">Neuheiten</span><span class="len">New Arrivals</span></span>
+              <span class="l">Flash Sales</span>
+              <span class="l">Outlet</span>
+              <span class="l"><span class="lde">Sofort lieferbare Betten</span><span class="len">Beds Available for Immediate Delivery</span></span>
+              <span class="l"><span class="lde">Sofort lieferbare Sofas</span><span class="len">Sofas Available for Immediate Delivery</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="dfoot hl" style="position:relative">
+          <span class="tagnum" style="top:-9px;left:-9px">③</span>
+          <div class="grp"><span class="btn"><span class="lde">Anmelden / Registrieren</span><span class="len">Log in / Sign up</span></span><span class="lnk2"><span class="lde">Wunschliste</span><span class="len">Wishlist</span></span></div>
+          <div class="grp"><span class="lnk2">Our Story +</span><span class="lnk2"><span class="lde">Deutsch · Deutschland (EUR €)</span><span class="len">German · Germany (EUR €)</span></span></div>
+        </div>
+      </div></div>
+      <div class="note"><span class="dot">①</span><span><span class="lde"><b>Alle vier Bestseller-Karten in einer Reihe</b> über den Navigationsspalten — auf dem Desktop ist Platz für vier, mobil scrollen sie horizontal. Gleiche Produkte, gleiche Reihenfolge wie mobil.</span><span class="len"><b>All four bestseller cards in one row</b> above the navigation columns — desktop has room for four, mobile scrolls them horizontally. Same products, same order as mobile.</span></span></div>
+      <div class="note"><span class="dot">②</span><span><span class="lde">Dieselben drei Direktlinks — Neuheiten, Flash Sales, Outlet — stehen auch hier über den Spalten. Die fünf Gruppen erscheinen als <b>fünf Spalten mit denselben Untergruppen</b> wie im mobilen Akkordeon — identische Informationsarchitektur, nur breiter dargestellt. Das Panel ist standardmäßig geöffnet.</span><span class="len">The same three direct links — New Arrivals, Flash Sales, Outlet — sit above the columns here too. The five groups appear as <b>five columns with the same subgroups</b> as in the mobile accordion — identical information architecture, only wider. The panel is open by default.</span></span></div>
+      <div class="note"><span class="dot">③</span><span><span class="lde">Konto zuerst, dann „Our Story“ eingeklappt, dann Sprache &amp; Region — <b>dieselbe Reihenfolge wie mobil</b>. Suche, Favoriten und Warenkorb bleiben oben rechts; die Suche wird im Menü nicht wiederholt.</span><span class="len">Account first, then “Our Story” collapsed, then language &amp; region — <b>the same order as mobile</b>. Search, favourites and cart stay top right; search is not duplicated inside the menu.</span></span></div>
+    </div>
+  </div>
+  <div class="pagenav">
+    <button data-go="b2"><span><span class="lde">Zurück</span><span class="len">Previous</span></span><span class="lde">← Mobil · Konto &amp; Service</span><span class="len">← Mobile · Account &amp; service</span></button>
+    <button class="nx" data-go="ia"><span><span class="lde">Weiter</span><span class="len">Next</span></span><span class="lde">Struktur &amp; Links →</span><span class="len">Structure &amp; links →</span></button>
+  </div>
+</div></div></section>
+
+<!-- ==================== IA · STRUKTUR ==================== -->
+<section class="page" id="page-ia"><div class="block"><div class="wrap">
+  <div class="section-lab"><span class="lde">Referenz</span><span class="len">Reference</span></div>
+  <h2 class="sec"><span class="lde">Vollständige Struktur mit Zielen</span><span class="len">Complete structure with destinations</span></h2>
+  <p class="lede lde">Die Build-Vorlage: jede Gruppe, jede Untergruppe und jedes Ziel mit der finalen URL. Reihenfolge ist verbindlich. Alle Links öffnen in einem neuen Tab, damit sich die Struktur prüfen lässt.</p>
+      <p class="lede len">The build reference: every group, subgroup and destination with its final URL. The order is binding. All links open in a new tab so the structure can be checked.</p>
+  <div class="iagrid">
+    <div class="iacard util">
+      <div class="n"><span class="lde">Über den fünf Gruppen</span><span class="len">Above the five groups</span></div>
+      <h4><span class="lde">Direktlinks</span><span class="len">Direct links</span></h4>
+      <p class="top"><span class="lde">Eine Zeile direkt unter der Überschrift „Einkaufen“, über „Betten“. Kein Akkordeon, ein Tap. Auf dem Desktop steht dieselbe Zeile über den Navigationsspalten.</span><span class="len">One row directly under the “Shop” heading, above “Beds”. No accordion, one tap. On desktop the same row sits above the navigation columns.</span></p>
+      <ul class="ialist">
+        <li><a href="https://luxusbetten24.de/collections/neuankommlinge" target="_blank" rel="noopener"><span class="lde">Neuheiten</span><span class="len">New Arrivals</span></a><span class="m">https://luxusbetten24.de/collections/neuankommlinge</span></li>
+        <li><a href="https://luxusbetten24.de/pages/flash-deals" target="_blank" rel="noopener">Flash Sales</a><span class="m">https://luxusbetten24.de/pages/flash-deals</span></li>
+        <li><a href="https://luxusbetten24.de/collections/outlet" target="_blank" rel="noopener">Outlet</a><span class="m">https://luxusbetten24.de/collections/outlet</span></li>
+      </ul>
+      <p class="top"><span class="lde">Die drei Ziele bleiben zusätzlich in der Gruppe „Neu &amp; Angebote“ — dieselbe bewusste Dopplung wie beim Magazin, damit die Gruppe für sich vollständig bleibt.</span><span class="len">The three destinations also stay inside the “New &amp; Offers” group — the same deliberate duplication as Magazine, so the group stays complete on its own.</span></p>
+    </div>
+    <div class="iacard">
+      <div class="n"><span class="lde">Gruppe</span><span class="len">Group</span> 1 <span class="lde">von</span><span class="len">of</span> 5</div>
+      <h4><span class="lde">Betten</span><span class="len">Beds</span></h4>
+      <p class="top"><span class="lde">Ziel der Gruppe:</span><span class="len">Group destination:</span> <a href="https://luxusbetten24.de/collections/betten" target="_blank" rel="noopener"><span class="lde">Alle Betten</span><span class="len">All Beds</span></a></p>
+      <div class="iagrp"><span class="lde">Betten entdecken</span><span class="len">Explore Beds</span></div>
+      <ul class="ialist">
+        <li><a href="https://luxusbetten24.de/collections/betten" target="_blank" rel="noopener"><span class="lde">Alle Betten</span><span class="len">All Beds</span></a><span class="m">https://luxusbetten24.de/collections/betten</span></li>
+        <li><a href="https://luxusbetten24.de/collections/boxspringbetten" target="_blank" rel="noopener"><span class="lde">Boxspringbetten</span><span class="len">Box Spring Beds</span></a><span class="m">https://luxusbetten24.de/collections/boxspringbetten</span></li>
+        <li><a href="https://luxusbetten24.de/collections/polsterbetten" target="_blank" rel="noopener"><span class="lde">Polsterbetten</span><span class="len">Upholstered Beds</span></a><span class="m">https://luxusbetten24.de/collections/polsterbetten</span></li>
+        <li><a href="https://luxusbetten24.de/collections/betten?page=1&filter.v.m.custom.delivery_time_metafield_name=lieferzeit_auf_lager_ohne_tag" target="_blank" rel="noopener"><span class="lde">Sofort lieferbare Betten</span><span class="len">Beds Available for Immediate Delivery</span></a><span class="m">https://luxusbetten24.de/collections/betten?page=1&filter.v.m.custom.delivery_time_metafield_name=lieferzeit_auf_lager_ohne_tag</span></li>
+        <li><a href="https://luxusbetten24.de/collections/holzbetten" target="_blank" rel="noopener"><span class="lde">Holzbetten</span><span class="len">Wooden Beds</span></a><span class="m">https://luxusbetten24.de/collections/holzbetten</span></li>
+        <li><a href="https://luxusbetten24.de/collections/kinderbetten" target="_blank" rel="noopener"><span class="lde">Kinderbetten</span><span class="len">Children’s Beds</span></a><span class="m">https://luxusbetten24.de/collections/kinderbetten</span></li>
+      </ul>
+      <div class="iagrp"><span class="lde">Matratzen &amp; Schlafkomfort</span><span class="len">Mattresses &amp; Sleep Comfort</span></div>
+      <ul class="ialist">
+        <li><a href="https://luxusbetten24.de/collections/nightsense%E2%84%A2matratzen" target="_blank" rel="noopener"><span class="lde">Matratzen</span><span class="len">Mattresses</span></a><span class="m">https://luxusbetten24.de/collections/nightsense%E2%84%A2matratzen</span></li>
+        <li><a href="https://luxusbetten24.de/collections/nightsense%E2%84%A2-topper" target="_blank" rel="noopener"><span class="lde">Topper</span><span class="len">Toppers</span></a><span class="m">https://luxusbetten24.de/collections/nightsense%E2%84%A2-topper</span></li>
+        <li><a href="https://luxusbetten24.de/collections/lattenroste" target="_blank" rel="noopener"><span class="lde">Lattenroste</span><span class="len">Slatted Bed Bases</span></a><span class="m">https://luxusbetten24.de/collections/lattenroste</span></li>
+      </ul>
+      <div class="iagrp"><span class="lde">Bett konfigurieren</span><span class="len">Configure a Bed</span></div>
+      <ul class="ialist">
+        <li><a href="https://luxusbetten24.de/products/customized-bed" target="_blank" rel="noopener"><span class="lde">Boxspringbett konfigurieren</span><span class="len">Configure a Box Spring Bed</span></a><span class="m">https://luxusbetten24.de/products/customized-bed</span></li>
+        <li><a href="https://luxusbetten24.de/products/polsterbett-configurator?view=customized-bed-abtest" target="_blank" rel="noopener"><span class="lde">Polsterbett konfigurieren</span><span class="len">Configure an Upholstered Bed</span></a><span class="m">https://luxusbetten24.de/products/polsterbett-configurator?view=customized-bed-abtest</span></li>
+      </ul>
+    </div>
+    <div class="iacard">
+      <div class="n"><span class="lde">Gruppe</span><span class="len">Group</span> 2 <span class="lde">von</span><span class="len">of</span> 5</div>
+      <h4><span class="lde">Sofas &amp; Sessel</span><span class="len">Sofas &amp; Armchairs</span></h4>
+      <p class="top"><span class="lde">Ziel der Gruppe:</span><span class="len">Group destination:</span> <a href="https://luxusbetten24.de/collections/sofas" target="_blank" rel="noopener"><span class="lde">Alle Sofas</span><span class="len">All Sofas</span></a></p>
+      <div class="iagrp"><span class="lde">Sofas entdecken</span><span class="len">Explore Sofas</span></div>
+      <ul class="ialist">
+        <li><a href="https://luxusbetten24.de/collections/sofas" target="_blank" rel="noopener"><span class="lde">Alle Sofas</span><span class="len">All Sofas</span></a><span class="m">https://luxusbetten24.de/collections/sofas</span></li>
+        <li><a href="https://luxusbetten24.de/collections/sofas?filter.v.m.custom.delivery_time_metafield_name=lieferzeit_auf_lager_ohne_tag&filter.p.m.custom.product_length.from=90&filter.p.m.custom.product_length.to=450" target="_blank" rel="noopener"><span class="lde">Sofort lieferbare Sofas</span><span class="len">Sofas Available for Immediate Delivery</span></a><span class="m">https://luxusbetten24.de/collections/sofas?filter.v.m.custom.delivery_time_metafield_name=lieferzeit_auf_lager_ohne_tag&filter.p.m.custom.product_length.from=90&filter.p.m.custom.product_length.to=450</span></li>
+        <li><a href="https://luxusbetten24.de/collections/sofas-aus-cord" target="_blank" rel="noopener"><span class="lde">Sofas aus Cord</span><span class="len">Corduroy Sofas</span></a><span class="m">https://luxusbetten24.de/collections/sofas-aus-cord</span></li>
+        <li><a href="https://luxusbetten24.de/collections/sofas-aus-boucle" target="_blank" rel="noopener"><span class="lde">Sofas aus Bouclé</span><span class="len">Bouclé Sofas</span></a><span class="m">https://luxusbetten24.de/collections/sofas-aus-boucle</span></li>
+        <li><a href="https://luxusbetten24.de/collections/sofas-mit-elektrischer-funktion" target="_blank" rel="noopener"><span class="lde">Elektrisch verstellbare Sofas</span><span class="len">Electrically Adjustable Sofas</span></a><span class="m">https://luxusbetten24.de/collections/sofas-mit-elektrischer-funktion</span></li>
+        <li><a href="https://luxusbetten24.de/collections/sessel" target="_blank" rel="noopener"><span class="lde">Sessel</span><span class="len">Armchairs</span></a><span class="m">https://luxusbetten24.de/collections/sessel</span></li>
+      </ul>
+      <div class="iagrp"><span class="lde">Sofa konfigurieren</span><span class="len">Configure a Sofa</span></div>
+      <ul class="ialist">
+        <li><a href="https://luxusbetten24.de/pages/lunaro-konfigurator" target="_blank" rel="noopener"><span class="lde">Ecksofa konfigurieren</span><span class="len">Configure a Corner Sofa</span></a><span class="m">https://luxusbetten24.de/pages/lunaro-konfigurator</span></li>
+        <li><a href="https://luxusbetten24.de/pages/sofa-konfigurator" target="_blank" rel="noopener"><span class="lde">Lazy Sofa konfigurieren</span><span class="len">Configure a Lazy Sofa</span></a><span class="m">https://luxusbetten24.de/pages/sofa-konfigurator</span></li>
+      </ul>
+    </div>
+    <div class="iacard">
+      <div class="n"><span class="lde">Gruppe</span><span class="len">Group</span> 3 <span class="lde">von</span><span class="len">of</span> 5</div>
+      <h4><span class="lde">Konfiguratoren</span><span class="len">Configurators</span></h4>
+      <p class="top"><span class="lde">Klappt das Untermenü auf, statt auf eine generische Konfigurator-Landingpage zu führen.</span><span class="len">Expands the submenu instead of sending users to a generic configurator landing page.</span></p>
+      <p class="top"><i><span class="lde">„Gestalte dein Möbelstück passend zu deinem Stil, deinen Maßen und deinen Bedürfnissen.“</span><span class="len">“Design your furniture to match your style, dimensions and needs.”</span></i></p>
+      <div class="iagrp"><span class="lde">Dein Möbel konfigurieren</span><span class="len">Configure Your Furniture</span></div>
+      <ul class="ialist">
+        <li><a href="https://luxusbetten24.de/products/customized-bed" target="_blank" rel="noopener"><span class="lde">Boxspringbett konfigurieren</span><span class="len">Configure a Box Spring Bed</span></a><span class="m">https://luxusbetten24.de/products/customized-bed</span></li>
+        <li><a href="https://luxusbetten24.de/products/polsterbett-configurator?view=customized-bed-abtest" target="_blank" rel="noopener"><span class="lde">Polsterbett konfigurieren</span><span class="len">Configure an Upholstered Bed</span></a><span class="m">https://luxusbetten24.de/products/polsterbett-configurator?view=customized-bed-abtest</span></li>
+        <li><a href="https://luxusbetten24.de/pages/lunaro-konfigurator" target="_blank" rel="noopener"><span class="lde">Ecksofa konfigurieren</span><span class="len">Configure a Corner Sofa</span></a><span class="m">https://luxusbetten24.de/pages/lunaro-konfigurator</span></li>
+        <li><a href="https://luxusbetten24.de/pages/sofa-konfigurator" target="_blank" rel="noopener"><span class="lde">Lazy Sofa konfigurieren</span><span class="len">Configure a Lazy Sofa</span></a><span class="m">https://luxusbetten24.de/pages/sofa-konfigurator</span></li>
+        <li><a href="https://luxusbetten24.de/pages/moduro-konfigurator" target="_blank" rel="noopener"><span class="lde">Kleiderschrank konfigurieren</span><span class="len">Configure a Wardrobe</span></a><span class="m">https://luxusbetten24.de/pages/moduro-konfigurator</span></li>
+      </ul>
+    </div>
+    <div class="iacard">
+      <div class="n"><span class="lde">Gruppe</span><span class="len">Group</span> 4 <span class="lde">von</span><span class="len">of</span> 5</div>
+      <h4><span class="lde">Möbel &amp; Wohnen</span><span class="len">Furniture &amp; Home</span></h4>
+      <p class="top"><span class="lde">Bündelt die kleineren raum- und zubehörbasierten Kategorien. Zunächst ohne Produktkarten — Umsatz und Traffic rechtfertigen den zusätzlichen mobilen Platz nicht.</span><span class="len">Consolidates the smaller room-based and accessory categories. No product cards initially — revenue and traffic do not justify the additional mobile space.</span></p>
+      <div class="iagrp"><span class="lde">Möbel</span><span class="len">Furniture</span></div>
+      <ul class="ialist">
+        <li><a href="https://luxusbetten24.de/collections/kleiderschranke" target="_blank" rel="noopener"><span class="lde">Kleiderschränke</span><span class="len">Wardrobes</span></a><span class="m">https://luxusbetten24.de/collections/kleiderschranke</span></li>
+        <li><a href="https://luxusbetten24.de/collections/nachttische" target="_blank" rel="noopener"><span class="lde">Nachttische</span><span class="len">Bedside Tables</span></a><span class="m">https://luxusbetten24.de/collections/nachttische</span></li>
+        <li><a href="https://luxusbetten24.de/collections/esstische" target="_blank" rel="noopener"><span class="lde">Esstische</span><span class="len">Dining Tables</span></a><span class="m">https://luxusbetten24.de/collections/esstische</span></li>
+        <li><a href="https://luxusbetten24.de/collections/couchtische" target="_blank" rel="noopener"><span class="lde">Couchtische</span><span class="len">Coffee Tables</span></a><span class="m">https://luxusbetten24.de/collections/couchtische</span></li>
+        <li><a href="https://luxusbetten24.de/collections/beistelltische" target="_blank" rel="noopener"><span class="lde">Beistelltische</span><span class="len">Side Tables</span></a><span class="m">https://luxusbetten24.de/collections/beistelltische</span></li>
+        <li><a href="https://luxusbetten24.de/collections/stuehle" target="_blank" rel="noopener"><span class="lde">Stühle</span><span class="len">Chairs</span></a><span class="m">https://luxusbetten24.de/collections/stuehle</span></li>
+      </ul>
+      <div class="iagrp"><span class="lde">Accessoires</span><span class="len">Accessories</span></div>
+      <ul class="ialist">
+        <li><a href="https://luxusbetten24.de/collections/wohn-accessoires" target="_blank" rel="noopener"><span class="lde">Wohnaccessoires</span><span class="len">Home Accessories</span></a><span class="m">https://luxusbetten24.de/collections/wohn-accessoires</span></li>
+        <li><a href="https://luxusbetten24.de/collections/lampen" target="_blank" rel="noopener"><span class="lde">Beleuchtung</span><span class="len">Lighting</span></a><span class="m">https://luxusbetten24.de/collections/lampen</span></li>
+        <li><a href="https://luxusbetten24.de/collections/geschirr-serviergeschirr" target="_blank" rel="noopener"><span class="lde">Geschirr &amp; Serviergeschirr</span><span class="len">Tableware &amp; Serving Dishes</span></a><span class="m">https://luxusbetten24.de/collections/geschirr-serviergeschirr</span></li>
+        <li><a href="https://luxusbetten24.de/collections/tassen-glaser" target="_blank" rel="noopener"><span class="lde">Tassen &amp; Gläser</span><span class="len">Cups &amp; Glasses</span></a><span class="m">https://luxusbetten24.de/collections/tassen-glaser</span></li>
+        <li><a href="https://luxusbetten24.de/collections/besteck-zubehor" target="_blank" rel="noopener"><span class="lde">Besteck &amp; Zubehör</span><span class="len">Cutlery &amp; Accessories</span></a><span class="m">https://luxusbetten24.de/collections/besteck-zubehor</span></li>
+      </ul>
+      <div class="iagrp"><span class="lde">Weitere Wohnwelten</span><span class="len">More Living Areas</span></div>
+      <ul class="ialist">
+        <li><a href="https://luxusbetten24.de/collections/garten-1" target="_blank" rel="noopener"><span class="lde">Garten</span><span class="len">Garden</span></a><span class="m">https://luxusbetten24.de/collections/garten-1</span></li>
+        <li><a href="https://luxusbetten24.de/collections/komplett-kinderzimmer" target="_blank" rel="noopener"><span class="lde">Komplett-Kinderzimmer</span><span class="len">Complete Children’s Rooms</span></a><span class="m">https://luxusbetten24.de/collections/komplett-kinderzimmer</span></li>
+      </ul>
+    </div>
+    <div class="iacard">
+      <div class="n"><span class="lde">Gruppe</span><span class="len">Group</span> 5 <span class="lde">von</span><span class="len">of</span> 5</div>
+      <h4><span class="lde">Neu &amp; Angebote</span><span class="len">New &amp; Offers</span></h4>
+      <p class="top"><span class="lde">Schreibweise „Flash Sales“, nicht „FLASH SALES“ — damit die Typografie konsistent bleibt.</span><span class="len">Written “Flash Sales”, not “FLASH SALES”, to keep the typography consistent.</span></p>
+      <div class="iagrp"><span class="lde">Aktuelle Angebote</span><span class="len">Current Offers</span></div>
+      <ul class="ialist">
+        <li><a href="https://luxusbetten24.de/collections/neuankommlinge" target="_blank" rel="noopener"><span class="lde">Neuheiten</span><span class="len">New Arrivals</span></a><span class="m">https://luxusbetten24.de/collections/neuankommlinge</span></li>
+        <li><a href="https://luxusbetten24.de/pages/flash-deals" target="_blank" rel="noopener">Flash Sales</a><span class="m">https://luxusbetten24.de/pages/flash-deals</span></li>
+        <li><a href="https://luxusbetten24.de/collections/outlet" target="_blank" rel="noopener">Outlet</a><span class="m">https://luxusbetten24.de/collections/outlet</span></li>
+        <li><a href="https://luxusbetten24.de/collections/betten?page=1&filter.v.m.custom.delivery_time_metafield_name=lieferzeit_auf_lager_ohne_tag" target="_blank" rel="noopener"><span class="lde">Sofort lieferbare Betten</span><span class="len">Beds Available for Immediate Delivery</span></a><span class="m">https://luxusbetten24.de/collections/betten?page=1&filter.v.m.custom.delivery_time_metafield_name=lieferzeit_auf_lager_ohne_tag</span></li>
+        <li><a href="https://luxusbetten24.de/collections/sofas?filter.v.m.custom.delivery_time_metafield_name=lieferzeit_auf_lager_ohne_tag&filter.p.m.custom.product_length.from=90&filter.p.m.custom.product_length.to=450" target="_blank" rel="noopener"><span class="lde">Sofort lieferbare Sofas</span><span class="len">Sofas Available for Immediate Delivery</span></a><span class="m">https://luxusbetten24.de/collections/sofas?filter.v.m.custom.delivery_time_metafield_name=lieferzeit_auf_lager_ohne_tag&filter.p.m.custom.product_length.from=90&filter.p.m.custom.product_length.to=450</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="iagrid" style="margin-top:14px">
+    <div class="iacard util">
+      <div class="n"><span class="lde">Über der Navigation</span><span class="len">Above the navigation</span></div>
+      <h4><span class="lde">Bestseller-Karten</span><span class="len">Bestseller cards</span></h4>
+      <p class="top"><span class="lde">Erstes Element im Menü. Bild, Kurzname, Badge, Bewertung und Anzahl. Monatlich gegen Umsatz, Bestand und Lieferzeit prüfen.</span><span class="len">First element in the menu. Image, short name, badge, rating and review count. Review monthly against sales, inventory and delivery time.</span></p>
+      <ul class="ialist">
+        <li><a href="https://luxusbetten24.de/products/boxspringbett-cozy-samt-mit-stauraum" target="_blank" rel="noopener"><span class="lde">Boxspringbett Cozy</span><span class="len">Cozy Box Spring Bed</span> — Bestseller</a><span class="m">https://luxusbetten24.de/products/boxspringbett-cozy-samt-mit-stauraum</span></li>
+        <li><a href="https://luxusbetten24.de/products/designer-sofa-verona-mit-breiter-ottomane-mit-schlaf-und-klappfunktion-in-cord" target="_blank" rel="noopener"><span class="lde">Ecksofa Verona</span><span class="len">Verona Corner Sofa</span> — <span class="lde">Im Trend</span><span class="len">Trending</span></a><span class="m">https://luxusbetten24.de/products/designer-sofa-verona-mit-breiter-ottomane-mit-schlaf-und-klappfunktion-in-cord</span></li>
+        <li><a href="https://luxusbetten24.de/products/designer-sofa-roma-in-cord-mit-schlaf-und-klappfunktion" target="_blank" rel="noopener"><span class="lde">Ecksofa Roma</span><span class="len">Roma Corner Sofa</span> — <span class="lde">Kundenfavorit</span><span class="len">Customer favourite</span></a><span class="m">https://luxusbetten24.de/products/designer-sofa-roma-in-cord-mit-schlaf-und-klappfunktion</span></li>
+        <li><a href="https://luxusbetten24.de/products/designer-polsterbett-boston-boucle-mit-stauraum" target="_blank" rel="noopener"><span class="lde">Polsterbett Boston</span><span class="len">Boston Upholstered Bed</span> — <span class="lde">Häufig gesucht</span><span class="len">Frequently searched</span></a><span class="m">https://luxusbetten24.de/products/designer-polsterbett-boston-boucle-mit-stauraum</span></li>
+      </ul>
+      <div class="iagrp"><span class="lde">Nicht verwenden</span><span class="len">Do not use</span></div>
+      <ul class="ialist"><li><span class="lde">Designer Sofa Lazy 3 Sitzer als dauerhafter Aufmacher — rückläufig.</span><span class="len">Lazy 3-Seater Designer Sofa as the permanent lead — declining.</span></li></ul>
+    </div>
+    <div class="iacard util">
+      <div class="n"><span class="lde">Nach der Shopping-Navigation</span><span class="len">After the shopping navigation</span></div>
+      <h4><span class="lde">Konto-Block</span><span class="len">Account block</span></h4>
+      <p class="top"><span class="lde">Button: „Anmelden / Registrieren“. Begleitsatz: „Verwalte deine Anfragen, Bestellungen und gespeicherten Favoriten.“</span><span class="len">Button: “Log in / Sign up”. Supporting copy: “Manage your enquiries, orders and saved favourites.”</span></p>
+      <ul class="ialist">
+        <li><a href="https://helpcenter-luxusbetten24.com/auth" target="_blank" rel="noopener"><span class="lde">Anmelden / Registrieren</span><span class="len">Log in / Sign up</span></a><span class="m">https://helpcenter-luxusbetten24.com/auth</span></li>
+        <li><a href="https://helpcenter-luxusbetten24.com/wunschliste" target="_blank" rel="noopener"><span class="lde">Wunschliste</span><span class="len">Wishlist</span></a><span class="m">https://helpcenter-luxusbetten24.com/wunschliste</span></li>
+      </ul>
+      <p class="top"><span class="lde">Der Warenkorb bleibt im Header. Das Konto-Icon kann entfallen, sobald der Menü-Button implementiert und validiert ist.</span><span class="len">The cart stays in the header. The account icon can be removed once the menu button is implemented and validated.</span></p>
+    </div>
+    <div class="iacard util">
+      <div class="n">Our Story · 4.1 / 4.2</div>
+      <h4><span class="lde">Direktlinks &amp; Hilfe</span><span class="len">Direct links &amp; help</span></h4>
+      <div class="iagrp"><span class="lde">Direkte Links — kein Akkordeon</span><span class="len">Direct links — not an accordion</span></div>
+      <ul class="ialist">
+        <li><a href="https://luxusbetten24.de/collections/all" target="_blank" rel="noopener"><span class="lde">Alle Produkte</span><span class="len">All Products</span></a><span class="m">https://luxusbetten24.de/collections/all</span></li>
+        <li><a href="https://aufgedeckt-magazin.com/" target="_blank" rel="noopener"><span class="lde">Magazin</span><span class="len">Magazine</span></a><span class="m">https://aufgedeckt-magazin.com/</span></li>
+      </ul>
+      <div class="iagrp"><span class="lde">Hilfe &amp; Service — eingeklappt</span><span class="len">Help &amp; Service — collapsed</span></div>
+      <ul class="ialist">
+        <li><a href="https://luxusbetten24.de/pages/hilfe-center" target="_blank" rel="noopener"><span class="lde">FAQ &amp; Hilfebereich</span><span class="len">FAQ &amp; Help Center</span></a> <span class="m"><span class="lde">höchste Priorität</span><span class="len">highest priority</span></span><span class="m">https://luxusbetten24.de/pages/hilfe-center</span></li>
+        <li><a href="https://helpcenter-luxusbetten24.com/" target="_blank" rel="noopener"><span class="lde">Ich brauche Hilfe</span><span class="len">I Need Help</span></a> <span class="m"><span class="lde">höchste Priorität</span><span class="len">highest priority</span></span><span class="m">https://helpcenter-luxusbetten24.com/</span></li>
+        <li><a href="https://helpcenter-luxusbetten24.com/bettenberater" target="_blank" rel="noopener"><span class="lde">Einrichtungsberater</span><span class="len">Interior Design Advisor</span></a> <span class="m"><span class="lde">höchste Priorität</span><span class="len">highest priority</span></span><span class="m">https://helpcenter-luxusbetten24.com/bettenberater</span></li>
+        <li><a href="https://helpcenter-luxusbetten24.com/gemeinsam-einrichten" target="_blank" rel="noopener"><span class="lde">Gemeinsam einrichten</span><span class="len">Plan Your Interior Together</span></a><span class="m">https://helpcenter-luxusbetten24.com/gemeinsam-einrichten</span></li>
+        <li><a href="https://luxusbetten24.de/pages/zahlung-versand" target="_blank" rel="noopener"><span class="lde">Zahlung &amp; Versand</span><span class="len">Payment &amp; Shipping</span></a><span class="m">https://luxusbetten24.de/pages/zahlung-versand</span></li>
+        <li><a href="https://www.helpcenter-luxusbetten24.com/widerruf" target="_blank" rel="noopener"><span class="lde">Widerrufen oder stornieren</span><span class="len">Cancel or Withdraw an Order</span></a><span class="m">https://www.helpcenter-luxusbetten24.com/widerruf</span></li>
+        <li><a href="https://luxusbetten24.de/pages/sonderregelungen-erweiterte-garantieleistungen" target="_blank" rel="noopener"><span class="lde">Garantie &amp; Garantieleistungen</span><span class="len">Warranty &amp; Warranty Services</span></a><span class="m">https://luxusbetten24.de/pages/sonderregelungen-erweiterte-garantieleistungen</span></li>
+        <li><a href="https://luxusbetten24.de/pages/showroom" target="_blank" rel="noopener">Showroom</a><span class="m">https://luxusbetten24.de/pages/showroom</span></li>
+        <li><a href="https://luxusbetten24.de/pages/kundenerfahrungen" target="_blank" rel="noopener"><span class="lde">Shop-Bewertungen</span><span class="len">Store Reviews</span></a><span class="m">https://luxusbetten24.de/pages/kundenerfahrungen</span></li>
+        <li><a href="https://umzugs-checkliste.com/" target="_blank" rel="noopener"><span class="lde">Umzugs-Checkliste</span><span class="len">Moving Checklist</span></a><span class="m">https://umzugs-checkliste.com/</span></li>
+        <li><a href="tel:+4951187989379" target="_blank" rel="noopener"><span class="lde">Telefon: 0511 87989379</span><span class="len">Phone: +49 511 87989379</span></a><span class="m">tel:+4951187989379</span></li>
+      </ul>
+    </div>
+    <div class="iacard util">
+      <div class="n">Our Story · 4.3 / 4.4 / 4.5</div>
+      <h4><span class="lde">Geschichte, Recht, Social</span><span class="len">Story, legal, social</span></h4>
+      <div class="iagrp"><span class="lde">Unsere Geschichte — eingeklappt</span><span class="len">About Us — collapsed</span></div>
+      <ul class="ialist">
+        <li><a href="https://luxusbetten24.de/pages/ueber-uns" target="_blank" rel="noopener"><span class="lde">Über uns</span><span class="len">About Us</span></a><span class="m">https://luxusbetten24.de/pages/ueber-uns</span></li>
+        <li><a href="https://luxusbetten24.de/pages/nachhaltigkeit" target="_blank" rel="noopener"><span class="lde">Nachhaltigkeit</span><span class="len">Sustainability</span></a><span class="m">https://luxusbetten24.de/pages/nachhaltigkeit</span></li>
+        <li><a href="https://aufgedeckt-magazin.com/" target="_blank" rel="noopener"><span class="lde">Magazin</span><span class="len">Magazine</span></a><span class="m">https://aufgedeckt-magazin.com/</span></li>
+        <li><a href="https://karriere-luxusbetten24.com/" target="_blank" rel="noopener"><span class="lde">Jobs &amp; Karriere</span><span class="len">Jobs &amp; Careers</span></a><span class="m">https://karriere-luxusbetten24.com/</span></li>
+        <li><a href="https://luxusbetten24.de/pages/b2b-cooperations" target="_blank" rel="noopener"><span class="lde">B2B-Kooperationen</span><span class="len">B2B Partnerships</span></a><span class="m">https://luxusbetten24.de/pages/b2b-cooperations</span></li>
+        <li><a href="https://luxusbetten24.de/pages/influencers" target="_blank" rel="noopener"><span class="lde">Influencer-Kooperationen</span><span class="len">Influencer Partnerships</span></a><span class="m">https://luxusbetten24.de/pages/influencers</span></li>
+      </ul>
+      <div class="iagrp"><span class="lde">Rechtliches — letztes Akkordeon</span><span class="len">Legal — last accordion</span></div>
+      <ul class="ialist">
+        <li><a href="https://luxusbetten24.de/pages/agb-kundeninformationen" target="_blank" rel="noopener"><span class="lde">AGB &amp; Kundeninformationen</span><span class="len">Terms and Customer Information</span></a><span class="m">https://luxusbetten24.de/pages/agb-kundeninformationen</span></li>
+        <li><a href="https://luxusbetten24.de/pages/datenschutzerklarung" target="_blank" rel="noopener"><span class="lde">Datenschutzerklärung</span><span class="len">Privacy Policy</span></a><span class="m">https://luxusbetten24.de/pages/datenschutzerklarung</span></li>
+        <li><a href="https://luxusbetten24.de/pages/impressum" target="_blank" rel="noopener"><span class="lde">Impressum</span><span class="len">Legal Notice</span></a><span class="m">https://luxusbetten24.de/pages/impressum</span></li>
+        <li><a href="https://luxusbetten24.de/pages/widerrufsbelehrung-formular" target="_blank" rel="noopener"><span class="lde">Widerrufsbelehrung &amp; Formular</span><span class="len">Withdrawal Policy &amp; Form</span></a><span class="m">https://luxusbetten24.de/pages/widerrufsbelehrung-formular</span></li>
+        <li><a href="https://luxusbetten24.de/pages/cookie-richtlinie" target="_blank" rel="noopener"><span class="lde">Cookie-Richtlinie</span><span class="len">Cookie Policy</span></a><span class="m">https://luxusbetten24.de/pages/cookie-richtlinie</span></li>
+        <li><a href="https://luxusbetten24.de/pages/sonderregelungen-erweiterte-garantieleistungen" target="_blank" rel="noopener"><span class="lde">Garantiebedingungen</span><span class="len">Warranty Terms</span></a><span class="m">https://luxusbetten24.de/pages/sonderregelungen-erweiterte-garantieleistungen</span></li>
+      </ul>
+      <div class="iagrp"><span class="lde">Social — am Ende des Drawers</span><span class="len">Social — at the end of the drawer</span></div>
+      <ul class="ialist">
+        <li><a href="https://www.facebook.com/luxusbetten24" target="_blank" rel="noopener">Facebook</a><span class="m">https://www.facebook.com/luxusbetten24</span></li>
+        <li><a href="https://instagram.com/luxusbetten24" target="_blank" rel="noopener">Instagram</a><span class="m">https://instagram.com/luxusbetten24</span></li>
+        <li><a href="https://www.pinterest.de/Luxusbetten24/" target="_blank" rel="noopener">Pinterest</a><span class="m">https://www.pinterest.de/Luxusbetten24/</span></li>
+        <li><a href="https://www.tiktok.com/@luxusbetten24" target="_blank" rel="noopener">TikTok</a><span class="m">https://www.tiktok.com/@luxusbetten24</span></li>
+      </ul>
+      <div class="iagrp"><span class="lde">Sprache &amp; Region — letztes Element</span><span class="len">Language &amp; Region — last element</span></div>
+      <ul class="ialist"><li><span class="lde">„Deutsch · Deutschland (EUR €)“ — öffnet die bestehenden Land-, Sprach- und Währungsoptionen.</span><span class="len">“German · Germany (EUR €)” — opens the existing country, language and currency options.</span></li></ul>
+    </div>
+  </div>
+  <div class="rulebox">
+    <h3><span class="lde">Was nicht ins Menü gehört</span><span class="len">What does not belong in the menu</span></h3>
+    <ul class="lde">
+      <li><b>Kein Suchfeld.</b> Die Suche bleibt über das bestehende Header-Icon erreichbar.</li>
+      <li><b>Kein „Home“.</b> Das Logo führt bereits zur Startseite.</li>
+      <li><b>Keine dritte Ebene.</b> Material, Größe und Ausstattung bleiben Filter auf der Collection-Seite.</li>
+      <li><b>Keine Produktkarten in „Möbel &amp; Wohnen“</b> — zunächst nicht. Umsatz und Traffic rechtfertigen den mobilen Platz nicht.</li>
+      <li><b>Kein „FLASH SALES“ in Großbuchstaben.</b> Schreibweise „Flash Sales“.</li>
+    </ul>
+    <ul class="len">
+      <li><b>No search field.</b> Search stays available through the existing header icon.</li>
+      <li><b>No “Home”.</b> The logo already links to the homepage.</li>
+      <li><b>No third level.</b> Material, size and feature options stay collection-page filters.</li>
+      <li><b>No product cards in “Furniture &amp; Home”</b> — not initially. Revenue and traffic do not justify the mobile space.</li>
+      <li><b>No “FLASH SALES” in all caps.</b> Written “Flash Sales”.</li>
+    </ul>
+  </div>
+  <div class="pagenav">
+    <button data-go="b3"><span><span class="lde">Zurück</span><span class="len">Previous</span></span>← Desktop</button>
+    <button class="nx" data-go="plan"><span><span class="lde">Weiter</span><span class="len">Next</span></span><span class="lde">Planung →</span><span class="len">Planning →</span></button>
+  </div>
+</div></div></section>
+
+<!-- ==================== PLAN ==================== -->
+<section class="page" id="page-plan">
+  <div class="block"><div class="wrap">
+    <div class="section-lab"><span class="lde">Umsetzung</span><span class="len">Execution</span></div>
+    <h2 class="sec"><span class="lde">Reihenfolge und Messung</span><span class="len">Sequence and measurement</span></h2>
+    <p class="lede lde">Ein Test, aber vier Voraussetzungen. Die Struktur wird als ein Paket ausgeliefert — mobil und Desktop gleichzeitig, damit die Informationsarchitektur nicht auseinanderläuft. Die Phasen unten beschreiben, was vor dem Launch geklärt sein muss und woran der Erfolg gemessen wird.</p>
+      <p class="lede len">One test, but four prerequisites. The structure ships as one package — mobile and desktop together, so the information architecture does not drift apart. The phases below describe what has to be settled before launch and how success is judged.</p>
+    <div class="phases">
+      <div class="phase"><span class="ph-lbl">Phase 0 · <span class="lde">Voraussetzungen</span><span class="len">Prerequisites</span></span><h4><span class="lde">Vor dem Build klären</span><span class="len">Settle before the build</span></h4><p><span class="lde">Bestseller-Auswahl gegen Umsatz, Bestand und Lieferzeit bestätigen (Cozy, Verona, Roma, Boston) und den monatlichen Review-Termin festlegen. Alle URLs in der Struktur-Ansicht auf Weiterleitungen und 404 prüfen — insbesondere die beiden Filter-URLs für sofort lieferbare Betten und Sofas. Die heutige Untertiefe je Zweig gegen die Theme-Menükonfiguration abgleichen. Freigeben, dass „Home“ entfällt und „FLASH SALES“ zu „Flash Sales“ wird.</span><span class="len">Confirm the bestseller selection against sales, inventory and delivery time (Cozy, Verona, Roma, Boston) and set the monthly review date. Check every URL in the structure view for redirects and 404s — especially the two filter URLs for immediately available beds and sofas. Reconcile today’s sub-depth per branch against the theme’s menu configuration. Sign off that “Home” disappears and “FLASH SALES” becomes “Flash Sales”.</span></p></div>
+      <div class="phase"><span class="ph-lbl">Phase 1 · Build</span><h4><span class="lde">Struktur mobil und Desktop gemeinsam</span><span class="len">Structure on mobile and desktop together</span></h4><p><span class="lde">Beide Ansichten aus derselben Menükonfiguration bauen, damit sich mobil und Desktop nicht auseinanderentwickeln. Regeln, die im Code stehen müssen: Shopping-Navigation beim Öffnen ausgeklappt, genau ein Akkordeon gleichzeitig offen, „Our Story“ startet eingeklappt, Sprachumschalter zuletzt, kein Suchfeld im Menü, keine dritte Ebene. Der Warenkorb bleibt im Header; das Konto-Icon bleibt zunächst bestehen und wird erst nach Validierung entfernt.</span><span class="len">Build both views from the same menu configuration so mobile and desktop cannot diverge. Rules that must live in the code: shopping navigation open by default, exactly one accordion open at a time, “Our Story” starts collapsed, language switcher last, no search field in the menu, no third level. The cart stays in the header; the account icon stays for now and is only removed after validation.</span></p></div>
+      <div class="phase"><span class="ph-lbl">Phase 2 · Tracking</span><h4><span class="lde">Vor dem Launch instrumentieren</span><span class="len">Instrument before launch</span></h4><p><span class="lde">Klicks auf jedes Element der ersten Ebene, die drei Direktlinks (Neuheiten, Flash Sales, Outlet) getrennt von ihren Zwillingen in „Neu &amp; Angebote“, jede Bestseller-Karte, die Konto-Aktion und jeden Support-Link erfassen — sonst lässt sich hinterher nicht sagen, welche Gruppe die Bewegung erzeugt hat. Ereignisse so benennen, dass Gruppe, Untergruppe und Ziel getrennt auswertbar sind. Ohne dieses Tracking ist der Test nicht auswertbar und sollte nicht starten.</span><span class="len">Track clicks on every first-level item, the three direct links (New Arrivals, Flash Sales, Outlet) separately from their twins inside “New &amp; Offers”, every bestseller card, the account action and every support link — otherwise there is no way to say afterwards which group produced the movement. Name events so that group, subgroup and destination can be read separately. Without this tracking the test cannot be evaluated and should not start.</span></p></div>
+      <div class="phase"><span class="ph-lbl">Phase 3 · <span class="lde">Launch &amp; Auswertung</span><span class="len">Launch &amp; read-out</span></span><h4><span class="lde">Entscheiden auf Umsatz, nicht auf Klicks</span><span class="len">Decide on revenue, not clicks</span></h4><p><span class="lde">Mobil und Desktop getrennt berichten. Menü-Interaktionsrate, Collection- und PDP-Einstiege sowie Bestseller-Karten-Klicks sind Diagnose; entschieden wird auf Conversion Rate, Umsatz und Beitragsmarge pro berechtigter Session. Die Shop-Plattform ist die Quelle der Wahrheit für Bestellungen und Umsatz. Nach dem Launch: Bestseller monatlich prüfen und das Konto-Icon im Header erst entfernen, wenn der Menü-Button messbar genutzt wird.</span><span class="len">Report mobile and desktop separately. Menu interaction rate, collection and PDP entries and bestseller card clicks are diagnostic; the decision runs on conversion rate, revenue and contribution margin per eligible session. The commerce platform is the source of truth for orders and revenue. After launch: review bestsellers monthly and only remove the header account icon once the menu button shows measurable use.</span></p></div>
+    </div>
+    <div class="rulebox">
+      <h3><span class="lde">Definition of Done</span><span class="len">Definition of done</span></h3>
+      <ul class="lde">
+        <li>Erste Ebene enthält genau fünf Einträge: Betten, Sofas &amp; Sessel, Konfiguratoren, Möbel &amp; Wohnen, Neu &amp; Angebote.</li>
+        <li>Vier Bestseller-Karten stehen als erstes Element über allen Kategorielinks, mobil eineinhalb Karten sichtbar, auf dem Desktop vier in einer Reihe.</li>
+        <li>Neuheiten, Flash Sales und Outlet sind als Direktlinks über „Betten“ sichtbar, ohne dass ein Akkordeon geöffnet werden muss — mobil und auf dem Desktop.</li>
+        <li>Die Shopping-Navigation ist beim Öffnen ausgeklappt; innerhalb ist nie mehr als ein Akkordeon offen.</li>
+        <li>Kein Menüpfad geht über zwei Ebenen hinaus. Kein Suchfeld im Menü. Kein „Home“.</li>
+        <li>„Anmelden / Registrieren“ ist ohne Scrollen an Service- und Rechtstexten vorbei erreichbar; Wunschliste steht als Sekundärlink darunter.</li>
+        <li>„Our Story“ startet eingeklappt und enthält Direktlinks, Hilfe &amp; Service, Unsere Geschichte, Rechtliches und Social.</li>
+        <li>Outlet, Flash Sales und Magazin haben je einen expliziten Textlink; „Flash Sales“ in normaler Schreibweise.</li>
+        <li>Der Sprachumschalter ist das letzte Bedienelement und zeigt „Deutsch · Deutschland (EUR €)“.</li>
+        <li>Mobil und Desktop nutzen dieselbe Informationsarchitektur aus einer Menükonfiguration.</li>
+        <li>Alle Ziele aus der Struktur-Ansicht antworten mit 200, ohne Weiterleitungskette.</li>
+        <li>Tracking für alle Ersteinträge, Bestseller-Karten, Konto-Aktion und Support-Links ist live und verifiziert.</li>
+      </ul>
+      <ul class="len">
+        <li>The first level contains exactly five entries: Beds, Sofas &amp; Armchairs, Configurators, Furniture &amp; Home, New &amp; Offers.</li>
+        <li>Four bestseller cards sit as the first element above every category link — one and a half visible on mobile, four in a row on desktop.</li>
+        <li>New Arrivals, Flash Sales and Outlet are visible as direct links above “Beds” without opening an accordion — on mobile and on desktop.</li>
+        <li>The shopping navigation is open by default; inside it, never more than one accordion is open.</li>
+        <li>No menu path goes beyond two levels. No search field in the menu. No “Home”.</li>
+        <li>“Log in / Sign up” is reachable without scrolling past service and legal links; Wishlist sits below it as a secondary link.</li>
+        <li>“Our Story” starts collapsed and contains direct links, Help &amp; Service, About Us, Legal and Social.</li>
+        <li>Outlet, Flash Sales and Magazine each have an explicit text link; “Flash Sales” in normal case.</li>
+        <li>The language switcher is the last control and reads “German · Germany (EUR €)”.</li>
+        <li>Mobile and desktop use the same information architecture from one menu configuration.</li>
+        <li>Every destination in the structure view answers 200, with no redirect chain.</li>
+        <li>Tracking for all first-level items, bestseller cards, the account action and support links is live and verified.</li>
+      </ul>
+    </div>
+    <div class="foot">
+      <p class=" lde"><b>Messung:</b> Unique Sessions je Oberfläche als Nenner. Klicks und Impressionen sind Diagnose; entschieden wird auf Conversion Rate, Umsatz und Beitragsmarge pro berechtigter Session. Mobil und Desktop getrennt berichten. Die Shop-Plattform ist die Quelle der Wahrheit für Bestellungen und Umsatz; Analytics liefert die Wegeanalyse.</p>
+      <p class=" len"><b>Measurement:</b> unique sessions per surface as the denominator. Clicks and impressions are diagnostic; the decision runs on conversion rate, revenue and contribution margin per eligible session. Report mobile and desktop separately. The commerce platform is the source of truth for orders and revenue; analytics provides the journey analysis.</p>
+      <div class="src">
+        <p class=" lde"><b>Datengrundlage:</b> Umsatz- und Session-Anteile (95,5 % / 48,2 % / 36,9 % / 59,6 %) stammen aus dem Analyse-Briefing zur Menüstruktur. Erste Menüebene und Footer-Gruppen wurden am 26.08.2026 auf luxusbetten24.de geprüft. Die genaue Untertiefe je Zweig ist gegen die Theme-Menükonfiguration zu bestätigen.</p>
+      <p class=" len"><b>Data basis:</b> revenue and session shares (95.5% / 48.2% / 36.9% / 59.6%) come from the navigation analysis brief. The first menu level and footer groups were verified on luxusbetten24.de on 26 Aug 2026. The exact sub-depth per branch must be confirmed against the theme’s menu configuration.</p>
+        <br>
+        <p class=" lde"><b>Wireframes:</b> schematisch. Bewertungen, Anzahlen und Bilder sind Platzhalter; Produktnamen, Gruppennamen, Reihenfolge und Ziel-URLs sind verbindlich. Abstände, Typografie und Bildzuschnitt werden im Build gegen das Theme finalisiert. Die englische Fassung dient dem Verständnis von Stakeholdern — der deutsche Shop verwendet die deutsche Fassung.</p>
+      <p class=" len"><b>Wireframes:</b> schematic. Ratings, counts and images are placeholders; product names, group names, order and destination URLs are binding. Spacing, typography and image cropping are finalised against the theme during the build. The English version is for stakeholder understanding — the German store uses the German copy.</p>
+      </div>
+    </div>
+    <div class="pagenav">
+      <button data-go="ia"><span><span class="lde">Zurück</span><span class="len">Previous</span></span><span class="lde">← Struktur &amp; Links</span><span class="len">← Structure &amp; links</span></button>
+      <button class="nx" data-go="overview"><span><span class="lde">Zurück zur</span><span class="len">Back to</span></span><span class="lde">Übersicht →</span><span class="len">Overview →</span></button>
+    </div>
+  </div></div>
+</section>
+
+</main>
+<script>
+(function () {
+  'use strict';
+
+  /* ---------------- router ---------------- */
+  var ORDER = ['overview', 'b1', 'b2', 'b3', 'ia', 'plan'];
+  var pager = document.getElementById('pager');
+  var ink = document.getElementById('ink');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var current = null;
+
+  function pageEl(id) { return document.getElementById('page-' + id); }
+  function navBtn(id) { return pager.querySelector('button[data-go="' + id + '"]'); }
+
+  function moveInk(id, animate) {
+    var b = navBtn(id);
+    if (!b) { ink.style.width = '0px'; return; }
+    if (!animate) ink.classList.add('noanim');
+    ink.style.width = b.offsetWidth + 'px';
+    ink.style.transform = 'translateX(' + b.offsetLeft + 'px)';
+    if (!animate) requestAnimationFrame(function () { ink.classList.remove('noanim'); });
+  }
+
+  function show(id, push) {
+    if (!pageEl(id)) id = 'overview';
+    if (id === current) return;
+
+    ORDER.forEach(function (k) {
+      var el = pageEl(k);
+      if (el) el.classList.toggle('active', k === id);
+      var b = navBtn(k);
+      if (b) { if (k === id) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); }
+    });
+
+    document.querySelectorAll('.overlay.open').forEach(function (o) { o.classList.remove('open'); });
+    document.querySelectorAll('.hotcard.open').forEach(function (c) { c.classList.remove('open'); });
+
+    var first = current === null;
+    current = id;
+    moveInk(id, !first);
+
+    var i = ORDER.indexOf(id);
+    prevBtn.disabled = i <= 0;
+    nextBtn.disabled = i >= ORDER.length - 1;
+
+    var b = navBtn(id);
+    if (b && pager.scrollWidth > pager.clientWidth) {
+      pager.scrollTo({ left: b.offsetLeft - pager.clientWidth / 2 + b.offsetWidth / 2, behavior: first ? 'auto' : 'smooth' });
+    }
+
+    if (push && location.hash !== '#' + id) history.pushState(null, '', '#' + id);
+    if (!first) window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function go(id) { show(id, true); }
+
+  /* ---------------- language ---------------- */
+  var deBtn = document.getElementById('langDe');
+  var enBtn = document.getElementById('langEn');
+
+  function setLang(code) {
+    var root = document.documentElement;
+    root.setAttribute('data-lang', code);
+    root.setAttribute('lang', code);
+    deBtn.setAttribute('aria-pressed', code === 'de' ? 'true' : 'false');
+    enBtn.setAttribute('aria-pressed', code === 'en' ? 'true' : 'false');
+    try { localStorage.setItem('lb24-lang', code); } catch (e) {}
+    requestAnimationFrame(function () { moveInk(current, false); });
+  }
+  deBtn.addEventListener('click', function () { setLang('de'); });
+  enBtn.addEventListener('click', function () { setLang('en'); });
+
+  /* ---------------- interactions ---------------- */
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t || !t.closest) return;
+
+    var nav = t.closest('[data-go]');
+    if (nav) { e.preventDefault(); go(nav.getAttribute('data-go')); return; }
+
+    var closer = t.closest('[data-close]');
+    if (closer) {
+      e.preventDefault();
+      var ov = closer.closest('.overlay');
+      if (ov) ov.classList.remove('open');
+      return;
+    }
+
+    var trig = t.closest('[data-opens]');
+    if (trig) {
+      e.preventDefault();
+      var target = document.getElementById(trig.getAttribute('data-opens'));
+      if (target) {
+        var screen = target.closest('.screen');
+        if (screen) screen.querySelectorAll('.overlay.open').forEach(function (o) { o.classList.remove('open'); });
+        target.classList.add('open');
+      }
+      return;
+    }
+
+    var overlay = t.closest('.overlay');
+    if (overlay) {
+      if (!t.closest('.sheet')) overlay.classList.remove('open');
+      return;
+    }
+
+    var q = t.closest('.acc .q');
+    if (q) {
+      var isOpen = q.classList.toggle('open');
+      var a = q.nextElementSibling;
+      if (a && a.classList.contains('a')) a.style.display = isOpen ? 'block' : 'none';
+      var cx = q.querySelector('.cx');
+      if (cx) cx.textContent = isOpen ? '−' : '+';
+
+      /* only one accordion open at a time, per level, inside a menu drawer */
+      if (isOpen) {
+        var box = q.parentElement;
+        var sibling = q.classList.contains('sub');
+        Array.prototype.forEach.call(box.children, function (el) {
+          if (el === q || !el.classList.contains('q') || !el.classList.contains('open')) return;
+          if (el.classList.contains('sub') !== sibling) return;
+          el.classList.remove('open');
+          var ea = el.nextElementSibling;
+          if (ea && ea.classList.contains('a')) ea.style.display = 'none';
+          var ecx = el.querySelector('.cx');
+          if (ecx) ecx.textContent = '+';
+        });
+      }
+      return;
+    }
+  });
+
+  prevBtn.addEventListener('click', function () { var i = ORDER.indexOf(current); if (i > 0) go(ORDER[i - 1]); });
+  nextBtn.addEventListener('click', function () { var i = ORDER.indexOf(current); if (i < ORDER.length - 1) go(ORDER[i + 1]); });
+
+  window.addEventListener('popstate', function () { show((location.hash || '#overview').slice(1), false); });
+  window.addEventListener('resize', function () { moveInk(current, false); });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.overlay.open').forEach(function (o) { o.classList.remove('open'); });
+      return;
+    }
+    var el = document.activeElement;
+    var typing = el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA');
+    if (!typing && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+      var i = ORDER.indexOf(current);
+      if (e.key === 'ArrowLeft' && i > 0) { e.preventDefault(); go(ORDER[i - 1]); }
+      if (e.key === 'ArrowRight' && i < ORDER.length - 1) { e.preventDefault(); go(ORDER[i + 1]); }
+      return;
+    }
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    if (el && el.matches && el.matches('[data-opens],[data-close],.acc .q')) {
+      e.preventDefault();
+      el.click();
+    }
+  });
+
+  /* label every After column that has something to click */
+  document.querySelectorAll('.col').forEach(function (col) {
+    if (!col.querySelector('.state.after')) return;
+    if (!col.querySelector('[data-opens],.acc .q')) return;
+    var head = col.querySelector('.col-h');
+    if (!head) return;
+    var chip = document.createElement('span');
+    chip.className = 'live';
+    chip.innerHTML = '<span class="lde">Interaktiv</span><span class="len">Interactive</span>';
+    head.appendChild(chip);
+  });
+
+  /* boot */
+  var saved = null;
+  try { saved = localStorage.getItem('lb24-lang'); } catch (e) {}
+  setLang(saved === 'en' ? 'en' : 'de');
+  show((location.hash || '#overview').slice(1), false);
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { moveInk(current, false); }); }
+})();
+</script>
+
+</body>
+</html>
