@@ -1,0 +1,1029 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Mobile-first before and after navigation prototype for Luxusbetten24.">
+  <title>Luxusbetten24 Navigation — Before & After</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oxygen:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #272727;
+      --muted: #747474;
+      --line: rgba(39, 39, 39, .12);
+      --soft-line: rgba(39, 39, 39, .08);
+      --paper: #fff;
+      --stage: #f3f4f3;
+      --accent: #6ccdc3;
+      --accent-dark: #2d8f87;
+      --accent-soft: #e9f8f6;
+      --sale: #c94b4b;
+      --shadow: 0 30px 70px rgba(34, 46, 45, .14);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--stage);
+      color: var(--ink);
+      font-family: Inter, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, a { font: inherit; }
+    button { color: inherit; }
+    a { color: inherit; text-decoration: none; }
+
+    .prototype-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+      background: rgba(255, 255, 255, .94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+    }
+
+    .prototype-brand {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .prototype-title {
+      display: grid;
+      gap: 3px;
+    }
+
+    .prototype-title strong {
+      font-family: Oxygen, Inter, sans-serif;
+      font-size: 15px;
+      letter-spacing: -.01em;
+    }
+
+    .prototype-title span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .status-chip {
+      padding: 7px 10px;
+      border: 1px solid rgba(45, 143, 135, .22);
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .prototype-controls {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .language-switcher {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #f5f5f4;
+    }
+
+    .language-switcher button {
+      min-width: 38px;
+      min-height: 38px;
+      padding: 7px 8px;
+      border: 0;
+      border-radius: 9px;
+      background: transparent;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .language-switcher button[aria-pressed="true"] {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .view-switcher {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #f5f5f4;
+    }
+
+    .view-switcher button {
+      min-height: 38px;
+      padding: 8px 10px;
+      border: 0;
+      border-radius: 9px;
+      background: transparent;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .view-switcher button[aria-selected="true"] {
+      background: var(--paper);
+      box-shadow: 0 2px 8px rgba(39, 39, 39, .09);
+    }
+
+    .stage {
+      display: grid;
+      min-height: calc(100vh - 122px);
+      padding: 18px 0 40px;
+    }
+
+    .version {
+      display: none;
+      min-width: 0;
+    }
+
+    .stage[data-view="before"] .version--before,
+    .stage[data-view="after"] .version--after {
+      display: block;
+    }
+
+    .stage[data-view="compare"] {
+      gap: 22px;
+    }
+
+    .stage[data-view="compare"] .version {
+      display: block;
+    }
+
+    .version-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: min(100% - 28px, 412px);
+      margin: 0 auto 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .version-heading span:last-child {
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .device {
+      position: relative;
+      width: min(100%, 412px);
+      height: min(790px, calc(100vh - 170px));
+      min-height: 610px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: var(--paper);
+      border-top: 1px solid #292929;
+      box-shadow: var(--shadow);
+    }
+
+    .store-header {
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      align-items: center;
+      min-height: 72px;
+      padding: 0 16px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .hamburger {
+      display: grid;
+      gap: 4px;
+      width: 30px;
+      padding: 6px;
+    }
+
+    .hamburger i {
+      display: block;
+      height: 1.5px;
+      background: var(--ink);
+    }
+
+    .logo {
+      display: flex;
+      justify-content: center;
+    }
+
+    .logo img {
+      display: block;
+      width: 146px;
+      height: 35px;
+      object-fit: contain;
+    }
+
+    .header-tools {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+    }
+
+    .menu-drawer {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: #bbb transparent;
+      background: var(--paper);
+    }
+
+    .drawer-top {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      min-height: 104px;
+      padding: 24px 32px 16px;
+      background: linear-gradient(#fff 76%, rgba(255,255,255,.92));
+    }
+
+    .close-button {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      font-size: 22px;
+      font-weight: 300;
+    }
+
+    .drawer-content { padding: 0 32px 28px; }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: #6d6d6d;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .feature-link {
+      display: block;
+      margin: 0 0 16px;
+      font-family: Oxygen, Inter, sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: .012em;
+      line-height: 1.25;
+    }
+
+    .divider {
+      height: 1px;
+      margin: 14px 0 16px;
+      background: var(--line);
+    }
+
+    .legacy-list {
+      display: grid;
+      gap: 0;
+    }
+
+    .legacy-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      min-height: 40px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .legacy-item .arrow-box {
+      display: grid;
+      width: 23px;
+      height: 24px;
+      place-items: center;
+      background: #ebebeb;
+      font-size: 17px;
+      font-weight: 400;
+    }
+
+    .legacy-products,
+    .product-rail {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(146px, 1fr);
+      gap: 8px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+
+    .legacy-products::-webkit-scrollbar,
+    .product-rail::-webkit-scrollbar { display: none; }
+
+    .legacy-product,
+    .product-card {
+      min-width: 0;
+      scroll-snap-align: start;
+    }
+
+    .legacy-product img,
+    .product-card img {
+      display: block;
+      width: 100%;
+      object-fit: cover;
+      background: #eee;
+    }
+
+    .legacy-product img { height: 86px; }
+
+    .legacy-product .stars {
+      margin-top: 6px;
+      color: #ffc400;
+      font-size: 10px;
+      letter-spacing: -.03em;
+    }
+
+    .legacy-product .stars span { color: #6d6d6d; }
+
+    .legacy-product p {
+      margin: 4px 0 0;
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      padding: 20px 0 4px;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .after-intro {
+      margin: -2px 0 10px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .product-rail {
+      grid-auto-columns: 72%;
+      margin: 0 -32px;
+      padding: 0 32px 6px;
+      gap: 10px;
+    }
+
+    .product-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      background: #fff;
+    }
+
+    .product-card img { height: 118px; }
+
+    .product-card-copy { padding: 10px 11px 11px; }
+
+    .card-badge {
+      display: inline-flex;
+      margin-bottom: 7px;
+      padding: 4px 7px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .product-card h3 {
+      margin: 0;
+      font-family: Oxygen, Inter, sans-serif;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .card-meta .rating { color: #e2ad00; }
+
+    .priority-links {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 7px;
+      margin: 22px 0 14px;
+    }
+
+    .priority-link {
+      display: flex;
+      min-height: 58px;
+      padding: 10px;
+      border: 1px solid rgba(108, 205, 195, .52);
+      background: var(--accent-soft);
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--ink);
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .priority-link::after {
+      align-self: flex-end;
+      color: var(--accent-dark);
+      content: "→";
+      font-size: 14px;
+    }
+
+    .priority-link--sale {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .priority-link--sale::after { color: var(--accent); }
+
+    .shopping-shell {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .accordion-item { border-top: 1px solid var(--soft-line); }
+    .accordion-item:first-of-type { border-top: 0; }
+
+    .accordion-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      min-height: 48px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      text-align: left;
+      font-size: 16px;
+      font-weight: 650;
+    }
+
+    .accordion-trigger .toggle {
+      position: relative;
+      width: 22px;
+      height: 22px;
+      background: #efefef;
+    }
+
+    .accordion-trigger .toggle::before,
+    .accordion-trigger .toggle::after {
+      position: absolute;
+      top: 10px;
+      left: 6px;
+      width: 10px;
+      height: 1px;
+      background: var(--ink);
+      content: "";
+      transition: transform .2s ease;
+    }
+
+    .accordion-trigger .toggle::after { transform: rotate(90deg); }
+    .accordion-trigger[aria-expanded="true"] .toggle::after { transform: rotate(0deg); }
+
+    .accordion-panel {
+      display: none;
+      padding: 0 0 13px;
+    }
+
+    .accordion-trigger[aria-expanded="true"] + .accordion-panel {
+      display: grid;
+    }
+
+    .accordion-panel a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 35px;
+      padding-left: 10px;
+      color: #4f4f4f;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .accordion-panel a:first-child {
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
+    .accordion-panel a::after {
+      color: #969696;
+      content: "→";
+    }
+
+    .account-card {
+      display: grid;
+      grid-template-columns: 38px 1fr auto;
+      align-items: center;
+      gap: 10px;
+      margin: 18px 0 8px;
+      padding: 13px;
+      border: 1px solid rgba(108, 205, 195, .52);
+      background: var(--accent-soft);
+    }
+
+    .account-icon {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border-radius: 50%;
+      background: #fff;
+      font-size: 19px;
+    }
+
+    .account-card strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 13px;
+    }
+
+    .account-card small {
+      display: block;
+      color: #5d6968;
+      font-size: 9px;
+      line-height: 1.4;
+    }
+
+    .account-card .account-arrow {
+      font-size: 19px;
+    }
+
+    .utility-details {
+      border-top: 1px solid var(--line);
+    }
+
+    .utility-details:last-of-type { border-bottom: 1px solid var(--line); }
+
+    .utility-details summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 52px;
+      cursor: pointer;
+      list-style: none;
+      font-size: 15px;
+      font-weight: 650;
+    }
+
+    .utility-details summary::-webkit-details-marker { display: none; }
+    .utility-details summary::after { content: "+"; font-size: 19px; font-weight: 400; }
+    .utility-details[open] summary::after { content: "−"; }
+
+    .utility-body {
+      display: grid;
+      gap: 16px;
+      padding: 0 0 18px;
+    }
+
+    .utility-group h4 {
+      margin: 0 0 5px;
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .utility-group a {
+      display: block;
+      padding: 6px 0;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .language-current {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .flag {
+      display: inline-grid;
+      width: 18px;
+      height: 12px;
+      overflow: hidden;
+      border-radius: 1px;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+    }
+
+    .flag i:nth-child(1) { background: #1f1f1f; }
+    .flag i:nth-child(2) { background: #d52b1e; }
+    .flag i:nth-child(3) { background: #f4c430; }
+
+    .prototype-note {
+      width: min(100% - 28px, 412px);
+      margin: 12px auto 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    @media (min-width: 920px) {
+      .prototype-header {
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        padding: 14px 24px;
+      }
+
+      .view-switcher { width: 320px; }
+
+      .prototype-controls {
+        display: flex;
+      }
+
+      .stage {
+        align-items: start;
+        padding: 26px 30px 46px;
+      }
+
+      .stage[data-view="compare"] {
+        grid-template-columns: repeat(2, minmax(0, 412px));
+        justify-content: center;
+      }
+
+      .device {
+        height: min(800px, calc(100vh - 150px));
+        border: 1px solid rgba(39,39,39,.22);
+        border-radius: 18px;
+      }
+
+      .menu-drawer { border-radius: 18px; }
+    }
+
+    @media (max-width: 919px) {
+      .stage[data-view="compare"] .version {
+        display: block;
+      }
+
+      .stage[data-view="compare"] .version + .version {
+        margin-top: 28px;
+      }
+
+      .device {
+        height: calc(100vh - 164px);
+        min-height: 580px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .prototype-header { padding: 12px; }
+      .status-chip { display: none; }
+      .stage { padding-top: 0; }
+      .version-heading { display: none; }
+      .device { width: 100%; box-shadow: none; }
+      .prototype-note { display: none; }
+      .language-switcher button { min-width: 34px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="prototype-header">
+    <div class="prototype-brand">
+      <div class="prototype-title">
+        <strong>Luxusbetten24 Navigation</strong>
+        <span>Mobile-first CRO prototype</span>
+      </div>
+      <span class="status-chip">Data-informed concept</span>
+    </div>
+    <div class="prototype-controls">
+      <div class="language-switcher" role="group" aria-label="Choose proposed menu language">
+        <button type="button" data-language-button="de" aria-pressed="true" title="German menu">DE</button>
+        <button type="button" data-language-button="en" aria-pressed="false" title="English menu">EN</button>
+      </div>
+      <div class="view-switcher" role="tablist" aria-label="Choose prototype view">
+        <button type="button" role="tab" data-view-button="before" aria-selected="false">Before</button>
+        <button type="button" role="tab" data-view-button="after" aria-selected="true">After</button>
+        <button type="button" role="tab" data-view-button="compare" aria-selected="false">Compare</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="stage" data-view="after">
+    <section class="version version--before" aria-labelledby="before-title">
+      <div class="version-heading">
+        <span id="before-title">Before</span>
+        <span>Current live structure</span>
+      </div>
+      <div class="device">
+        <div class="store-header" aria-hidden="true">
+          <span class="hamburger"><i></i><i></i><i></i></span>
+          <span class="logo"><img src="https://luxusbetten24.de/cdn/shop/files/LB24_Living_4.1.jpg?v=1765899789&amp;width=400" alt="Luxusbetten24 Living"></span>
+          <span class="header-tools"><span>♡</span><span>🛒</span></span>
+        </div>
+
+        <aside class="menu-drawer" aria-label="Current navigation menu">
+          <div class="drawer-top"><button class="close-button" type="button" aria-label="Close current menu">×</button></div>
+          <div class="drawer-content">
+            <p class="eyebrow">Am beliebtesten</p>
+            <a class="feature-link" href="https://luxusbetten24.de/pages/betten-konfigurator">Boxspringbett Konfigurator</a>
+            <a class="feature-link" href="https://luxusbetten24.de/pages/polsterbett-konfigurator">Polsterbett Konfigurator</a>
+            <div class="divider"></div>
+
+            <nav class="legacy-list" aria-label="Current shopping links">
+              <a class="legacy-item" href="https://luxusbetten24.de/">Home</a>
+              <button class="legacy-item" type="button">Garten <span class="arrow-box">→</span></button>
+              <button class="legacy-item" type="button">Konfiguratoren <span class="arrow-box">→</span></button>
+              <button class="legacy-item" type="button">Schlafzimmer <span class="arrow-box">→</span></button>
+              <button class="legacy-item" type="button">Wohnzimmer <span class="arrow-box">→</span></button>
+              <button class="legacy-item" type="button">Küche <span class="arrow-box">→</span></button>
+              <button class="legacy-item" type="button">Wohnaccessoires <span class="arrow-box">→</span></button>
+              <button class="legacy-item" type="button">Kinder <span class="arrow-box">→</span></button>
+              <a class="legacy-item" href="https://luxusbetten24.de/collections/neuankommlinge">Neuheiten</a>
+              <a class="legacy-item" href="https://luxusbetten24.de/pages/flash-deals">FLASH SALES</a>
+              <a class="legacy-item" href="https://luxusbetten24.de/collections/outlet">Outlet</a>
+              <a class="legacy-item" href="https://aufgedeckt-magazin.com/">Magazin</a>
+            </nav>
+
+            <div class="divider"></div>
+            <p class="eyebrow">Bestseller</p>
+            <div class="legacy-products">
+              <a class="legacy-product" href="https://luxusbetten24.de/products/designer-sofa-lazy-3-sitzer-in-cord">
+                <img src="https://luxusbetten24.de/cdn/shop/files/OUTLET-Designer-Sofa-Lazy-3-Sitzer-in-Cord.jpg?v=1780653450&amp;width=900" alt="Designer Sofa Lazy 3 Sitzer in Cord">
+                <div class="stars">★★★★★ <span>(57)</span></div>
+                <p>Designer Sofa Lazy 3 Sitzer in Cord</p>
+              </a>
+              <a class="legacy-product" href="https://luxusbetten24.de/products/designer-polsterbett-boston-boucle-mit-stauraum">
+                <img src="https://luxusbetten24.de/cdn/shop/files/Baidani_25_03_14_Boston_side_Quelle_01.jpg?v=1743796718&amp;width=900" alt="Designer Polsterbett Boston Bouclé mit Stauraum">
+                <div class="stars">★★★★★ <span>(72)</span></div>
+                <p>Designer Polsterbett Boston Bouclé mit Stauraum</p>
+              </a>
+            </div>
+            <div class="socials" aria-label="Social links"><span>f</span><span>◎</span><span>p</span><span>♪</span></div>
+          </div>
+        </aside>
+      </div>
+      <p class="prototype-note">The current structure mixes rooms, categories, campaigns, content and configurators at the same level. Bestseller cards appear after the complete link list.</p>
+    </section>
+
+    <section class="version version--after" aria-labelledby="after-title">
+      <div class="version-heading">
+        <span id="after-title">After</span>
+        <span>Proposed mobile-first structure</span>
+      </div>
+      <div class="device">
+        <div class="store-header" aria-hidden="true">
+          <span class="hamburger"><i></i><i></i><i></i></span>
+          <span class="logo"><img src="https://luxusbetten24.de/cdn/shop/files/LB24_Living_4.1.jpg?v=1765899789&amp;width=400" alt="Luxusbetten24 Living"></span>
+          <span class="header-tools"><span>⌕</span><span>🛒</span></span>
+        </div>
+
+        <aside class="menu-drawer" id="after-menu" lang="de" aria-label="Proposed navigation menu">
+          <div class="drawer-top"><button class="close-button" type="button" aria-label="Close proposed menu">×</button></div>
+          <div class="drawer-content">
+            <p class="after-intro" data-de="Bestseller" data-en="Bestsellers">Bestseller</p>
+            <div class="product-rail" aria-label="Bestseller products">
+              <a class="product-card" href="https://luxusbetten24.de/products/boxspringbett-cozy-samt-mit-stauraum">
+                <img src="https://luxusbetten24.de/cdn/shop/files/Baidani_26_02_09_Cozy_bed_side_footboard_Velluto_02.jpg?v=1772017040&amp;width=1200" alt="Boxspringbett Cozy Samt mit Stauraum">
+                <div class="product-card-copy">
+                  <span class="card-badge" data-de="Bestseller" data-en="Bestseller">Bestseller</span>
+                  <h3 data-de="Boxspringbett Cozy" data-en="Cozy Box Spring Bed">Boxspringbett Cozy</h3>
+                  <div class="card-meta"><span class="rating">★★★★★</span><span data-de="Produkt ansehen →" data-en="View product →">Produkt ansehen →</span></div>
+                </div>
+              </a>
+              <a class="product-card" href="https://luxusbetten24.de/products/designer-sofa-verona-mit-breiter-ottomane-mit-schlaf-und-klappfunktion-in-cord">
+                <img src="https://luxusbetten24.de/cdn/shop/files/Baidani251024SofaMona2frontPoso38beige.jpg?v=1773748748&amp;width=1200" alt="Designer Ecksofa Verona">
+                <div class="product-card-copy">
+                  <span class="card-badge" data-de="Im Trend" data-en="Trending">Im Trend</span>
+                  <h3 data-de="Ecksofa Verona" data-en="Verona Corner Sofa">Ecksofa Verona</h3>
+                  <div class="card-meta"><span class="rating">★★★★★</span><span data-de="Produkt ansehen →" data-en="View product →">Produkt ansehen →</span></div>
+                </div>
+              </a>
+              <a class="product-card" href="https://luxusbetten24.de/products/designer-sofa-roma-in-cord-mit-schlaf-und-klappfunktion">
+                <img src="https://luxusbetten24.de/cdn/shop/files/Baidani260203RomasofaPoso38beigeside.jpg?v=1770777131&amp;width=1200" alt="Designer Ecksofa Roma">
+                <div class="product-card-copy">
+                  <span class="card-badge" data-de="Kundenfavorit" data-en="Customer favorite">Kundenfavorit</span>
+                  <h3 data-de="Ecksofa Roma" data-en="Roma Corner Sofa">Ecksofa Roma</h3>
+                  <div class="card-meta"><span class="rating">★★★★★</span><span data-de="Produkt ansehen →" data-en="View product →">Produkt ansehen →</span></div>
+                </div>
+              </a>
+              <a class="product-card" href="https://luxusbetten24.de/products/designer-polsterbett-boston-boucle-mit-stauraum">
+                <img src="https://luxusbetten24.de/cdn/shop/files/Baidani_25_03_14_Boston_side_Quelle_01.jpg?v=1743796718&amp;width=1200" alt="Designer Polsterbett Boston Bouclé">
+                <div class="product-card-copy">
+                  <span class="card-badge" data-de="Häufig gesucht" data-en="Frequently searched">Häufig gesucht</span>
+                  <h3 data-de="Polsterbett Boston" data-en="Boston Upholstered Bed">Polsterbett Boston</h3>
+                  <div class="card-meta"><span class="rating">★★★★★</span><span data-de="Produkt ansehen →" data-en="View product →">Produkt ansehen →</span></div>
+                </div>
+              </a>
+            </div>
+
+            <nav class="priority-links" aria-label="Highlighted shopping links">
+              <a class="priority-link" href="https://luxusbetten24.de/collections/neuankommlinge" data-de="Neuheiten" data-en="New arrivals">Neuheiten</a>
+              <a class="priority-link priority-link--sale" href="https://luxusbetten24.de/pages/flash-deals" data-de="Flash Sales" data-en="Flash Sales">Flash Sales</a>
+              <a class="priority-link" href="https://luxusbetten24.de/collections/outlet" data-de="Outlet" data-en="Outlet">Outlet</a>
+            </nav>
+
+            <div class="shopping-shell">
+              <div class="accordion-item">
+                <button class="accordion-trigger" type="button" aria-expanded="true"><span data-de="Betten" data-en="Beds">Betten</span><span class="toggle" aria-hidden="true"></span></button>
+                <div class="accordion-panel">
+                  <a href="https://luxusbetten24.de/collections/betten" data-de="Alle Betten" data-en="All beds">Alle Betten</a>
+                  <a href="https://luxusbetten24.de/collections/boxspringbetten" data-de="Boxspringbetten" data-en="Box spring beds">Boxspringbetten</a>
+                  <a href="https://luxusbetten24.de/collections/polsterbetten" data-de="Polsterbetten" data-en="Upholstered beds">Polsterbetten</a>
+                  <a href="https://luxusbetten24.de/collections/holzbetten" data-de="Holzbetten" data-en="Wooden beds">Holzbetten</a>
+                  <a href="https://luxusbetten24.de/collections/kinderbetten" data-de="Kinderbetten" data-en="Children’s beds">Kinderbetten</a>
+                  <a href="https://luxusbetten24.de/products/customized-bed" data-de="Boxspringbett konfigurieren" data-en="Configure a box spring bed">Boxspringbett konfigurieren</a>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <button class="accordion-trigger" type="button" aria-expanded="false"><span data-de="Sofas &amp; Sessel" data-en="Sofas &amp; Armchairs">Sofas &amp; Sessel</span><span class="toggle" aria-hidden="true"></span></button>
+                <div class="accordion-panel">
+                  <a href="https://luxusbetten24.de/collections/sofas" data-de="Alle Sofas" data-en="All sofas">Alle Sofas</a>
+                  <a href="https://luxusbetten24.de/collections/sofas-aus-cord" data-de="Sofas aus Cord" data-en="Corduroy sofas">Sofas aus Cord</a>
+                  <a href="https://luxusbetten24.de/collections/sofas-aus-boucle" data-de="Sofas aus Bouclé" data-en="Bouclé sofas">Sofas aus Bouclé</a>
+                  <a href="https://luxusbetten24.de/collections/sofas-mit-elektrischer-funktion" data-de="Elektrische Sofas" data-en="Electric sofas">Elektrische Sofas</a>
+                  <a href="https://luxusbetten24.de/collections/sessel" data-de="Sessel" data-en="Armchairs">Sessel</a>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <button class="accordion-trigger" type="button" aria-expanded="false"><span data-de="Konfiguratoren" data-en="Configurators">Konfiguratoren</span><span class="toggle" aria-hidden="true"></span></button>
+                <div class="accordion-panel">
+                  <a href="https://luxusbetten24.de/products/customized-bed" data-de="Boxspringbett konfigurieren" data-en="Configure a box spring bed">Boxspringbett konfigurieren</a>
+                  <a href="https://luxusbetten24.de/products/polsterbett-configurator?view=customized-bed-abtest" data-de="Polsterbett konfigurieren" data-en="Configure an upholstered bed">Polsterbett konfigurieren</a>
+                  <a href="https://luxusbetten24.de/pages/lunaro-konfigurator" data-de="Ecksofa konfigurieren" data-en="Configure a corner sofa">Ecksofa konfigurieren</a>
+                  <a href="https://luxusbetten24.de/pages/moduro-konfigurator" data-de="Kleiderschrank konfigurieren" data-en="Configure a wardrobe">Kleiderschrank konfigurieren</a>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <button class="accordion-trigger" type="button" aria-expanded="false"><span data-de="Möbel &amp; Wohnen" data-en="Furniture &amp; Home">Möbel &amp; Wohnen</span><span class="toggle" aria-hidden="true"></span></button>
+                <div class="accordion-panel">
+                  <a href="https://luxusbetten24.de/collections/kleiderschranke" data-de="Kleiderschränke" data-en="Wardrobes">Kleiderschränke</a>
+                  <a href="https://luxusbetten24.de/collections/esstische" data-de="Esstische" data-en="Dining tables">Esstische</a>
+                  <a href="https://luxusbetten24.de/collections/couchtische" data-de="Couchtische" data-en="Coffee tables">Couchtische</a>
+                  <a href="https://luxusbetten24.de/collections/wohn-accessoires" data-de="Wohnaccessoires" data-en="Home accessories">Wohnaccessoires</a>
+                  <a href="https://luxusbetten24.de/collections/lampen" data-de="Beleuchtung" data-en="Lighting">Beleuchtung</a>
+                  <a href="https://luxusbetten24.de/collections/garten-1" data-de="Garten" data-en="Garden">Garten</a>
+                </div>
+              </div>
+
+            </div>
+
+            <a class="account-card" href="https://helpcenter-luxusbetten24.com/auth">
+              <span class="account-icon">♙</span>
+              <span><strong data-de="Anmelden / Registrieren" data-en="Log in / Sign up">Anmelden / Registrieren</strong><small data-de="Bestellungen und Favoriten verwalten" data-en="Manage orders and favorites">Bestellungen und Favoriten verwalten</small></span>
+              <span class="account-arrow">→</span>
+            </a>
+
+            <details class="utility-details">
+              <summary data-de="Über uns" data-en="About us">Über uns</summary>
+              <div class="utility-body">
+                <div class="utility-group">
+                  <h4 data-de="Luxusbetten24 entdecken" data-en="Discover Luxusbetten24">Luxusbetten24 entdecken</h4>
+                  <a href="https://aufgedeckt-magazin.com/" data-de="Magazin" data-en="Magazine">Magazin</a>
+                  <a href="https://luxusbetten24.de/pages/ueber-uns" data-de="Über uns" data-en="About us">Über uns</a>
+                  <a href="https://luxusbetten24.de/pages/nachhaltigkeit" data-de="Nachhaltigkeit" data-en="Sustainability">Nachhaltigkeit</a>
+                  <a href="https://luxusbetten24.de/pages/showroom" data-de="Showroom" data-en="Showroom">Showroom</a>
+                </div>
+              </div>
+            </details>
+
+            <details class="utility-details">
+              <summary data-de="Hilfe &amp; Service" data-en="Help &amp; Service">Hilfe &amp; Service</summary>
+              <div class="utility-body">
+                <div class="utility-group">
+                  <a href="https://luxusbetten24.de/pages/hilfe-center" data-de="FAQ &amp; Hilfebereich" data-en="FAQ &amp; Help Center">FAQ &amp; Hilfebereich</a>
+                  <a href="https://helpcenter-luxusbetten24.com/" data-de="Ich brauche Hilfe" data-en="I need help">Ich brauche Hilfe</a>
+                  <a href="https://luxusbetten24.de/pages/zahlung-versand" data-de="Zahlung &amp; Versand" data-en="Payment &amp; Shipping">Zahlung &amp; Versand</a>
+                  <a href="https://www.helpcenter-luxusbetten24.com/widerruf" data-de="Widerrufen oder stornieren" data-en="Cancel or withdraw an order">Widerrufen oder stornieren</a>
+                </div>
+              </div>
+            </details>
+
+            <details class="utility-details">
+              <summary data-de="Rechtliches" data-en="Legal">Rechtliches</summary>
+              <div class="utility-body">
+                <div class="utility-group">
+                  <a href="https://luxusbetten24.de/pages/agb-kundeninformationen" data-de="AGB &amp; Kundeninformationen" data-en="Terms &amp; Customer Information">AGB &amp; Kundeninformationen</a>
+                  <a href="https://luxusbetten24.de/pages/datenschutzerklarung" data-de="Datenschutzerklärung" data-en="Privacy Policy">Datenschutzerklärung</a>
+                  <a href="https://luxusbetten24.de/pages/impressum" data-de="Impressum" data-en="Legal Notice">Impressum</a>
+                </div>
+              </div>
+            </details>
+
+            <details class="utility-details">
+              <summary><span data-de="Sprache &amp; Region" data-en="Language &amp; Region">Sprache &amp; Region</span><span class="language-current"><span class="flag"><i></i><i></i><i></i></span><span data-de="DE · EUR €" data-en="EN · EUR €">DE · EUR €</span></span></summary>
+              <div class="utility-body">
+                <div class="utility-group">
+                  <h4 data-de="Aktuelle Auswahl" data-en="Current selection">Aktuelle Auswahl</h4>
+                  <a href="#language" data-de="Deutsch · Deutschland (EUR €)" data-en="English · Germany (EUR €)">Deutsch · Deutschland (EUR €)</a>
+                </div>
+              </div>
+            </details>
+          </div>
+        </aside>
+      </div>
+      <p class="prototype-note">The proposed structure promotes current bestsellers first, exposes New Arrivals, Flash Sales and Outlet as direct links, then separates account access, About us, service, legal and language controls.</p>
+    </section>
+  </main>
+
+  <script>
+    const stage = document.querySelector('.stage');
+    const viewButtons = document.querySelectorAll('[data-view-button]');
+    const afterMenu = document.querySelector('#after-menu');
+    const languageButtons = document.querySelectorAll('[data-language-button]');
+    const translatedMenuItems = afterMenu.querySelectorAll('[data-de][data-en]');
+
+    function setMenuLanguage(language) {
+      translatedMenuItems.forEach((item) => {
+        item.textContent = item.dataset[language];
+      });
+
+      languageButtons.forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.languageButton === language));
+      });
+
+      afterMenu.lang = language;
+      afterMenu.setAttribute(
+        'aria-label',
+        language === 'de' ? 'Vorgeschlagenes Navigationsmenü' : 'Proposed navigation menu'
+      );
+    }
+
+    languageButtons.forEach((button) => {
+      button.addEventListener('click', () => setMenuLanguage(button.dataset.languageButton));
+    });
+
+    viewButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const view = button.dataset.viewButton;
+        stage.dataset.view = view;
+        viewButtons.forEach((item) => item.setAttribute('aria-selected', String(item === button)));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    document.querySelectorAll('.shopping-shell').forEach((group) => {
+      const triggers = group.querySelectorAll('.accordion-trigger');
+      triggers.forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+          const shouldOpen = trigger.getAttribute('aria-expanded') !== 'true';
+          triggers.forEach((item) => item.setAttribute('aria-expanded', 'false'));
+          trigger.setAttribute('aria-expanded', String(shouldOpen));
+        });
+      });
+    });
+
+    setMenuLanguage('de');
+  </script>
+</body>
+</html>
