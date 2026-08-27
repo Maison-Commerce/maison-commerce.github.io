@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"><style>
+body{margin:0;background:#e9e6e0;font-family:Inter,system-ui,sans-serif;color:#1d1a17;-webkit-font-smoothing:antialiased}
+a{color:#1d1a17}a:hover{color:#5a5147}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+</style></helmet>
+<div style="width:1280px;margin:0 auto;background:#fdfbf8;box-shadow:0 8px 56px rgba(20,18,16,.09)">
+
+<div style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 60px;background:rgba(253,251,248,.9);backdrop-filter:blur(10px);border-bottom:1px solid rgba(29,26,23,.08);position:sticky;top:0;z-index:20">
+<div style="display:flex;align-items:center;gap:10px"><div style="width:26px;height:26px;border-radius:7px;background:#dcd8d1;border:1px solid rgba(29,26,23,.14)"></div><span style="font:500 16px/1 Inter,sans-serif;letter-spacing:-.01em">Feedwizrd</span></div>
+<div style="display:flex;align-items:center;gap:26px;font:400 14px/1 Inter,sans-serif;color:rgba(29,26,23,.72)"><a href="#s4" style="text-decoration:none;color:inherit">Product</a><a href="#s7" style="text-decoration:none;color:inherit">How it works</a><a href="#s10" style="text-decoration:none;color:inherit">Pricing</a><a href="#s11" style="text-decoration:none;color:inherit">FAQ</a></div>
+<div style="display:flex;align-items:center;gap:16px"><a href="#" style="font:400 14px/1 Inter,sans-serif;color:rgba(29,26,23,.72);text-decoration:none">Sign in</a><a href="#s10" style="display:inline-block;padding:10px 18px;border-radius:999px;background:#f8ea51;color:#423c00;font:500 14px/1 Inter,sans-serif;text-decoration:none;box-shadow:inset 0 0 0 1px rgba(44,36,32,.16),inset 0 -2px 0 rgba(44,36,32,.12),0 1px 2px rgba(44,36,32,.05)">Get started</a></div>
+</div>
+
+<section id="s1" style="padding:64px 60px 56px;border-bottom:1px solid rgba(29,26,23,.08)">
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:28px">01 · Hero — the daily profit decision</div>
+<div style="display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:center">
+<div>
+<div style="display:inline-block;padding:6px 12px;border-radius:999px;border:1px solid rgba(29,26,23,.12);background:rgba(29,26,23,.04);font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.6);margin-bottom:22px">For Shopify sellers running Google Ads</div>
+<h1 style="margin:0 0 18px;font:500 52px/1.06 Inter,sans-serif;letter-spacing:-.02em;text-wrap:pretty">Know which products make money. Fix the ones that do not.</h1>
+<p style="margin:0 0 28px;font:400 17px/1.55 Inter,sans-serif;color:rgba(29,26,23,.72);max-width:44ch;text-wrap:pretty">Feedwizrd shows profit for every product after COGS, fees and ad spend, recommends the change worth making, then tracks what happened next. You approve every action.</p>
+<div style="display:flex;gap:12px;margin-bottom:16px"><a href="#s10" style="padding:14px 24px;border-radius:999px;background:#f8ea51;color:#423c00;font:500 15px/1 Inter,sans-serif;text-decoration:none;box-shadow:inset 0 0 0 1px rgba(44,36,32,.16),inset 0 -2px 0 rgba(44,36,32,.12)">Get started</a><a href="#s4" style="padding:14px 22px;border-radius:999px;border:1px solid rgba(29,26,23,.16);font:500 15px/1 Inter,sans-serif;text-decoration:none;color:#1d1a17">See how it works →</a></div>
+<p style="margin:0;font:400 13px/1.5 Inter,sans-serif;color:rgba(29,26,23,.5)">From $29 per store/month with 3+ stores. Cancellation terms to confirm.</p>
+</div>
+<div style="border:1px solid rgba(29,26,23,.12);border-radius:20px;background:#fff;padding:18px;box-shadow:0 8px 56px rgba(20,18,16,.07)">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><div style="font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45)">Product profit · last 30 days</div><div style="display:flex;gap:4px">{{ heroWindowChips }}</div></div>
+<div style="border:1px dashed rgba(29,26,23,.2);border-radius:14px;padding:14px;background:#faf8f5">
+<div style="display:grid;grid-template-columns:1.6fr .7fr .7fr .7fr .9fr;gap:8px;font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.42);padding-bottom:10px;border-bottom:1px solid rgba(29,26,23,.1)"><span>Product</span><span>Revenue</span><span>Ad spend</span><span>ROAS</span><span>Profit</span></div>
+<sc-for list="{{ heroRows }}" as="r" hint-placeholder-count="4">
+<div style="display:grid;grid-template-columns:1.6fr .7fr .7fr .7fr .9fr;gap:8px;align-items:center;padding:11px 0;border-bottom:1px solid rgba(29,26,23,.06);font:400 13px/1.2 Inter,sans-serif">
+<span style="display:flex;align-items:center;gap:8px"><span style="width:20px;height:20px;border-radius:5px;background:#e4e0d9;flex:none"></span>{{ r.name }}</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px">{{ r.rev }}</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px">{{ r.spend }}</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px">{{ r.roas }}</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500">{{ r.profitLabel }}</span>
+</div>
+</sc-for>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;padding:12px;border-radius:10px;background:#f3f0ea;border:1px solid rgba(29,26,23,.1)">
+<div><div style="font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45);margin-bottom:6px">Recommended action</div><div style="font:400 13px/1.35 Inter,sans-serif">Exclude “Ceramic Planter 12cm” from Shopping — losing $12.70 per order after costs.</div></div>
+<span style="flex:none;padding:8px 14px;border-radius:999px;background:#e4e0d9;border:1px solid rgba(29,26,23,.14);font:500 12px/1 Inter,sans-serif">Review</span>
+</div>
+<div style="margin-top:10px;font:400 11px/1.4 'IBM Plex Mono',monospace;color:rgba(29,26,23,.4)">Change history · 3 feed changes recorded this week</div>
+</div>
+<div style="margin-top:12px;font:400 11px/1.4 'IBM Plex Mono',monospace;color:rgba(29,26,23,.38)">ASSET: real dashboard screenshot at 2×, product row + profit state + recommendation + change history. Caption required.</div>
+</div>
+</div>
+</section>
+
+<section id="s2" style="padding:32px 60px;border-bottom:1px solid rgba(29,26,23,.08);background:#faf8f5">
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:20px">02 · Reassurance strip — publish only confirmed claims</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+<sc-for list="{{ reassurance }}" as="r" hint-placeholder-count="4">
+<div style="display:flex;gap:12px;align-items:flex-start;padding:16px;border:1px solid rgba(29,26,23,.1);border-radius:14px;background:#fff">
+<div style="width:24px;height:24px;border-radius:7px;background:#e4e0d9;border:1px solid rgba(29,26,23,.12);flex:none"></div>
+<div><div style="font:500 14px/1.3 Inter,sans-serif;margin-bottom:4px">{{ r.title }}</div><div style="font:400 12px/1.4 Inter,sans-serif;color:rgba(29,26,23,.6)">{{ r.note }}</div></div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section id="s3" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08)">
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">03 · Problem proof — the product ROAS hides</div>
+<h2 style="margin:0 0 12px;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em;max-width:22ch">A 3.4 ROAS product can quietly lose $522 a month.</h2>
+<p style="margin:0 0 36px;font:400 16px/1.55 Inter,sans-serif;color:rgba(29,26,23,.72);max-width:60ch">Google reports revenue against ad spend. It does not know your cost of goods, payment fees, shipping or returns. Here is the same product, calculated both ways.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div style="border:1px solid rgba(29,26,23,.12);border-radius:20px;padding:24px;background:#fff">
+<div style="font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45);margin-bottom:16px">What Google &amp; Shopify show</div>
+<div style="display:grid;gap:10px">
+<sc-for list="{{ googleView }}" as="g" hint-placeholder-count="3">
+<div style="display:flex;justify-content:space-between;padding:12px 14px;border-radius:10px;background:#f3f0ea;font:400 14px/1 Inter,sans-serif"><span>{{ g.k }}</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:500">{{ g.v }}</span></div>
+</sc-for>
+</div>
+<div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(29,26,23,.1);font:400 13px/1.45 Inter,sans-serif;color:rgba(29,26,23,.6)">Verdict shown to the merchant: keep scaling.</div>
+</div>
+<div style="border:1px solid rgba(29,26,23,.12);border-radius:20px;padding:24px;background:#fff">
+<div style="font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45);margin-bottom:16px">What Feedwizrd calculates</div>
+<div style="display:grid;gap:6px">
+<sc-for list="{{ waterfall }}" as="w" hint-placeholder-count="6">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-radius:10px;border:1px solid rgba(29,26,23,.1);font:400 14px/1 Inter,sans-serif"><span>{{ w.k }}</span><span style="font-family:'IBM Plex Mono',monospace;font-weight:500">{{ w.v }}</span></div>
+</sc-for>
+</div>
+<div style="margin-top:14px;padding:14px;border-radius:12px;background:#f3f0ea;border:1px solid rgba(29,26,23,.14);display:flex;justify-content:space-between;align-items:center"><span style="font:500 15px/1 Inter,sans-serif">Product profit</span><span style="font:500 18px/1 'IBM Plex Mono',monospace">− $522</span></div>
+</div>
+</div>
+<p style="margin:20px 0 0;font:400 12px/1.5 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45)">Illustrative example, not customer data. Inputs shown: product revenue, COGS, payment fees, shipping, returns, ad spend. Exclusions to be listed here before launch.</p>
+</section>
+
+<section id="s4" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08);background:#faf8f5">
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">04 · Product demonstration — one morning, one decision</div>
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-bottom:28px">
+<div><h2 style="margin:0 0 10px;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em">One morning. One decision.</h2><p style="margin:0;font:400 16px/1.55 Inter,sans-serif;color:rgba(29,26,23,.72);max-width:54ch">Open the product list, sort by profit, and see what needs attention today.</p></div>
+<div style="display:flex;gap:6px;flex:none">{{ demoTabs }}</div>
+</div>
+<div style="border:1px solid rgba(29,26,23,.12);border-radius:20px;background:#fff;overflow:hidden;box-shadow:0 8px 56px rgba(20,18,16,.06)">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;border-bottom:1px solid rgba(29,26,23,.1);background:#faf8f5">
+<div style="display:flex;gap:4px">{{ windowChips }}</div>
+<div style="display:flex;gap:8px;align-items:center"><span style="padding:7px 12px;border-radius:999px;border:1px solid rgba(29,26,23,.14);background:#f3f0ea;font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase">Zombie filter · on</span><span style="padding:7px 12px;border-radius:999px;border:1px solid rgba(29,26,23,.12);font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase;color:rgba(29,26,23,.55)">Sort: profit ↑</span></div>
+</div>
+<div style="display:grid;grid-template-columns:1.55fr 1fr">
+<div style="padding:8px 20px 20px;border-right:1px solid rgba(29,26,23,.1)">
+<div style="display:grid;grid-template-columns:1.7fr .7fr .7fr .7fr .8fr;gap:10px;font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.42);padding:14px 0 10px;border-bottom:1px solid rgba(29,26,23,.1)"><span>Product</span><span>Revenue</span><span>Ad spend</span><span>ROAS</span><span>Profit</span></div>
+<sc-for list="{{ demoRows }}" as="r" hint-placeholder-count="6">
+<div style="display:grid;grid-template-columns:1.7fr .7fr .7fr .7fr .8fr;gap:10px;align-items:center;padding:12px 8px;margin:2px -8px 0;border-radius:10px;font:400 13px/1.2 Inter,sans-serif;background:{{ r.bg }};box-shadow:{{ r.ring }}">
+<span style="display:flex;align-items:center;gap:9px"><span style="width:22px;height:22px;border-radius:6px;background:#e4e0d9;flex:none"></span><span>{{ r.name }}<span style="display:block;font:400 10px/1.3 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45);margin-top:3px">{{ r.tag }}</span></span></span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px">{{ r.rev }}</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px">{{ r.spend }}</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px">{{ r.roas }}</span>
+<span style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500">{{ r.profitLabel }}</span>
+</div>
+</sc-for>
+</div>
+<div style="padding:20px">
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.42);margin-bottom:14px">{{ panelEyebrow }}</div>
+<div style="font:500 17px/1.3 Inter,sans-serif;margin-bottom:6px">{{ panelTitle }}</div>
+<div style="font:400 13px/1.5 Inter,sans-serif;color:rgba(29,26,23,.68);margin-bottom:18px">{{ panelBody }}</div>
+<sc-if value="{{ showBreakdown }}" hint-placeholder-val="{{ true }}">
+<div style="display:grid;gap:5px;margin-bottom:18px">
+<sc-for list="{{ waterfall }}" as="w" hint-placeholder-count="6">
+<div style="display:flex;justify-content:space-between;padding:9px 12px;border-radius:9px;background:#f7f5f1;font:400 12px/1 Inter,sans-serif"><span>{{ w.k }}</span><span style="font-family:'IBM Plex Mono',monospace">{{ w.v }}</span></div>
+</sc-for>
+<div style="display:flex;justify-content:space-between;padding:11px 12px;border-radius:9px;background:#f3f0ea;border:1px solid rgba(29,26,23,.14);font:500 13px/1 Inter,sans-serif"><span>Product profit</span><span style="font-family:'IBM Plex Mono',monospace">− $522</span></div>
+</div>
+</sc-if>
+<sc-if value="{{ showActions }}" hint-placeholder-val="{{ true }}">
+<div style="display:grid;gap:8px">
+<div style="padding:12px 14px;border-radius:10px;border:1px solid rgba(29,26,23,.14);background:#fff;font:400 13px/1.35 Inter,sans-serif">Improve feed title &amp; type — AI draft, you approve</div>
+<div style="padding:12px 14px;border-radius:10px;border:1px solid rgba(29,26,23,.14);background:#fff;font:400 13px/1.35 Inter,sans-serif">Set product to draft in Shopify</div>
+<div style="padding:12px 14px;border-radius:10px;border:1px solid rgba(29,26,23,.14);background:#fff;font:400 13px/1.35 Inter,sans-serif">Exclude from Shopping campaign</div>
+<div style="margin-top:6px;font:400 11px/1.45 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45)">Nothing is applied until you approve it.</div>
+</div>
+</sc-if>
+</div>
+</div>
+</div>
+<p style="margin:16px 0 0;font:400 12px/1.5 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45)">Three-state demo. Mobile: one card per product, profit status and next action visible, metrics in a drawer.</p>
+</section>
+
+<section id="s5" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08)">
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">05 · Differentiator — find → fix → verify</div>
+<h2 style="margin:0 0 10px;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em">Find it, fix it, then check what changed.</h2>
+<p style="margin:0 0 40px;font:400 16px/1.55 Inter,sans-serif;color:rgba(29,26,23,.72);max-width:60ch">The same product, followed through all three stages: Ceramic Planter 12cm.</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;align-items:stretch">
+<sc-for list="{{ stages }}" as="s" hint-placeholder-count="3">
+<div style="position:relative;padding:0 24px 0 0">
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:18px"><span style="width:12px;height:12px;border-radius:999px;background:#e4e0d9;border:2px solid #b8b2a8;flex:none"></span><span style="flex:1;height:1px;background:rgba(29,26,23,.14)"></span></div>
+<div style="font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45);margin-bottom:8px">Step {{ s.n }}</div>
+<div style="font:500 24px/1.2 Inter,sans-serif;letter-spacing:-.01em;margin-bottom:14px">{{ s.title }}</div>
+<div style="display:grid;gap:10px;margin-right:0">
+<div style="padding:14px;border-radius:12px;border:1px solid rgba(29,26,23,.1);background:#fff"><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:6px">You see</div><div style="font:400 13px/1.45 Inter,sans-serif">{{ s.see }}</div></div>
+<div style="padding:14px;border-radius:12px;border:1px solid rgba(29,26,23,.1);background:#fff"><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:6px">You can</div><div style="font:400 13px/1.45 Inter,sans-serif">{{ s.act }}</div></div>
+<div style="padding:14px;border-radius:12px;border:1px dashed rgba(29,26,23,.2);background:#faf8f5"><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:6px">Feedwizrd records</div><div style="font:400 13px/1.45 Inter,sans-serif">{{ s.record }}</div></div>
+</div>
+</div>
+</sc-for>
+</div>
+<div style="margin-top:24px;display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:999px;border:1px solid rgba(29,26,23,.14);background:#f3f0ea;font:400 13px/1 Inter,sans-serif"><span style="width:8px;height:8px;border-radius:999px;background:#3db85c;box-shadow:0 0 0 3px rgba(61,184,92,.15)"></span>Every stage requires your approval before anything changes.</div>
+</section>
+
+<section id="s6" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08);background:#faf8f5">
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">06 · Capability support — grouped by outcome</div>
+<h2 style="margin:0 0 40px;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em">Everything behind the decision.</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<sc-for list="{{ groups }}" as="g" hint-placeholder-count="4">
+<div style="padding:24px;border-radius:20px;background:#fff;border:1px solid rgba(29,26,23,.1)">
+<div style="font:500 20px/1.2 Inter,sans-serif;letter-spacing:-.01em;margin-bottom:6px">{{ g.title }}</div>
+<div style="font:400 13px/1.45 Inter,sans-serif;color:rgba(29,26,23,.65);margin-bottom:18px">{{ g.sub }}</div>
+<div style="display:grid;gap:8px">
+<sc-for list="{{ g.items }}" as="i" hint-placeholder-count="3">
+<div style="display:flex;gap:10px;align-items:center;padding:11px 13px;border-radius:10px;background:#f7f5f1;font:400 13px/1.3 Inter,sans-serif"><span style="width:18px;height:18px;border-radius:5px;background:#e4e0d9;flex:none"></span>{{ i }}</div>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section id="s7" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08)">
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">07 · Setup and daily use</div>
+<h2 style="margin:0 0 10px;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em">Connected in about five minutes.</h2>
+<p style="margin:0 0 40px;font:400 16px/1.55 Inter,sans-serif;color:rgba(29,26,23,.72);max-width:58ch">Both connections use the official Shopify and Google flows. No tracking code goes on your storefront.</p>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+<sc-for list="{{ setup }}" as="s" hint-placeholder-count="4">
+<div style="padding:20px;border-radius:16px;background:#fff;border:1px solid rgba(29,26,23,.1)">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px"><span style="font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;color:rgba(29,26,23,.45)">STEP {{ s.n }}</span><span style="font:400 11px/1 'IBM Plex Mono',monospace;color:rgba(29,26,23,.4)">{{ s.time }}</span></div>
+<div style="height:80px;border-radius:10px;border:1px dashed rgba(29,26,23,.2);background:#faf8f5;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font:400 10px/1.4 'IBM Plex Mono',monospace;color:rgba(29,26,23,.42);margin-bottom:14px">{{ s.asset }}</div>
+<div style="font:500 15px/1.3 Inter,sans-serif;margin-bottom:6px">{{ s.title }}</div>
+<div style="font:400 13px/1.45 Inter,sans-serif;color:rgba(29,26,23,.65)">{{ s.body }}</div>
+</div>
+</sc-for>
+</div>
+<div style="margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+<sc-for list="{{ setupFacts }}" as="f" hint-placeholder-count="3">
+<div style="padding:14px 16px;border-radius:12px;border:1px solid rgba(29,26,23,.1);background:#faf8f5;font:400 13px/1.45 Inter,sans-serif"><span style="display:block;font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.42);margin-bottom:6px">{{ f.k }}</span>{{ f.v }}</div>
+</sc-for>
+</div>
+</section>
+
+<section id="s8" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08);background:#faf8f5">
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">08 · Trust and account control</div>
+<h2 style="margin:0 0 10px;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em">Your accounts, your call.</h2>
+<p style="margin:0 0 36px;font:400 16px/1.55 Inter,sans-serif;color:rgba(29,26,23,.72);max-width:58ch">Exactly what Feedwizrd can read, what it can change once you approve, and what it never touches.</p>
+<div style="border:1px solid rgba(29,26,23,.12);border-radius:20px;background:#fff;overflow:hidden">
+<div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:0;background:#f3f0ea;border-bottom:1px solid rgba(29,26,23,.1)">
+<div style="padding:14px 20px;font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45)">Scope</div>
+<div style="padding:14px 16px;font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45)">Read</div>
+<div style="padding:14px 16px;font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45)">Change with approval</div>
+<div style="padding:14px 16px;font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45)">Never access</div>
+</div>
+<sc-for list="{{ permissions }}" as="p" hint-placeholder-count="6">
+<div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;border-bottom:1px solid rgba(29,26,23,.07)">
+<div style="padding:14px 20px;font:400 13px/1.35 Inter,sans-serif">{{ p.scope }}</div>
+<div style="padding:14px 16px;font:400 12px/1.35 'IBM Plex Mono',monospace;color:rgba(29,26,23,.7)">{{ p.read }}</div>
+<div style="padding:14px 16px;font:400 12px/1.35 'IBM Plex Mono',monospace;color:rgba(29,26,23,.7)">{{ p.change }}</div>
+<div style="padding:14px 16px;font:400 12px/1.35 'IBM Plex Mono',monospace;color:rgba(29,26,23,.7)">{{ p.never }}</div>
+</div>
+</sc-for>
+</div>
+<div style="margin-top:20px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+<sc-for list="{{ trustFacts }}" as="f" hint-placeholder-count="4">
+<div style="padding:16px;border-radius:14px;border:1px solid rgba(29,26,23,.1);background:#fff"><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.42);margin-bottom:8px">{{ f.k }}</div><div style="font:400 13px/1.45 Inter,sans-serif">{{ f.v }}</div></div>
+</sc-for>
+</div>
+<p style="margin:16px 0 0;font:400 12px/1.5 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45)">Copy blocked until product confirms exact Shopify and Google Ads permission scopes.</p>
+</section>
+
+<section id="s9" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08)">
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">09 · Outcome proof — placeholder case study</div>
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-bottom:24px">
+<div>
+<div style="display:inline-block;margin-bottom:16px;padding:7px 13px;border-radius:999px;background:#f3f0ea;border:1px dashed rgba(29,26,23,.25);font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.05em;text-transform:uppercase;color:rgba(29,26,23,.55)">Placeholder · awaiting documented customer case</div>
+<h2 style="margin:0;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em;max-width:26ch">One product decision, told by the merchant who made it.</h2>
+</div>
+<div style="display:flex;align-items:center;gap:10px;flex:none">
+<span style="font:400 12px/1 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45);margin-right:6px">{{ caseCounter }}</span>
+<button type="button" onClick="{{ prevCase }}" style="width:40px;height:40px;border-radius:999px;border:1px solid rgba(29,26,23,.16);background:#fff;cursor:pointer;font:400 15px/1 'IBM Plex Mono',monospace;color:#1d1a17">←</button>
+<button type="button" onClick="{{ nextCase }}" style="width:40px;height:40px;border-radius:999px;border:1px solid rgba(29,26,23,.16);background:#fff;cursor:pointer;font:400 15px/1 'IBM Plex Mono',monospace;color:#1d1a17">→</button>
+</div>
+</div>
+<div style="border:1px solid rgba(29,26,23,.12);border-radius:24px;background:#fff;overflow:hidden;box-shadow:0 8px 56px rgba(20,18,16,.06)">
+<div style="display:grid;grid-template-columns:7fr 5fr">
+<div style="padding:36px 36px 28px;border-right:1px solid rgba(29,26,23,.1)">
+<div style="font:400 34px/1 'IBM Plex Mono',monospace;color:rgba(29,26,23,.22);margin-bottom:12px">“</div>
+<blockquote style="margin:0 0 28px;font:500 24px/1.4 Inter,sans-serif;letter-spacing:-.01em;text-wrap:pretty">{{ caseQuote }}</blockquote>
+<div style="display:flex;align-items:center;gap:12px;padding-bottom:26px;border-bottom:1px solid rgba(29,26,23,.1)">
+<div style="width:44px;height:44px;border-radius:999px;background:#e4e0d9;border:1px solid rgba(29,26,23,.12);flex:none"></div>
+<div><div style="font:500 14px/1.3 Inter,sans-serif">{{ caseName }}</div><div style="font:400 12px/1.4 'IBM Plex Mono',monospace;color:rgba(29,26,23,.5);margin-top:3px">{{ caseStore }}</div></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:22px">
+<sc-for list="{{ caseSteps }}" as="c" hint-placeholder-count="4">
+<div style="padding:14px;border-radius:12px;background:#faf8f5;border:1px solid rgba(29,26,23,.08)">
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.42);margin-bottom:6px">{{ c.title }}</div>
+<div style="font:400 13px/1.45 Inter,sans-serif;color:rgba(29,26,23,.7)">{{ c.body }}</div>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="padding:28px;display:flex;flex-direction:column;gap:16px;background:#faf8f5">
+<div style="padding:24px;border-radius:20px;background:linear-gradient(117.3deg,#fdf0e8,#fbeabf);border:4px solid rgba(254,253,252,.6)">
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.5);margin-bottom:16px">{{ caseWindow }}</div>
+<div style="display:grid;gap:14px">
+<sc-for list="{{ caseMetrics }}" as="m" hint-placeholder-count="3">
+<div><div style="font:500 28px/1 'IBM Plex Mono',monospace;letter-spacing:-.02em">{{ m.v }}</div><div style="font:400 12px/1.4 Inter,sans-serif;color:rgba(29,26,23,.6);margin-top:4px">{{ m.k }}</div></div>
+</sc-for>
+</div>
+</div>
+<div style="flex:1;min-height:120px;border-radius:16px;border:1px dashed rgba(29,26,23,.2);background:#fff;display:flex;align-items:center;text-align:center;padding:16px;font:400 11px/1.5 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45)">ASSET: unedited before/after monitoring screenshot for this store, plus written permission to name it.</div>
+</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 36px;border-top:1px solid rgba(29,26,23,.1);background:#fff">
+<div style="display:flex;gap:8px">
+<sc-for list="{{ caseDots }}" as="d" hint-placeholder-count="3">
+<button type="button" onClick="{{ d.go }}" aria-label="Go to case study" style="width:{{ d.w }};height:8px;border-radius:999px;border:0;padding:0;cursor:pointer;background:{{ d.bg }}"></button>
+</sc-for>
+</div>
+<span style="font:400 11px/1.4 'IBM Plex Mono',monospace;color:rgba(29,26,23,.42)">One case per slide. No multi-card carousel — the full story stays readable.</span>
+</div>
+</div>
+<p style="margin:16px 0 0;font:400 12px/1.5 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45)">Placeholder cases. Until at least one is documented and signed off, this section ships as a single labeled product walkthrough with no quote. Mobile: quote and attribution first, result metrics stacked beneath, swipe between cases.</p>
+</section>
+
+<section id="s10" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08);background:#faf8f5">
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">10 · Pricing</div>
+<h2 style="margin:0 0 10px;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em">From $29 per store/month with 3+ stores.</h2>
+<p style="margin:0 0 36px;font:400 16px/1.55 Inter,sans-serif;color:rgba(29,26,23,.72);max-width:56ch">One plan, priced by how many stores you connect. Every capability is included at every store count.</p>
+<div style="display:grid;grid-template-columns:6fr 6fr;gap:24px;align-items:stretch">
+<div style="padding:28px;border-radius:24px;background:#fff;border:1px solid rgba(29,26,23,.12)">
+<div style="font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45);margin-bottom:18px">How many stores?</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:26px">{{ storeChips }}</div>
+<div style="display:flex;align-items:flex-end;gap:12px;margin-bottom:8px"><span style="font:500 48px/1 'IBM Plex Mono',monospace;letter-spacing:-.03em">{{ totalLabel }}</span><span style="font:400 14px/1.4 Inter,sans-serif;color:rgba(29,26,23,.6);padding-bottom:6px">per month, billed monthly</span></div>
+<div style="font:400 14px/1.5 Inter,sans-serif;color:rgba(29,26,23,.7);margin-bottom:24px">{{ perStoreLabel }}</div>
+<a href="#" style="display:block;text-align:center;padding:15px;border-radius:999px;background:#f8ea51;color:#423c00;font:500 15px/1 Inter,sans-serif;text-decoration:none;box-shadow:inset 0 0 0 1px rgba(44,36,32,.16),inset 0 -2px 0 rgba(44,36,32,.12)">{{ pricingCta }}</a>
+<div style="margin-top:14px;font:400 12px/1.5 Inter,sans-serif;color:rgba(29,26,23,.5)">Cancel anytime from billing settings. Taxes may apply. Trial terms to confirm.</div>
+</div>
+<div style="padding:28px;border-radius:24px;background:#fff;border:1px solid rgba(29,26,23,.12)">
+<div style="font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45);margin-bottom:18px">Included at every store count</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;margin-bottom:24px">
+<sc-for list="{{ included }}" as="i" hint-placeholder-count="8">
+<div style="display:flex;gap:9px;align-items:center;font:400 13px/1.35 Inter,sans-serif"><span style="width:6px;height:6px;border-radius:999px;background:#b8b2a8;flex:none"></span>{{ i }}</div>
+</sc-for>
+</div>
+<div style="padding:18px;border-radius:16px;background:#f3f0ea;border:1px solid rgba(29,26,23,.1)"><div style="font:500 14px/1.3 Inter,sans-serif;margin-bottom:6px">10 or more stores</div><div style="font:400 13px/1.5 Inter,sans-serif;color:rgba(29,26,23,.68);margin-bottom:12px">Agency and multi-brand setups get a custom price and onboarding.</div><a href="#" style="font:500 13px/1 Inter,sans-serif;text-decoration:none">Talk to us →</a></div>
+<div style="margin-top:16px;font:400 11px/1.5 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45)">Prices shown: 1 store $49 · 2 stores $39/store · 3+ stores $29/store. Awaiting final confirmation.</div>
+</div>
+</div>
+</section>
+
+<section id="s11" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08)">
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">11 · FAQ</div>
+<div style="display:grid;grid-template-columns:4fr 8fr;gap:48px;align-items:start">
+<h2 style="margin:0;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em;position:sticky;top:90px">Questions merchants ask first.</h2>
+<div style="border-top:1px solid rgba(29,26,23,.12)">
+<sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+<div style="border-bottom:1px solid rgba(29,26,23,.12)">
+<button type="button" onClick="{{ f.toggle }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 4px;background:none;border:0;cursor:pointer;text-align:left;font:500 16px/1.35 Inter,sans-serif;color:#1d1a17">
+<span>{{ f.q }}</span><span style="font:400 18px/1 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45);flex:none">{{ f.sign }}</span>
+</button>
+<sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+<div style="padding:0 60px 20px 4px;font:400 14px/1.6 Inter,sans-serif;color:rgba(29,26,23,.72)">{{ f.a }}</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section id="s12" style="padding:80px 60px;border-bottom:1px solid rgba(29,26,23,.08);background:#faf8f5;text-align:center">
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:28px">12 · Final CTA</div>
+<h2 style="margin:0 auto 16px;font:500 44px/1.1 Inter,sans-serif;letter-spacing:-.02em;max-width:24ch">Find the product costing you money before another week of ad spend does.</h2>
+<p style="margin:0 auto 28px;font:400 17px/1.55 Inter,sans-serif;color:rgba(29,26,23,.72);max-width:52ch">See profit by product, take the action Feedwizrd recommends, and watch what changes. No tracking code, no automatic changes.</p>
+<div style="display:flex;gap:12px;justify-content:center;margin-bottom:14px"><a href="#" style="padding:15px 26px;border-radius:999px;background:#f8ea51;color:#423c00;font:500 15px/1 Inter,sans-serif;text-decoration:none;box-shadow:inset 0 0 0 1px rgba(44,36,32,.16),inset 0 -2px 0 rgba(44,36,32,.12)">Get started</a><a href="#s4" style="padding:15px 24px;border-radius:999px;border:1px solid rgba(29,26,23,.16);font:500 15px/1 Inter,sans-serif;text-decoration:none">See how it works →</a></div>
+<p style="margin:0;font:400 13px/1.5 Inter,sans-serif;color:rgba(29,26,23,.5)">From $29 per store/month with 3+ stores.</p>
+<p style="margin:22px 0 0;font:400 11px/1.5 'IBM Plex Mono',monospace;color:rgba(29,26,23,.4)">Mobile: sticky bottom CTA appears after the hero scrolls away, hidden while pricing or this section is in view.</p>
+</section>
+
+<footer style="padding:48px 60px 32px">
+<div style="display:grid;grid-template-columns:4fr 2fr 2fr 2fr;gap:32px;padding-bottom:32px;border-bottom:1px solid rgba(29,26,23,.1)">
+<div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div style="width:24px;height:24px;border-radius:6px;background:#dcd8d1;border:1px solid rgba(29,26,23,.14)"></div><span style="font:500 15px/1 Inter,sans-serif">Feedwizrd</span></div>
+<p style="margin:0;font:400 13px/1.55 Inter,sans-serif;color:rgba(29,26,23,.6);max-width:34ch">Product-level profit tracking and feed actions for Shopify stores running Google Ads.</p>
+</div>
+<sc-for list="{{ footerCols }}" as="c" hint-placeholder-count="3">
+<div>
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.42);margin-bottom:12px">{{ c.title }}</div>
+<div style="display:grid;gap:8px">
+<sc-for list="{{ c.links }}" as="l" hint-placeholder-count="4">
+<a href="#" style="font:400 13px/1.3 Inter,sans-serif;color:rgba(29,26,23,.7);text-decoration:none">{{ l }}</a>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+<div style="display:flex;justify-content:space-between;gap:24px;padding-top:20px;font:400 12px/1.5 Inter,sans-serif;color:rgba(29,26,23,.45)"><span>© 2026 Feedwizrd. Company details and registration number to confirm.</span><span>support@feedwizrd.com</span></div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+const WINDOWS = ["7", "14", "30", "60", "90"];
+
+// Placeholder cases — replace with documented, signed-off customer stories before launch.
+const CASES = [
+  {
+    quote: "The planter was our best-selling product on paper. Feedwizrd was the first place that showed it cost us $12.70 every time someone bought it.",
+    name: "Placeholder name",
+    store: "Home & garden store · 6 SKUs on Shopping · ~$14.000/mo ad spend",
+    window: "Measured over 30 days after the change",
+    steps: [
+      { title: "It looked acceptable", body: "3.4 ROAS across 41 orders, above the store's 2.5 target, so it kept running." },
+      { title: "What Feedwizrd showed", body: "After COGS, fees, shipping and four returns: $522 lost over 30 days." },
+      { title: "The approved action", body: "Feed title rewrite approved, then the product excluded from the Shopping campaign." },
+      { title: "What happened next", body: "Monitoring compared the next 30 days against the recorded baseline." }
+    ],
+    metrics: [
+      { v: "$522", k: "Monthly loss identified on one product" },
+      { v: "30 days", k: "Monitoring window after the approved change" },
+      { v: "1 action", k: "Approved changes needed to stop the loss" }
+    ]
+  },
+  {
+    quote: "We were adding SKUs to grow. Half of them were zombies drawing spend and returning nothing. It took one morning to clear them out.",
+    name: "Placeholder name",
+    store: "Pet accessories store · 84 SKUs · 2 feeds, 2 markets",
+    window: "Measured over 60 days after the changes",
+    steps: [
+      { title: "It looked acceptable", body: "Account-level ROAS held at 2.8, so nobody looked at individual products." },
+      { title: "What Feedwizrd showed", body: "31 SKUs flagged as zombies, together taking a share of spend with almost no profitable orders." },
+      { title: "The approved action", body: "Zombies excluded from the campaign; nine were kept with rewritten feed titles." },
+      { title: "What happened next", body: "Change history recorded each exclusion so the kept SKUs could be compared separately." }
+    ],
+    metrics: [
+      { v: "31 SKUs", k: "Flagged by the zombie filter" },
+      { v: "60 days", k: "Monitoring window after the changes" },
+      { v: "1 morning", k: "Time spent on the review" }
+    ]
+  },
+  {
+    quote: "Running four stores, I used to rebuild the same spreadsheet every Monday. Now the losing products are already at the top of the list.",
+    name: "Placeholder name",
+    store: "Four-store operator · Shopify + Google Ads · EUR and GBP",
+    window: "Measured over 90 days after adoption",
+    steps: [
+      { title: "It looked acceptable", body: "Each store reported its own ROAS; nothing compared products across the four." },
+      { title: "What Feedwizrd showed", body: "Product profit for all four stores in one list, with time windows from 7 to 90 days." },
+      { title: "The approved action", body: "A weekly routine: review the bottom of the list, approve or dismiss each recommendation." },
+      { title: "What happened next", body: "Feed changes logged per store, so each change could be traced to its result." }
+    ],
+    metrics: [
+      { v: "4 stores", k: "Reviewed in one list" },
+      { v: "90 days", k: "Longest comparison window used" },
+      { v: "Weekly", k: "Review cadence replacing the spreadsheet" }
+    ]
+  }
+];
+
+class Component extends DCLogic {
+  state = { demo: 0, faq: 0, stores: 3, win: "30", kase: 0 };
+
+  chip(label, active, onClick, suffix) {
+    return React.createElement("button", {
+      type: "button", onClick,
+      style: {
+        padding: "7px 12px", borderRadius: 999, cursor: "pointer",
+        border: active ? "1px solid rgba(29,26,23,.35)" : "1px solid rgba(29,26,23,.12)",
+        background: active ? "#e4e0d9" : "transparent",
+        font: "500 11px/1 'IBM Plex Mono',monospace", letterSpacing: ".04em",
+        color: active ? "#1d1a17" : "rgba(29,26,23,.55)"
+      }
+    }, label + (suffix || ""));
+  }
+
+  renderVals() {
+    const s = this.state;
+    const setWin = w => this.setState({ win: w });
+    const windowChips = WINDOWS.map(w => React.createElement(React.Fragment, { key: w }, this.chip(w + "d", s.win === w, () => setWin(w))));
+
+    const demoLabels = ["All products", "Losing product selected", "Profit calculation expanded"];
+    const demoTabs = demoLabels.map((l, i) => React.createElement(React.Fragment, { key: l }, this.chip(l, s.demo === i, () => this.setState({ demo: i }))));
+
+    const rows = [
+      { name: "Linen Cushion Cover", tag: "12 orders", rev: "$1.842", spend: "$540", roas: "3.4", profitLabel: "+ $312" },
+      // note: profitable row at the same ROAS as the loss-making planter — that contrast is the point
+      { name: "Ceramic Planter 12cm", tag: "Zombie · 41 orders", rev: "$6.494", spend: "$1.910", roas: "3.4", profitLabel: "− $522" },
+      { name: "Brass Watering Can", tag: "8 orders", rev: "$960", spend: "$210", roas: "4.6", profitLabel: "+ $188" },
+      { name: "Rattan Basket L", tag: "Zombie · 2 orders", rev: "$140", spend: "$390", roas: "0.4", profitLabel: "− $402" },
+      { name: "Stoneware Mug Set", tag: "23 orders", rev: "$1.610", spend: "$430", roas: "3.7", profitLabel: "+ $265" },
+      { name: "Terracotta Pot 20cm", tag: "5 orders", rev: "$310", spend: "$260", roas: "1.2", profitLabel: "− $96" }
+    ];
+    const sel = s.demo > 0 ? 1 : -1;
+    const demoRows = rows.map((r, i) => ({
+      ...r,
+      bg: i === sel ? "#f3f0ea" : "transparent",
+      ring: i === sel ? "inset 0 0 0 1px rgba(29,26,23,.28)" : "none"
+    }));
+
+    const panels = [
+      { eyebrow: "Today's summary", title: "2 products need a decision", body: "Sorted by profit, zombie filter on. Select a product to see its numbers and the recommended action." },
+      { eyebrow: "Selected product", title: "Ceramic Planter 12cm", body: "3.4 ROAS on the campaign, but $522 lost over 30 days once COGS, fees, shipping and returns are counted. Choose an action below." },
+      { eyebrow: "Selected product · profit", title: "Where the money went", body: "Every input Feedwizrd counts for this product over the last 30 days." }
+    ];
+    const p = panels[s.demo];
+    const kase = CASES[s.kase];
+
+    const perStoreMap = n => (n >= 3 ? 29 : n === 2 ? 39 : 49);
+    const per = perStoreMap(s.stores);
+    const total = per * s.stores;
+    const storeChips = [1, 2, 3, 4, 5, 6, 8, 10].map(n =>
+      React.createElement(React.Fragment, { key: n }, this.chip(String(n), s.stores === n, () => this.setState({ stores: n }), n === 10 ? "+" : ""))
+    );
+
+    const faqData = [
+      ["How is Feedwizrd's profit calculated?", "Product revenue minus cost of goods, payment and transaction fees, shipping cost, returns and the ad spend attributed to that product. Every input is visible per product, so you can check the arithmetic."],
+      ["How is this different from the numbers in Shopify and Google Ads?", "Shopify knows your orders but not your ad spend by product. Google knows spend but not your costs. Feedwizrd joins both at product level, which is where the loss usually hides."],
+      ["Does Feedwizrd change products or campaigns automatically?", "No. Automations are off by default. Feedwizrd drafts a change and shows you a preview; nothing reaches Shopify or Google until you approve it."],
+      ["What can Feedwizrd access in my accounts?", "Read access to products, orders, costs and campaign performance. Write access only to feed attributes, product status and campaign exclusions, and only after your approval. Exact scopes are listed in the permission table above."],
+      ["Can I undo a feed or campaign change?", "Every approved change is recorded with its previous value, so you can revert it from the change history. Reversal behavior for campaign-level exclusions is being confirmed."],
+      ["How does the zombie-product filter work?", "It flags products that draw ad spend or impressions but produce little or no profitable order volume in the selected time window. The exact thresholds are configurable."],
+      ["What does AI feed improvement change?", "It proposes rewrites to feed attributes such as title, description, product type and Google category. It does not change your price or your storefront content."],
+      ["Does it work for one store?", "Yes. One store is $49 per month. The $29 rate applies from three stores upward."],
+      ["Does it support multiple feeds, markets, and currencies?", "Multi-feed and multi-store are supported. Supported markets, currencies and campaign types are being confirmed before launch."],
+      ["How long does setup and initial synchronization take?", "Connecting both accounts takes about five minutes. Historical import and the first full profit view typically appear within a few hours; exact windows to be confirmed."],
+      ["What happens to my data if I disconnect or cancel?", "Revoke access from Shopify or Google at any time, or disconnect inside Feedwizrd. Stored data is deleted on request; the retention period is being finalized."],
+      ["How does pricing work for several stores?", "One plan priced per connected store: $49 for one, $39 each for two, $29 each from three. Ten or more stores get a custom price."]
+    ];
+    const faqs = faqData.map(([q, a], i) => ({
+      q, a, open: s.faq === i, sign: s.faq === i ? "–" : "+",
+      toggle: () => this.setState(st => ({ faq: st.faq === i ? -1 : i }))
+    }));
+
+    return {
+      windowChips, demoTabs, demoRows, demoTabs2: null,
+      heroWindowChips: WINDOWS.slice(0, 4).map(w => React.createElement(React.Fragment, { key: w }, this.chip(w + "d", w === "30", () => {}))),
+      heroRows: rows.slice(0, 4),
+      panelEyebrow: p.eyebrow, panelTitle: p.title, panelBody: p.body,
+      showBreakdown: s.demo === 2, showActions: s.demo >= 1,
+      reassurance: [
+        { title: "Connect Shopify + Google Ads", note: "Official OAuth flows, no manual export" },
+        { title: "About five minutes to set up", note: "Two connections, no configuration" },
+        { title: "No tracking code", note: "Nothing added to your storefront" },
+        { title: "No changes without approval", note: "Automations off by default" }
+      ],
+      googleView: [
+        { k: "Revenue (30d)", v: "$6.494" },
+        { k: "Ad spend", v: "$1.910" },
+        { k: "ROAS", v: "3.4" },
+        { k: "Conversions", v: "41" }
+      ],
+      waterfall: [
+        { k: "Product revenue", v: "$6.494" },
+        { k: "Cost of goods", v: "− $3.896" },
+        { k: "Payment & transaction fees", v: "− $292" },
+        { k: "Shipping & fulfilment", v: "− $698" },
+        { k: "Returns (4 orders)", v: "− $220" },
+        { k: "Ad spend", v: "− $1.910" }
+      ],
+      stages: [
+        { n: "1", title: "Find", see: "Product list sorted by profit, with the zombie filter surfacing spend that produces nothing.", act: "Open any product and check its profit inputs for 7 to 90 days.", record: "The profit baseline for this product at this date." },
+        { n: "2", title: "Fix", see: "An AI feed recommendation with the reason it was proposed, plus a preview of the exact change.", act: "Approve the feed rewrite, set the product to draft in Shopify, or exclude it from the campaign.", record: "Who approved what, the previous value, and the time of the change." },
+        { n: "3", title: "Verify", see: "The same product before and after, over the time window you select.", act: "Keep the change, revert it, or move to the next product.", record: "The change history and the profit movement that followed it." }
+      ],
+      groups: [
+        { title: "See the truth", sub: "Know what each product actually earns.", items: ["Product-level profit calculation", "7/14/30/60/90-day analysis", "Performance dashboard"] },
+        { title: "Act sooner", sub: "Turn a finding into an approved action.", items: ["Feed zombie filter", "AI feed improvement recommendations", "Draft in Shopify or exclude from campaign"] },
+        { title: "Learn what worked", sub: "Connect a change to what happened after it.", items: ["Feed-change monitoring", "Change history with previous values", "Before/after profit comparison"] },
+        { title: "Scale the workflow", sub: "Run the same routine across more surface.", items: ["Multi-feed support", "Multi-store support", "Full ROI and profit tracking"] }
+      ],
+      setup: [
+        { n: "1", time: "~1 min", title: "Connect Shopify", body: "Install through the official Shopify app flow.", asset: "ASSET: Shopify connect state" },
+        { n: "2", time: "~1 min", title: "Connect Google Ads", body: "Authorize through Google's own consent screen.", asset: "ASSET: Google Ads consent state" },
+        { n: "3", time: "Runs in background", title: "Feedwizrd syncs", body: "Orders, costs, fees and ad spend are matched product by product.", asset: "ASSET: sync progress state" },
+        { n: "4", time: "Daily, ~5 min", title: "Review and decide", body: "Check product profit, approve one action, move on.", asset: "ASSET: product profit view" }
+      ],
+      setupFacts: [
+        { k: "No tracking code", v: "Nothing is installed on your storefront theme." },
+        { k: "Time to useful data", v: "First profit view within hours of connecting. Exact window to confirm." },
+        { k: "Historical data", v: "Past orders and spend imported where the platforms allow. Depth to confirm." }
+      ],
+      permissions: [
+        { scope: "Shopify products & variants", read: "Yes", change: "Status, feed attributes", never: "Price, theme" },
+        { scope: "Shopify orders & costs", read: "Yes", change: "—", never: "Order edits, refunds" },
+        { scope: "Shopify customers", read: "—", change: "—", never: "No access" },
+        { scope: "Google Ads performance", read: "Yes", change: "—", never: "—" },
+        { scope: "Google Ads campaigns", read: "Yes", change: "Product exclusions", never: "Budgets, bids, new campaigns" },
+        { scope: "Merchant Center feed", read: "Yes", change: "Attribute values", never: "Account settings" },
+        { scope: "Payment methods & banking", read: "—", change: "—", never: "No access" }
+      ],
+      trustFacts: [
+        { k: "Automations", v: "Off by default. Every change needs your approval." },
+        { k: "Preview", v: "See the exact before and after value before approving." },
+        { k: "Revoke access", v: "Remove the app in Shopify or revoke in Google at any time." },
+        { k: "Data", v: "Storage location, encryption, retention and deletion facts to be supplied." }
+      ],
+      caseQuote: kase.quote, caseName: kase.name, caseStore: kase.store,
+      caseWindow: kase.window, caseSteps: kase.steps, caseMetrics: kase.metrics,
+      caseCounter: (s.kase + 1) + " / " + CASES.length,
+      prevCase: () => this.setState(st => ({ kase: (st.kase - 1 + CASES.length) % CASES.length })),
+      nextCase: () => this.setState(st => ({ kase: (st.kase + 1) % CASES.length })),
+      caseDots: CASES.map((c, i) => ({
+        w: i === s.kase ? "28px" : "8px",
+        bg: i === s.kase ? "#1d1a17" : "rgba(29,26,23,.18)",
+        go: () => this.setState({ kase: i })
+      })),
+      storeChips,
+      totalLabel: "$" + total,
+      perStoreLabel: "$" + per + " per store/month × " + s.stores + (s.stores === 1 ? " store" : " stores") + (s.stores >= 10 ? " — custom pricing from 10 stores" : ""),
+      pricingCta: s.stores >= 3 ? "Start for $29 per store/month" : "Get started — $" + total + "/month",
+      included: ["Product-level profit", "AI feed improvement", "Zombie filter", "7–90 day analysis", "Change monitoring", "Performance dashboard", "Multi-feed support", "Email support"],
+      faqs,
+      footerCols: [
+        { title: "Product", links: ["Product", "How it works", "Pricing", "FAQ", "Sign in"] },
+        { title: "Legal", links: ["Privacy Policy", "Terms", "Cookie Policy", "Data processing"] },
+        { title: "Company", links: ["Contact support", "Security", "Status"] }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
