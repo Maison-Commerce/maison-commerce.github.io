@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin="crossorigin" />
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=gambarino@400&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #f1eeec; }
+  * { box-sizing: border-box; }
+  a { color: #14494b; text-decoration: none; }
+  a:hover { color: #0d3234; }
+  em { font-style: normal; }
+  input, textarea, select { font-family: 'Satoshi', system-ui, sans-serif; }
+  input::placeholder, textarea::placeholder { color: rgba(28,27,26,0.38); }
+  input:focus, textarea:focus { outline: none; border-color: #14494b; }
+  @keyframes cardFloat {
+    0%   { transform: rotate(-2.6deg) translateY(0px); }
+    50%  { transform: rotate(-1.8deg) translateY(-10px); }
+    100% { transform: rotate(-2.6deg) translateY(0px); }
+  }
+</style>
+</helmet>
+
+<div style="background: #f1eeec; font-family: 'Satoshi', system-ui, sans-serif; color: #1c1b1a; -webkit-font-smoothing: antialiased;">
+
+  <div style="max-width: 1360px; margin: 0 auto; padding: 22px 40px 8px; display: flex; align-items: center; gap: 16px;">
+    <div style="flex: 1; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(28,27,26,0.45); display: flex; gap: 10px;">
+      <a href="#pdp" style="color: inherit;">{{ t.crumbHome }}</a><span>/</span><a href="#pdp" style="color: inherit;">{{ t.crumbGift }}</a><span>/</span><span style="color: rgba(28,27,26,0.8);">{{ t.crumbCurrent }}</span>
+    </div>
+    <div style="display: flex; padding: 3px; border-radius: 999px; background: #ffffff; border: 1px solid rgba(28,27,26,0.08);">
+      <button onClick="{{ setNL }}" style="cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; padding: 7px 14px; border-radius: 999px; border: none; background: {{ nlBg }}; color: {{ nlFg }};">NL</button>
+      <button onClick="{{ setEN }}" style="cursor: pointer; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; padding: 7px 14px; border-radius: 999px; border: none; background: {{ enBg }}; color: {{ enFg }};">EN</button>
+    </div>
+  </div>
+
+  <section id="pdp" style="max-width: 1360px; margin: 0 auto; padding: 20px 40px 72px; display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start;">
+
+    <div style="flex: 1 1 560px; min-width: 440px; display: flex; flex-direction: column; gap: 14px;">
+      <div style="position: relative; border-radius: 32px; overflow: hidden; aspect-ratio: 1 / 1; background: #e6edec; box-shadow: 0 8px 56px rgba(20,18,16,0.07);">
+
+        <div style="position: absolute; inset: 0; transition: opacity 350ms cubic-bezier(0.22,1,0.36,1); opacity: {{ g1 }};">
+          <img src="https://dreaver.nl/cdn/shop/files/DreaverI11-09-20253510_1.jpg?v=1765776159&width=1400" alt="Dreaver" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" />
+          <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(28,27,26,0.05), rgba(28,27,26,0.34));"></div>
+          <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 74%; max-width: 420px;">
+            <div style="animation: cardFloat 7s ease-in-out infinite; border-radius: 24px; padding: 28px 30px 26px; background: linear-gradient(152deg, #1a5658 0%, #113c3e 100%); color: #f1eeec; box-shadow: 0 30px 70px rgba(17,60,62,0.45), inset 0 1px 0 rgba(255,255,255,0.14);">
+              <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 52px;">
+                <img src="https://dreaver.nl/cdn/shop/files/Dreaver_Logo_Petrol.svg?v=1747058277&width=270" alt="Dreaver" style="height: 22px; width: auto; filter: brightness(0) invert(1);" />
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(241,238,236,0.6); padding-top: 6px;">{{ t.cardLabel }}</span>
+              </div>
+              <div style="font-family: 'Gambarino', Georgia, serif; font-size: 52px; line-height: 1; letter-spacing: -0.02em;">{{ selectedLabel }}</div>
+              <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(241,238,236,0.18); display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(241,238,236,0.65);">
+                <span>{{ t.cardCode }} {{ code }}</span>
+                <span>{{ t.cardNoExpiry }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="position: absolute; inset: 0; transition: opacity 350ms cubic-bezier(0.22,1,0.36,1); opacity: {{ g2 }}; pointer-events: none;">
+          <img src="https://dreaver.nl/cdn/shop/files/Dreaver_Assist_1_van_19.jpg?v=1775823984&width=1400" alt="Dreaver" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+
+        <div style="position: absolute; inset: 0; transition: opacity 350ms cubic-bezier(0.22,1,0.36,1); opacity: {{ g3 }}; pointer-events: none; background: #f1eeec; display: flex; align-items: center; justify-content: center; padding: 9%;">
+          <div style="width: 100%; max-width: 460px; background: #ffffff; border-radius: 20px; padding: 30px 30px 26px; border: 1px solid rgba(28,27,26,0.07); box-shadow: 0 8px 56px rgba(20,18,16,0.07);">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(28,27,26,0.4); padding-bottom: 14px; border-bottom: 1px solid rgba(28,27,26,0.08); margin-bottom: 20px;">{{ t.inbox }}</div>
+            <div style="font-size: 20px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 8px;">{{ t.mailTitle }}</div>
+            <p style="margin: 0 0 20px; font-size: 14px; line-height: 1.55; color: rgba(28,27,26,0.68);">{{ t.mailNote }}</p>
+            <div style="border-radius: 14px; background: linear-gradient(152deg, #1a5658, #113c3e); color: #f1eeec; padding: 18px 20px; display: flex; align-items: center; justify-content: space-between;">
+              <span style="font-family: 'Gambarino', Georgia, serif; font-size: 30px; letter-spacing: -0.02em;">{{ selectedLabel }}</span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.08em;">{{ code }}</span>
+            </div>
+            <div style="margin-top: 18px; text-align: center; font-size: 13.5px; font-weight: 700; color: #14494b;">{{ t.mailCta }}</div>
+          </div>
+        </div>
+
+        <div style="position: absolute; inset: 0; transition: opacity 350ms cubic-bezier(0.22,1,0.36,1); opacity: {{ g4 }}; pointer-events: none;">
+          <img src="https://dreaver.nl/cdn/shop/files/DreaverI11-09-20252964.jpg?v=1765534222&width=1400" alt="Dreaver" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+
+        <div style="position: absolute; top: 20px; left: 20px; padding: 8px 14px; border-radius: 999px; background: rgba(255,255,255,0.82); backdrop-filter: blur(10px); border: 1px solid rgba(28,27,26,0.08); font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; display: flex; align-items: center; gap: 8px;">
+          <span style="width: 7px; height: 7px; border-radius: 999px; background: #00b67a; box-shadow: 0 0 0 3px rgba(0,182,122,0.16);"></span>
+          {{ t.pillDirect }}
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+        <sc-for list="{{ thumbs }}" as="th" hint-placeholder-count="4">
+          <button onClick="{{ th.pick }}" style="cursor: pointer; padding: 0; overflow: hidden; aspect-ratio: 1 / 1; border-radius: 16px; background: {{ th.bg }}; border: 2px solid {{ th.bd }}; display: flex; align-items: center; justify-content: center;">
+            <span style="width: 100%; height: 100%; background-size: cover; background-position: center; background-image: {{ th.bgImg }}; display: {{ th.imgShow }};"></span>
+            <span style="font-family: 'Gambarino', Georgia, serif; font-size: 22px; color: #113c3e; display: {{ th.textShow }};">✉</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="flex: 1 1 420px; min-width: 380px; position: sticky; top: 28px;">
+
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 18px;">
+        <span style="width: 18px; height: 18px; border-radius: 4px; background: #00b67a;"></span>
+        <span style="font-size: 13.5px; color: rgba(28,27,26,0.7);"><strong style="font-weight: 700; color: #1c1b1a;">4,6</strong> {{ t.trustpilotLine }}</span>
+      </div>
+
+      <h1 style="margin: 0 0 12px; font-size: clamp(38px, 3.6vw, 52px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 500;">
+        {{ t.h1a }} <em style="font-family: 'Gambarino', Georgia, serif; letter-spacing: -0.02em; color: #14494b;">{{ t.h1b }}</em>
+      </h1>
+
+      <p style="margin: 0 0 24px; font-size: 17px; line-height: 1.55; color: rgba(28,27,26,0.72);">{{ t.sub }}</p>
+
+      <div style="display: flex; align-items: baseline; gap: 12px; padding-bottom: 24px; border-bottom: 1px solid rgba(28,27,26,0.1); margin-bottom: 24px;">
+        <span style="font-size: 32px; font-weight: 700; letter-spacing: -0.03em;">{{ priceFmt }}</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(28,27,26,0.45);">{{ t.vatLine }}</span>
+      </div>
+
+      <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px;">
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(28,27,26,0.45);">{{ t.amountLabel }}</span>
+        <span style="font-size: 13px; font-weight: 500; color: rgba(28,27,26,0.6);">{{ selectedLabel }} {{ t.selectedWord }}</span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 10px; margin-bottom: 28px;">
+        <sc-for list="{{ amounts }}" as="chip" hint-placeholder-count="5">
+          <button onClick="{{ chip.pick }}" style="position: relative; cursor: pointer; font-family: 'Satoshi', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: -0.02em; padding: 17px 10px; border-radius: 14px; transition: transform 150ms cubic-bezier(0.22,1,0.36,1); background: {{ chip.bg }}; color: {{ chip.fg }}; border: 1.5px solid {{ chip.bd }};" style-hover="transform: translateY(-1px)">
+            {{ chip.label }}
+            <span style="position: absolute; top: 7px; right: 9px; font-size: 12px; line-height: 1; color: #ffffff; display: {{ chip.checkShow }};">✓</span>
+            <span style="position: absolute; top: -9px; left: 50%; transform: translateX(-50%); font-family: 'IBM Plex Mono', monospace; font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 8px; border-radius: 999px; background: #1c1b1a; color: #f1eeec; white-space: nowrap; display: {{ chip.badgeShow }};">{{ t.mostChosen }}</span>
+          </button>
+        </sc-for>
+      </div>
+
+      <button onClick="{{ addToCart }}" style="cursor: pointer; width: 100%; font-family: 'Satoshi', sans-serif; font-size: 17px; font-weight: 700; letter-spacing: -0.01em; color: #ffffff; background: #14494b; border: none; padding: 21px; border-radius: 999px; box-shadow: 0 8px 24px rgba(20,73,75,0.2); transition: transform 150ms ease;" style-hover="transform: translateY(-1px)">
+        {{ t.cta }} — {{ selectedLabel }}
+      </button>
+
+      <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin: 16px 0 20px; font-size: 13.5px; color: rgba(28,27,26,0.62);">
+        <span style="width: 7px; height: 7px; border-radius: 999px; background: #00b67a; box-shadow: 0 0 0 3px rgba(0,182,122,0.16);"></span>
+        {{ t.deliveryNote }}
+        <a href="#hoe-werkt-het" style="margin-left: 6px; font-weight: 700;">{{ t.howLink }}</a>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 20px; padding: 20px 0; border-top: 1px solid rgba(28,27,26,0.1); border-bottom: 1px solid rgba(28,27,26,0.1);">
+        <sc-for list="{{ trust }}" as="tr" hint-placeholder-count="4">
+          <div style="display: flex; align-items: center; gap: 9px; font-size: 13.5px; font-weight: 500; color: rgba(28,27,26,0.75);">
+            <span style="color: #14494b; display: flex;">{{ tr.icon }}</span>
+            {{ tr.label }}
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="padding-top: 18px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(28,27,26,0.4); margin-bottom: 10px;">{{ t.payWith }}</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 7px 12px; border-radius: 8px; background: #ffffff; border: 1px solid rgba(28,27,26,0.08); color: rgba(28,27,26,0.7);">iDEAL</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 7px 12px; border-radius: 8px; background: #ffffff; border: 1px solid rgba(28,27,26,0.08); color: rgba(28,27,26,0.7);">Klarna</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 7px 12px; border-radius: 8px; background: #ffffff; border: 1px solid rgba(28,27,26,0.08); color: rgba(28,27,26,0.7);">PayPal</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 7px 12px; border-radius: 8px; background: #ffffff; border: 1px solid rgba(28,27,26,0.08); color: rgba(28,27,26,0.7);">Bancontact</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 7px 12px; border-radius: 8px; background: #ffffff; border: 1px solid rgba(28,27,26,0.08); color: rgba(28,27,26,0.7);">Visa</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 7px 12px; border-radius: 8px; background: #ffffff; border: 1px solid rgba(28,27,26,0.08); color: rgba(28,27,26,0.7);">Mastercard</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #ffffff; border-top: 1px solid rgba(28,27,26,0.07); border-bottom: 1px solid rgba(28,27,26,0.07);">
+    <div style="max-width: 1360px; margin: 0 auto; padding: 30px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px;">
+      <sc-for list="{{ usps }}" as="u" hint-placeholder-count="3">
+        <div style="display: flex; align-items: baseline; gap: 12px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #14494b;">{{ u.n }}</span>
+          <p style="margin: 0; font-size: 15px; line-height: 1.5;"><strong style="font-weight: 700;">{{ u.title }}</strong> <span style="color: rgba(28,27,26,0.66);">{{ u.body }}</span></p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="padding: 96px 40px;">
+    <div style="max-width: 1360px; margin: 0 auto;">
+      <h2 style="margin: 0 0 16px; max-width: 720px; font-size: clamp(30px, 3.2vw, 44px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 500;">
+        {{ t.whyH2a }} <em style="font-family: 'Gambarino', Georgia, serif; letter-spacing: -0.02em; color: #14494b;">{{ t.whyH2b }}</em>
+      </h2>
+      <p style="margin: 0 0 44px; max-width: 520px; font-size: 17px; line-height: 1.55; color: rgba(28,27,26,0.7);">{{ t.whyIntro }}</p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+        <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="4">
+          <div style="border-radius: 24px; padding: 30px 26px 28px; background: {{ b.bg }}; color: {{ b.fg }}; border: 1px solid {{ b.bd }}; box-shadow: 0 8px 40px rgba(20,18,16,0.05);">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: {{ b.numFg }}; margin-bottom: 44px;">{{ b.n }}</div>
+            <h3 style="margin: 0 0 8px; font-size: 19px; letter-spacing: -0.02em; font-weight: 700;">{{ b.title }}</h3>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.55; color: {{ b.bodyFg }};">{{ b.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="hoe-werkt-het" style="background: #ffffff; padding: 96px 40px; border-top: 1px solid rgba(28,27,26,0.07);">
+    <div style="max-width: 1360px; margin: 0 auto;">
+      <h2 style="margin: 0 0 48px; max-width: 700px; font-size: clamp(30px, 3.2vw, 44px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 500;">
+        {{ t.stepsH2a }} <em style="font-family: 'Gambarino', Georgia, serif; letter-spacing: -0.02em; color: #14494b;">{{ t.stepsH2b }}</em> {{ t.stepsH2c }}
+      </h2>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px;">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+          <div>
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 18px;">
+              <span style="width: 38px; height: 38px; border-radius: 999px; background: #14494b; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700;">{{ s.n }}</span>
+              <span style="flex: 1; height: 1px; background: rgba(28,27,26,0.12);"></span>
+            </div>
+            <h3 style="margin: 0 0 8px; font-size: 21px; letter-spacing: -0.02em; font-weight: 700;">{{ s.title }}</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.55; color: rgba(28,27,26,0.68);">{{ s.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="margin-top: 44px; padding: 24px 28px; border-radius: 20px; background: #f1eeec; display: flex; flex-wrap: wrap; align-items: center; gap: 24px; justify-content: space-between;">
+        <p style="margin: 0; max-width: 620px; font-size: 15px; line-height: 1.55; color: rgba(28,27,26,0.72);">{{ t.stepsFoot }}</p>
+        <a href="#pdp" style="font-size: 15px; font-weight: 700; padding: 13px 24px; border-radius: 999px; background: #1c1b1a; color: #f1eeec;">{{ t.stepsCta }}</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 96px 40px;">
+    <div style="max-width: 1360px; margin: 0 auto;">
+      <h2 style="margin: 0 0 14px; font-size: clamp(30px, 3.2vw, 44px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 500;">
+        {{ t.spendH2a }} <em style="font-family: 'Gambarino', Georgia, serif; letter-spacing: -0.02em; color: #14494b;">{{ t.spendH2b }}</em> {{ t.spendH2c }}
+      </h2>
+      <p style="margin: 0 0 40px; max-width: 560px; font-size: 17px; line-height: 1.55; color: rgba(28,27,26,0.7);">{{ t.spendIntro }}</p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
+        <div style="background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid rgba(28,27,26,0.06);">
+          <div style="height: 200px; background: #e6edec; display: flex; align-items: center; justify-content: center; padding: 18px;">
+            <img src="https://dreaver.nl/cdn/shop/files/Frame_1484579401-m_91e57554-0b70-404a-a1e7-c0236e416fd9.png?v=1756204038&width=800" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+          </div>
+          <div style="padding: 20px 22px 22px;">
+            <h3 style="margin: 0 0 4px; font-size: 17px; font-weight: 700; letter-spacing: -0.02em;">{{ t.catTreadmills }}</h3>
+            <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: rgba(28,27,26,0.55);">{{ t.from }} €297</p>
+          </div>
+        </div>
+        <div style="background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid rgba(28,27,26,0.06);">
+          <div style="height: 200px; background: #e6edec; display: flex; align-items: center; justify-content: center; padding: 18px;">
+            <img src="https://dreaver.nl/cdn/shop/files/Frame_1484579401-a-m_4d81ad05-1e5b-459c-988c-fa8e6abc834c.png?v=1756204037&width=800" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+          </div>
+          <div style="padding: 20px 22px 22px;">
+            <h3 style="margin: 0 0 4px; font-size: 17px; font-weight: 700; letter-spacing: -0.02em;">{{ t.catAccessories }}</h3>
+            <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: rgba(28,27,26,0.55);">{{ t.from }} €9,99</p>
+          </div>
+        </div>
+        <div style="background: #ffffff; border-radius: 24px; overflow: hidden; border: 1px solid rgba(28,27,26,0.06);">
+          <div style="height: 200px; background: #e6edec; display: flex; align-items: center; justify-content: center; padding: 18px;">
+            <img src="https://dreaver.nl/cdn/shop/files/Frame_1484579401-r-m_bbee1f7e-2122-48b4-bf89-b9135076a96a.png?v=1756204037&width=800" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+          </div>
+          <div style="padding: 20px 22px 22px;">
+            <h3 style="margin: 0 0 4px; font-size: 17px; font-weight: 700; letter-spacing: -0.02em;">{{ t.catRecovery }}</h3>
+            <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: rgba(28,27,26,0.55);">{{ t.from }} €89,99</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 20px; padding: 40px; border-radius: 28px; background: #e6edec; display: flex; flex-wrap: wrap; gap: 40px; align-items: center;">
+        <div style="flex: 1 1 460px; min-width: 320px;">
+          <h3 style="margin: 0 0 10px; font-size: 26px; letter-spacing: -0.025em; font-weight: 500;">{{ t.chipH3 }}</h3>
+          <p style="margin: 0; max-width: 540px; font-size: 16px; line-height: 1.6; color: rgba(28,27,26,0.72);">{{ t.chipBody }}</p>
+        </div>
+        <div style="flex: 0 0 auto; display: flex;">
+          <div style="width: 74px; height: 102px; border-radius: 12px; background: linear-gradient(152deg, #1a5658, #113c3e); box-shadow: 0 10px 26px rgba(17,60,62,0.28); transform: rotate(-8deg);"></div>
+          <div style="width: 74px; height: 102px; border-radius: 12px; background: linear-gradient(152deg, #1a5658, #113c3e); box-shadow: 0 10px 26px rgba(17,60,62,0.28); margin-left: -22px; transform: rotate(1deg);"></div>
+          <div style="width: 74px; height: 102px; border-radius: 12px; background: linear-gradient(152deg, #1a5658, #113c3e); box-shadow: 0 10px 26px rgba(17,60,62,0.28); margin-left: -22px; transform: rotate(9deg);"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: #ffffff; padding: 96px 40px; border-top: 1px solid rgba(28,27,26,0.07);">
+    <div style="max-width: 1360px; margin: 0 auto;">
+      <div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 32px; margin-bottom: 44px;">
+        <h2 style="margin: 0; flex: 1 1 460px; font-size: clamp(30px, 3.2vw, 44px); line-height: 1.08; letter-spacing: -0.03em; font-weight: 500;">
+          <em style="font-family: 'Gambarino', Georgia, serif; letter-spacing: -0.02em; color: #14494b;">75.000+</em> {{ t.proofH2 }}
+        </h2>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="width: 22px; height: 22px; border-radius: 4px; background: #00b67a;"></span>
+          <span style="font-size: 15px; color: rgba(28,27,26,0.75);"><strong style="font-weight: 700; color: #1c1b1a;">4,6/5</strong> {{ t.proofTrust }}</span>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+        <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+          <div style="background: #f1eeec; border-radius: 24px; padding: 28px 26px;">
+            <div style="font-family: 'Gambarino', Georgia, serif; font-size: 34px; line-height: 0.6; color: rgba(20,73,75,0.35); margin-bottom: 18px;">“</div>
+            <p style="margin: 0 0 22px; font-size: 15px; line-height: 1.6; color: rgba(28,27,26,0.8);">{{ r.quote }}</p>
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span style="width: 40px; height: 40px; border-radius: 999px; background-color: #e6edec; background-size: cover; background-position: center; background-image: {{ r.bgImg }};"></span>
+              <div>
+                <div style="font-size: 14px; font-weight: 700;">{{ r.name }}</div>
+                <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: #00b67a;">{{ t.verified }}</div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px;">
+        <sc-for list="{{ guarantees }}" as="g" hint-placeholder-count="3">
+          <div style="padding: 24px 26px; border-radius: 20px; border: 1px solid rgba(28,27,26,0.1);">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #14494b; margin-bottom: 12px;">{{ g.eyebrow }}</div>
+            <h4 style="margin: 0 0 6px; font-size: 17px; font-weight: 700; letter-spacing: -0.02em;">{{ g.title }}</h4>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.5; color: rgba(28,27,26,0.66);">{{ g.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 96px 40px 0;">
+    <div style="max-width: 900px; margin: 0 auto;">
+      <h2 style="margin: 0 0 36px; font-size: clamp(28px, 2.9vw, 40px); letter-spacing: -0.03em; font-weight: 500;">{{ t.faqH2 }}</h2>
+      <div style="border-top: 1px solid rgba(28,27,26,0.12);">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="9">
+          <div style="border-bottom: 1px solid rgba(28,27,26,0.12);">
+            <button onClick="{{ f.toggle }}" style="cursor: pointer; width: 100%; display: flex; align-items: center; gap: 20px; justify-content: space-between; text-align: left; background: none; border: none; padding: 21px 4px; font-family: 'Satoshi', sans-serif; font-size: 17px; font-weight: 500; letter-spacing: -0.015em; color: #1c1b1a;">
+              {{ f.q }}
+              <span style="flex: 0 0 auto; font-size: 20px; color: #14494b; transition: transform 200ms cubic-bezier(0.22,1,0.36,1); transform: {{ f.iconT }};">+</span>
+            </button>
+            <div style="overflow: hidden; transition: max-height 300ms cubic-bezier(0.22,1,0.36,1); max-height: {{ f.maxH }};">
+              <p style="margin: 0; padding: 0 60px 22px 4px; font-size: 15px; line-height: 1.6; color: rgba(28,27,26,0.7);">{{ f.a }}</p>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <div style="height: 96px;"></div>
+
+  <div style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 70; transition: transform 300ms cubic-bezier(0.22,1,0.36,1); transform: {{ stickyT }};">
+    <div style="background: rgba(255,255,255,0.94); backdrop-filter: blur(14px); border-top: 1px solid rgba(28,27,26,0.1); padding: 13px 40px;">
+      <div style="max-width: 1360px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 20px; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="width: 42px; height: 30px; border-radius: 6px; background: linear-gradient(152deg, #1a5658, #113c3e); display: flex; align-items: center; justify-content: center;">
+            <img src="https://dreaver.nl/cdn/shop/files/Dreaver_Logo_Petrol.svg?v=1747058277&width=270" alt="Dreaver" style="width: 28px; height: auto; filter: brightness(0) invert(1);" />
+          </div>
+          <div>
+            <div style="font-size: 14.5px; font-weight: 700; letter-spacing: -0.015em;">{{ t.crumbCurrent }}</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: rgba(28,27,26,0.55);">{{ priceFmt }} · {{ t.pillDirect }}</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <sc-for list="{{ amounts }}" as="chip" hint-placeholder-count="5">
+            <button onClick="{{ chip.pick }}" style="cursor: pointer; font-family: 'Satoshi', sans-serif; font-size: 14px; font-weight: 700; padding: 9px 15px; border-radius: 999px; background: {{ chip.bg }}; color: {{ chip.fg }}; border: 1.5px solid {{ chip.bd }};">{{ chip.label }}</button>
+          </sc-for>
+          <button onClick="{{ addToCart }}" style="cursor: pointer; margin-left: 10px; font-family: 'Satoshi', sans-serif; font-size: 15px; font-weight: 700; color: #ffffff; background: #14494b; border: none; padding: 14px 26px; border-radius: 999px;">{{ t.addToCart }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#14494b&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#14494b&quot;,&quot;#1c1b1a&quot;,&quot;#7a5c3e&quot;],&quot;section&quot;:&quot;Brand&quot;},&quot;language&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;nl&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;nl&quot;,&quot;en&quot;],&quot;section&quot;:&quot;Content&quot;},&quot;highlightAmount&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:100,&quot;tsType&quot;:&quot;number&quot;,&quot;options&quot;:[10,25,50,100,200],&quot;section&quot;:&quot;Selector&quot;},&quot;showMostChosen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Selector&quot;}}">
+const COPY = {
+  nl: {
+    crumbHome: 'Home', crumbGift: 'Cadeaubon', crumbCurrent: 'Digitale cadeaubon',
+    cardLabel: 'Cadeaubon', cardCode: 'Code', cardNoExpiry: 'Geen vervaldatum',
+    inbox: 'Inbox · Dreaver', mailTitle: 'Je hebt een cadeaubon gekregen',
+    mailNote: '"Voor meer stappen op je eigen tempo. Veel plezier! — Sanne"', mailCta: 'Bon inwisselen →',
+    pillDirect: 'Direct per e-mail',
+    trustpilotLine: 'op Trustpilot · 3.350+ beoordelingen',
+    h1a: 'Geef het cadeau van', h1b: 'beweging.',
+    sub: 'Een digitale Dreaver-cadeaubon — direct per e-mail, in te wisselen op de hele collectie, zonder vervaldatum.',
+    vatLine: 'Incl. btw · digitale levering',
+    amountLabel: 'Bedrag', selectedWord: 'geselecteerd', mostChosen: 'Meest gekozen',
+    personalise: 'Personaliseer',
+    phName: 'Naam ontvanger', phEmail: 'E-mail ontvanger', phMessage: 'Persoonlijke boodschap (optioneel)',
+    sendNow: 'Nu versturen', sendLater: 'Kies een datum',
+    cta: 'Verstuur dit cadeau', addToCart: 'In winkelwagen',
+    deliveryNote: 'Meestal binnen enkele minuten in de inbox', howLink: 'Hoe werkt het? →',
+    payWith: 'Veilig betalen met',
+    usps: [
+      ['Direct geleverd', '— in de inbox binnen enkele minuten.'],
+      ['Zij kiezen zelf', '— inwisselbaar op elke Dreaver.'],
+      ['Altijd goed', '— geen maat, geen kleur, geen gedoe.']
+    ],
+    whyH2a: 'Het mooiste cadeau? Beweging die past in', whyH2b: 'hún leven.',
+    whyIntro: 'Geen fitnessregime cadeau doen. Wel de ruimte om te bewegen op hun eigen manier, op hun eigen moment.',
+    benefits: [
+      ['Bewegen zonder druk', 'Geen fitnessregime, maar kleine stappen die passen in de dag.'],
+      ['Zij kiezen hun Dreaver', 'Het model, het moment en het tempo dat bij hen past.'],
+      ['Een cadeau met bewezen liefde', '75.000+ mensen bewegen al met Dreaver.'],
+      ['Perfect, ook op het laatste moment', 'Direct geleverd, altijd raak.']
+    ],
+    stepsH2a: 'Zo werkt het — in', stepsH2b: 'twee minuten', stepsH2c: 'geregeld.',
+    steps: [
+      ['Kies een bedrag', 'Vijf bedragen, van €10 tot €200. Je kunt niet misgokken — zij kiezen zelf waar het aan opgaat.'],
+      ['Reken af', 'Betaal met iDEAL, Klarna of PayPal. Geen account nodig, geen verzendkosten.'],
+      ['Direct in de inbox', "De cadeaubon komt binnen enkele minuten per e-mail binnen, met een unieke code. Liever tastbaar? Je kunt 'm ook printen."]
+    ],
+    stepsFoot: 'De bon staat op naam van niemand: stuur hem door wanneer jij wilt. Inwisselbaar op de hele Dreaver-collectie, zonder vervaldatum.',
+    stepsCta: 'Kies een bedrag →',
+    spendH2a: 'In te wisselen op', spendH2b: 'alles', spendH2c: 'van Dreaver.',
+    spendIntro: 'Van loopbanden (vanaf €297) tot accessoires en recovery — de ontvanger kiest zelf waar de bon aan wordt besteed.',
+    catTreadmills: 'Loopbanden', catAccessories: 'Accessoires', catRecovery: 'Recovery', from: 'vanaf',
+    chipH3: 'Samen een groter cadeau geven?',
+    chipBody: "Meerdere cadeaubonnen kunnen gecombineerd worden. Geef samen met familie, vrienden of collega's — en help iemand aan hun eigen Dreaver.",
+    proofH2: 'mensen bewegen al met Dreaver.', proofTrust: 'op Trustpilot — 3.350+ beoordelingen.',
+    verified: 'Verified review',
+    guarantees: [
+      ['Geldigheid', 'Geen vervaldatum', 'De bon verloopt niet.'],
+      ['Betalen', 'Veilig betalen', 'iDEAL, Klarna, PayPal & meer.'],
+      ['Retour', '30 dagen bedenktijd', 'Op elke bestelling met de bon.']
+    ],
+    faqH2: 'Veelgestelde vragen',
+    faqs: [
+      ['Hoe wordt de cadeaubon geleverd?', 'Digitaal, per e-mail, met unieke code — meestal binnen enkele minuten.'],
+      ['Waar kan de bon voor gebruikt worden?', 'De hele collectie: loopbanden, accessoires en recovery.'],
+      ['Wat als het bedrag niet genoeg is voor een loopband?', 'Combineer met een eigen bijdrage of andere cadeaubonnen.'],
+      ['Heeft de bon een vervaldatum?', 'Nee, de bon verloopt niet.'],
+      ['Kan de ontvanger het restbedrag bewaren?', 'Ja, het restbedrag blijft op de bon staan voor een volgende aankoop.'],
+      ['Kan ik de bon printen?', 'Ja. De e-mail is zo opgemaakt dat je de bon kunt printen en tastbaar kunt geven.'],
+      ['Kan ik de bon inruilen voor geld?', 'Nee.']
+    ],
+    finalH2a: 'Klaar om beweging', finalH2b: 'cadeau te geven?',
+    finalSub: 'Twijfel je over het bedrag? Je kunt niet misgokken — zij kiezen zelf.',
+    trust: ['Direct per e-mail', 'Zelf te printen', 'Geen vervaldatum', '30 dagen bedenktijd'],
+    reviews: [
+      ['Valerie V.', 'Zo geweldig blij met deze loopband! Dagelijks sta ik er zeker een uur op. Dit werkt perfect. Serie aan en gaan!'],
+      ['Natascha H.', 'Elke dag 15.000 stappen! Door weer en wind. ;) Te gek…'],
+      ['Yasmina J.', 'Super tevreden! Kwalitatief en gebruik m nu al bijna 2 maanden elke dag. Soms zelfs twee keer per dag.']
+    ]
+  },
+  en: {
+    crumbHome: 'Home', crumbGift: 'Gift card', crumbCurrent: 'Digital gift card',
+    cardLabel: 'Gift card', cardCode: 'Code', cardNoExpiry: 'No expiry date',
+    inbox: 'Inbox · Dreaver', mailTitle: "You've been given a gift card",
+    mailNote: '"For more steps at your own pace. Enjoy! — Sanne"', mailCta: 'Redeem gift card →',
+    pillDirect: 'Straight to their inbox',
+    trustpilotLine: 'on Trustpilot · 3.350+ reviews',
+    h1a: 'Give the gift of', h1b: 'movement.',
+    sub: 'A digital Dreaver gift card — delivered by e-mail, redeemable across the whole collection, with no expiry date.',
+    vatLine: 'Incl. VAT · digital delivery',
+    amountLabel: 'Amount', selectedWord: 'selected', mostChosen: 'Most chosen',
+    personalise: 'Personalise',
+    phName: "Recipient's name", phEmail: "Recipient's e-mail", phMessage: 'Personal message (optional)',
+    sendNow: 'Send now', sendLater: 'Pick a date',
+    cta: 'Send this gift', addToCart: 'Add to cart',
+    deliveryNote: 'Usually in the inbox within minutes', howLink: 'How does it work? →',
+    payWith: 'Secure payment with',
+    usps: [
+      ['Delivered instantly', '— in the inbox within minutes.'],
+      ['They choose', '— redeemable on any Dreaver.'],
+      ['Always right', '— no size, no colour, no hassle.']
+    ],
+    whyH2a: 'The best gift? Movement that fits', whyH2b: 'their life.',
+    whyIntro: "Not a fitness regime. Just the room to move their own way, at their own moment.",
+    benefits: [
+      ['Movement without pressure', 'No training plan — small steps that fit into the day.'],
+      ['They pick their Dreaver', 'The model, the moment and the pace that suits them.'],
+      ['A gift with proof behind it', '75.000+ people already walk with Dreaver.'],
+      ['Perfect at the last minute too', 'Delivered instantly, always right.']
+    ],
+    stepsH2a: 'How it works — sorted in', stepsH2b: 'two minutes.', stepsH2c: '',
+    steps: [
+      ['Choose an amount', "Five amounts, from €10 to €200. You can't get it wrong — they decide what it goes towards."],
+      ['Check out', 'Pay with iDEAL, Klarna or PayPal. No account needed, no shipping costs.'],
+      ['Straight to the inbox', 'The gift card arrives by e-mail within minutes, with a unique code. Prefer something tangible? You can print it.']
+    ],
+    stepsFoot: 'The card is not tied to a name: forward it whenever you like. Redeemable across the whole Dreaver collection, with no expiry date.',
+    stepsCta: 'Choose an amount →',
+    spendH2a: 'Redeemable on', spendH2b: 'everything', spendH2c: 'from Dreaver.',
+    spendIntro: 'From treadmills (from €297) to accessories and recovery — the recipient decides what the card goes towards.',
+    catTreadmills: 'Treadmills', catAccessories: 'Accessories', catRecovery: 'Recovery', from: 'from',
+    chipH3: 'Giving a bigger gift together?',
+    chipBody: 'Multiple gift cards can be combined. Chip in with family, friends or colleagues — and help someone to their own Dreaver.',
+    proofH2: 'people already walk with Dreaver.', proofTrust: 'on Trustpilot — 3.350+ reviews.',
+    verified: 'Verified review',
+    guarantees: [
+      ['Validity', 'No expiry date', 'The card does not expire.'],
+      ['Payment', 'Secure payment', 'iDEAL, Klarna, PayPal & more.'],
+      ['Returns', '30-day trial', 'On every order placed with the card.']
+    ],
+    faqH2: 'Frequently asked questions',
+    faqs: [
+      ['How is the gift card delivered?', 'Digitally, by e-mail, with a unique code — usually within minutes.'],
+      ['What can the card be used for?', 'The whole collection: treadmills, accessories and recovery.'],
+      ["What if the amount isn't enough for a treadmill?", 'Combine it with your own contribution or with other gift cards.'],
+      ['Does the card have an expiry date?', 'No, the card does not expire.'],
+      ['Can the recipient keep the remaining balance?', 'Yes, any remaining balance stays on the card for a future purchase.'],
+      ['Can I print the card?', 'Yes. The e-mail is laid out so you can print the card and give it by hand.'],
+      ['Can the card be exchanged for cash?', 'No.']
+    ],
+    finalH2a: 'Ready to give', finalH2b: 'movement as a gift?',
+    finalSub: "Unsure about the amount? You can't get it wrong — they choose themselves.",
+    trust: ['Delivered by e-mail', 'Printable at home', 'No expiry date', '30-day trial'],
+    reviews: [
+      ['Valerie V.', "So happy with this treadmill! I'm on it at least an hour a day. This just works. Series on and go!"],
+      ['Natascha H.', '15.000 steps every day! Rain or shine. ;) Brilliant…'],
+      ['Yasmina J.', "Really pleased! Great quality and I've used it every day for almost two months. Sometimes twice a day."]
+    ]
+  }
+};
+
+class Component extends DCLogic {
+  state = { amount: 100, open: {}, scrolled: false, slide: 0, when: 'now', lang: 'nl' };
+
+  componentDidMount() {
+    this._onScroll = () => {
+      const s = window.scrollY > 900;
+      if (s !== this.state.scrolled) this.setState({ scrolled: s });
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onScroll();
+  }
+  componentWillUnmount() { window.removeEventListener('scroll', this._onScroll); }
+
+  icon(d) {
+    return React.createElement('svg', { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.6, strokeLinecap: 'round', strokeLinejoin: 'round' }, React.createElement('path', { d }));
+  }
+
+  renderVals() {
+    const accent = this.props.accentColor ?? '#14494b';
+    const highlight = this.props.highlightAmount ?? 100;
+    const lang = (this.props.language ?? this.state.lang) === 'en' ? 'en' : this.state.lang;
+    const t = COPY[lang] || COPY.nl;
+    const values = [10, 25, 50, 100, 200];
+    const sel = this.state.amount;
+    const slide = this.state.slide;
+
+    const amounts = values.map(v => ({
+      label: '€' + v,
+      pick: () => this.setState({ amount: v }),
+      bg: v === sel ? accent : '#ffffff',
+      fg: v === sel ? '#ffffff' : '#1c1b1a',
+      bd: v === sel ? accent : 'rgba(28,27,26,0.14)',
+      checkShow: v === sel ? 'block' : 'none',
+      darkBg: v === sel ? '#f1eeec' : 'rgba(241,238,236,0.08)',
+      darkFg: v === sel ? accent : '#f1eeec',
+      darkBd: v === sel ? '#f1eeec' : 'rgba(241,238,236,0.28)',
+      badgeShow: (v === highlight && this.props.showMostChosen !== false) ? 'block' : 'none'
+    }));
+
+    const thumbSrc = [
+      'https://dreaver.nl/cdn/shop/files/DreaverI11-09-20253510_1.jpg?v=1765776159&width=300',
+      'https://dreaver.nl/cdn/shop/files/Dreaver_Assist_1_van_19.jpg?v=1775823984&width=300',
+      '',
+      'https://dreaver.nl/cdn/shop/files/DreaverI11-09-20252964.jpg?v=1765534222&width=300'
+    ];
+    const thumbs = thumbSrc.map((src, i) => ({
+      bgImg: src ? 'url(' + src + ')' : 'none',
+      imgShow: src ? 'block' : 'none',
+      textShow: src ? 'none' : 'flex',
+      pick: () => this.setState({ slide: i }),
+      bg: src ? '#e6edec' : '#ffffff',
+      bd: slide === i ? accent : 'rgba(28,27,26,0.1)'
+    }));
+
+    const faqs = t.faqs.map((f, i) => ({
+      q: f[0], a: f[1],
+      maxH: this.state.open[i] ? '260px' : '0px',
+      iconT: this.state.open[i] ? 'rotate(45deg)' : 'rotate(0deg)',
+      toggle: () => this.setState(s => ({ open: Object.assign({}, s.open, { [i]: !s.open[i] }) }))
+    }));
+
+    const avatars = [
+      'https://dreaver.nl/cdn/shop/files/Gs8SqgDmg_mid.jpg?v=1752739198&width=200',
+      'https://dreaver.nl/cdn/shop/files/PrNEUp3vo_mid_f267f863-1daf-41e7-a1ca-947b16f4f8c7.jpg?v=1752237041&width=200',
+      'https://dreaver.nl/cdn/shop/files/zjaRpZ4eL_mid.jpg?v=1752237189&width=200'
+    ];
+
+    const iconPaths = [
+      'M13 2 4.5 13H11l-1 9 8.5-11H12l1-9z',
+      'M7 8.5V3.5h10v5M7 18h10v3.5H7zM6.5 8.5h11a3 3 0 0 1 3 3v4.5a1.5 1.5 0 0 1-1.5 1.5H17M7 17.5H5a1.5 1.5 0 0 1-1.5-1.5v-4.5a3 3 0 0 1 3-3z',
+      'M6.5 8.5a3.5 3.5 0 0 1 0 7c-2.2 0-3.5-1.8-3.5-3.5S4.3 8.5 6.5 8.5zM6.5 8.5c2.6 0 4 6.9 7.5 6.9a3.5 3.5 0 0 0 0-7C10.5 8.4 9.1 15.4 6.5 15.4',
+      'M3.5 12a8.5 8.5 0 1 0 2.6-6.1M3.5 4v4.5H8'
+    ];
+
+    const later = this.state.when === 'later';
+    const isEN = lang === 'en';
+
+    return {
+      t, amounts, faqs, thumbs,
+      selectedLabel: '€' + sel,
+      priceFmt: '€' + sel + ',00',
+      code: 'DRV-' + String(sel).padStart(3, '0') + '-8K4Q',
+      g1: slide === 0 ? 1 : 0,
+      g2: slide === 1 ? 1 : 0,
+      g3: slide === 2 ? 1 : 0,
+      g4: slide === 3 ? 1 : 0,
+      stickyT: this.state.scrolled ? 'translateY(0)' : 'translateY(110%)',
+      addToCart: () => {},
+      setNL: () => this.setState({ lang: 'nl' }),
+      setEN: () => this.setState({ lang: 'en' }),
+      nlBg: isEN ? 'transparent' : accent,
+      nlFg: isEN ? 'rgba(28,27,26,0.6)' : '#ffffff',
+      enBg: isEN ? accent : 'transparent',
+      enFg: isEN ? '#ffffff' : 'rgba(28,27,26,0.6)',
+      sendNow: () => this.setState({ when: 'now' }),
+      sendLater: () => this.setState({ when: 'later' }),
+      nowBg: later ? '#f1eeec' : accent,
+      nowFg: later ? '#1c1b1a' : '#ffffff',
+      nowBd: later ? 'rgba(28,27,26,0.14)' : accent,
+      laterBg: later ? accent : '#f1eeec',
+      laterFg: later ? '#ffffff' : '#1c1b1a',
+      laterBd: later ? accent : 'rgba(28,27,26,0.14)',
+      dateH: later ? '60px' : '0px',
+      usps: t.usps.map((u, i) => ({ n: '0' + (i + 1), title: u[0], body: u[1] })),
+      steps: t.steps.map((s, i) => ({ n: i + 1, title: s[0], body: s[1] })),
+      benefits: t.benefits.map((b, i) => ({
+        n: '0' + (i + 1), title: b[0], body: b[1],
+        bg: i === 2 ? accent : '#ffffff',
+        fg: i === 2 ? '#f1eeec' : '#1c1b1a',
+        bd: i === 2 ? accent : 'rgba(28,27,26,0.06)',
+        numFg: i === 2 ? 'rgba(241,238,236,0.5)' : 'rgba(28,27,26,0.35)',
+        bodyFg: i === 2 ? 'rgba(241,238,236,0.75)' : 'rgba(28,27,26,0.68)'
+      })),
+      guarantees: t.guarantees.map(g => ({ eyebrow: g[0], title: g[1], body: g[2] })),
+      trust: t.trust.map((label, i) => ({ label, icon: this.icon(iconPaths[i]) })),
+      reviews: t.reviews.map((r, i) => ({ name: r[0], quote: r[1], bgImg: 'url(' + avatars[i] + ')' }))
+    };
+  }
+}
+</script>
+</body>
+</html>
