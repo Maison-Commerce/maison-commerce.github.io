@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin="crossorigin" />
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=gambarino@400&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #F3EDDD; color: #1B2A4A; font-family: 'Satoshi', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #1B2A4A; text-decoration: none; }
+  a:hover { color: #C27C8A; }
+  p { text-wrap: pretty; }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<div style="background: #1B2A4A; color: #F3EDDD; text-align: center; padding: 11px 20px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;">Café matcha for ~€2 a cup — a to-go cup in every serving</div>
+
+<header style="position: sticky; top: 0; z-index: 60; background: rgba(243,237,221,0.82); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(27,42,74,0.10);">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 14px 40px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+    <a href="#top" style="display: flex; align-items: center; gap: 12px;">
+      <span style="display: inline-block; border: 1.5px solid #A9873F; padding: 6px 10px 5px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #1B2A4A; box-shadow: 0 0 0 3px #F3EDDD, 0 0 0 4.5px rgba(169,135,63,0.35);">Blisbrew</span>
+    </a>
+    <nav style="display: flex; align-items: center; gap: 28px; font-size: 14px; color: rgba(27,42,74,0.75);">
+      <a href="#kit">The kit</a>
+      <a href="#recipes">Recipes</a>
+      <a href="#craft">Why Blisbrew</a>
+      <a href="#compare">Refills</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top" style="max-width: 1440px; margin: 0 auto;">
+
+  <section data-screen-label="01 Hero &amp; buy box" style="padding: 56px 40px 80px; display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start;">
+    <div style="flex: 1 1 520px; min-width: 320px; display: flex; flex-direction: column; gap: 14px;">
+      <div style="position: relative; aspect-ratio: 4 / 5; padding: 10px; background: #FFFDF8; border: 1px solid rgba(169,135,63,0.45); box-shadow: 0 8px 56px rgba(20,18,16,0.07);">
+        <div style="position: absolute; inset: 4px; border: 1px dashed rgba(169,135,63,0.35); pointer-events: none; z-index: 2;"></div>
+        <div style="position: relative; width: 100%; height: 100%;">
+          <image-slot id="bb-hero" shape="rect" placeholder="Signature hero: finished matcha in a Blisbrew café-style to-go cup, held in hand, warm daylight on cream linen"></image-slot>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px;">
+        <div style="position: relative; min-width: 0; aspect-ratio: 1;"><image-slot id="bb-thumb-1" shape="rect" placeholder="Kit flat-lay"></image-slot></div>
+        <div style="position: relative; min-width: 0; aspect-ratio: 1;"><image-slot id="bb-thumb-2" shape="rect" placeholder="Whisking motion"></image-slot></div>
+        <div style="position: relative; min-width: 0; aspect-ratio: 1;"><image-slot id="bb-thumb-3" shape="rect" placeholder="Packaging detail"></image-slot></div>
+        <div style="position: relative; min-width: 0; aspect-ratio: 1;"><image-slot id="bb-thumb-4" shape="rect" placeholder="Cup close-up"></image-slot></div>
+      </div>
+    </div>
+
+    <div style="flex: 1 1 400px; min-width: 320px; position: sticky; top: 96px;">
+      <div style="background: #FFFDF8; border-radius: 24px; border: 1px solid rgba(27,42,74,0.08); box-shadow: 0 8px 56px rgba(20,18,16,0.07); padding: 36px 34px 30px;">
+
+        <h1 style="margin: 0; font-size: clamp(30px, 3.4vw, 42px); font-weight: 500; line-height: 1.08; letter-spacing: -0.02em;">Your café matcha, made <em style="font-family: 'Gambarino', serif; font-style: normal; letter-spacing: -0.02em;">at your counter</em>.</h1>
+
+        <sc-if value="{{ showProvenance }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-top: 14px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #A9873F;">First-harvest · Shade-grown Japan</div>
+        </sc-if>
+        <sc-if value="{{ showReviews }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top: 14px; display: flex; align-items: center; gap: 10px;">
+            <span style="display: flex; gap: 3px; color: #C27C8A;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 .8-5.2 4.7 1.5 7-6.3-3.6L6.7 21l1.5-7L3 9.4l7-.8z"></path></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 .8-5.2 4.7 1.5 7-6.3-3.6L6.7 21l1.5-7L3 9.4l7-.8z"></path></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 .8-5.2 4.7 1.5 7-6.3-3.6L6.7 21l1.5-7L3 9.4l7-.8z"></path></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 .8-5.2 4.7 1.5 7-6.3-3.6L6.7 21l1.5-7L3 9.4l7-.8z"></path></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.6 7 .8-5.2 4.7 1.5 7-6.3-3.6L6.7 21l1.5-7L3 9.4l7-.8z"></path></svg>
+            </span>
+            <span style="font-size: 13px; color: rgba(27,42,74,0.75);">{{ reviewCountLabel }}</span>
+          </div>
+        </sc-if>
+
+        <div style="margin-top: 22px; display: flex; align-items: baseline; gap: 12px;">
+          <span style="font-family: 'Gambarino', serif; font-size: 44px; line-height: 1; letter-spacing: -0.02em;">€{{ price }}</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.04em; color: #A9873F;">€{{ perCup }} a cup</span>
+        </div>
+
+        <p style="margin: 16px 0 0; font-size: 15px; line-height: 1.55; color: rgba(27,42,74,0.75);">A complete starter kit — ceremonial-grade matcha, a bamboo whisk, and café-style to-go cups — so a proper matcha costs you about €2, not €6–8 at the window.</p>
+
+        <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="flex: 0 0 30px; width: 30px; height: 30px; border-radius: 999px; border: 1px solid rgba(169,135,63,0.5); display: flex; align-items: center; justify-content: center; color: #A9873F;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
+            </span>
+            <span style="font-size: 14px;">100% first-harvest matcha</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="flex: 0 0 30px; width: 30px; height: 30px; border-radius: 999px; border: 1px solid rgba(169,135,63,0.5); display: flex; align-items: center; justify-content: center; color: #A9873F;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"></path></svg>
+            </span>
+            <span style="font-size: 14px;">Shade-grown in Japan</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="flex: 0 0 30px; width: 30px; height: 30px; border-radius: 999px; border: 1px solid rgba(169,135,63,0.5); display: flex; align-items: center; justify-content: center; color: #A9873F;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 4 5 6.5 5 9a5 5 0 0 1-10 0c0-2.5 2-5 5-9Z"></path></svg>
+            </span>
+            <span style="font-size: 14px;">One ingredient — nothing added</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <span style="flex: 0 0 30px; width: 30px; height: 30px; border-radius: 999px; border: 1px solid rgba(169,135,63,0.5); display: flex; align-items: center; justify-content: center; color: #A9873F;">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 12.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8Z"></path><path d="M5 7h14M9 11h6"></path></svg>
+            </span>
+            <span style="font-size: 14px;">A café to-go cup in every serving</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 28px; display: flex; flex-direction: column; gap: 10px;" role="radiogroup" aria-label="Choose your kit">
+          <div onClick="{{ pickStarter }}" role="radio" aria-checked="{{ isStarter }}" tabindex="0" style="cursor: pointer; padding: 14px 16px; border-radius: 14px; background: #FFFDF8; border: 1.5px solid rgba(27,42,74,0.12); border-color: {{ starterBorder }}; box-shadow: {{ starterGlow }}; display: flex; align-items: center; gap: 14px; transition: border-color 150ms ease;" style-hover="border-color: rgba(194,124,138,0.6)">
+            <span style="flex: 0 0 16px; width: 16px; height: 16px; border-radius: 999px; border: 1.5px solid rgba(27,42,74,0.3); border-color: {{ starterDotBorder }}; display: flex; align-items: center; justify-content: center;">
+              <sc-if value="{{ isStarter }}" hint-placeholder-val="{{ true }}"><span style="width: 8px; height: 8px; border-radius: 999px; background: #C27C8A; display: block;"></span></sc-if>
+            </span>
+            <span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 3px;">
+              <span style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span style="font-size: 15px; font-weight: 500;">Starter Kit</span>
+                <span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #FFFDF8; background: #C27C8A; border-radius: 999px; padding: 3px 8px;">Best to start</span>
+              </span>
+              <span style="font-size: 12.5px; color: rgba(27,42,74,0.6);">30 servings · <span style="color: #A9873F; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;">€1.97/cup</span></span>
+            </span>
+            <span style="font-size: 16px; font-weight: 500;">€59</span>
+          </div>
+
+          <div onClick="{{ pickHome }}" role="radio" aria-checked="{{ isHome }}" tabindex="0" style="cursor: pointer; padding: 14px 16px; border-radius: 14px; background: #FFFDF8; border: 1.5px solid rgba(27,42,74,0.12); border-color: {{ homeBorder }}; box-shadow: {{ homeGlow }}; display: flex; align-items: center; gap: 14px; transition: border-color 150ms ease;" style-hover="border-color: rgba(194,124,138,0.6)">
+            <span style="flex: 0 0 16px; width: 16px; height: 16px; border-radius: 999px; border: 1.5px solid rgba(27,42,74,0.3); border-color: {{ homeDotBorder }}; display: flex; align-items: center; justify-content: center;">
+              <sc-if value="{{ isHome }}" hint-placeholder-val="{{ false }}"><span style="width: 8px; height: 8px; border-radius: 999px; background: #C27C8A; display: block;"></span></sc-if>
+            </span>
+            <span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 3px;">
+              <span style="font-size: 15px; font-weight: 500;">Home Bar</span>
+              <span style="font-size: 12.5px; color: rgba(27,42,74,0.6);">60 servings · <span style="color: #A9873F; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;">€1.48/cup</span></span>
+            </span>
+            <span style="font-size: 16px; font-weight: 500;">€89</span>
+          </div>
+
+          <div onClick="{{ pickSignature }}" role="radio" aria-checked="{{ isSignature }}" tabindex="0" style="cursor: pointer; padding: 14px 16px; border-radius: 14px; background: #FFFDF8; border: 1.5px solid rgba(27,42,74,0.12); border-color: {{ signatureBorder }}; box-shadow: {{ signatureGlow }}; display: flex; align-items: center; gap: 14px; transition: border-color 150ms ease;" style-hover="border-color: rgba(194,124,138,0.6)">
+            <span style="flex: 0 0 16px; width: 16px; height: 16px; border-radius: 999px; border: 1.5px solid rgba(27,42,74,0.3); border-color: {{ signatureDotBorder }}; display: flex; align-items: center; justify-content: center;">
+              <sc-if value="{{ isSignature }}" hint-placeholder-val="{{ false }}"><span style="width: 8px; height: 8px; border-radius: 999px; background: #C27C8A; display: block;"></span></sc-if>
+            </span>
+            <span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 3px;">
+              <span style="font-size: 15px; font-weight: 500;">Signature Bar</span>
+              <span style="font-size: 12.5px; color: rgba(27,42,74,0.6);">90 servings · <span style="color: #A9873F; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;">€1.43/cup</span> · + stamp collection</span>
+            </span>
+            <span style="font-size: 16px; font-weight: 500;">€129</span>
+          </div>
+        </div>
+
+        <p style="margin: 16px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.03em; color: rgba(27,42,74,0.6);">What's inside: {{ insideLine }}</p>
+
+        <button onClick="{{ addToCart }}" style="margin-top: 20px; width: 100%; border: none; cursor: pointer; background: #C27C8A; color: #FFFDF8; border-radius: 999px; padding: 18px 24px; font-family: 'Satoshi', sans-serif; font-size: 16px; font-weight: 500; letter-spacing: -0.01em; box-shadow: 0 1px 2px rgba(44,36,32,.05), inset 0 -2px 0 rgba(27,42,74,.12); transition: transform 150ms ease;" style-hover="transform: translateY(-1px)">Add to Cart — €{{ price }}</button>
+
+        <div style="margin-top: 14px; text-align: center;"><a href="#compare" style="font-size: 13px; color: rgba(27,42,74,0.6); border-bottom: 1px solid rgba(27,42,74,0.2); padding-bottom: 1px;">compare the kits ↓</a></div>
+
+        <div style="margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(27,42,74,0.1); display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; text-align: center;">
+          <span style="font-size: 11.5px; line-height: 1.35; color: rgba(27,42,74,0.7);">Free shipping over €{{ shipThreshold }}</span>
+          <span style="font-size: 11.5px; line-height: 1.35; color: rgba(27,42,74,0.7); border-left: 1px solid rgba(169,135,63,0.35); border-right: 1px solid rgba(169,135,63,0.35);">~€2 a cup</span>
+          <span style="font-size: 11.5px; line-height: 1.35; color: rgba(27,42,74,0.7);">30-day happiness guarantee</span>
+        </div>
+      </div>
+      <p style="margin: 14px 4px 0; font-size: 12px; color: rgba(27,42,74,0.55);">Not your ritual? 30 days, full refund.</p>
+    </div>
+  </section>
+</main>
+
+<section data-screen-label="04 The ritual" style="max-width: 1440px; margin: 0 auto; padding: 24px 40px 96px;">
+  <div style="max-width: 640px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #A9873F;">The ritual</div>
+    <h2 style="margin: 16px 0 0; font-size: clamp(30px, 3.6vw, 46px); font-weight: 500; line-height: 1.08; letter-spacing: -0.02em;">Three steps. <em style="font-family: 'Gambarino', serif; font-style: normal;">Under a minute</em>.</h2>
+    <p style="margin: 16px 0 0; font-size: 17px; color: rgba(27,42,74,0.75);">No barista, no ceremony anxiety.</p>
+  </div>
+  <div style="margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 32px;">
+    <div style="display: flex; flex-direction: column; gap: 18px;">
+      <div style="position: relative; aspect-ratio: 3 / 2;"><image-slot id="bb-step-1" shape="rect" placeholder="Hands scooping matcha with the chashaku, warm light"></image-slot></div>
+      <div style="display: flex; gap: 16px; align-items: baseline;">
+        <span style="font-family: 'Gambarino', serif; font-size: 34px; line-height: 1; color: #C27C8A;">1</span>
+        <div>
+          <div style="font-size: 18px; font-weight: 500;">Scoop.</div>
+          <p style="margin: 6px 0 0; font-size: 14.5px; line-height: 1.55; color: rgba(27,42,74,0.72);">One curve of the bamboo scoop into your cup.</p>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 18px;">
+      <div style="position: relative; aspect-ratio: 3 / 2;"><image-slot id="bb-step-2" shape="rect" placeholder="Whisking motion, froth rising — short muted loop if available"></image-slot></div>
+      <div style="display: flex; gap: 16px; align-items: baseline;">
+        <span style="font-family: 'Gambarino', serif; font-size: 34px; line-height: 1; color: #C27C8A;">2</span>
+        <div>
+          <div style="font-size: 18px; font-weight: 500;">Whisk with a little hot water until frothy.</div>
+          <p style="margin: 6px 0 0; font-size: 14.5px; line-height: 1.55; color: rgba(27,42,74,0.72);">Twenty seconds of W-shaped strokes. That's the whole technique.</p>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 18px;">
+      <div style="position: relative; aspect-ratio: 3 / 2;"><image-slot id="bb-step-3" shape="rect" placeholder="Pouring milk over ice into a Blisbrew to-go cup, lid going on"></image-slot></div>
+      <div style="display: flex; gap: 16px; align-items: baseline;">
+        <span style="font-family: 'Gambarino', serif; font-size: 34px; line-height: 1; color: #C27C8A;">3</span>
+        <div>
+          <div style="font-size: 18px; font-weight: 500;">Pour over ice or milk into your café cup, and go.</div>
+          <p style="margin: 6px 0 0; font-size: 14.5px; line-height: 1.55; color: rgba(27,42,74,0.72);">Lid on, out the door. The cup was in the box.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="02 Value proof" style="background: #1B2A4A; color: #F3EDDD; padding: 96px 40px;">
+  <div style="max-width: 1080px; margin: 0 auto;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(243,237,221,0.55);">The math</div>
+    <h2 style="margin: 16px 0 0; font-size: clamp(32px, 4.2vw, 56px); font-weight: 500; line-height: 1.06; letter-spacing: -0.02em; max-width: 16em;">Do the math on your <em style="font-family: 'Gambarino', serif; font-style: normal;">matcha habit</em>.</h2>
+    <p style="margin: 18px 0 0; font-size: clamp(16px, 1.4vw, 19px); color: rgba(243,237,221,0.75); max-width: 34em;">One café matcha a day adds up fast. Blisbrew doesn't.</p>
+
+    <div role="img" aria-label="A takeaway café matcha costs 6 to 8 euro a cup. Blisbrew costs 1 euro 97 a cup, and under 1 euro when you refill." style="margin-top: 56px; display: flex; flex-direction: column; gap: 28px;">
+      <div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(243,237,221,0.6); margin-bottom: 10px;">Takeaway matcha</div>
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="flex: 1 1 auto; height: 58px; border-radius: 999px; background: rgba(243,237,221,0.16); border: 1px solid rgba(243,237,221,0.22);"></div>
+          <div style="flex: 0 0 auto; font-family: 'Gambarino', serif; font-size: clamp(30px, 3.6vw, 46px); line-height: 1; letter-spacing: -0.02em; min-width: 4.6em; text-align: right;">€6–8</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(243,237,221,0.6); margin-bottom: 10px;">Blisbrew, at your counter</div>
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div style="flex: 1 1 auto; display: flex;"><div style="width: 28%; min-width: 90px; height: 58px; border-radius: 999px; background: #C27C8A;"></div></div>
+          <div style="flex: 0 0 auto; font-family: 'Gambarino', serif; font-size: clamp(30px, 3.6vw, 46px); line-height: 1; letter-spacing: -0.02em; color: #C27C8A; min-width: 4.6em; text-align: right;">€1.97</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 48px; display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-end; justify-content: space-between; border-top: 1px solid rgba(243,237,221,0.16); padding-top: 28px;">
+      <p style="margin: 0; flex: 1 1 420px; font-size: 14.5px; line-height: 1.6; color: rgba(243,237,221,0.72); max-width: 44em;">€59 ÷ 30 servings = €1.97 a cup. When you refill, it drops under €1. A daily café matcha runs €180–240 a month — the same ritual from Blisbrew is a fraction of that.</p>
+      <a href="#top" style="flex: 0 0 auto; background: #C27C8A; color: #FFFDF8; border-radius: 999px; padding: 15px 28px; font-size: 15px; font-weight: 500; display: inline-block; transition: transform 150ms ease;" style-hover="transform: translateY(-1px); color: #FFFDF8">Start the swap — €{{ price }}</a>
+    </div>
+  </div>
+</section>
+
+<section id="kit" data-screen-label="03 What's in the kit" style="max-width: 1440px; margin: 0 auto; padding: 96px 40px;">
+  <div style="max-width: 640px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #A9873F;">In the box</div>
+    <h2 style="margin: 16px 0 0; font-size: clamp(30px, 3.6vw, 46px); font-weight: 500; line-height: 1.08; letter-spacing: -0.02em;">Everything to start. <em style="font-family: 'Gambarino', serif; font-style: normal;">Nothing to figure out</em>.</h2>
+    <p style="margin: 16px 0 0; font-size: 17px; color: rgba(27,42,74,0.75);">One box, and you're a home matcha bar.</p>
+  </div>
+
+  <div style="margin-top: 48px; position: relative; aspect-ratio: 21 / 9; padding: 10px; background: #FFFDF8; border: 1px solid rgba(169,135,63,0.4);">
+    <div style="position: relative; width: 100%; height: 100%;"><image-slot id="bb-flatlay" shape="rect" placeholder="Overhead studio flat-lay of the full kit on a cream surface — matcha tin, whisk, scoop, holder, stack of to-go cups, editorial spacing"></image-slot></div>
+  </div>
+
+  <div style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 28px;">
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="position: relative; aspect-ratio: 4 / 5;"><image-slot id="bb-item-1" shape="rect" placeholder="Matcha tin"></image-slot></div>
+      <div>
+        <div style="font-size: 15px; font-weight: 500;">30 servings of ceremonial-grade matcha</div>
+        <p style="margin: 6px 0 0; font-size: 13.5px; line-height: 1.5; color: rgba(27,42,74,0.7);">First-harvest leaf, stone-ground — a month of daily cups.</p>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="position: relative; aspect-ratio: 4 / 5;"><image-slot id="bb-item-2" shape="rect" placeholder="Bamboo whisk"></image-slot></div>
+      <div>
+        <div style="font-size: 15px; font-weight: 500;">Bamboo whisk (chasen)</div>
+        <p style="margin: 6px 0 0; font-size: 13.5px; line-height: 1.5; color: rgba(27,42,74,0.7);">Hand-cut tines, the only tool that makes a proper froth.</p>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="position: relative; aspect-ratio: 4 / 5;"><image-slot id="bb-item-3" shape="rect" placeholder="Bamboo scoop"></image-slot></div>
+      <div>
+        <div style="font-size: 15px; font-weight: 500;">Bamboo scoop (chashaku)</div>
+        <p style="margin: 6px 0 0; font-size: 13.5px; line-height: 1.5; color: rgba(27,42,74,0.7);">One curve, one perfect serving. No scales, no guessing.</p>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="position: relative; aspect-ratio: 4 / 5;"><image-slot id="bb-item-4" shape="rect" placeholder="Whisk holder"></image-slot></div>
+      <div>
+        <div style="font-size: 15px; font-weight: 500;">Whisk holder</div>
+        <p style="margin: 6px 0 0; font-size: 13.5px; line-height: 1.5; color: rgba(27,42,74,0.7);">Keeps the tines in shape, and looks right on the counter.</p>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="position: relative; aspect-ratio: 4 / 5;"><image-slot id="bb-item-5" shape="rect" placeholder="Stack of café-style to-go cups"></image-slot></div>
+      <div>
+        <div style="font-size: 15px; font-weight: 500;">30 café-style to-go cups — one for every serving</div>
+        <p style="margin: 6px 0 0; font-size: 13.5px; line-height: 1.5; color: rgba(27,42,74,0.7);">Recyclable single-use cups, so the counter cup travels like the window one.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="recipes" data-screen-label="05 Recipes" style="max-width: 1440px; margin: 0 auto; padding: 0 40px 96px;">
+  <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end; justify-content: space-between;">
+    <div style="max-width: 640px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #A9873F;">Recipes</div>
+      <h2 style="margin: 16px 0 0; font-size: clamp(30px, 3.6vw, 46px); font-weight: 500; line-height: 1.08; letter-spacing: -0.02em;">One kit. <em style="font-family: 'Gambarino', serif; font-style: normal;">A hundred cups</em>.</h2>
+      <p style="margin: 16px 0 0; font-size: 17px; color: rgba(27,42,74,0.75);">Iced, hot, sparkling, seasonal — browse the recipes and never make the same cup twice.</p>
+    </div>
+    <a href="#recipes" style="flex: 0 0 auto; font-size: 15px; font-weight: 500; border-bottom: 1px solid rgba(27,42,74,0.25); padding-bottom: 3px;">Explore all recipes →</a>
+  </div>
+  <div style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px;">
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="position: relative; aspect-ratio: 3 / 4;"><image-slot id="bb-recipe-1" shape="rounded" radius="16" placeholder="Iced vanilla matcha in a to-go cup"></image-slot></div>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-size: 16px; font-weight: 500;">Iced Vanilla Matcha</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #C27C8A;">Iced · 3 min</span>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="position: relative; aspect-ratio: 3 / 4;"><image-slot id="bb-recipe-2" shape="rounded" radius="16" placeholder="Matcha tonic, sparkling, over ice"></image-slot></div>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-size: 16px; font-weight: 500;">Matcha Tonic</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #C27C8A;">Sparkling · 4 min</span>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="position: relative; aspect-ratio: 3 / 4;"><image-slot id="bb-recipe-3" shape="rounded" radius="16" placeholder="Strawberry matcha, layered pink and green"></image-slot></div>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-size: 16px; font-weight: 500;">Strawberry Matcha</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #C27C8A;">Iced · 5 min</span>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="position: relative; aspect-ratio: 3 / 4;"><image-slot id="bb-recipe-4" shape="rounded" radius="16" placeholder="Cherry-blossom seasonal matcha, blossom cues"></image-slot></div>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <span style="font-size: 16px; font-weight: 500;">Cherry-Blossom Seasonal</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; color: #C27C8A;">Seasonal · 4 min</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="craft" data-screen-label="06 Why Blisbrew" style="background: #FFFDF8; border-top: 1px solid rgba(27,42,74,0.08); border-bottom: 1px solid rgba(27,42,74,0.08);">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 96px 40px; display: flex; flex-wrap: wrap; gap: 64px; align-items: flex-start;">
+    <div style="flex: 1 1 380px; min-width: 300px; position: relative; aspect-ratio: 4 / 5;">
+      <image-slot id="bb-craft" shape="rect" placeholder="Editorial hero: shaded tea field or quiet studio still of the leaf — one strong image, faded-print grade"></image-slot>
+    </div>
+    <div style="flex: 1 1 460px; min-width: 300px; padding-top: 24px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #A9873F;">Craft &amp; provenance</div>
+      <h2 style="margin: 18px 0 0; font-size: clamp(32px, 3.8vw, 52px); font-weight: 500; line-height: 1.05; letter-spacing: -0.02em;">Serious matcha. <em style="font-family: 'Gambarino', serif; font-style: normal;">None of the fuss</em>.</h2>
+      <p style="margin: 20px 0 0; font-size: clamp(16px, 1.3vw, 19px); line-height: 1.5; color: rgba(27,42,74,0.78); max-width: 30em;">Ceremonial-grade leaf, chosen for how it actually tastes in a daily cup — not for a tasting room.</p>
+      <p style="margin: 24px 0 0; font-size: 15px; line-height: 1.65; color: rgba(27,42,74,0.72); max-width: 34em;">Our matcha comes from first-harvest, shade-grown leaf in Japan, stone-ground slowly so it stays sweet rather than sharp. We pick lots that hold up with milk and ice, because that's how the cup actually gets drunk. The cups are café-grade and recyclable, made to the same spec a good coffee bar would use — a kit is only as good as the last object your hand touches.</p>
+      <div style="margin-top: 40px; padding: 28px; background: #5E6A83; color: #F3EDDD; border-radius: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px;">
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(243,237,221,0.6);">Grade &amp; origin</div>
+          <div style="margin-top: 8px; font-size: 14.5px; line-height: 1.4;">Ceremonial, first harvest, Japan</div>
+        </div>
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(243,237,221,0.6);">Tested</div>
+          <div style="margin-top: 8px; font-size: 14.5px; line-height: 1.4;">Third-party lab, every lot</div>
+        </div>
+        <div>
+          <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(243,237,221,0.6);">Guarantee</div>
+          <div style="margin-top: 8px; font-size: 14.5px; line-height: 1.4;">Not your ritual? 30 days, full refund.</div>
+        </div>
+      </div>
+      <a href="#top" style="margin-top: 32px; display: inline-block; background: #C27C8A; color: #FFFDF8; border-radius: 999px; padding: 15px 28px; font-size: 15px; font-weight: 500; transition: transform 150ms ease;" style-hover="transform: translateY(-1px); color: #FFFDF8">Add the {{ kitName }} — €{{ price }}</a>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="07 Social proof" style="max-width: 1440px; margin: 0 auto; padding: 96px 40px;">
+  <div style="max-width: 640px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #A9873F;">@blisbrew</div>
+    <sc-if value="{{ showProvenance }}" hint-placeholder-val="{{ true }}">
+      <h2 style="margin: 16px 0 0; font-size: clamp(30px, 3.6vw, 46px); font-weight: 500; line-height: 1.08; letter-spacing: -0.02em;">Made to be <em style="font-family: 'Gambarino', serif; font-style: normal;">shared</em>.</h2>
+    </sc-if>
+    <sc-if value="{{ showReviews }}" hint-placeholder-val="{{ false }}">
+      <h2 style="margin: 16px 0 0; font-size: clamp(30px, 3.6vw, 46px); font-weight: 500; line-height: 1.08; letter-spacing: -0.02em;">Loved by the people who <em style="font-family: 'Gambarino', serif; font-style: normal;">quit the €6 queue</em>.</h2>
+    </sc-if>
+    <p style="margin: 16px 0 0; font-size: 17px; color: rgba(27,42,74,0.75);">Tag @blisbrew — the good cups deserve the grid.</p>
+  </div>
+  <div style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 20px;">
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="position: relative; aspect-ratio: 1;"><image-slot id="bb-ugc-1" shape="rounded" radius="14" placeholder="UGC: cup on a kitchen counter, phone-shot"></image-slot></div>
+      <p style="margin: 0; font-size: 13px; line-height: 1.5; color: rgba(27,42,74,0.7);">"Made this before my 8am. Cheaper than the tram." — @mira.kd</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="position: relative; aspect-ratio: 1;"><image-slot id="bb-ugc-2" shape="rounded" radius="14" placeholder="UGC: cup held on a commute"></image-slot></div>
+      <p style="margin: 0; font-size: 13px; line-height: 1.5; color: rgba(27,42,74,0.7);">"The cup is the bit I didn't expect to love." — @tomas.brews</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="position: relative; aspect-ratio: 1;"><image-slot id="bb-ugc-3" shape="rounded" radius="14" placeholder="UGC: whisking at home, messy real kitchen"></image-slot></div>
+      <p style="margin: 0; font-size: 13px; line-height: 1.5; color: rgba(27,42,74,0.7);">"Third week in and I haven't been to the matcha place once." — @lu.ontheside</p>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <div style="position: relative; aspect-ratio: 1;"><image-slot id="bb-ugc-4" shape="rounded" radius="14" placeholder="UGC: strawberry matcha, desk shot"></image-slot></div>
+      <p style="margin: 0; font-size: 13px; line-height: 1.5; color: rgba(27,42,74,0.7);">"Strawberry matcha, day off, no queue." — @anouk.hm</p>
+    </div>
+  </div>
+  <div style="margin-top: 32px; padding: 20px 24px; border: 1px solid rgba(169,135,63,0.4); border-radius: 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;">
+    <span style="font-size: 15px;">Every kit is covered by the 30-day happiness guarantee.</span>
+    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #A9873F;">Not your ritual? Full refund.</span>
+  </div>
+</section>
+
+<section id="compare" data-screen-label="09 Compare kits &amp; refills" style="background: #FFFDF8; border-top: 1px solid rgba(27,42,74,0.08);">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 96px 40px;">
+    <div style="max-width: 700px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #A9873F;">The range</div>
+      <h2 style="margin: 16px 0 0; font-size: clamp(30px, 3.6vw, 46px); font-weight: 500; line-height: 1.08; letter-spacing: -0.02em;">Drink it daily? Start bigger — <em style="font-family: 'Gambarino', serif; font-style: normal;">or just refill</em>.</h2>
+      <p style="margin: 16px 0 0; font-size: 17px; color: rgba(27,42,74,0.75);">Every step up the range is a step down in price per cup.</p>
+    </div>
+
+    <div style="margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+      <div style="background: #F3EDDD; border: 1px solid rgba(27,42,74,0.1); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 18px;">
+        <div style="position: relative; aspect-ratio: 4 / 3;"><image-slot id="bb-kit-starter" shape="rounded" radius="12" placeholder="Starter Kit, same angle and light as the other two"></image-slot></div>
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span style="font-size: 19px; font-weight: 500;">Starter</span>
+          <sc-if value="{{ isStarter }}" hint-placeholder-val="{{ true }}">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #FFFDF8; background: #C27C8A; border-radius: 999px; padding: 3px 8px;">You're viewing</span>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: rgba(27,42,74,0.75);">
+          <span>€59 · 30 servings</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A9873F;">€1.97 a cup</span>
+        </div>
+        <button onClick="{{ pickStarter }}" style="margin-top: auto; width: 100%; cursor: pointer; border-radius: 999px; padding: 14px 20px; font-family: 'Satoshi', sans-serif; font-size: 14.5px; font-weight: 500; background: {{ starterCardBg }}; color: {{ starterCardFg }}; border: 1.5px solid; border-color: {{ starterCardBorder }};" style-hover="border-color: #C27C8A">{{ starterCardCta }}</button>
+      </div>
+
+      <div style="background: #F3EDDD; border: 1px solid rgba(27,42,74,0.1); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 18px;">
+        <div style="position: relative; aspect-ratio: 4 / 3;"><image-slot id="bb-kit-home" shape="rounded" radius="12" placeholder="Home Bar kit, same angle and light"></image-slot></div>
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span style="font-size: 19px; font-weight: 500;">Home Bar</span>
+          <sc-if value="{{ isHome }}" hint-placeholder-val="{{ false }}">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #FFFDF8; background: #C27C8A; border-radius: 999px; padding: 3px 8px;">You're viewing</span>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: rgba(27,42,74,0.75);">
+          <span>€89 · 60 servings</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A9873F;">€1.48 a cup</span>
+        </div>
+        <button onClick="{{ pickHome }}" style="margin-top: auto; width: 100%; cursor: pointer; text-align: center; border-radius: 999px; padding: 14px 20px; font-family: 'Satoshi', sans-serif; font-size: 14.5px; font-weight: 500; background: {{ homeCardBg }}; color: {{ homeCardFg }}; border: 1.5px solid; border-color: {{ homeCardBorder }}; transition: transform 150ms ease;" style-hover="transform: translateY(-1px)">{{ homeCardCta }}</button>
+      </div>
+
+      <div style="background: #F3EDDD; border: 1px solid rgba(27,42,74,0.1); border-radius: 20px; padding: 24px; display: flex; flex-direction: column; gap: 18px;">
+        <div style="position: relative; aspect-ratio: 4 / 3;"><image-slot id="bb-kit-signature" shape="rounded" radius="12" placeholder="Signature Bar kit with the stamp collection, same angle and light"></image-slot></div>
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span style="font-size: 19px; font-weight: 500;">Signature Bar</span>
+          <sc-if value="{{ isSignature }}" hint-placeholder-val="{{ false }}">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #FFFDF8; background: #C27C8A; border-radius: 999px; padding: 3px 8px;">You're viewing</span>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: rgba(27,42,74,0.75);">
+          <span>€129 · 90 servings · + stamp collection</span>
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A9873F;">€1.43 a cup</span>
+        </div>
+        <button onClick="{{ pickSignature }}" style="margin-top: auto; width: 100%; cursor: pointer; text-align: center; border-radius: 999px; padding: 14px 20px; font-family: 'Satoshi', sans-serif; font-size: 14.5px; font-weight: 500; background: {{ signatureCardBg }}; color: {{ signatureCardFg }}; border: 1.5px solid; border-color: {{ signatureCardBorder }}; transition: transform 150ms ease;" style-hover="transform: translateY(-1px)">{{ signatureCardCta }}</button>
+      </div>
+    </div>
+
+    <div style="margin-top: 32px; background: #5E6A83; color: #F3EDDD; border-radius: 20px; padding: 32px; display: flex; flex-wrap: wrap; gap: 32px; align-items: center; justify-content: space-between;">
+      <div style="flex: 1 1 420px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(243,237,221,0.6);">Never run out</div>
+        <div style="margin-top: 10px; font-size: clamp(18px, 1.7vw, 22px); line-height: 1.35; max-width: 30em;">30 servings ≈ a month. When you're low, refills start at €29 (or €39 with a fresh set of cups) — under €1 a cup.</div>
+        <p style="margin: 12px 0 0; font-size: 14px; line-height: 1.55; color: rgba(243,237,221,0.72); max-width: 34em;">You'll never re-buy the whisk. Refills keep the ritual going from €29 — the cheapest cup you'll make.</p>
+      </div>
+      <div style="flex: 0 0 auto; display: flex; align-items: center; gap: 20px;">
+        <div style="position: relative; width: 108px; height: 108px;"><image-slot id="bb-refill" shape="rounded" radius="12" placeholder="Refill pouch"></image-slot></div>
+        <a href="#compare" style="background: #F3EDDD; color: #1B2A4A; border-radius: 999px; padding: 14px 24px; font-size: 14.5px; font-weight: 500; white-space: nowrap; transition: transform 150ms ease;" style-hover="transform: translateY(-1px); color: #1B2A4A">Shop refills →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="08 FAQ" style="max-width: 1440px; margin: 0 auto; padding: 96px 40px 120px;">
+  <div style="max-width: 820px; margin: 0 auto;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #A9873F;">FAQ</div>
+    <h2 style="margin: 16px 0 40px; font-size: clamp(30px, 3.6vw, 46px); font-weight: 500; line-height: 1.08; letter-spacing: -0.02em;">Everything else <em style="font-family: 'Gambarino', serif; font-style: normal;">you're wondering</em>.</h2>
+
+    <div style="border-top: 1px solid rgba(27,42,74,0.14);">
+      <div onClick="{{ toggle0 }}" style="border-bottom: 1px solid rgba(27,42,74,0.14); padding: 22px 4px; cursor: pointer;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+          <span style="font-size: 17px; font-weight: 500;">How much caffeine is in a cup?</span>
+          <span style="flex: 0 0 auto; color: #A9873F; font-family: 'IBM Plex Mono', monospace; font-size: 18px; line-height: 1;">{{ sign0 }}</span>
+        </div>
+        <sc-if value="{{ open0 }}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 14px 0 0; font-size: 15px; line-height: 1.6; color: rgba(27,42,74,0.75); max-width: 46em;">Around 35–45mg per serving — about half a coffee. Most people find it's a steadier lift without the drop at eleven.</p>
+        </sc-if>
+      </div>
+      <div onClick="{{ toggle1 }}" style="border-bottom: 1px solid rgba(27,42,74,0.14); padding: 22px 4px; cursor: pointer;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+          <span style="font-size: 17px; font-weight: 500;">I've never made matcha — is this beginner-friendly?</span>
+          <span style="flex: 0 0 auto; color: #A9873F; font-family: 'IBM Plex Mono', monospace; font-size: 18px; line-height: 1;">{{ sign1 }}</span>
+        </div>
+        <sc-if value="{{ open1 }}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 14px 0 0; font-size: 15px; line-height: 1.6; color: rgba(27,42,74,0.75); max-width: 46em;">That's who the kit is for. The scoop measures for you, and the whisk does the rest — scoop, whisk, pour. Three steps, under a minute, and a card in the box walks you through the first one.</p>
+        </sc-if>
+      </div>
+      <div onClick="{{ toggle2 }}" style="border-bottom: 1px solid rgba(27,42,74,0.14); padding: 22px 4px; cursor: pointer;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+          <span style="font-size: 17px; font-weight: 500;">What does the guarantee cover?</span>
+          <span style="flex: 0 0 auto; color: #A9873F; font-family: 'IBM Plex Mono', monospace; font-size: 18px; line-height: 1;">{{ sign2 }}</span>
+        </div>
+        <sc-if value="{{ open2 }}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 14px 0 0; font-size: 15px; line-height: 1.6; color: rgba(27,42,74,0.75); max-width: 46em;">Everything. Make matcha for thirty days, and if it isn't your ritual, tell us and we refund you in full — opened tin included. You don't need to ship the kit back.</p>
+        </sc-if>
+      </div>
+      <div onClick="{{ toggle3 }}" style="border-bottom: 1px solid rgba(27,42,74,0.14); padding: 22px 4px; cursor: pointer;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+          <span style="font-size: 17px; font-weight: 500;">Do I get a to-go cup with every serving?</span>
+          <span style="flex: 0 0 auto; color: #A9873F; font-family: 'IBM Plex Mono', monospace; font-size: 18px; line-height: 1;">{{ sign3 }}</span>
+        </div>
+        <sc-if value="{{ open3 }}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 14px 0 0; font-size: 15px; line-height: 1.6; color: rgba(27,42,74,0.75); max-width: 46em;">Yes — 30 servings, 30 cups with lids. They're café-grade single-use cups, and they're recyclable, so the counter cup travels exactly like the window one.</p>
+        </sc-if>
+      </div>
+      <div onClick="{{ toggle4 }}" style="border-bottom: 1px solid rgba(27,42,74,0.14); padding: 22px 4px; cursor: pointer;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+          <span style="font-size: 17px; font-weight: 500;">How long does a kit last?</span>
+          <span style="flex: 0 0 auto; color: #A9873F; font-family: 'IBM Plex Mono', monospace; font-size: 18px; line-height: 1;">{{ sign4 }}</span>
+        </div>
+        <sc-if value="{{ open4 }}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 14px 0 0; font-size: 15px; line-height: 1.6; color: rgba(27,42,74,0.75); max-width: 46em;">A cup a day makes the Starter Kit about a month. The Home Bar runs two months, the Signature three. The whisk, scoop and holder are yours for good.</p>
+        </sc-if>
+      </div>
+      <div onClick="{{ toggle5 }}" style="border-bottom: 1px solid rgba(27,42,74,0.14); padding: 22px 4px; cursor: pointer;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+          <span style="font-size: 17px; font-weight: 500;">How do refills work?</span>
+          <span style="flex: 0 0 auto; color: #A9873F; font-family: 'IBM Plex Mono', monospace; font-size: 18px; line-height: 1;">{{ sign5 }}</span>
+        </div>
+        <sc-if value="{{ open5 }}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 14px 0 0; font-size: 15px; line-height: 1.6; color: rgba(27,42,74,0.75); max-width: 46em;">When you're low, order a refill — €29 for matcha alone, €39 with a fresh set of cups. No subscription, no lock-in; buy one when you need one. We'll email you around the time your tin runs low.</p>
+        </sc-if>
+      </div>
+      <div onClick="{{ toggle6 }}" style="border-bottom: 1px solid rgba(27,42,74,0.14); padding: 22px 4px; cursor: pointer;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+          <span style="font-size: 17px; font-weight: 500;">Shipping &amp; returns?</span>
+          <span style="flex: 0 0 auto; color: #A9873F; font-family: 'IBM Plex Mono', monospace; font-size: 18px; line-height: 1;">{{ sign6 }}</span>
+        </div>
+        <sc-if value="{{ open6 }}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 14px 0 0; font-size: 15px; line-height: 1.6; color: rgba(27,42,74,0.75); max-width: 46em;">Free shipping on every kit — orders leave within a day and arrive in 2–4 working days across the EU. Returns run through the 30-day guarantee, and we cover the cost.</p>
+        </sc-if>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px; text-align: center;">
+      <a href="#top" style="display: inline-block; background: #C27C8A; color: #FFFDF8; border-radius: 999px; padding: 17px 34px; font-size: 16px; font-weight: 500; transition: transform 150ms ease;" style-hover="transform: translateY(-1px); color: #FFFDF8">Add to Cart — €{{ price }}</a>
+    </div>
+  </div>
+</section>
+
+<footer style="background: #1B2A4A; color: #F3EDDD; padding: 72px 40px 40px;">
+  <div style="max-width: 1440px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between;">
+    <div style="flex: 1 1 300px;">
+      <span style="display: inline-block; border: 1.5px solid rgba(169,135,63,0.8); padding: 7px 11px 6px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; color: #F3EDDD;">Blisbrew</span>
+      <p style="margin: 20px 0 0; font-size: 14px; line-height: 1.6; color: rgba(243,237,221,0.7); max-width: 26em;">Café matcha at your counter. About €2 a cup, a to-go cup in every serving.</p>
+    </div>
+    <div style="flex: 0 1 auto; display: flex; flex-wrap: wrap; gap: 56px;">
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(243,237,221,0.5);">Shop</div>
+        <a href="#top" style="font-size: 14px; color: rgba(243,237,221,0.85);">Matcha Starter Kit</a>
+        <a href="#compare" style="font-size: 14px; color: rgba(243,237,221,0.85);">Home Bar</a>
+        <a href="#compare" style="font-size: 14px; color: rgba(243,237,221,0.85);">Signature Bar</a>
+        <a href="#compare" style="font-size: 14px; color: rgba(243,237,221,0.85);">Refills</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(243,237,221,0.5);">Learn</div>
+        <a href="#recipes" style="font-size: 14px; color: rgba(243,237,221,0.85);">Recipes</a>
+        <a href="#craft" style="font-size: 14px; color: rgba(243,237,221,0.85);">Why Blisbrew</a>
+        <a href="#kit" style="font-size: 14px; color: rgba(243,237,221,0.85);">What's in the kit</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(243,237,221,0.5);">Help</div>
+        <a href="#top" style="font-size: 14px; color: rgba(243,237,221,0.85);">Shipping &amp; returns</a>
+        <a href="#top" style="font-size: 14px; color: rgba(243,237,221,0.85);">The guarantee</a>
+        <a href="#top" style="font-size: 14px; color: rgba(243,237,221,0.85);">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div style="max-width: 1440px; margin: 56px auto 0; padding-top: 20px; border-top: 1px solid rgba(243,237,221,0.16); display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; font-size: 12px; color: rgba(243,237,221,0.55);">
+    <span>© 2026 Blisbrew</span>
+    <span>Per-cup figures based on kit price ÷ servings. Cups are single-use and recyclable.</span>
+  </div>
+</footer>
+
+<div style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 80; background: rgba(255,253,248,0.92); backdrop-filter: blur(10px); border-top: 1px solid rgba(27,42,74,0.12); box-shadow: 0 -8px 40px rgba(20,18,16,0.08); transform: translateY(110%); transform: {{ stickyTransform }}; opacity: {{ stickyOpacity }}; transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1), opacity 250ms ease; pointer-events: {{ stickyPointer }};">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 12px 40px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between;">
+    <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+      <span style="font-size: 14.5px; font-weight: 500;">{{ kitName }}</span>
+      <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #A9873F;">€{{ price }} · €{{ perCup }} a cup</span>
+    </div>
+    <button onClick="{{ addToCart }}" style="flex: 1 1 220px; max-width: 340px; border: none; cursor: pointer; background: #C27C8A; color: #FFFDF8; border-radius: 999px; padding: 15px 24px; font-family: 'Satoshi', sans-serif; font-size: 15px; font-weight: 500; box-shadow: inset 0 -2px 0 rgba(27,42,74,.12); transition: transform 150ms ease;" style-hover="transform: translateY(-1px)">Add to Cart — €{{ price }}</button>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultKit&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;starter&quot;,&quot;home&quot;,&quot;signature&quot;],&quot;default&quot;:&quot;starter&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Merchandising&quot;},&quot;showReviews&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Merchandising&quot;},&quot;shipThreshold&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:59,&quot;min&quot;:0,&quot;max&quot;:150,&quot;unit&quot;:&quot;€&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Merchandising&quot;},&quot;stickyBar&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behaviour&quot;}}">
+const KITS = {
+  starter: { name: "Starter Kit", price: 59, perCup: "1.97", inside: "30 servings · bamboo whisk · scoop · whisk holder · 30 to-go cups" },
+  home: { name: "Home Bar", price: 89, perCup: "1.48", inside: "60 servings · bamboo whisk · scoop · whisk holder · 60 to-go cups" },
+  signature: { name: "Signature Bar", price: 129, perCup: "1.43", inside: "90 servings · bamboo whisk · scoop · whisk holder · 90 to-go cups · collector stamp set" }
+};
+
+class Component extends DCLogic {
+  state = { kit: null, faq: -1, sticky: false };
+
+  componentDidMount() {
+    this.onScroll = () => {
+      const y = window.scrollY || 0;
+      const next = y > 700;
+      if (next !== this.state.sticky) this.setState({ sticky: next });
+    };
+    window.addEventListener("scroll", this.onScroll, { passive: true });
+    this.onScroll();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScroll);
+  }
+
+  pick(kit) {
+    return () => this.setState({ kit });
+  }
+
+  toggleFaq(i) {
+    return () => this.setState(s => ({ faq: s.faq === i ? -1 : i }));
+  }
+
+  renderVals() {
+    const key = this.state.kit || this.props.defaultKit || "starter";
+    const kit = KITS[key] || KITS.starter;
+    const reviews = this.props.showReviews === true;
+    const sel = "#C27C8A";
+    const unsel = "rgba(27,42,74,0.12)";
+    const dotSel = "#C27C8A";
+    const dotUnsel = "rgba(27,42,74,0.3)";
+    const glow = "0 0 0 3px rgba(194,124,138,0.14)";
+    const vals = {
+      price: kit.price,
+      perCup: kit.perCup,
+      insideLine: kit.inside,
+      kitName: kit.name,
+      shipThreshold: this.props.shipThreshold ?? 59,
+      showReviews: reviews,
+      showProvenance: !reviews,
+      reviewCountLabel: "4.8 · 320 reviews",
+      isStarter: key === "starter",
+      isHome: key === "home",
+      isSignature: key === "signature",
+      starterBorder: key === "starter" ? sel : unsel,
+      homeBorder: key === "home" ? sel : unsel,
+      signatureBorder: key === "signature" ? sel : unsel,
+      starterGlow: key === "starter" ? glow : "none",
+      homeGlow: key === "home" ? glow : "none",
+      signatureGlow: key === "signature" ? glow : "none",
+      starterDotBorder: key === "starter" ? dotSel : dotUnsel,
+      homeDotBorder: key === "home" ? dotSel : dotUnsel,
+      signatureDotBorder: key === "signature" ? dotSel : dotUnsel,
+      starterCardBg: key === "starter" ? "transparent" : "#1B2A4A",
+      starterCardFg: key === "starter" ? "#1B2A4A" : "#FFFDF8",
+      starterCardBorder: key === "starter" ? "rgba(27,42,74,0.2)" : "#1B2A4A",
+      starterCardCta: key === "starter" ? "Selected" : "Choose Starter →",
+      homeCardBg: key === "home" ? "transparent" : "#1B2A4A",
+      homeCardFg: key === "home" ? "#1B2A4A" : "#FFFDF8",
+      homeCardBorder: key === "home" ? "rgba(27,42,74,0.2)" : "#1B2A4A",
+      homeCardCta: key === "home" ? "Selected" : "Choose Home Bar →",
+      signatureCardBg: key === "signature" ? "transparent" : "#1B2A4A",
+      signatureCardFg: key === "signature" ? "#1B2A4A" : "#FFFDF8",
+      signatureCardBorder: key === "signature" ? "rgba(27,42,74,0.2)" : "#1B2A4A",
+      signatureCardCta: key === "signature" ? "Selected" : "Choose Signature →",
+      pickStarter: this.pick("starter"),
+      pickHome: this.pick("home"),
+      pickSignature: this.pick("signature"),
+      addToCart: () => {},
+      stickyTransform: this.state.sticky ? "translateY(0)" : "translateY(110%)",
+      stickyOpacity: this.state.sticky ? 1 : 0,
+      stickyPointer: this.state.sticky ? "auto" : "none"
+    };
+    if (this.props.stickyBar === false) {
+      vals.stickyTransform = "translateY(110%)";
+      vals.stickyOpacity = 0;
+      vals.stickyPointer = "none";
+    }
+    for (let i = 0; i < 7; i++) {
+      vals["open" + i] = this.state.faq === i;
+      vals["sign" + i] = this.state.faq === i ? "–" : "+";
+      vals["toggle" + i] = this.toggleFaq(i);
+    }
+    return vals;
+  }
+}
+
+</script>
+</body>
+</html>
