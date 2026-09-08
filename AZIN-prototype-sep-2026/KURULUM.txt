@@ -1,0 +1,61 @@
+AZIN — GITHUB PAGES İÇİN HAZIR PROTOTİP
+
+Bu paket kaynak kod paketi değildir. Site önceden hazırlanmıştır.
+Node.js, npm, terminal veya GitHub Actions ile derleme gerekmez.
+
+GITHUB PAGES'TE YAYINLAMA
+
+1. ZIP dosyasını açın.
+2. GitHub reponuzda Add file > Upload files seçeneğini açın.
+3. Bu klasörün İÇİNDEKİ index.html dosyasını, assets klasörünü ve diğer
+   dosyaları birlikte yükleyin. Dıştaki AZIN-GitHub-Pages klasörünü ayrı
+   bir alt klasör olarak yüklemeyin.
+   Reponun ana dizininde doğrudan index.html görünmelidir:
+
+   index.html
+   assets/
+   KURULUM.txt
+   .nojekyll
+
+4. Commit changes ile kaydedin.
+5. Settings > Pages > Build and deployment bölümünde:
+   Source: Deploy from a branch
+   Branch: main (dosyaları başka dala yüklediyseniz o dalı seçin)
+   Folder: / (root)
+   Save
+6. Yayın tamamlanınca Pages bölümünde verilen bağlantıyı açın.
+   Paylaşılacak adres bu bağlantıdır; github.com üzerindeki dosya sayfası değil.
+
+Daha önce kaynak kodu yüklediyseniz de bu dosyaları reponun ANA DİZİNİNE
+koyun. GitHub Pages bu index.html dosyasını açacaktır.
+
+ÖRNEK SAYFA BAĞLANTILARI
+
+https://kullanici.github.io/depo/#/
+https://kullanici.github.io/depo/#/collections/bestsellers
+https://kullanici.github.io/depo/#/products/faux-bloesem-oudroze-3-stengels
+
+# işaretinden sonraki kısım sayfa adresidir. Böylece alt sayfalar doğrudan
+paylaşılabilir ve sayfayı yenilemek sunucuda 404 hatası oluşturmaz.
+
+YEREL GÖRÜNTÜLEME
+
+Giriş dosyası index.html'dir. Normal bir tarayıcıda açılabilmesi için
+JavaScript ve stiller bu dosyanın içine yerleştirilmiştir. assets klasörü
+index.html'nin yanında kalmalıdır. Bazı tarayıcılar yerel dosyaları veya
+bu dosyalarda kalıcı depolamayı kısıtlayabilir; asıl paylaşım yöntemi
+GitHub Pages bağlantısıdır.
+
+NOTLAR
+
+- Ana sayfa, koleksiyonlar, arama, ürün seçimi, sepet, görsel büyütme,
+  mobil galeriler ve son kullanılabilirlik düzenlemeleri dahildir.
+- Sepet tarayıcıda tutulur. Gerçek sipariş, ödeme veya e-posta gönderilmez.
+- Ana görseller pakettedir. Yazı tipleri ve bazı ek galeri fotoğrafları
+  internetten yüklenir; tam görünüm için internet bağlantısı gerekir.
+- Ürün fiyatları ve stok mesajları prototip verileridir.
+- GitHub Pages'e yükleme kullanıcı tarafından yapılır; bu ZIP'i hazırlamak
+  mevcut çevrimiçi Sites sürümünü değiştirmez.
+
+Resmî yönerge:
+https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
