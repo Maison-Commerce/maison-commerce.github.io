@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dreaver — A/B Testing Roadmap</title>
+<link rel="preconnect" href="https://fonts.cdnfonts.com">
+<link href="https://fonts.cdnfonts.com/css/gt-america-trial" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ---------- Maison Commerce type ---------- */
+@font-face{font-family:"GT Sectra";font-weight:400;font-style:normal;font-display:swap;
+  src:url("../fonts/GTSectra-Book.woff2") format("woff2");}
+@font-face{font-family:"GT Sectra";font-weight:500;font-style:normal;font-display:swap;
+  src:url("../fonts/GTSectra-Medium.woff2") format("woff2");}
+@font-face{font-family:"GT Sectra";font-weight:700;font-style:normal;font-display:swap;
+  src:url("../fonts/GTSectra-Bold.woff2") format("woff2");}
+@font-face{font-family:"GT Sectra";font-weight:400;font-style:italic;font-display:swap;
+  src:url("../fonts/GTSectra-BookItalic.woff2") format("woff2");}
+
+/* ---------- design.md tokens ---------- */
+:root{
+  --espresso:#0A0A0A;
+  --espresso-soft:#55554F;
+  --sand:#8A8A83;
+  --olive:#001B05;
+  --cream:#FDFDFB;
+  --oat:#F1F1EF;
+  --linen:#E8E8E4;
+  --paper:#FFFFFF;
+  --grey:#8A8A83;
+  --sale:#A4443A;
+  --line:rgba(10,10,10,.12);
+  --line-soft:rgba(10,10,10,.07);
+  --ph:#ECECE7; --ph2:#E8E8E4; --ph-line:#CFCFC8;
+  --shadow:0 1px 2px rgba(10,10,10,.04),0 30px 60px -42px rgba(10,10,10,.25);
+  --font:"GT America Trial",-apple-system,"Helvetica Neue","Segoe UI",Arial,sans-serif;
+  --font-serif:"GT Sectra",Georgia,"Times New Roman",serif;
+  --font-mono:"GT America Mono Trial",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --green:#001B05;
+  --gutter:clamp(20px,3.4vw,60px);
+  --max:1840px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --topbar-h:72px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--espresso);font-family:var(--font);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,h5{font-family:var(--font-serif);font-style:italic;font-weight:400;margin:0;letter-spacing:-.015em}
+a{color:var(--espresso);text-decoration:none;border-bottom:1px solid var(--sand)}
+a:hover{border-bottom-color:var(--espresso)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+
+/* ---------- production-only template download ---------- */
+.template-download[hidden]{display:none!important}
+.template-download{background:var(--espresso);color:var(--paper)}
+.template-download-inner{max-width:var(--max);margin:0 auto;padding:11px var(--gutter)}
+.template-download a{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--paper);border:0;font-size:13px;font-weight:500;letter-spacing:.02em;text-align:center}
+.template-download a:hover{color:var(--paper)}
+.template-download a:focus-visible{outline:2px solid var(--paper);outline-offset:3px}
+.template-download-arrow{font-size:17px;line-height:1;transition:transform .3s var(--ease)}
+.template-download a:hover .template-download-arrow{transform:translateY(2px)}
+
+/* ---------- sticky topbar ---------- */
+.topbar{position:sticky;top:0;z-index:40;background:rgba(247,245,241,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1560px;margin:0 auto;padding:0 40px;height:var(--topbar-h);display:flex;align-items:center;gap:22px}
+.brand{display:flex;align-items:center;gap:12px;border:0;flex:none}
+.brand img{height:26px;width:auto;display:block}
+.brand .sub{font-size:11px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--espresso-soft);border-left:1px solid var(--line);padding-left:12px}
+.pager{position:relative;display:flex;align-items:center;gap:2px;margin-left:auto;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.pager::-webkit-scrollbar{display:none}
+.pager button{position:relative;z-index:2;appearance:none;background:transparent;border:0;font-family:inherit;font-size:12.5px;font-weight:500;color:var(--espresso-soft);letter-spacing:.3px;padding:7px 13px;border-radius:60px;cursor:pointer;white-space:nowrap;transition:color .22s ease}
+.pager button:hover{color:var(--espresso)}
+.pager button[aria-current="page"]{color:var(--paper)}
+.pager .divider{width:1px;height:16px;background:var(--line);margin:0 7px;flex:none}
+.ink{position:absolute;z-index:1;top:0;height:100%;background:var(--espresso);border-radius:60px;transition:transform .34s cubic-bezier(.32,.72,0,1),width .34s cubic-bezier(.32,.72,0,1);pointer-events:none;left:0;width:0}
+.ink.noanim{transition:none}
+.arrows{display:flex;gap:4px;flex:none}
+.arrows button{appearance:none;background:transparent;border:1px solid var(--line);color:var(--espresso);width:30px;height:30px;border-radius:60px;font-size:15px;line-height:1;cursor:pointer;font-family:inherit;transition:background .15s ease,border-color .15s ease}
+.arrows button:hover:not(:disabled){background:var(--oat);border-color:var(--sand)}
+.arrows button:disabled{opacity:.32;cursor:default}
+
+/* ---------- pages ---------- */
+.page{display:none}
+.page.active{display:block;animation:pageIn .3s cubic-bezier(.16,1,.3,1) both}
+@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- overview hero ---------- */
+.page-head{background:var(--oat);border-bottom:1px solid var(--line);padding:52px 0 44px}
+.brandline{font-size:12px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--espresso-soft)}
+.page-head h1{font-size:40px;line-height:110%;letter-spacing:.8px;margin:14px 0 10px}
+.page-head p{max-width:800px;color:var(--espresso-soft);margin:8px 0 0;font-size:14px;line-height:1.6}
+.hmeta{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.pill{display:inline-flex;align-items:center;gap:6px;background:var(--paper);border:1px solid var(--line);border-radius:60px;padding:5px 14px;font-size:12px;font-weight:500;color:var(--espresso-soft)}
+
+.block{padding:44px 0}
+.section-lab{font-size:12px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--sand);margin:0 0 6px}
+.block h2.sec{font-size:24px;line-height:110%;letter-spacing:.5px;margin:0 0 4px}
+.block .lede{color:var(--espresso-soft);font-size:13.5px;margin:6px 0 0;max-width:860px}
+
+/* ---------- master table ---------- */
+.mtable{width:100%;border-collapse:collapse;font-size:13px;margin-top:18px;background:var(--paper);border:1px solid var(--line)}
+.mtable th,.mtable td{text-align:left;padding:12px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+.mtable th{font-size:11px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:var(--espresso-soft);background:var(--cream)}
+.mtable tr:last-child td{border-bottom:0}
+.mtable tbody tr{cursor:pointer;transition:background .15s ease}
+.mtable tbody tr:hover{background:var(--cream)}
+.mtable .mno{font-weight:700;white-space:nowrap}
+.mtable .tid{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:var(--espresso-soft);letter-spacing:-.2px}
+.tablenote{font-size:12px;color:var(--grey);margin:10px 2px 0}
+
+.callout{background:var(--paper);border:1px solid var(--line);padding:18px 20px;margin-top:24px}
+.callout h3{margin:0 0 8px;font-size:16px}
+.callout ol{margin:0;padding-left:18px;font-size:13.5px;color:var(--espresso-soft)}
+.callout li{margin:6px 0}
+.callout b{color:var(--espresso);font-weight:500}
+
+/* ---------- badges ---------- */
+.pgbadge{font-size:10px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;border-radius:2px;padding:4px 8px;white-space:nowrap}
+.pgbadge--pdp{background:var(--oat);color:#7A6448}
+.pgbadge--cart{background:#F1EFDA;color:#6E682F}
+.pgbadge--coll{background:#F7EBEB;color:#8A5F60}
+.stbadge{font-size:10px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;border-radius:2px;padding:4px 8px;background:#F1EFDA;color:#6E682F;white-space:nowrap}
+.kpi{display:inline-block;font-size:10.5px;font-weight:500;border:1px solid var(--line);border-radius:60px;padding:2px 9px;color:var(--espresso-soft);white-space:nowrap;margin:0 3px 3px 0}
+
+/* ---------- test page ---------- */
+.test{padding:44px 0 56px}
+.test-grid{display:grid;grid-template-columns:minmax(360px,450px) minmax(0,1fr);gap:60px;align-items:start}
+.thead{display:flex;flex-wrap:wrap;align-items:center;gap:0}
+/* chamfered outline tags, joined by a hairline */
+.thead .hid,.thead .pgbadge,.thead .stbadge{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  height:34px;
+  padding:0 20px;
+  background:transparent;
+  border:0;
+  border-radius:0;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.7px;
+  text-transform:uppercase;
+  color:var(--espresso-soft);
+  white-space:nowrap;
+}
+.thead .hid{color:var(--espresso);font-weight:700;letter-spacing:.6px}
+.thead .hid::before,.thead .hid::after,
+.thead .pgbadge::before,.thead .pgbadge::after,
+.thead .stbadge::before,.thead .stbadge::after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  clip-path:polygon(13px 0,calc(100% - 13px) 0,100% 50%,calc(100% - 13px) 100%,13px 100%,0 50%);
+}
+/* outline layer */
+.thead .hid::before,.thead .pgbadge::before,.thead .stbadge::before{inset:0;background:var(--sand);z-index:-2}
+/* inner fill, 1px in — leaves a hairline rim */
+.thead .hid::after,.thead .pgbadge::after,.thead .stbadge::after{inset:1px;background:var(--cream);z-index:-1}
+/* connector between tags */
+.thead .lnk{flex:none;width:17px;height:1px;background:var(--sand)}
+.hid{font-size:12px;font-weight:700;letter-spacing:.6px;color:var(--paper);background:var(--espresso);border-radius:2px;padding:5px 10px}
+.test h2{font-size:26px;line-height:110%;letter-spacing:.4px;margin:14px 0 0}
+.tid-ref{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;color:var(--grey);letter-spacing:-.2px;overflow-wrap:anywhere}
+.tsub{color:var(--espresso-soft);font-size:14.5px;margin:14px 0 0}
+
+/* meta as a list, not pills */
+.mlist{margin:22px 0 22px;padding:0;border-top:1px solid var(--line-soft)}
+.mlist>div{display:flex;gap:16px;padding:8px 0;border-bottom:1px solid var(--line-soft)}
+.mlist dt{flex:none;width:92px;font-size:11px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:var(--sand);padding-top:2px}
+.mlist dd{margin:0;font-size:13.5px;color:var(--espresso)}
+
+.ps{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:16px}
+.ps .box{background:var(--paper);border:1px solid var(--line);padding:15px 17px}
+.ps .box h4{margin:0 0 5px;font-size:12px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--sand)}
+.ps .box p{margin:0;font-size:13px;color:var(--espresso-soft);line-height:1.55}
+.hyp{background:var(--paper);border:1px solid var(--line);padding:15px 17px}
+.hyp-lbl{display:block;font-size:11px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--sand);margin-bottom:9px}
+.hyp .hline{margin:0 0 8px;font-size:13px;color:var(--espresso-soft);line-height:1.55;padding-left:62px;text-indent:-62px}
+.hyp .hline:last-child{margin-bottom:0}
+.hyp .hline b{display:inline-block;width:62px;text-indent:0;color:var(--espresso);font-weight:700;font-size:11px;letter-spacing:.6px;vertical-align:baseline}
+
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start;justify-items:center}
+.col{min-width:0;width:100%;max-width:390px}
+.col-h{display:flex;align-items:center;gap:8px;margin:0 auto 12px;justify-content:center;flex-wrap:wrap}
+.state{font-size:11px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;padding:4px 11px;border-radius:60px}
+.state.before{background:var(--linen);color:var(--espresso-soft)}
+.state.after{background:var(--espresso);color:var(--paper)}
+.col-h .lab{font-size:12px;color:var(--espresso-soft)}
+.note{margin:13px 2px 0;font-size:12.5px;color:var(--espresso-soft);display:flex;gap:8px;line-height:1.5}
+.note .dot{color:var(--sand);font-weight:700;flex:none}
+.note b{color:var(--espresso);font-weight:500}
+
+/* page-to-page footer nav */
+.pagenav{display:flex;justify-content:space-between;gap:16px;margin-top:44px;padding-top:22px;border-top:1px solid var(--line-soft)}
+.pagenav button{appearance:none;background:transparent;border:1px solid var(--line);font-family:inherit;font-size:13px;color:var(--espresso);padding:10px 16px;cursor:pointer;text-align:left;transition:background .15s ease,border-color .15s ease;max-width:47%}
+.pagenav button:hover{background:var(--paper);border-color:var(--sand)}
+.pagenav button span{display:block;font-size:10.5px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:var(--sand);margin-bottom:2px}
+.pagenav button.nx{text-align:right;margin-left:auto}
+.pagenav button:disabled{visibility:hidden}
+
+/* ---------- phone: iPhone-like 9:19.2 ---------- */
+.phone-wrap{display:flex;justify-content:center}
+.phone{width:334px;border:9px solid var(--espresso);border-radius:44px;overflow:hidden;background:var(--espresso);box-shadow:var(--shadow)}
+.phone .notch{height:18px;background:var(--espresso);position:relative}
+.phone .notch::after{content:"";position:absolute;left:50%;top:5px;transform:translateX(-50%);width:76px;height:6px;border-radius:6px;background:#2C2C29}
+.screen{background:var(--paper);position:relative;aspect-ratio:9/19.2;overflow:hidden;display:flex;flex-direction:column}
+.anno{background:var(--espresso);color:var(--oat);font-size:8.5px;font-weight:500;letter-spacing:.7px;text-align:center;padding:6px 8px;text-transform:uppercase;flex:none}
+.head{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;border-bottom:1px solid var(--line-soft);flex:none}
+.logo{font-weight:700;letter-spacing:.2em;font-size:14px}
+.ico{color:var(--espresso);font-size:12px;letter-spacing:3px}
+.img{background:repeating-linear-gradient(135deg,var(--ph) 0 11px,var(--ph2) 11px 22px);border:1px solid var(--ph-line);display:flex;align-items:center;justify-content:center;color:#A79781;font-size:9px;text-align:center;padding:6px;line-height:1.3}
+
+.gallery{position:relative;flex:none}
+.gallery .img{height:150px;border-left:0;border-right:0;border-top:0}
+.gdots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px;align-items:center}
+.gdots i{width:4px;height:4px;border-radius:60px;background:rgba(10,10,10,.2)}
+.gdots i.on{width:16px;border-radius:4px;background:var(--sand)}
+.pdp{padding:12px 13px;flex:none}
+.p-title{font-size:15px;font-weight:700;line-height:1.1;letter-spacing:.4px;margin:0 0 5px;text-transform:uppercase}
+.p-rate{font-size:9.5px;color:var(--espresso-soft);letter-spacing:.2px;margin-bottom:7px}
+.p-rate .st{color:var(--sand);letter-spacing:1px}
+.p-price{font-size:14px;font-weight:500;letter-spacing:.32px;margin:2px 0 11px}
+.lblrow{font-size:9.5px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--espresso-soft);margin:0 0 7px}
+.swatches{display:flex;gap:7px;margin:0 0 12px}
+.sw{width:24px;height:24px;border-radius:32px;border:1px solid var(--line);background:#E8B7B7}
+.sw.b{background:#C9736F}.sw.c{background:#B8746A}
+.sw.sel{outline:1px solid var(--espresso);outline-offset:2px}
+.benefits{margin:0 0 12px}
+.benefits .b{display:flex;gap:7px;align-items:center;font-size:9.5px;color:var(--espresso-soft);padding:4px 0}
+.benefits .b i{width:14px;height:14px;border-radius:32px;background:var(--oat);border:1px solid var(--sand);flex:none}
+.atc{background:var(--espresso);color:var(--paper);text-align:center;font-size:11px;font-weight:500;padding:11px;letter-spacing:.3px}
+.atc.ghost{background:transparent;color:var(--espresso);border:1px solid var(--espresso)}
+.atc.sand{background:var(--sand);color:var(--paper)}
+.mini{font-size:8.5px;color:var(--grey);text-align:center;padding:8px 6px 0}
+.tabs{display:flex;flex-direction:column;flex:none}
+.tabs .tb{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;border-top:1px solid var(--line-soft);font-size:10px}
+.tabs .tb .cx{color:var(--sand);font-size:12px}
+.sectlbl{font-size:11px;font-weight:700;letter-spacing:.3px;color:var(--espresso);padding:13px 13px 6px;flex:none}
+.divider{border-top:1px solid var(--line-soft);flex:none}
+.scrollhint{font-size:8.5px;color:var(--grey);text-align:center;padding:8px;letter-spacing:.3px;flex:none}
+.grow{flex:1 1 auto;min-height:0}
+
+.acc{border-top:1px solid var(--line-soft);flex:none}
+.acc .q{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 13px;font-size:10px;border-bottom:1px solid var(--line-soft)}
+.acc .q .cx{color:var(--sand);font-size:12px;flex:none}
+.acc .a{padding:0 13px 10px;font-size:9px;color:var(--espresso-soft);line-height:1.5;border-bottom:1px solid var(--line-soft)}
+
+.usprow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:11px;border-bottom:1px solid var(--line-soft);background:var(--cream);flex:none}
+.usprow .u{text-align:center;font-size:8px;color:var(--espresso-soft);line-height:1.35}
+.usprow .u i{display:block;width:18px;height:18px;border-radius:32px;background:var(--oat);border:1px solid var(--sand);margin:0 auto 5px}
+.usprow .u b{display:block;font-weight:500;color:var(--espresso);font-size:8.5px}
+.checks{display:flex;flex-direction:column;gap:3px;margin:5px 0 0}
+.checks .c{display:flex;gap:5px;align-items:center;font-size:9px;color:var(--espresso-soft)}
+.checks .c b{color:var(--sand);font-weight:700}
+
+.paylogos{display:flex;gap:5px;flex-wrap:wrap;margin:9px 0 0}
+.paylogos i{width:25px;height:15px;border-radius:2px;background:var(--linen);border:1px solid var(--line);display:block}
+.klarna{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--oat);border:1px solid var(--sand);padding:8px 10px;margin:9px 0 0;font-size:10px;color:var(--espresso)}
+.klarna b{font-weight:500}
+.klarna .info{color:var(--sand);font-size:9px;white-space:nowrap}
+
+.ugc{display:flex;gap:7px;padding:8px 13px 12px;overflow:hidden;flex:none}
+.ugc .t{flex:none;width:72px}
+.ugc .t .img{height:100px;margin-bottom:5px}
+.ugc .t .cap{font-size:8px;color:var(--espresso-soft);line-height:1.3}
+.ugc .t.peek{width:30px;opacity:.55}
+.playdot{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--paper);font-size:14px}
+
+.xsell{display:flex;gap:8px;padding:4px 13px 12px;overflow:hidden;flex:none}
+.xsell .x{flex:none;width:76px}
+.xsell .x .img{height:70px;margin-bottom:5px}
+.xsell .x .nm{font-size:8.5px;font-weight:500;line-height:1.25;text-transform:uppercase}
+.xsell .x .pr{font-size:8.5px;color:var(--espresso-soft)}
+.xsell .x .bt{font-size:8px;border:1px solid var(--espresso);text-align:center;padding:3px;margin-top:4px}
+
+.dhead{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-bottom:1px solid var(--line-soft);flex:none}
+.dhead .t{font-size:14px;font-weight:700}
+.dhead .x{color:var(--espresso);font-size:13px}
+.ship{padding:11px 14px;border-bottom:1px solid var(--line-soft);flex:none}
+.ship .msg{font-size:10px;color:var(--espresso);font-weight:500}
+.ship .bar{height:4px;border-radius:60px;background:var(--linen);margin-top:8px;overflow:hidden;display:flex}
+.ship .bar i{display:block;height:100%;background:var(--sand)}
+.ship .bar i.on{background:var(--espresso)}
+.ship .ticks{display:flex;justify-content:space-between;font-size:8px;color:var(--grey);margin-top:6px}
+.segbar{display:flex;gap:7px;align-items:center}
+.segbar .seg{flex:1;position:relative;display:block;height:4px}
+.segbar .seg::after{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--sand);opacity:.55;transform:translateY(-50%)}
+.segbar .seg i{position:relative;z-index:1;display:block;height:4px;border-radius:60px;background:var(--sand)}
+.segbar .seg i.done{background:var(--espresso)}
+.msg2{font-size:10px;color:var(--espresso);margin-top:9px;line-height:1.45}
+.msg2 b{font-weight:500}
+.litem{display:flex;gap:9px;padding:11px 14px;border-bottom:1px solid var(--line-soft);flex:none}
+.litem .img{width:48px;height:48px;flex:none}
+.litem .info{flex:1;min-width:0}
+.litem .nm{font-size:10.5px;line-height:1.3;font-weight:500;text-transform:uppercase}
+.litem .pr{font-size:10px;color:var(--espresso-soft);margin-top:2px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:2px;margin-top:5px;font-size:10px}
+.qty span{padding:2px 7px;color:var(--sand)}
+.qty b{padding:2px 7px;border-left:1px solid var(--line);border-right:1px solid var(--line);font-weight:500}
+.ups{padding:10px 14px;border-bottom:1px solid var(--line-soft);background:var(--cream);flex:none}
+.ups .h{display:flex;align-items:center;justify-content:space-between;font-size:10px;font-weight:700;margin-bottom:8px}
+.ups .h .nav{color:var(--sand);font-size:10px;letter-spacing:2px}
+.upitem{display:flex;gap:8px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);padding:8px}
+.upitem .img{width:40px;height:40px;flex:none}
+.upitem .nm{font-size:10px;font-weight:500;line-height:1.3;text-transform:uppercase}
+.upitem .pr{font-size:9.5px;color:var(--espresso-soft)}
+.upitem .add{flex:none;width:22px;height:22px;border:1px solid var(--espresso);display:flex;align-items:center;justify-content:center;font-size:12px}
+.more{font-size:9px;color:var(--sand);border-bottom:1px solid var(--sand);display:inline-block;margin-top:5px}
+.foot-cart{border-top:1px solid var(--line);background:var(--paper);padding:11px 14px 13px;margin-top:auto;flex:none}
+.subrow{display:flex;justify-content:space-between;align-items:baseline;font-size:11px;margin-bottom:4px}
+.subrow.tot{font-size:12.5px;font-weight:500;margin-bottom:6px}
+.taxnote{font-size:8px;color:var(--grey);margin:0 0 9px;line-height:1.4}
+
+.cfilters{display:flex;gap:6px;padding:9px 12px;overflow:hidden;border-bottom:1px solid var(--line-soft);flex:none}
+.cfilters .f{font-size:8.5px;border:1px solid var(--line);border-radius:60px;padding:4px 9px;color:var(--espresso-soft);white-space:nowrap}
+.cfilters .f.on{background:var(--espresso);border-color:var(--espresso);color:var(--paper)}
+.cbar{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;font-size:8.5px;color:var(--espresso-soft);border-bottom:1px solid var(--line-soft);letter-spacing:.5px;flex:none}
+.banner{position:relative;flex:none}
+.banner .img{height:130px;border-left:0;border-right:0}
+.hotspot{position:absolute;width:20px;height:20px;border-radius:32px;background:var(--paper);border:1px solid var(--sand);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--espresso);box-shadow:0 2px 6px rgba(10,10,10,.18)}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:11px 12px;flex:none}
+.ccard .img{height:82px;margin-bottom:5px;position:relative}
+.ccard .bdg{position:absolute;top:5px;left:5px;background:var(--olive);color:var(--paper);font-size:7px;font-weight:500;letter-spacing:.5px;padding:2px 5px;border-radius:2px}
+.ccard .pr{font-size:9.5px;color:var(--espresso);font-weight:500}
+.ccard .nm{font-size:9px;line-height:1.25;font-weight:700;text-transform:uppercase;margin-top:1px}
+.ccard .sub{font-size:8px;color:var(--espresso-soft);line-height:1.3;margin-top:2px}
+
+.overlay{position:absolute;inset:0;background:rgba(10,10,10,.35);display:none;align-items:flex-end;z-index:8}
+.overlay.open{display:flex}
+.sheet{background:var(--paper);width:100%;border-top:2px solid var(--sand);padding:12px 13px 15px;max-height:88%;overflow:hidden}
+.sheet .sh-h{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
+.sheet .sh-h .t{font-size:12px;font-weight:700}
+.sheet .sh-h .x{color:var(--sand);font-size:12px;white-space:nowrap}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:9px}
+.ba .img{height:96px}
+.ba .cap{font-size:8px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:var(--espresso-soft);text-align:center;margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font-size:8px;border:1px solid var(--line);border-radius:60px;padding:3px 8px;color:var(--espresso-soft)}
+
+/* ---------- interactivity ---------- */
+.tap{cursor:pointer;transition:background .15s ease}
+.tap:hover{background:rgba(10,10,10,.06)}
+.tap:focus-visible{outline:2px solid var(--sand);outline-offset:2px}
+.atc.tap:hover{background:#002A08;color:var(--paper)}
+.atc.ghost.tap:hover{background:rgba(0,27,5,.08);color:var(--espresso)}
+.hotspot.tap:hover{background:var(--sand);color:var(--paper)}
+.sheet .x{cursor:pointer}
+.acc .q{cursor:pointer;user-select:none}
+.acc .q:hover{background:rgba(10,10,10,.04)}
+.ugc .t.tap:hover .img{border-color:var(--sand)}
+.hotcard{position:absolute;display:none;background:var(--paper);border:1px solid var(--sand);padding:7px 8px;width:116px;box-shadow:0 4px 14px rgba(10,10,10,.22);z-index:6}
+.hotcard.open{display:block}
+.hotcard .nm{font-size:9px;font-weight:700;line-height:1.25;text-transform:uppercase}
+.hotcard .pr{font-size:9px;color:var(--espresso-soft);margin-top:1px}
+.hotcard .go{font-size:8px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:var(--sand);margin-top:5px;display:block}
+.col-h .live{font-size:10px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;color:var(--sand);border:1px solid var(--sand);border-radius:60px;padding:3px 9px;white-space:nowrap}
+
+.hl{outline:1px dashed var(--sand);outline-offset:2px;background:rgba(0,27,5,.05)}
+.tagnum{position:absolute;z-index:5;background:var(--sand);color:var(--paper);font-size:9px;font-weight:700;border-radius:60px;width:17px;height:17px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(10,10,10,.25)}
+
+/* ---------- plan page ---------- */
+.phases{display:grid;gap:12px;margin-top:18px}
+.phase{background:var(--paper);border:1px solid var(--line);padding:16px 19px}
+.phase h4{margin:2px 0 5px;font-size:15px}
+.phase p{margin:0;font-size:13.5px;color:var(--espresso-soft);line-height:1.55}
+.phase p b{color:var(--espresso);font-weight:500}
+.phase .ph-lbl{font-size:11px;font-weight:500;letter-spacing:.72px;text-transform:uppercase;color:var(--sand)}
+.foot{padding:34px 0 64px;color:var(--espresso-soft);font-size:13px;line-height:1.6;border-top:1px solid var(--line-soft);margin-top:36px}
+.foot b{color:var(--espresso);font-weight:500}
+.foot .src{margin-top:14px;font-size:12px;color:var(--grey)}
+
+/* ---------- Maison Commerce presentation layer ---------- */
+::selection{background:var(--espresso);color:var(--paper)}
+.topbar{background:rgba(253,253,251,.92);border-bottom-color:var(--line-soft)}
+.topbar-inner{max-width:var(--max);padding:0 var(--gutter);gap:20px}
+.brand{gap:16px}
+.brand-logo{display:block;height:26px;width:auto}
+.brand .sub{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--faint,var(--grey));border-left-color:var(--line);padding-left:16px}
+.pager button{font-size:12px;padding:8px 12px;border-radius:999px;transition:color .3s var(--ease)}
+.ink{background:var(--green);border-radius:999px;transition:transform .4s var(--ease),width .4s var(--ease)}
+.arrows{gap:8px}
+.arrows button{width:32px;height:32px;border-radius:999px;font-size:16px;transition:background .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)}
+.arrows button:hover:not(:disabled){background:var(--espresso);border-color:var(--espresso);color:var(--paper);transform:scale(1.04)}
+
+.page-head{background:linear-gradient(180deg,var(--paper) 0%,var(--cream) 100%);border-bottom-color:var(--line-soft);padding:64px 0 56px}
+.brandline,.section-lab,.ph-lbl,.hyp-lbl,.mlist dt,.service-index{font-family:var(--font-mono)}
+.brandline{font-size:11px;letter-spacing:.08em;color:var(--faint,var(--grey))}
+.page-head h1{font-size:clamp(40px,4.2vw,72px);line-height:1.01;letter-spacing:-.02em;margin:16px 0 12px;width:100%;max-width:none}
+.page-head p{max-width:64ch;color:var(--espresso-soft);margin:12px 0 0;font-size:16px;line-height:1.65}
+.hmeta{margin-top:24px;gap:8px}
+.pill{border-color:var(--line-soft);border-radius:999px;padding:8px 16px;font-size:12px;color:var(--espresso-soft);box-shadow:0 1px 2px rgba(10,10,10,.04)}
+
+.block{padding:64px 0 80px}
+.section-lab{font-size:11px;letter-spacing:.08em;color:var(--faint,var(--grey));margin-bottom:8px}
+.block h2.sec{font-size:clamp(32px,2.8vw,48px);line-height:1.04;letter-spacing:-.015em;margin-bottom:8px;max-width:20ch}
+.block .lede{color:var(--espresso-soft);font-size:16px;line-height:1.65;margin-top:8px;max-width:64ch}
+
+.mtable{margin-top:32px;border-collapse:separate;border-spacing:0;border-color:var(--line-soft);border-radius:12px;overflow:hidden;box-shadow:0 1px 2px rgba(10,10,10,.04)}
+.mtable th,.mtable td{padding:16px;border-bottom-color:var(--line-soft)}
+.mtable th{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--grey);background:var(--surface,var(--oat))}
+.mtable tbody tr{transition:background .3s var(--ease)}
+.mtable tbody tr:hover{background:var(--cream)}
+.mtable .mno,.mtable .tid,.tid-ref{font-family:var(--font-mono)}
+.tablenote{font-size:12px;color:var(--grey);margin:12px 4px 0}
+.callout{background:var(--paper);border-color:var(--line-soft);border-radius:12px;padding:24px;margin-top:32px;box-shadow:0 1px 2px rgba(10,10,10,.04)}
+.callout h3{font-size:20px;margin-bottom:12px}
+.callout ol{font-size:14px;line-height:1.65}
+.callout li{margin:8px 0}
+
+.pgbadge,.stbadge,.kpi{border-radius:999px;background:var(--oat);color:var(--espresso-soft);border:1px solid var(--line-soft)}
+.pgbadge--pdp,.pgbadge--cart,.pgbadge--coll{background:var(--oat);color:var(--espresso-soft)}
+.test{padding:64px 0 80px}
+.test-grid{grid-template-columns:minmax(360px,480px) minmax(0,1fr);gap:clamp(48px,5vw,96px)}
+.test-info,.test-frames{min-width:0}
+.thead{gap:8px}
+.thead .hid,.thead .pgbadge,.thead .stbadge{height:32px;padding:0 12px;border:1px solid var(--line-soft);border-radius:999px;background:var(--paper);font-family:var(--font-mono);font-size:10px;color:var(--espresso-soft)}
+.thead .hid{background:var(--green);border-color:var(--green);color:var(--paper)}
+.thead .hid::before,.thead .hid::after,.thead .pgbadge::before,.thead .pgbadge::after,.thead .stbadge::before,.thead .stbadge::after{display:none}
+.thead .lnk{width:12px;background:var(--line)}
+.test h2{font-size:clamp(32px,2.4vw,44px);line-height:1.04;letter-spacing:-.015em;margin-top:20px;max-width:18ch}
+.tid-ref{font-size:10px;color:var(--grey);margin:0;overflow-wrap:anywhere}
+.tsub{font-size:16px;line-height:1.65;color:var(--espresso-soft);margin-top:20px}
+.mlist{margin:24px 0;border-top-color:var(--line-soft)}
+.mlist>div{padding:12px 0;border-bottom-color:var(--line-soft)}
+.mlist dt{width:96px;font-size:10px;letter-spacing:.08em;color:var(--grey)}
+.mlist dd{font-size:14px;flex:1;min-width:0}
+.mlist dd.tid-ref{font-size:10px;line-height:1.55;color:var(--grey)}
+.ps{gap:12px;margin-bottom:12px}
+.ps .box,.hyp{background:var(--paper);border-color:var(--line-soft);border-radius:12px;padding:20px;box-shadow:0 1px 2px rgba(10,10,10,.04)}
+.ps .box h4,.hyp-lbl{font-family:var(--font-mono);font-size:10px;letter-spacing:.08em;color:var(--grey)}
+.ps .box p,.hyp .hline{font-size:14px;line-height:1.65;color:var(--espresso-soft)}
+.hyp .hline b{font-family:var(--font-mono);font-size:10px;color:var(--espresso)}
+
+.state{font-family:var(--font-mono);font-size:10px;border-radius:999px;padding:4px 12px}
+.state.before{background:var(--oat);color:var(--espresso-soft)}
+.state.after{background:var(--green);color:var(--paper)}
+.col-h .live{font-family:var(--font-mono);color:var(--green);border-color:var(--green);border-radius:999px}
+.phone{border-color:var(--espresso);background:var(--espresso);box-shadow:var(--shadow)}
+.phone .notch{background:var(--espresso)}
+.phone .notch::after{background:#2C2C29}
+.anno{background:var(--green);color:var(--paper)}
+.atc,.state.after{background:var(--green)}
+.atc.tap:hover{background:#002A08}
+.hl{outline-color:var(--green);background:rgba(0,27,5,.05)}
+.tagnum{background:var(--green)}
+.tap:focus-visible{outline-color:var(--green)}
+.hotspot.tap:hover{background:var(--green)}
+.note{font-size:12px;line-height:1.55}
+
+.pagenav{margin-top:48px;padding-top:24px;border-top-color:var(--line-soft)}
+.pagenav button{border-color:var(--line);border-radius:4px;font-size:13px;padding:12px 20px;transition:background .3s var(--ease),border-color .3s var(--ease),transform .3s var(--ease)}
+.pagenav button:hover{background:var(--green);border-color:var(--green);color:var(--paper);transform:scale(1.02)}
+.pagenav button:hover span{color:rgba(255,255,255,.68)}
+.pagenav button span{font-family:var(--font-mono);font-size:10px;color:var(--grey)}
+
+.phases{gap:12px;margin-top:32px}
+.phase{background:var(--paper);border-color:var(--line-soft);border-radius:12px;padding:24px;box-shadow:0 1px 2px rgba(10,10,10,.04)}
+.phase h4{font-size:20px;margin:4px 0 8px}
+.phase p{font-size:14px;line-height:1.65}
+.phase .ph-lbl{font-size:10px;letter-spacing:.08em;color:var(--grey)}
+.foot{padding:40px 0 64px;margin-top:48px;border-top-color:var(--line-soft);font-size:14px;line-height:1.65}
+.foot .src{margin-top:16px;font-size:12px;line-height:1.65}
+
+@media(max-width:1180px){
+  .test-grid{grid-template-columns:1fr;gap:30px}
+  .brand .sub{display:none}
+}
+@media(max-width:900px){
+  .wrap,.topbar-inner{padding:0 20px}
+  .compare{grid-template-columns:1fr;gap:34px}
+  .page-head h1{font-size:30px}
+  .mtable th:nth-child(4),.mtable td:nth-child(4){display:none}
+  .topbar-inner{gap:12px}
+}
+@media(max-width:640px){
+  .topbar{overflow:hidden}
+  .topbar-inner{min-width:0}
+  .brand-logo{height:20px}
+  .pager{min-width:0;flex:1;margin-left:0}
+  .arrows{display:none}
+  .page-head{padding:48px 0}
+  .page-head h1{font-size:36px;width:100%;max-width:none}
+  .page-head p{display:block;font-size:14px;line-height:1.6}
+  .hmeta{margin-top:20px}
+  .pill{padding:8px 12px}
+  .block{padding:48px 0 64px}
+  .block h2.sec{font-size:32px}
+  .block .lede{font-size:14px}
+  .mtable{margin-top:24px;table-layout:fixed}
+  .mtable th,.mtable td{padding:16px 12px}
+  .mtable th:nth-child(2),.mtable td:nth-child(2),
+  .mtable th:nth-child(4),.mtable td:nth-child(4),
+  .mtable th:nth-child(5),.mtable td:nth-child(5),
+  .mtable th:nth-child(6),.mtable td:nth-child(6){display:none}
+  .mtable th:first-child,.mtable td:first-child{width:48px}
+  .callout{padding:20px}
+  .test{padding:48px 0 64px}
+  .test h2{font-size:32px}
+  .pagenav button{padding:12px 16px}
+}
+@media print{
+  body{background:#fff}
+  .topbar,.pagenav,.arrows{display:none}
+  .page{display:block!important;animation:none;break-after:page}
+  .overlay{display:flex!important}
+  .phone{box-shadow:none}
+}
+
+/* ============ Dreaver adaptation — added components ============ */
+/* market column in tables */
+.mtable .mkt{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;color:var(--green);font-weight:500}
+.subh{font-size:19px;margin:2px 0 0;letter-spacing:-.01em}
+
+/* market / research cards */
+.mkt-grid{display:grid;gap:14px;margin-top:28px}
+@media(min-width:900px){.mkt-grid{grid-template-columns:repeat(3,1fr)}}
+.mktcard{background:var(--paper);border:1px solid var(--line-soft);border-radius:12px;padding:22px;box-shadow:0 1px 2px rgba(10,10,10,.04)}
+.mktcard .mh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.mktcard .mh .m{font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--green);border:1px solid var(--green);border-radius:999px;padding:2px 10px}
+.mktcard h4{font-size:19px;line-height:1.15}
+.mktcard .tl{color:var(--espresso-soft);font-size:13.5px;margin:0 0 10px;line-height:1.55}
+.mktcard ul{margin:0;padding-left:17px;font-size:12.5px;color:var(--espresso-soft);line-height:1.5}
+.mktcard li{margin:5px 0}
+.prio{margin-top:14px;font-size:12.5px;background:var(--oat);border-radius:8px;padding:11px 13px;color:var(--espresso);line-height:1.5}
+.prio b{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--green);display:block;margin-bottom:3px;font-weight:500}
+
+/* ===== funnel infographics ===== */
+.funnels{display:grid;gap:18px;margin-top:30px}
+@media(min-width:820px){.funnels{grid-template-columns:repeat(3,1fr)}}
+.funnel{margin:0;background:var(--paper);border:1px solid var(--line-soft);border-radius:12px;padding:20px 20px 18px;box-shadow:0 1px 2px rgba(10,10,10,.04);text-align:center}
+.funnel figcaption{font-family:var(--font-serif);font-style:italic;font-size:18px;color:var(--espresso);margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:9px}
+.funnel figcaption .fm{font-family:var(--font-mono);font-style:normal;font-size:11px;letter-spacing:.08em;color:var(--green);border:1px solid var(--green);border-radius:999px;padding:2px 9px}
+.funnel svg{width:100%;height:auto;display:block}
+.funnel svg .fv{font-family:var(--font-mono);font-size:15px;font-weight:600;fill:var(--espresso)}
+.funnel svg .fl{font-family:var(--font);font-size:10px;fill:var(--espresso-soft)}
+.fcomp{margin-top:14px;padding-top:14px;border-top:1px solid var(--line-soft)}
+.fcomp .fnum{display:block;font-family:var(--font-mono);font-size:24px;font-weight:600;color:var(--green);line-height:1}
+.fcomp .flbl{font-size:11px;color:var(--grey);letter-spacing:.02em}
+
+/* ===== survey comparison tables ===== */
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:14px}
+.stbl{margin-top:0}
+.stbl th:not(:first-child),.stbl td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
+.stbl td.hi{background:rgba(0,27,5,.06);color:var(--green);font-weight:600}
+/* never hide a market column: override the template's responsive column-hiding so SE (col 4) always shows */
+.stbl th,.stbl td{display:table-cell!important}
+@media(max-width:820px){.stbl{min-width:480px}.stbl th,.stbl td{padding:12px 10px}}
+
+/* ===== phone: generic card rows ===== */
+.pcard{background:var(--paper);border:1px solid var(--line);padding:8px 10px}
+.pcard .ph-t{font-size:9.5px;font-weight:700;letter-spacing:.2px;color:var(--espresso);display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.pcard .row{display:flex;gap:7px;align-items:center;font-size:9px;color:var(--espresso-soft);padding:5px 0;border-top:1px solid var(--line-soft);line-height:1.35}
+.pcard .row:first-of-type{border-top:0}
+.pcard .row b{color:var(--espresso);font-weight:500}
+.pcard .row .n{width:15px;height:15px;border-radius:32px;background:var(--green);color:var(--paper);font-size:8px;display:flex;align-items:center;justify-content:center;flex:none;font-weight:700}
+.pcard .row .ck{color:var(--green);font-weight:700;flex:none;width:12px;text-align:center}
+.pcard .row .info{margin-left:auto;color:var(--sand);font-size:11px;flex:none}
+.rev{font-size:9px;color:var(--espresso-soft);line-height:1.4}
+.rev .who{color:var(--espresso);font-weight:500}
+.vt{font-size:8px;color:var(--sand);text-transform:uppercase;letter-spacing:.4px}
+.usprow .u .qi{color:var(--sand);font-size:8px;margin-left:1px}
+
+/* ===== phone: review topic tabs ===== */
+.rtabs{background:var(--paper)}
+.rtabh{display:flex}
+.rtab{flex:1;appearance:none;font-family:inherit;cursor:pointer;text-align:center;font-size:8px;padding:7px 3px;border:1px solid var(--line);border-right:0;color:var(--espresso-soft);background:var(--cream);letter-spacing:.2px;transition:background .15s ease,color .15s ease}
+.rtab:last-child{border-right:1px solid var(--line)}
+.rtab:hover{background:var(--oat)}
+.rtab.on{background:var(--green);border-color:var(--green);color:var(--paper);font-weight:500}
+.rpane{border:1px solid var(--line);border-top:0;padding:9px 10px}
+
+/* ===== price group ===== */
+.pricegrp{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:3px 0 11px}
+.pricegrp .now{font-family:"Inter",var(--font);font-size:16px;font-weight:700;color:#023130}
+.pricegrp .was{font-size:11px;color:rgba(2,49,48,.5);text-decoration:line-through}
+.pricegrp .save{font-size:8.5px;font-weight:700;color:#fff;background:#C00036;border-radius:60px;padding:2px 8px;letter-spacing:.2px}
+
+/* ===== model selector ===== */
+.models{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+.mo{font-family:"Inter",var(--font);font-size:9.5px;padding:6px 11px;border:1px solid rgba(2,49,48,.25);border-radius:50px;color:#023130;background:#F9F8F7}
+.mo.sel{background:#023130;border-color:#023130;color:#00FFD0;font-weight:600}
+
+/* ============ Dreaver storefront theme (inside phone mockups) ============ */
+.screen.dv{
+  --dv-ink:#023130;--dv-ground:#F1EEEC;--dv-card:#F9F8F7;
+  --dv-lilac:#DFBAFF;--dv-lilac-ink:#4B3C6E;--dv-mint:#00FFD0;
+  --dv-sale:#C00036;--dv-green:#0CA785;--dv-amber:#F6AC00;
+  font-family:"Inter",var(--font);background:var(--dv-card);color:var(--dv-ink);
+}
+.screen.dv .anno{background:var(--dv-ink);color:var(--dv-mint);letter-spacing:.2px;text-transform:none;font-weight:500;font-size:9px}
+.screen.dv .head{border-bottom-color:rgba(2,49,48,.1)}
+.screen.dv .logo{font-family:"Inter",var(--font);font-weight:700;letter-spacing:-.03em;text-transform:none;font-size:16px;color:var(--dv-ink)}
+.screen.dv .ico{color:var(--dv-ink)}
+.screen.dv .p-title{font-family:"Inter",var(--font);text-transform:none;font-weight:600;font-size:15px;letter-spacing:-.01em;color:var(--dv-ink)}
+.screen.dv .p-rate{color:rgba(2,49,48,.7)}
+.screen.dv .p-rate .st{color:var(--dv-amber);letter-spacing:.5px}
+.screen.dv .tp{font-weight:700;color:var(--dv-green);letter-spacing:-.01em}
+.screen.dv .sectlbl{color:var(--dv-ink);font-weight:700}
+.screen.dv .lblrow{color:var(--dv-ink)}
+.screen.dv .benefits .b{color:rgba(2,49,48,.75)}
+.screen.dv .benefits .b i{background:var(--dv-mint);border-color:var(--dv-green)}
+.screen.dv .mini{color:rgba(2,49,48,.5)}
+.screen.dv .scrollhint{color:rgba(2,49,48,.45)}
+.screen.dv .divider{border-top-color:rgba(2,49,48,.1)}
+.screen.dv .tabs .tb{border-top-color:rgba(2,49,48,.1)}
+.screen.dv .tabs .tb .cx{color:var(--dv-lilac-ink)}
+
+/* ATC lilac pill */
+.screen.dv .atc{background:var(--dv-lilac);color:var(--dv-lilac-ink);border-radius:50px;font-family:"Inter",var(--font);font-weight:600;font-size:12px;padding:12px;letter-spacing:.1px}
+.screen.dv .atc.ghost{background:transparent;color:var(--dv-ink);border:1.5px solid var(--dv-ink);border-radius:50px}
+.screen.dv .atc.tap:hover{background:#CDA2F5;color:var(--dv-lilac-ink)}
+.screen.dv .atc.ghost.tap:hover{background:rgba(2,49,48,.06);color:var(--dv-ink)}
+
+/* usp row */
+.screen.dv .usprow{background:var(--dv-ground);border-color:rgba(2,49,48,.1)}
+.screen.dv .usprow .u{color:rgba(2,49,48,.7)}
+.screen.dv .usprow .u i{background:var(--dv-mint);border-color:var(--dv-green)}
+.screen.dv .usprow .u b{color:var(--dv-ink)}
+.screen.dv .usprow .u .qi{color:var(--dv-lilac-ink)}
+
+/* pcard / rows / reviews */
+.screen.dv .pcard{background:var(--dv-card);border-color:rgba(2,49,48,.14)}
+.screen.dv .pcard .ph-t{color:var(--dv-ink)}
+.screen.dv .pcard .row{color:rgba(2,49,48,.72);border-top-color:rgba(2,49,48,.1)}
+.screen.dv .pcard .row b{color:var(--dv-ink)}
+.screen.dv .pcard .row .n{background:var(--dv-ink);color:var(--dv-mint)}
+.screen.dv .pcard .row .ck{color:var(--dv-green)}
+.screen.dv .pcard .row .info{color:var(--dv-lilac-ink)}
+.screen.dv .rev{color:rgba(2,49,48,.72)}
+.screen.dv .rev .who{color:var(--dv-ink)}
+.screen.dv .rev .st{color:var(--dv-amber);font-size:8px;letter-spacing:.3px}
+.screen.dv .vt{color:var(--dv-lilac-ink)}
+.screen.dv .more{color:var(--dv-lilac-ink);border-bottom-color:var(--dv-lilac-ink)}
+
+/* review tabs */
+.screen.dv .rtab{border-color:rgba(2,49,48,.2);color:rgba(2,49,48,.7);background:var(--dv-ground)}
+.screen.dv .rtab:hover{background:#EAE7E4}
+.screen.dv .rtab.on{background:var(--dv-ink);border-color:var(--dv-ink);color:var(--dv-mint)}
+.screen.dv .rtab.on:hover{background:#012422}
+.screen.dv .rpane{border-color:rgba(2,49,48,.2)}
+
+/* sheet */
+.screen.dv .sheet{border-top-color:var(--dv-lilac)}
+.screen.dv .sheet .sh-h .t{color:var(--dv-ink)}
+.screen.dv .chip{border-color:rgba(2,49,48,.2);color:rgba(2,49,48,.7)}
+.screen.dv .checks .c{color:rgba(2,49,48,.75)}
+.screen.dv .checks .c b{color:var(--dv-green)}
+
+/* ===== homepage hero + intended-use routes (T6) ===== */
+.screen.dv .hero{background:var(--dv-ink);padding:15px 14px 17px;position:relative;overflow:hidden;flex:none}
+.screen.dv .hero .hz{font-family:"Inter",var(--font);font-weight:700;font-size:16px;line-height:1.14;letter-spacing:-.02em;color:#fff;margin:0 0 5px;max-width:82%;position:relative;z-index:1}
+.screen.dv .hero .hp{font-size:8.5px;color:rgba(255,255,255,.8);margin:0 0 11px;line-height:1.45;max-width:88%;position:relative;z-index:1}
+.screen.dv .hero .blob{position:absolute;right:-34px;top:-26px;width:120px;height:120px;border-radius:50%;background:rgba(0,255,208,.16)}
+.screen.dv .hero .atc{display:inline-block;width:auto;padding:9px 18px;position:relative;z-index:1}
+.routes{display:flex;flex-direction:column;gap:6px;padding:0 13px}
+.screen.dv .route{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--dv-card);border:1px solid rgba(2,49,48,.18);border-radius:10px;padding:9px 12px;font-size:10px;font-weight:600;color:var(--dv-ink);font-family:"Inter",var(--font)}
+.screen.dv .route .ar{color:var(--dv-lilac-ink);font-size:13px;flex:none}
+.screen.dv .route:hover{border-color:var(--dv-lilac);background:#fff}
+.screen.dv .route .sub{display:block;font-weight:400;font-size:8px;color:rgba(2,49,48,.6);margin-top:2px}
+.shrow{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+
+/* ===== collection filters (T7) ===== */
+.screen.dv .cbar{color:rgba(2,49,48,.7);border-bottom-color:rgba(2,49,48,.1)}
+.screen.dv .cfilters{border-bottom-color:rgba(2,49,48,.1)}
+.screen.dv .cfilters .f{border-color:rgba(2,49,48,.2);color:rgba(2,49,48,.7);background:var(--dv-card)}
+.screen.dv .cfilters .f.on{background:var(--dv-ink);border-color:var(--dv-ink);color:var(--dv-mint)}
+.screen.dv .ccard .img{color:#A79781}
+.screen.dv .ccard .pr{color:var(--dv-ink);font-weight:600}
+.screen.dv .ccard .nm{color:var(--dv-ink)}
+.screen.dv .ccard .sub{color:rgba(2,49,48,.6)}
+.screen.dv .ccard .bdg{background:var(--dv-green);color:#fff}
+.ccount{font-size:8.5px;color:rgba(2,49,48,.6);padding:8px 12px 0;font-weight:400}
+.ccount b{color:var(--dv-ink);font-weight:600}
+/* rtabs "filters" variant = chip row, not equal-width tabs */
+.screen.dv .rtabs.filters{background:transparent}
+.rtabs.filters .rtabh{gap:5px;overflow-x:auto;padding:8px 12px 0;scrollbar-width:none}
+.rtabs.filters .rtabh::-webkit-scrollbar{display:none}
+.screen.dv .rtabs.filters .rtab{flex:0 0 auto;border:1px solid rgba(2,49,48,.2);border-radius:50px;padding:5px 11px;font-size:8.5px;background:var(--dv-ground);color:rgba(2,49,48,.75)}
+.screen.dv .rtabs.filters .rtab.on{background:var(--dv-ink);border-color:var(--dv-ink);color:var(--dv-mint);font-weight:600}
+.rtabs.filters .rpane{border:0;padding:0}
+
+</style>
+</head>
+<body>
+
+<aside class="template-download" id="template-download" aria-label="Download the CRO template" hidden>
+  <div class="template-download-inner">
+    <a href="/cro-wireframes-template/cro-wireframes-template.zip" download>
+      <span>Download the CRO template</span>
+      <span class="template-download-arrow" aria-hidden="true">↓</span>
+    </a>
+  </div>
+</aside>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#overview" data-go="overview">
+      <img class="brand-logo" src="../images/logo-maison-commerce.png" alt="Maison Commerce" width="1206" height="154" decoding="async">
+      <span class="sub">A/B Testing Roadmap</span>
+    </a>
+    <nav class="pager" id="pager" aria-label="Tests">
+      <span class="ink" id="ink"></span>
+      <button data-go="overview">Overview</button>
+      <button data-go="insights">Data Insights</button>
+      <button data-go="survey">Survey</button>
+      <span class="divider"></span>
+      <button data-go="b1">T1</button>
+      <button data-go="b2">T2</button>
+      <button data-go="b3">T3</button>
+      <button data-go="b4">T4</button>
+      <button data-go="b5">T5</button>
+      <button data-go="b6">T6</button>
+      <button data-go="b7">T7</button>
+      <span class="divider"></span>
+      <button data-go="plan">Planning</button>
+    </nav>
+    <div class="arrows">
+      <button id="prevBtn" aria-label="Previous">‹</button>
+      <button id="nextBtn" aria-label="Next">›</button>
+    </div>
+  </div>
+</header>
+
+<main id="app">
+
+<!-- ==================== OVERVIEW ==================== -->
+<section class="page" id="page-overview">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="brandline">Conversion research · Netherlands · Denmark · Sweden</div>
+      <h1>Market-by-market CRO growth plan</h1>
+      <p>A market-by-market plan to grow conversion across the Dreaver NL, DK and SE stores. Seven evidence-backed tests, from the homepage and collection through to the product page, each with a problem, solution, hypothesis and a mobile before/after wireframe, judged against first-party commerce data. Every idea is tested in its home market first, and if it wins there it rolls out to the other two.</p>
+      <div class="hmeta">
+        <span class="pill">7 tests</span>
+        <span class="pill">3 markets</span>
+        <span class="pill">Targets to confirm</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="block" style="padding-bottom:24px"><div class="wrap">
+    <div class="section-lab">Before anything else</div>
+    <h2 class="sec">Clarify the target</h2>
+    <p class="lede">The whole plan hinges on the growth target, and right now "+1 point" is ambiguous. Before we commit, confirm with the client whether they mean <b>+1 percentage point</b> (for example 1.9% to 2.9%) or <b>+1% relative</b> (1.9% to about 1.92%). The two are worlds apart, so we should not accept the framing silently.</p>
+
+    <div class="tscroll"><table class="mtable stbl">
+      <thead><tr><th>If "+1 point" means +1 percentage point</th><th>NL</th><th>DK</th><th>SE</th></tr></thead>
+      <tbody>
+        <tr><td>Current conversion rate</td><td>1.90%</td><td>1.33%</td><td>0.99%</td></tr>
+        <tr><td>+1pp target</td><td>2.90%</td><td>2.33%</td><td>1.99%</td></tr>
+        <tr><td>That is a relative lift of</td><td class="hi">+53%</td><td class="hi">+75%</td><td class="hi">+101%</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="callout" style="margin-top:24px;border-left:3px solid var(--sale)">
+      <h3>Worth saying plainly</h3>
+      <p style="font-size:14px;color:var(--espresso-soft);margin:0;line-height:1.65">On these baselines, +1 percentage point is a <b style="color:var(--espresso);font-weight:500">50% to 100% relative lift</b>. That is not a CRO programme outcome in a single quarter; it is a site rebuild plus a change in traffic mix. At today's traffic it would be worth on the order of <b style="color:var(--espresso);font-weight:500">€1M+ in added revenue per quarter</b> across the three stores, which is a business-plan target, not a testing target. Naming that gap now keeps the conversation constructive.</p>
+    </div>
+
+    <h3 class="subh" style="margin-top:32px">What this test programme can realistically deliver</h3>
+    <p class="lede" style="margin-top:6px">A well-run test programme typically lifts conversion by 10% to 20% relative over two to three quarters, market by market. These are planning bands to align on, not guarantees, shown at today's traffic and average order value.</p>
+    <div class="tscroll"><table class="mtable stbl">
+      <thead><tr><th>Realistic on-site target</th><th>NL</th><th>DK</th><th>SE</th></tr></thead>
+      <tbody>
+        <tr><td>Conversion lift (relative)</td><td>+8 to 12%</td><td>+12 to 20%</td><td>+10 to 18%</td></tr>
+        <tr><td>Horizon</td><td>~2 quarters</td><td>2 to 3 quarters</td><td>2 to 3 quarters</td></tr>
+        <tr><td>Added revenue / quarter</td><td class="hi">€55K to €80K</td><td class="hi">DKK 0.5M to 0.8M</td><td class="hi">SEK 0.3M to 0.6M</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tablenote">Combined, that is roughly <b>€150K to €240K in added revenue per quarter</b> at current traffic (rough euro conversion, for scale only). The biggest prizes sit alongside CRO rather than inside it: NL's job is to protect conversion and rebuild traffic, and DK's largest single opportunity is closing the checkout-completion gap. We flag those as separate workstreams.</p>
+  </div></div>
+
+  <div class="block"><div class="wrap">
+    <div class="section-lab">Overview</div>
+    <h2 class="sec">All briefed tests</h2>
+    <p class="lede">Names, IDs, hypotheses, targeting and KPIs kept together in one reviewable system. T1 to T7 illustrate a proposed build sequence rather than a fixed priority. Click any row to open the test, or start with the data and survey insights behind them.</p>
+    <table class="mtable">
+      <thead><tr><th>#</th><th>Market</th><th>Surface</th><th>Test</th><th>Test ID</th><th>KPIs</th></tr></thead>
+      <tbody>
+        <tr data-go="b1">
+          <td class="mno">T1</td><td><span class="mkt">NL</span></td><td><span class="pgbadge pgbadge--pdp">PDP</span></td>
+          <td>Use-case fitness routine module<br><span style="font-size:11.5px;color:var(--espresso-soft)">Motion Pro PDP · goals / use-case section</span></td>
+          <td class="tid">MC_PDP_FITNESS_ROUTINE_USE_CASES_NL</td>
+          <td><span class="kpi">ATC</span><span class="kpi">SC</span></td>
+        </tr>
+        <tr data-go="b2">
+          <td class="mno">T2</td><td><span class="mkt">NL</span></td><td><span class="pgbadge pgbadge--pdp">PDP</span></td>
+          <td>Review topic tabs · everyday use, storage, value<br><span style="font-size:11.5px;color:var(--espresso-soft)">Motion Pro PDP · first review section</span></td>
+          <td class="tid">MC_PDP_REVIEW_TOPIC_TABS_NL</td>
+          <td><span class="kpi">SC</span><span class="kpi">ATC</span></td>
+        </tr>
+        <tr data-go="b3">
+          <td class="mno">T3</td><td><span class="mkt">NL</span></td><td><span class="pgbadge pgbadge--pdp">PDP</span></td>
+          <td>USP tooltips below add-to-cart<br><span style="font-size:11.5px;color:var(--espresso-soft)">Motion Pro PDP · USP row under the CTA</span></td>
+          <td class="tid">MC_PDP_USP_TOOLTIPS_BELOW_ATC_NL</td>
+          <td><span class="kpi">ATC</span><span class="kpi">SC</span></td>
+        </tr>
+        <tr data-go="b4">
+          <td class="mno">T4</td><td><span class="mkt">DK</span></td><td><span class="pgbadge pgbadge--pdp">PDP</span></td>
+          <td>Routine reviews beside the model decision<br><span style="font-size:11.5px;color:var(--espresso-soft)">Motion Pro PDP · below model selection</span></td>
+          <td class="tid">MC_PDP_ROUTINE_REVIEWS_NEAR_DECISION_DK</td>
+          <td><span class="kpi">SC</span><span class="kpi">ATC</span></td>
+        </tr>
+        <tr data-go="b5">
+          <td class="mno">T5</td><td><span class="mkt">SE</span></td><td><span class="pgbadge pgbadge--pdp">PDP</span></td>
+          <td>Package-value summary beside the price<br><span style="font-size:11.5px;color:var(--espresso-soft)">Motion Pro PDP · price / accessory area</span></td>
+          <td class="tid">MC_PDP_PACKAGE_VALUE_SUMMARY_SE</td>
+          <td><span class="kpi">ATC</span><span class="kpi">SC</span></td>
+        </tr>
+        <tr data-go="b6">
+          <td class="mno">T6</td><td><span class="mkt">SE·DK</span></td><td><span class="pgbadge pgbadge--home">HOME</span></td>
+          <td>Shop by intended use · H01<br><span style="font-size:11.5px;color:var(--espresso-soft)">Homepage · routes near the main CTA</span></td>
+          <td class="tid">MC_HOME_SHOP_BY_INTENDED_USE_SE</td>
+          <td><span class="kpi">SC</span><span class="kpi">PDP</span></td>
+        </tr>
+        <tr data-go="b7">
+          <td class="mno">T7</td><td><span class="mkt">SE</span></td><td><span class="pgbadge pgbadge--coll">COLL</span></td>
+          <td>Filter by the way you move · C02<br><span style="font-size:11.5px;color:var(--espresso-soft)">Treadmill collection · activity filter chips</span></td>
+          <td class="tid">MC_COLL_FILTER_BY_MOVEMENT_SE</td>
+          <td><span class="kpi">SC</span><span class="kpi">PDP</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="tablenote">SC = Sessions Converted · ATC = Add to Cart · PDP = qualified PDP visits (diagnostic). Connect each test to the store's selected experimentation platform. A winning market test becomes a candidate for the other two markets, localised and re-validated before launch.</p>
+
+    <div class="pagenav">
+      <button disabled></button>
+      <button class="nx" data-go="insights"><span>Next</span>Data insights →</button>
+    </div>
+  </div></div>
+</section>
+
+<!-- ==================== DATA INSIGHTS ==================== -->
+<section class="page" id="page-insights">
+  <div class="block"><div class="wrap">
+    <div class="section-lab">Data insights · Shopify + survey</div>
+    <h2 class="sec">Three stores, three problems</h2>
+    <p class="lede">We have three stores and, really, three different problems. The conversion gap is clear (NL 1.90%, DK 1.33%, SE 0.99%), but each market loses people at a different spot, and the direction each store is heading matters just as much as the number. Below: the funnel side by side, what's happening in each market, the patterns they share, and what it all adds up to.</p>
+
+    <div class="funnels">
+<figure class="funnel"><figcaption><span class="fm">NL</span> Netherlands</figcaption><svg viewBox="0 0 300 188" role="img" aria-label="Netherlands funnel: add to cart 6.53%, reached checkout 6.45%, conversion 1.9%"><defs><linearGradient id="fgNL" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0CA785"/><stop offset="1" stop-color="#023130"/></linearGradient></defs><polygon points="14.0,14.0 170.0,14.0 169.0,58.0 15.0,58.0" fill="url(#fgNL)"/><text x="188" y="32.5" class="fv">6.53%</text><text x="188" y="46.6" class="fl">Add to cart</text><polygon points="15.0,74.0 169.0,74.0 114.7,118.0 69.3,118.0" fill="url(#fgNL)"/><text x="188" y="92.5" class="fv">6.45%</text><text x="188" y="106.6" class="fl">Reached checkout</text><polygon points="69.3,134.0 114.7,134.0 103.3,178.0 80.7,178.0" fill="url(#fgNL)"/><text x="188" y="152.5" class="fv">1.90%</text><text x="188" y="166.6" class="fl">Conversion</text></svg><div class="fcomp"><span class="fnum">29.5%</span><span class="flbl">est. checkout completion</span></div></figure>
+<figure class="funnel"><figcaption><span class="fm">DK</span> Denmark</figcaption><svg viewBox="0 0 300 188" role="img" aria-label="Denmark funnel: add to cart 5.97%, reached checkout 6.24%, conversion 1.33%"><defs><linearGradient id="fgDK" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0CA785"/><stop offset="1" stop-color="#023130"/></linearGradient></defs><polygon points="20.7,14.0 163.3,14.0 166.5,58.0 17.5,58.0" fill="url(#fgDK)"/><text x="188" y="32.5" class="fv">5.97%</text><text x="188" y="46.6" class="fl">Add to cart</text><polygon points="17.5,74.0 166.5,74.0 107.9,118.0 76.1,118.0" fill="url(#fgDK)"/><text x="188" y="92.5" class="fv">6.24%</text><text x="188" y="106.6" class="fl">Reached checkout</text><polygon points="76.1,134.0 107.9,134.0 99.9,178.0 84.1,178.0" fill="url(#fgDK)"/><text x="188" y="152.5" class="fv">1.33%</text><text x="188" y="166.6" class="fl">Conversion</text></svg><div class="fcomp"><span class="fnum">21.4%</span><span class="flbl">est. checkout completion</span></div></figure>
+<figure class="funnel"><figcaption><span class="fm">SE</span> Sweden</figcaption><svg viewBox="0 0 300 188" role="img" aria-label="Sweden funnel: add to cart 4.18%, reached checkout 4.27%, conversion 0.99%"><defs><linearGradient id="fgSE" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0CA785"/><stop offset="1" stop-color="#023130"/></linearGradient></defs><polygon points="42.1,14.0 141.9,14.0 143.0,58.0 41.0,58.0" fill="url(#fgSE)"/><text x="188" y="32.5" class="fv">4.18%</text><text x="188" y="46.6" class="fl">Add to cart</text><polygon points="41.0,74.0 143.0,74.0 103.8,118.0 80.2,118.0" fill="url(#fgSE)"/><text x="188" y="92.5" class="fv">4.27%</text><text x="188" y="106.6" class="fl">Reached checkout</text><polygon points="80.2,134.0 103.8,134.0 97.9,178.0 86.1,178.0" fill="url(#fgSE)"/><text x="188" y="152.5" class="fv">0.99%</text><text x="188" y="166.6" class="fl">Conversion</text></svg><div class="fcomp"><span class="fnum">23.3%</span><span class="flbl">est. checkout completion</span></div></figure>
+</div>
+    <p class="tablenote">Rates are % of sessions, for Jun 6 to Sep 4 2026. Est. checkout completion = completed checkouts ÷ reached-checkout sessions. DK and SE log slightly more checkout sessions than cart sessions, so the steps aren't a clean sequence. Check Shopify's definitions before over-reading them.</p>
+
+    <div class="section-lab" style="margin-top:36px">The full picture</div>
+    <h3 class="subh">Every metric, side by side</h3>
+    <div class="tscroll"><table class="mtable stbl">
+      <thead><tr><th>Metric (arrows vs prior 90 days)</th><th>NL</th><th>DK</th><th>SE</th></tr></thead>
+      <tbody>
+        <tr><td>Sessions</td><td>146,720 ↓34%</td><td>134,400 ↓30%</td><td>101,935 ↑35%</td></tr>
+        <tr><td>Added to cart</td><td class="hi">6.53%</td><td>5.97%</td><td>4.18%</td></tr>
+        <tr><td>Reached checkout</td><td>6.45%</td><td>6.24%</td><td>4.27%</td></tr>
+        <tr><td>Converted (CVR)</td><td class="hi">1.90%</td><td>1.33%</td><td>0.99%</td></tr>
+        <tr><td>Est. checkout completion</td><td class="hi">29.5%</td><td>21.4%</td><td>23.3%</td></tr>
+        <tr><td>Orders (all channels)</td><td>3,848 ↓20%</td><td>2,170 ↓23%</td><td>1,193 ↑63%</td></tr>
+        <tr><td>Total sales</td><td>€1.07M ↓23%</td><td>DKK 5.86M ↓25%</td><td>SEK 4.53M ↑59%</td></tr>
+        <tr><td>Discounts (% of gross)</td><td>30.9%</td><td>29.7%</td><td>29.1%</td></tr>
+        <tr><td>Average order value</td><td>€243 ↓4%</td><td>DKK 2,225 ↓2%</td><td>SEK 3,120 ↓3%</td></tr>
+        <tr><td>Returning-customer rate</td><td class="hi">18.98% ↑23%</td><td>9.72% ↓21%</td><td>10.73% ↑56%</td></tr>
+        <tr><td>Mobile share of sessions</td><td>82.4%</td><td>91.8%</td><td>93.9%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tablenote">NL is 38% of the three stores' sessions but half of their completed orders; SE is the reverse, 27% of sessions and 18% of orders. In rough euro terms (illustrative rates only), the quarter is about €1.07M NL, €0.79M DK and €0.40M SE, so NL is still the biggest store by a wide margin even while it declines.</p>
+
+    <div class="callout" style="margin-top:28px;border-left:3px solid var(--green)">
+      <h3>True in every store</h3>
+      <p style="font-size:14px;color:var(--espresso-soft);margin:0 0 8px;line-height:1.65">Discounting is already heavy (around 30% of gross sales everywhere) yet DK and SE still convert poorly, so more discount isn't the answer; helping people understand the value is. And traffic is almost entirely mobile (82% NL, 92% DK, 94% SE), so mobile is where testing counts.</p>
+      <p style="font-size:14px;color:var(--espresso);font-weight:500;margin:0;line-height:1.65">One shared bright spot: reviews are the number-one reason people choose Dreaver in all three markets (60 to 71%), the most dependable lever we have.</p>
+    </div>
+
+    <div class="section-lab" style="margin-top:36px">Each market</div>
+    <div class="mkt-grid">
+      <div class="mktcard">
+        <div class="mh"><span class="m">NL</span><h4>Strong store, shrinking</h4></div>
+        <p class="tl">The efficient store: best conversion, best checkout completion, and the only rising returning-customer rate. The trouble is upstream.</p>
+        <ul>
+          <li>Add-to-cart and checkout reach both around 6.5%; checkout completion 29.5%, the best of the three.</li>
+          <li>But sessions are down 34%, orders 20% and sales 23%, and paid-social revenue is falling hard.</li>
+          <li>Buyers still name price most (43.2%) and ask about fit, folding, noise and installation.</li>
+        </ul>
+        <div class="prio"><b>Priority</b>Keep the checkout strong and put the energy into traffic volume and acquisition quality.</div>
+      </div>
+
+      <div class="mktcard">
+        <div class="mh"><span class="m">DK</span><h4>Engaged, then stalls</h4></div>
+        <p class="tl">The early funnel looks like NL, but the fewest checkouts convert. The gap is at the finish, not on the product page.</p>
+        <ul>
+          <li>Add-to-cart 5.97% and checkout reach 6.24% are close to NL, but only 21.4% of checkouts complete.</li>
+          <li>39.5% of leavers aren't sure they'll actually use the treadmill; delivery is slower than NL (3 to 6 days vs 2 to 4).</li>
+          <li>Consistent with friction at the final step: payment, delivery expectations, mobile checkout.</li>
+        </ul>
+        <div class="prio"><b>Priority</b>Audit the checkout by device, payment method and shipping step before more product-page work.</div>
+      </div>
+
+      <div class="mktcard">
+        <div class="mh"><span class="m">SE</span><h4>Small, but growing fast</h4></div>
+        <p class="tl">Loses people earliest and converts the least, yet it's expanding across the board. Price dominates the reasons people leave.</p>
+        <ul>
+          <li>Lowest add-to-cart (4.18%) and CVR (0.99%), but sessions up 35%, orders up 63%, sales up 59%.</li>
+          <li>Price is the top exit reason (61.6%); many shoppers compare other brands.</li>
+          <li>Only 16.9% of buyers say price nearly stopped them, so this reads as selection, not a resolved concern.</li>
+        </ul>
+        <div class="prio"><b>Priority</b>Make package value and model fit clear before add-to-cart, then check traffic quality.</div>
+      </div>
+    </div>
+
+    <div class="section-lab" style="margin-top:36px">Patterns across all three</div>
+    <div class="phases">
+      <div class="phase"><span class="ph-lbl">Trend</span><h4>NL and DK are shrinking, SE is growing</h4><p>Judging Sweden on its 0.99% rate alone is unfair, because a fast-broadening top of funnel pulls the rate down while revenue climbs. And NL's strong 1.90% sits on a shrinking base. Direction matters as much as level.</p></div>
+      <div class="phase"><span class="ph-lbl">Discounting</span><h4>Heavy everywhere, and not the lever</h4><p>Discounts run 29 to 31% of gross in all three stores, yet DK and SE still convert poorly. Deeper cuts aren't the fix; helping people understand what the package is worth is the cheaper, testable path.</p></div>
+      <div class="phase"><span class="ph-lbl">Product mix</span><h4>Elevate Pro earns the most, but tests target Motion Pro</h4><p>Elevate Pro is the top revenue product in all three stores, with Motion Pro second. Any winning product-page test should move to the Elevate Pro page too.</p></div>
+      <div class="phase"><span class="ph-lbl">Entry points</span><h4>Discovery tests sit where traffic lands</h4><p>The treadmill collection and the Motion Pro and Elevate Pro pages are the top landing pages in every market, so the homepage-route and collection-filter tests address real entry volume.</p></div>
+    </div>
+
+    <div class="section-lab" style="margin-top:36px">What the surveys add</div>
+    <h3 class="subh">Why people hesitate</h3>
+    <div class="tscroll"><table class="mtable stbl">
+      <thead><tr><th>Signal (survey)</th><th>NL</th><th>DK</th><th>SE</th></tr></thead>
+      <tbody>
+        <tr><td>Exit: price is the main reason</td><td>34.8%</td><td>28.9%</td><td class="hi">61.6%</td></tr>
+        <tr><td>Exit: unsure they'll use it</td><td>30.4%</td><td class="hi">39.5%</td><td>15.1%</td></tr>
+        <tr><td>Buyer: price almost stopped purchase</td><td class="hi">43.2%</td><td>32.9%</td><td>16.9%</td></tr>
+        <tr><td>Reviews = deciding reason for Dreaver</td><td class="hi">70.7%</td><td>60.0%</td><td>64.0%</td></tr>
+        <tr><td>Goal: improve fitness</td><td class="hi">57.7%</td><td>40.2%</td><td>29.2%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tablenote">The surveys are small and mostly directional; the one statistically solid difference is Sweden's much higher "cannot remember" answer on time-to-purchase, which is a recall quirk rather than a faster buying cycle. Reviews leading everywhere is the strongest shared signal; price (SE), routine confidence (DK) and fitness framing (NL) are the market-specific leads, and each already maps to a test.</p>
+
+    <div class="callout" style="margin-top:32px">
+      <h3>The takeaways that matter</h3>
+      <ol>
+        <li><b>One conversion number hides three problems.</b> NL is shrinking demand on a strong site, DK is a checkout leak, SE is top-of-funnel plus growth dilution. Handle them separately.</li>
+        <li><b>NL's real risk is traffic, not conversion.</b> Protect what's working and dig into the decline.</li>
+        <li><b>DK needs a checkout audit before more product-page tests.</b> Engagement is fine; the final step is where it drops.</li>
+        <li><b>Sweden is growing, so don't judge it on rate alone.</b> Lead with value and model choice.</li>
+        <li><b>Discounts are already ~30% of gross and aren't moving the needle.</b> Test value clarity, not bigger cuts.</li>
+        <li><b>Traffic is 82 to 94% mobile.</b> Make mobile the default test surface and pull device-level CVR to see how mobile and desktop really differ.</li>
+        <li><b>Reviews are the top purchase reason in all three markets.</b> The most dependable lever we have.</li>
+        <li><b>Elevate Pro out-earns Motion Pro but the tests target Motion Pro.</b> Extend any winner to the Elevate Pro page.</li>
+      </ol>
+      <p style="font-size:12.5px;color:var(--grey);margin:14px 0 0;line-height:1.6">Worth remembering: Shopify covers 90 days while the surveys cover only a few days at the end, so don't multiply survey shares by traffic. Cross-market euro figures use rough rates for scale only. The cleanest next step is to break Shopify down by market × landing page × device × channel × new/returning × checkout step × payment method to confirm where each problem really starts.</p>
+    </div>
+
+    <div class="pagenav">
+      <button data-go="overview"><span>Previous</span>← Overview</button>
+      <button class="nx" data-go="survey"><span>Next</span>Survey insights →</button>
+    </div>
+  </div></div>
+</section>
+<!-- ==================== SURVEY INSIGHTS ==================== -->
+<section class="page" id="page-survey">
+  <div class="block"><div class="wrap">
+    <div class="section-lab">Survey insights · Comparison</div>
+    <h2 class="sec">What the exit &amp; buyer surveys say</h2>
+    <p class="lede">Six exit-intent and post-purchase surveys across NL, DK and SE. Substantial differences are worth investigating, but most are directional — not statistically established across these small samples. Reviews are the leading reason for choosing Dreaver in every market.</p>
+
+    <div class="callout" style="border-left:3px solid var(--green)">
+      <h3>How certain are we?</h3>
+      <p style="font-size:14px;color:var(--espresso-soft);margin:0 0 8px;line-height:1.65">After correcting for all 132 pairwise comparisons (Fisher exact + Holm), <b style="color:var(--espresso);font-weight:500">only Sweden's higher "cannot remember" recall for time-to-purchase survives correction</b> against both NL and DK. That is a difference in reported recall, not evidence of a faster or slower buying journey. Price, usage and fitness differences are directional — useful for prioritising research, not for claiming why conversion differs.</p>
+    </div>
+
+    <div class="section-lab" style="margin-top:36px">1 · Exit barriers</div>
+    <h3 class="subh">Main reason for not ordering now</h3>
+    <div class="tscroll"><table class="mtable stbl">
+      <thead><tr><th>Reason (single choice)</th><th>NL · n=23</th><th>DK · n=38</th><th>SE · n=73</th></tr></thead>
+      <tbody>
+        <tr><td>Price</td><td>8 (34.8%)</td><td>11 (28.9%)</td><td class="hi">45 (61.6%)</td></tr>
+        <tr><td>Unsure they'll actually use it</td><td>7 (30.4%)</td><td class="hi">15 (39.5%)</td><td>11 (15.1%)</td></tr>
+        <tr><td>Want to compare models</td><td>4 (17.4%)</td><td>6 (15.8%)</td><td>11 (15.1%)</td></tr>
+        <tr><td>Unsure it fits at home</td><td>4 (17.4%)</td><td>3 (7.9%)</td><td>5 (6.8%)</td></tr>
+        <tr><td>Missing information</td><td>0</td><td>3 (7.9%)</td><td>1 (1.4%)</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tablenote">SE price is +32.7pp vs DK and +26.9pp vs NL (directional). DK's largest category is usage uncertainty, but the DK–SE usage gap shrinks from 24.4pp to 4.7pp on matching dates — treat a uniquely Danish routine problem cautiously.</p>
+
+    <div class="section-lab" style="margin-top:36px">2 · Buyers</div>
+    <h3 class="subh">What almost prevented purchase</h3>
+    <div class="tscroll"><table class="mtable stbl">
+      <thead><tr><th>Concern (multiple choice)</th><th>NL · n=44</th><th>DK · n=85</th><th>SE · n=59</th></tr></thead>
+      <tbody>
+        <tr><td>Price / cost</td><td class="hi">19 (43.2%)</td><td>28 (32.9%)</td><td>10 (16.9%)</td></tr>
+        <tr><td>Warranty / service</td><td>5 (11.4%)</td><td>11 (12.9%)</td><td>9 (15.3%)</td></tr>
+        <tr><td>Delivery time</td><td>1 (2.3%)</td><td>3 (3.5%)</td><td>1 (1.7%)</td></tr>
+        <tr><td>Product information</td><td>1 (2.3%)</td><td>1 (1.2%)</td><td>3 (5.1%)</td></tr>
+        <tr><td>No hesitation</td><td>19 (43.2%)</td><td>45 (52.9%)</td><td>37 (62.7%)</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tablenote">Exit price-sensitive respondents (SE 61.6%) and buyer price-hesitant respondents (SE 16.9%) are different samples answering different prompts — likely selection, not a resolved concern. Warranty/service is a shared 11–15%, not a Swedish-specific issue.</p>
+
+    <div class="section-lab" style="margin-top:36px">3 · Goals</div>
+    <h3 class="subh">Important usage goal — daily movement is shared</h3>
+    <div class="tscroll"><table class="mtable stbl">
+      <thead><tr><th>Goal (multiple choice)</th><th>NL · n=52</th><th>DK · n=92</th><th>SE · n=72</th></tr></thead>
+      <tbody>
+        <tr><td>More daily movement</td><td>36 (69.2%)</td><td>62 (67.4%)</td><td>39 (54.2%)</td></tr>
+        <tr><td>Weight loss</td><td>32 (61.5%)</td><td>58 (63.0%)</td><td>34 (47.2%)</td></tr>
+        <tr><td>Improve fitness</td><td class="hi">30 (57.7%)</td><td>37 (40.2%)</td><td>21 (29.2%)</td></tr>
+        <tr><td>Mental wellbeing / stress</td><td>20 (38.5%)</td><td>23 (25.0%)</td><td>16 (22.2%)</td></tr>
+        <tr><td>Daily step target</td><td>18 (34.6%)</td><td>25 (27.2%)</td><td>20 (27.8%)</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tablenote">Fitness is +28.5pp higher in NL than SE — the largest goal difference, and it stays visible after correction as a directional finding (NL-country treadmill buyers 63.4%). Daily movement is a shared priority everywhere.</p>
+
+    <div class="section-lab" style="margin-top:36px">4 · Why Dreaver</div>
+    <h3 class="subh">Deciding reason for choosing Dreaver — reviews lead everywhere</h3>
+    <div class="tscroll"><table class="mtable stbl">
+      <thead><tr><th>Reason (multiple choice)</th><th>NL · n=41</th><th>DK · n=80</th><th>SE · n=50</th></tr></thead>
+      <tbody>
+        <tr><td>Positive reviews / ratings</td><td class="hi">29 (70.7%)</td><td class="hi">48 (60.0%)</td><td class="hi">32 (64.0%)</td></tr>
+        <tr><td>Value for money</td><td>16 (39.0%)</td><td>30 (37.5%)</td><td>12 (24.0%)</td></tr>
+        <tr><td>Product quality / durability</td><td>8 (19.5%)</td><td>14 (17.5%)</td><td>6 (12.0%)</td></tr>
+        <tr><td>Fast delivery</td><td>8 (19.5%)</td><td>2 (2.5%)</td><td>7 (14.0%)</td></tr>
+        <tr><td>Dreaver app</td><td>5 (12.2%)</td><td>10 (12.5%)</td><td>8 (16.0%)</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tablenote">Reviews rank first in all three samples, with no statistically established difference — credible, relevant customer evidence is a shared foundation for the tests (see T2 and T4). Fast delivery is selected far less in DK — worth checking the promise, its visibility, and channel/product mix.</p>
+
+    <div class="callout" style="margin-top:32px;border-left:3px solid var(--green)">
+      <h3>The one statistically robust difference: recall, not purchase speed</h3>
+      <p style="font-size:14px;color:var(--espresso-soft);margin:0 0 10px;line-height:1.65">Sweden's "cannot remember" share for time-from-awareness-to-purchase is <b style="color:var(--espresso);font-weight:500">52.8%</b>, vs 9.5% (DK) and 2.3% (NL) — +50.5pp over NL and +43.3pp over DK, both passing Holm correction (adjusted p ≈ 0.000002–0.000007). Do <b style="color:var(--espresso);font-weight:500">not</b> read this as a shorter Swedish buying cycle: over half of answered durations are unknown and 24 buyers didn't answer. Audit the question's wording, options, device experience and routing before using it for anything.</p>
+      <p style="font-size:12.5px;color:var(--grey);margin:0;line-height:1.6">Method: 132 two-sided Fisher exact tests across 44 harmonised outcomes (NL–DK, NL–SE, DK–SE), Holm step-down correction at 0.05. A raw p&lt;0.05 alone is not a significance claim in a screen this broad; failing correction is not proof the markets are identical.</p>
+    </div>
+
+    <div class="section-lab" style="margin-top:36px">Research direction per market</div>
+    <div class="mkt-grid">
+      <div class="mktcard">
+        <div class="mh"><span class="m">NL</span><h4>Purchase confidence</h4></div>
+        <p class="tl">Price justification, credible fitness benefits and practical ownership details. Evidence directional; smallest exit sample.</p>
+        <ul><li>Investigate how customers judge value and whether product fit, noise and installation are clear enough.</li><li>Review shared-use needs without assuming every buyer is a couple.</li></ul>
+      </div>
+      <div class="mktcard">
+        <div class="mh"><span class="m">DK</span><h4>Confidence it becomes a routine</h4></div>
+        <p class="tl">Habit formation and understanding of the trial. The DK–SE usage gap weakens greatly on common dates.</p>
+        <ul><li>Verify current trial understanding and routine-related content; collect more exit answers on matching dates.</li><li>Retain value/price in the review.</li></ul>
+      </div>
+      <div class="mktcard">
+        <div class="mh"><span class="m">SE</span><h4>Affordability &amp; specifications</h4></div>
+        <p class="tl">Value vs named alternatives, then clear operating specs. Strongest observed contrast is exit price (fails correction).</p>
+        <ul><li>Match Home Fitness Code / FitNord by product, package, shipping and terms; check instalment visibility.</li><li>Verify mode/speed/running info and the recall question.</li></ul>
+      </div>
+    </div>
+
+    <div class="pagenav">
+      <button data-go="insights"><span>Previous</span>← Data insights</button>
+      <button class="nx" data-go="b1"><span>Next</span>T1 · Fitness routine module →</button>
+    </div>
+  </div></div>
+</section>
+
+<!-- ==================== T1 · NL-03 ==================== -->
+<section class="page" id="page-b1"><div class="test"><div class="wrap"><div class="test-grid">
+  <div class="test-info">
+    <div class="thead"><span class="hid">T1</span><span class="lnk"></span><span class="pgbadge pgbadge--pdp">PDP</span><span class="lnk"></span><span class="stbadge">NL</span></div>
+    <h2>Use-case fitness routine module</h2>
+    <p class="tsub">Replace the generic goals section with three realistic uses of the model — daily movement, brisk walking and running within tested limits — and how the speed controls and app support a routine.</p>
+    <dl class="mlist">
+      <div><dt>KPIs</dt><dd>ATC · Sessions Converted</dd></div>
+      <div><dt>Targeting</dt><dd>Motion Pro PDP · goals / use-case section</dd></div>
+      <div><dt>Segment</dt><dd>All eligible visitors</dd></div>
+      <div><dt>Tool</dt><dd>Experiment platform</dd></div>
+      <div><dt>Evidence</dt><dd>Fitness 30/52 buyers (57.7%), daily movement 36/52 (69.2%); 7/23 exit (30.4%) name usage uncertainty as their main barrier</dd></div>
+      <div><dt>A/B test ID</dt><dd class="tid-ref">MC_PDP_FITNESS_ROUTINE_USE_CASES_NL</dd></div>
+    </dl>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>Buyers want to improve their fitness, but undecided visitors are unsure whether a treadmill will help them do it. A feature list doesn't connect capability to a manageable routine.</p></div>
+      <div class="box"><h4>Solution</h4><p>Swap the goals block for three concrete uses of the selected model, explaining how speed controls and supported app functions help someone follow a routine. No promised weight loss or unsupported training claims.</p></div>
+    </div>
+    <div class="hyp">
+      <span class="hyp-lbl">Hypothesis</span>
+      <p class="hline"><b>IF</b> we connect the model's verified capabilities to concrete, achievable routines,</p>
+      <p class="hline"><b>THEN</b> eligible-visitor purchase conversion will increase,</p>
+      <p class="hline"><b>BECAUSE</b> shoppers can better judge whether the treadmill supports their fitness intentions. Track add-to-cart and module engagement; guardrail on cancellations and returns.</p>
+    </div>
+  </div>
+
+  <div class="test-frames"><div class="compare">
+    <div class="col">
+      <div class="col-h"><span class="state before">Before</span><span class="lab">generic goals section</span></div>
+      <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen dv">
+        <div class="anno">Free delivery · 30-day home trial</div>
+        <div class="head"><span class="ico">≡</span><span class="logo">dreaver</span><span class="ico">⌕ ⛒</span></div>
+        <div class="gallery"><div class="img">MOTION PRO TREADMILL</div><div class="gdots"><i class="on"></i><i></i><i></i></div></div>
+        <div class="pdp">
+          <div class="p-title">Dreaver Motion Pro</div>
+          <div class="p-rate"><span class="tp">Trustpilot</span> <span class="st">★★★★★</span> 3,427 reviews</div>
+          <div class="pricegrp"><span class="now">2.999 kr</span><span class="was">3.999 kr</span><span class="save">Save 1.000 kr</span></div>
+          <div class="atc">Add to cart</div>
+        </div>
+        <div class="sectlbl">Your goals</div>
+        <div class="pdp" style="padding-top:0">
+          <div class="benefits">
+            <div class="b"><i></i>Improve your fitness</div>
+            <div class="b"><i></i>Move more every day</div>
+            <div class="b"><i></i>Train at home</div>
+          </div>
+        </div>
+        <div class="grow"></div>
+        <div class="scrollhint">Generic benefit list — no link between capability and a real routine</div>
+      </div></div></div>
+      <div class="note"><span class="dot">①</span><span>A generic goals list restates the promise but never shows <b>how</b> the treadmill becomes part of a day, so the undecided visitor's core question stays open.</span></div>
+    </div>
+
+    <div class="col">
+      <div class="col-h"><span class="state after">After</span><span class="lab">3 real use-cases</span></div>
+      <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen dv">
+        <div class="anno">Free delivery · 30-day home trial</div>
+        <div class="head"><span class="ico">≡</span><span class="logo">dreaver</span><span class="ico">⌕ ⛒</span></div>
+        <div class="gallery"><div class="img">MOTION PRO TREADMILL</div><div class="gdots"><i class="on"></i><i></i><i></i></div></div>
+        <div class="pdp">
+          <div class="p-title">Dreaver Motion Pro</div>
+          <div class="p-rate"><span class="tp">Trustpilot</span> <span class="st">★★★★★</span> 3,427 reviews</div>
+          <div class="pricegrp"><span class="now">2.999 kr</span><span class="was">3.999 kr</span><span class="save">Save 1.000 kr</span></div>
+          <div class="atc">Add to cart</div>
+        </div>
+        <div style="position:relative;margin-top:8px" class="hl">
+          <span class="tagnum" style="top:-8px;left:5px">①</span>
+          <div class="sectlbl" style="padding-bottom:4px">Ways to use your Motion Pro</div>
+          <div class="pcard" style="border-left:0;border-right:0">
+            <div class="row tap" tabindex="0" role="button" data-opens="ov-b1" data-title="Daily movement" data-body="Walk at a gentle pace while you work or watch TV. Low speed range, quiet motor — designed for steady, all-day movement rather than a workout.">
+              <span class="n">1</span><span><b>Daily movement</b> — walk while you work</span><span class="info">ⓘ</span>
+            </div>
+            <div class="row tap" tabindex="0" role="button" data-opens="ov-b1" data-title="Brisk walking" data-body="Set a steady cardio pace with the speed controls. Follow a routine with the connected app's guided walks and pace targets.">
+              <span class="n">2</span><span><b>Brisk walking</b> — steady cardio pace</span><span class="info">ⓘ</span>
+            </div>
+            <div class="row tap" tabindex="0" role="button" data-opens="ov-b1" data-title="Running" data-body="Run within the model's tested speed and incline limits. The app tracks sessions so you can build up gradually and keep a routine.">
+              <span class="n">3</span><span><b>Running</b> — within tested limits</span><span class="info">ⓘ</span>
+            </div>
+          </div>
+        </div>
+        <div class="grow"></div>
+        <div class="overlay" id="ov-b1">
+          <div class="sheet">
+            <div class="sh-h"><span class="t">Daily movement</span><span class="x" tabindex="0" role="button" data-close>✕</span></div>
+            <p class="sh-body" style="font-size:9.5px;color:var(--dv-ink);opacity:.8;margin:0;line-height:1.5">Walk at a gentle pace while you work or watch TV. Low speed range, quiet motor — designed for steady, all-day movement rather than a workout.</p>
+            <div class="chips" style="margin-top:9px"><span class="chip">speed controls</span><span class="chip">connected app</span><span class="chip">tested limits</span></div>
+          </div>
+        </div>
+      </div></div></div>
+      <div class="note"><span class="dot">①</span><span>Three tappable use-cases sit in the goals slot. Each opens a short explainer of the speed range and app support for that use — turning an abstract promise into a routine the shopper can picture.</span></div>
+    </div>
+  </div>
+  <div class="pagenav">
+    <button data-go="survey"><span>Previous</span>← Survey insights</button>
+    <button class="nx" data-go="b2"><span>Next</span>T2 · Review topic tabs →</button>
+  </div>
+  </div>
+</div></div></div></section>
+
+<!-- ==================== T2 · NL-04 ==================== -->
+<section class="page" id="page-b2"><div class="test"><div class="wrap"><div class="test-grid">
+  <div class="test-info">
+    <div class="thead"><span class="hid">T2</span><span class="lnk"></span><span class="pgbadge pgbadge--pdp">PDP</span><span class="lnk"></span><span class="stbadge">NL</span></div>
+    <h2>Review topic tabs</h2>
+    <p class="tsub">Add three topic tabs — everyday use, storage and value — to the top of the review section, showing authentic reviews from the existing set. Full ratings and mixed feedback stay accessible.</p>
+    <dl class="mlist">
+      <div><dt>KPIs</dt><dd>Sessions Converted · ATC</dd></div>
+      <div><dt>Targeting</dt><dd>Motion Pro PDP · first review section</dd></div>
+      <div><dt>Segment</dt><dd>All eligible visitors</dd></div>
+      <div><dt>Tool</dt><dd>Experiment platform</dd></div>
+      <div><dt>Evidence</dt><dd>Reviews influenced 29/41 buyers (70.7%); guiding concerns are price 8/23, usage 7/23, home fit 4/23 in exit Q1</dd></div>
+      <div><dt>A/B test ID</dt><dd class="tid-ref">MC_PDP_REVIEW_TOPIC_TABS_NL</dd></div>
+    </dl>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>A broad rating or an unstructured carousel doesn't answer a visitor's specific question about value, everyday use or storage.</p></div>
+      <div class="box"><h4>Solution</h4><p>Three topic tabs at the top of the existing review section, each surfacing relevant authentic reviews. Attribution, full-review access, the rating distribution and product-version labels are preserved.</p></div>
+    </div>
+    <div class="hyp">
+      <span class="hyp-lbl">Hypothesis</span>
+      <p class="hline"><b>IF</b> visitors can find authentic reviews about their practical buying concern more easily,</p>
+      <p class="hline"><b>THEN</b> eligible-visitor purchase conversion will increase,</p>
+      <p class="hline"><b>BECAUSE</b> customer evidence becomes more useful for evaluating Dreaver. Track review interactions; guardrail on page performance and expectation-related returns.</p>
+    </div>
+  </div>
+
+  <div class="test-frames"><div class="compare">
+    <div class="col">
+      <div class="col-h"><span class="state before">Before</span><span class="lab">unstructured review list</span></div>
+      <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen dv">
+        <div class="anno">↓ scrolled — the review section</div>
+        <div class="sectlbl">Loved by our customers</div>
+        <div class="pdp" style="padding-top:2px">
+          <div class="p-rate" style="font-size:11px"><span class="tp">Trustpilot</span> <span class="st">★★★★★</span> 4.7 · 3,427 reviews</div>
+        </div>
+        <div class="pcard" style="border-left:0;border-right:0;margin:0">
+          <div class="rev"><span class="who">Anna</span> · <span class="st">★★★★★</span><br>Really happy with it, great quality and fast delivery.</div>
+        </div>
+        <div class="pcard" style="border-left:0;border-right:0;border-top:0;margin:0">
+          <div class="rev"><span class="who">Tom</span> · <span class="st">★★★★☆</span><br>Does the job. Took a little while to get used to it.</div>
+        </div>
+        <div class="pcard" style="border-left:0;border-right:0;border-top:0;margin:0">
+          <div class="rev"><span class="who">Lisa</span> · <span class="st">★★★★★</span><br>Would recommend to a friend.</div>
+        </div>
+        <div class="grow"></div>
+        <div class="scrollhint">One long, unsorted list — the visitor scans for their own concern</div>
+      </div></div></div>
+      <div class="note"><span class="dot">①</span><span>Generic five-star blurbs in no particular order. A shopper worried about storage or value has to read through unrelated reviews to find one that speaks to them.</span></div>
+    </div>
+
+    <div class="col">
+      <div class="col-h"><span class="state after">After</span><span class="lab">everyday use · storage · value</span></div>
+      <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen dv">
+        <div class="anno">↓ scrolled — the review section</div>
+        <div class="sectlbl">Loved by our customers</div>
+        <div class="pdp" style="padding-top:2px">
+          <div class="p-rate" style="font-size:11px"><span class="tp">Trustpilot</span> <span class="st">★★★★★</span> 4.7 · 3,427 reviews</div>
+        </div>
+        <div style="position:relative;margin-top:2px" class="hl">
+          <span class="tagnum" style="top:-8px;left:5px">①</span>
+          <div class="rtabs" data-rtabs>
+            <div class="rtabh">
+              <button class="rtab on" data-rtab="0">Everyday use</button>
+              <button class="rtab" data-rtab="1">Storage</button>
+              <button class="rtab" data-rtab="2">Value</button>
+            </div>
+            <div class="rpane" data-rpane="0">
+              <div class="rev"><span class="who">Anna</span> · <span class="st">★★★★★</span> · <span class="vt">everyday use</span><br>I walk on it during calls every morning — it's become part of my day.</div>
+              <div class="rev" style="margin-top:8px"><span class="who">Tom</span> · <span class="st">★★★★★</span> · <span class="vt">everyday use</span><br>Quiet enough to use while the family is around.</div>
+            </div>
+            <div class="rpane" data-rpane="1" hidden>
+              <div class="rev"><span class="who">Lisa</span> · <span class="st">★★★★☆</span> · <span class="vt">storage</span><br>Folds flat and slides under the sofa — smaller than I expected.</div>
+              <div class="rev" style="margin-top:8px"><span class="who">Mark</span> · <span class="st">★★★★★</span> · <span class="vt">storage</span><br>Easy to move on the wheels and store upright in a cupboard.</div>
+            </div>
+            <div class="rpane" data-rpane="2" hidden>
+              <div class="rev"><span class="who">Sophie</span> · <span class="st">★★★★★</span> · <span class="vt">value</span><br>Cheaper than a gym year and I actually use it. Worth it.</div>
+              <div class="rev" style="margin-top:8px"><span class="who">Daan</span> · <span class="st">★★★★☆</span> · <span class="vt">value</span><br>Solid build for the price — feels sturdier than I feared.</div>
+            </div>
+          </div>
+          <div class="pdp" style="padding:8px 13px 0"><span class="more">See all 3,427 reviews</span></div>
+        </div>
+        <div class="grow"></div>
+      </div></div></div>
+      <div class="note"><span class="dot">①</span><span>Three tabs sort the same authentic reviews by the concerns exit surveys flag — <b>everyday use, storage, value</b>. The visitor taps their worry and reads proof about it; the full rating and all reviews stay one tap away.</span></div>
+    </div>
+  </div>
+  <div class="pagenav">
+    <button data-go="b1"><span>Previous</span>← T1 · Fitness routine module</button>
+    <button class="nx" data-go="b3"><span>Next</span>T3 · USP tooltips →</button>
+  </div>
+  </div>
+</div></div></div></section>
+
+<!-- ==================== T3 · NL-05 ==================== -->
+<section class="page" id="page-b3"><div class="test"><div class="wrap"><div class="test-grid">
+  <div class="test-info">
+    <div class="thead"><span class="hid">T3</span><span class="lnk"></span><span class="pgbadge pgbadge--pdp">PDP</span><span class="lnk"></span><span class="stbadge">NL</span></div>
+    <h2>USP tooltips below add-to-cart</h2>
+    <p class="tsub">The USP row under the CTA shows labels only. Add an info affordance to each so a tap opens a short tooltip explaining support, returns/trial, warranty and delivery — right at the decision.</p>
+    <dl class="mlist">
+      <div><dt>KPIs</dt><dd>ATC · Sessions Converted</dd></div>
+      <div><dt>Targeting</dt><dd>Motion Pro PDP · USP row under the CTA</dd></div>
+      <div><dt>Segment</dt><dd>All eligible visitors · mobile prioritised</dd></div>
+      <div><dt>Tool</dt><dd>Experiment platform</dd></div>
+      <div><dt>Evidence</dt><dd>Warranty/service almost prevented purchase for 5/44 buyers (11.4%); 3/11 exit ask about returning the product</dd></div>
+      <div><dt>A/B test ID</dt><dd class="tid-ref">MC_PDP_USP_TOOLTIPS_BELOW_ATC_NL</dd></div>
+    </dl>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>Each USP is a one-word label with no explanation, so a hesitant buyer with a specific worry — how support works, how a return is handled, what the trial covers — has to hunt across the page.</p></div>
+      <div class="box"><h4>Solution</h4><p>An info icon on each USP opens a plain-language tooltip. Terms, price and offer stay identical; only clarity and access change. Content is verified with operations, with the trial kept separate from warranty.</p></div>
+    </div>
+    <div class="hyp">
+      <span class="hyp-lbl">Hypothesis</span>
+      <p class="hline"><b>IF</b> each USP below add-to-cart explains itself with a short tooltip,</p>
+      <p class="hline"><b>THEN</b> eligible-visitor purchase conversion will increase,</p>
+      <p class="hline"><b>BECAUSE</b> a buyer can resolve a support, return or ownership question at the moment of decision without leaving the buy box. Track tooltip opens per USP; guardrail on support workload, margin and returns.</p>
+    </div>
+  </div>
+
+  <div class="test-frames"><div class="compare">
+    <div class="col">
+      <div class="col-h"><span class="state before">Before</span><span class="lab">labels only, no explanation</span></div>
+      <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen dv">
+        <div class="anno">Free delivery · 30-day home trial</div>
+        <div class="head"><span class="ico">≡</span><span class="logo">dreaver</span><span class="ico">⌕ ⛒</span></div>
+        <div class="gallery"><div class="img">MOTION PRO TREADMILL</div><div class="gdots"><i class="on"></i><i></i><i></i></div></div>
+        <div class="pdp">
+          <div class="p-title">Dreaver Motion Pro</div>
+          <div class="p-rate"><span class="tp">Trustpilot</span> <span class="st">★★★★★</span> 3,427 reviews</div>
+          <div class="pricegrp"><span class="now">2.999 kr</span><span class="was">3.999 kr</span><span class="save">Save 1.000 kr</span></div>
+          <div class="atc">Add to cart</div>
+        </div>
+        <div class="usprow">
+          <div class="u"><i></i><b>Free delivery</b></div>
+          <div class="u"><i></i><b>30-day trial</b></div>
+          <div class="u"><i></i><b>Warranty &amp; support</b></div>
+        </div>
+        <div class="grow"></div>
+        <div class="scrollhint">Three labels, no way to learn what any of them actually means here</div>
+      </div></div></div>
+      <div class="note"><span class="dot">①</span><span>The USPs sit in the right place but say nothing. A buyer wondering how support or a return actually works can't find out without leaving the buy box.</span></div>
+    </div>
+
+    <div class="col">
+      <div class="col-h"><span class="state after">After</span><span class="lab">each USP opens a tooltip</span></div>
+      <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen dv">
+        <div class="anno">Free delivery · 30-day home trial</div>
+        <div class="head"><span class="ico">≡</span><span class="logo">dreaver</span><span class="ico">⌕ ⛒</span></div>
+        <div class="gallery"><div class="img">MOTION PRO TREADMILL</div><div class="gdots"><i class="on"></i><i></i><i></i></div></div>
+        <div class="pdp">
+          <div class="p-title">Dreaver Motion Pro</div>
+          <div class="p-rate"><span class="tp">Trustpilot</span> <span class="st">★★★★★</span> 3,427 reviews</div>
+          <div class="pricegrp"><span class="now">2.999 kr</span><span class="was">3.999 kr</span><span class="save">Save 1.000 kr</span></div>
+          <div class="atc">Add to cart</div>
+        </div>
+        <div style="position:relative" class="hl">
+          <span class="tagnum" style="top:-8px;left:5px">①</span>
+          <div class="usprow">
+            <div class="u tap" tabindex="0" role="button" data-opens="ov-b3" data-title="Free delivery" data-body="Delivered free to your door in 2–4 working days. You'll get a tracking link and can choose a delivery day at checkout."><i></i><b>Free delivery <span class="qi">ⓘ</span></b></div>
+            <div class="u tap" tabindex="0" role="button" data-opens="ov-b3" data-title="30-day home trial" data-body="Try it at home for 30 days. If it's not for you, start a return from your account — we arrange collection. See the window and any costs before you buy."><i></i><b>30-day trial <span class="qi">ⓘ</span></b></div>
+            <div class="u tap" tabindex="0" role="button" data-opens="ov-b3" data-title="Warranty &amp; support" data-body="Covered by a multi-year warranty. If something goes wrong, contact support, we assess it, then arrange repair or return — with any costs shown up front."><i></i><b>Warranty <span class="qi">ⓘ</span></b></div>
+          </div>
+        </div>
+        <div class="grow"></div>
+        <div class="overlay" id="ov-b3">
+          <div class="sheet">
+            <div class="sh-h"><span class="t">Free delivery</span><span class="x" tabindex="0" role="button" data-close>✕</span></div>
+            <p class="sh-body" style="font-size:9.5px;color:var(--dv-ink);opacity:.8;margin:0;line-height:1.5">Delivered free to your door in 2–4 working days. You'll get a tracking link and can choose a delivery day at checkout.</p>
+          </div>
+        </div>
+      </div></div></div>
+      <div class="note"><span class="dot">①</span><span>Every USP gains an info icon; a tap opens a plain-language explainer for that point — support, return/trial, warranty, delivery — without changing any terms or leaving the page. The diagnostic also reveals <b>which concern shoppers open most</b>.</span></div>
+    </div>
+  </div>
+  <div class="pagenav">
+    <button data-go="b2"><span>Previous</span>← T2 · Review topic tabs</button>
+    <button class="nx" data-go="b4"><span>Next</span>T4 · Routine reviews (DK) →</button>
+  </div>
+  </div>
+</div></div></div></section>
+
+<!-- ==================== T4 · DK-04 ==================== -->
+<section class="page" id="page-b4"><div class="test"><div class="wrap"><div class="test-grid">
+  <div class="test-info">
+    <div class="thead"><span class="hid">T4</span><span class="lnk"></span><span class="pgbadge pgbadge--pdp">PDP</span><span class="lnk"></span><span class="stbadge">DK</span></div>
+    <h2>Routine reviews beside the model decision</h2>
+    <p class="tsub">Move a compact preview of authenticated reviews about building a routine into the area right below model selection, with the full review set still linked.</p>
+    <dl class="mlist">
+      <div><dt>KPIs</dt><dd>Sessions Converted · ATC</dd></div>
+      <div><dt>Targeting</dt><dd>Motion Pro PDP · below model selection</dd></div>
+      <div><dt>Segment</dt><dd>All eligible visitors</dd></div>
+      <div><dt>Tool</dt><dd>Experiment platform</dd></div>
+      <div><dt>Evidence</dt><dd>Reviews influenced 48/80 buyers (60.0%), the leading reason for choosing Dreaver; usage uncertainty in 15/38 exit answers</dd></div>
+      <div><dt>A/B test ID</dt><dd class="tid-ref">MC_PDP_ROUTINE_REVIEWS_NEAR_DECISION_DK</dd></div>
+    </dl>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>Buyers use reviews to choose Dreaver, but they may need evidence that speaks to everyday use rather than only an aggregate brand rating — and it currently sits far below the decision.</p></div>
+      <div class="box"><h4>Solution</h4><p>A compact preview of existing, authenticated routine-building reviews placed below the model selector, full set still linked. Provenance, product version and the rating are preserved; critical reviews stay accessible.</p></div>
+    </div>
+    <div class="hyp">
+      <span class="hyp-lbl">Hypothesis</span>
+      <p class="hline"><b>IF</b> relevant customer experiences are easier to find near model selection,</p>
+      <p class="hline"><b>THEN</b> eligible-visitor purchase conversion will increase,</p>
+      <p class="hline"><b>BECAUSE</b> visitors can assess how the treadmill fits ordinary routines. Track review engagement; guardrail on page speed and returns.</p>
+    </div>
+  </div>
+
+  <div class="test-frames"><div class="compare">
+    <div class="col">
+      <div class="col-h"><span class="state before">Before</span><span class="lab">reviews far below the decision</span></div>
+      <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen dv">
+        <div class="anno">Free delivery · 30-day home trial</div>
+        <div class="head"><span class="ico">≡</span><span class="logo">dreaver</span><span class="ico">⌕ ⛒</span></div>
+        <div class="gallery"><div class="img">MOTION PRO TREADMILL</div><div class="gdots"><i class="on"></i><i></i><i></i></div></div>
+        <div class="pdp">
+          <div class="p-title">Dreaver Motion Pro</div>
+          <div class="p-rate"><span class="tp">Trustpilot</span> <span class="st">★★★★★</span> 3,427 reviews</div>
+          <div class="pricegrp"><span class="now">2.999 kr</span><span class="was">3.999 kr</span><span class="save">Save 1.000 kr</span></div>
+          <div class="lblrow">Choose your model</div>
+          <div class="models">
+            <span class="mo">Motion</span><span class="mo sel">Motion Pro</span><span class="mo">Elevate Pro</span>
+          </div>
+          <div class="atc">Add to cart</div>
+        </div>
+        <div class="tabs">
+          <div class="tb"><span>What's new</span><span class="cx">+</span></div>
+          <div class="tb"><span>Specifications</span><span class="cx">+</span></div>
+        </div>
+        <div class="grow"></div>
+        <div class="scrollhint" style="color:var(--dv-sale)">↓ ↓ reviews only appear far below, after the tabs and app section</div>
+      </div></div></div>
+      <div class="note"><span class="dot">①</span><span>The visitor picks a model, then meets the CTA with nothing between them and the buy button. The proof they trust most is several scrolls away.</span></div>
+    </div>
+
+    <div class="col">
+      <div class="col-h"><span class="state after">After</span><span class="lab">routine reviews under the model</span></div>
+      <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen dv">
+        <div class="anno">Free delivery · 30-day home trial</div>
+        <div class="head"><span class="ico">≡</span><span class="logo">dreaver</span><span class="ico">⌕ ⛒</span></div>
+        <div class="gallery"><div class="img">MOTION PRO TREADMILL</div><div class="gdots"><i class="on"></i><i></i><i></i></div></div>
+        <div class="pdp" style="padding-bottom:6px">
+          <div class="p-title">Dreaver Motion Pro</div>
+          <div class="p-rate"><span class="tp">Trustpilot</span> <span class="st">★★★★★</span> 3,427 reviews</div>
+          <div class="pricegrp"><span class="now">2.999 kr</span><span class="was">3.999 kr</span><span class="save">Save 1.000 kr</span></div>
+          <div class="lblrow">Choose your model</div>
+          <div class="models">
+            <span class="mo">Motion</span><span class="mo sel">Motion Pro</span><span class="mo">Elevate Pro</span>
+          </div>
+        </div>
+        <div style="position:relative" class="hl">
+          <span class="tagnum" style="top:-8px;left:5px">①</span>
+          <div class="pcard" style="margin:0 13px 0">
+            <div class="ph-t">Real owners · building a routine <span style="color:var(--dv-green);font-weight:600">✓ verified</span></div>
+            <div class="rev"><span class="who">Mette</span> · <span class="st">★★★★★</span><br>Six weeks in and I use it every morning — it finally stuck.</div>
+            <div class="rev" style="margin-top:7px"><span class="who">Jonas</span> · <span class="st">★★★★★</span><br>Easy to fit into the day; I walk while the coffee brews.</div>
+            <div class="tap" tabindex="0" role="button" data-opens="ov-b4" style="margin-top:7px"><span class="more">See all routine reviews</span></div>
+          </div>
+        </div>
+        <div class="pdp" style="padding-top:8px">
+          <div class="atc">Add to cart</div>
+        </div>
+        <div class="grow"></div>
+        <div class="overlay" id="ov-b4">
+          <div class="sheet">
+            <div class="sh-h"><span class="t">Routine reviews</span><span class="x" tabindex="0" role="button" data-close>✕</span></div>
+            <div class="rev"><span class="who">Mette</span> · <span class="st">★★★★★</span><br>Six weeks in and I use it every morning — it finally stuck.</div>
+            <div class="rev" style="margin-top:8px"><span class="who">Jonas</span> · <span class="st">★★★★★</span><br>Easy to fit into the day; I walk while the coffee brews.</div>
+            <div class="rev" style="margin-top:8px"><span class="who">Camilla</span> · <span class="st">★★★★☆</span><br>Took a week to build the habit, now it's automatic.</div>
+            <div class="atc tap" tabindex="0" role="button" data-close style="margin-top:11px">Read all 3,427 reviews</div>
+          </div>
+        </div>
+      </div></div></div>
+      <div class="note"><span class="dot">①</span><span>A compact, verified preview of routine-building reviews sits <b>directly under the model choice</b>, above the CTA. The full set stays one tap away — provenance and the overall rating unchanged.</span></div>
+    </div>
+  </div>
+  <div class="pagenav">
+    <button data-go="b3"><span>Previous</span>← T3 · USP tooltips</button>
+    <button class="nx" data-go="b5"><span>Next</span>T5 · Package value (SE) →</button>
+  </div>
+  </div>
+</div></div></div></section>
+
+<!-- ==================== T5 · SE-01 ==================== -->
+<section class="page" id="page-b5"><div class="test"><div class="wrap"><div class="test-grid">
+  <div class="test-info">
+    <div class="thead"><span class="hid">T5</span><span class="lnk"></span><span class="pgbadge pgbadge--pdp">PDP</span><span class="lnk"></span><span class="stbadge">SE</span></div>
+    <h2>Package-value summary beside the price</h2>
+    <p class="tsub">Reorganise the area below the price into a compact package summary — treadmill, included accessories, supported capabilities and delivery — connecting features to practical uses. Price and offer unchanged.</p>
+    <dl class="mlist">
+      <div><dt>KPIs</dt><dd>ATC · Sessions Converted</dd></div>
+      <div><dt>Targeting</dt><dd>Motion Pro PDP · price / accessory area</dd></div>
+      <div><dt>Segment</dt><dd>All eligible visitors · compact mobile layout</dd></div>
+      <div><dt>Tool</dt><dd>Experiment platform</dd></div>
+      <div><dt>Evidence</dt><dd>Price is the main exit barrier for 45/73 (61.6%), 44/71 on Swedish geolocation; value a deciding reason for 12/50 (24.0%)</dd></div>
+      <div><dt>A/B test ID</dt><dd class="tid-ref">MC_PDP_PACKAGE_VALUE_SUMMARY_SE</dd></div>
+    </dl>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>A large share of exiting respondents see the price as a barrier. Some don't see why the package is worth it; the accessories and capabilities that justify it are scattered around the page.</p></div>
+      <div class="box"><h4>Solution</h4><p>A compact package summary right below the price: treadmill, included accessories, supported capabilities and delivery, with optional extras distinguished. Price, promotion, financing and package stay unchanged — this isolates value comprehension.</p></div>
+    </div>
+    <div class="hyp">
+      <span class="hyp-lbl">Hypothesis</span>
+      <p class="hline"><b>IF</b> we explain the model's complete package and practical value beside its unchanged price,</p>
+      <p class="hline"><b>THEN</b> eligible-visitor purchase conversion will increase,</p>
+      <p class="hline"><b>BECAUSE</b> shoppers can judge what they receive before rejecting the offer on price alone. Track add-to-cart and margin per visitor; a null result wouldn't prove remaining objections need lower prices.</p>
+    </div>
+  </div>
+
+  <div class="test-frames"><div class="compare">
+    <div class="col">
+      <div class="col-h"><span class="state before">Before</span><span class="lab">price, then scattered accessories</span></div>
+      <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen dv">
+        <div class="anno">Free delivery · 30-day home trial</div>
+        <div class="head"><span class="ico">≡</span><span class="logo">dreaver</span><span class="ico">⌕ ⛒</span></div>
+        <div class="gallery"><div class="img">MOTION PRO TREADMILL</div><div class="gdots"><i class="on"></i><i></i><i></i></div></div>
+        <div class="pdp">
+          <div class="p-title">Dreaver Motion Pro</div>
+          <div class="p-rate"><span class="tp">Trustpilot</span> <span class="st">★★★★★</span> 3,427 reviews</div>
+          <div class="pricegrp"><span class="now">2.999 kr</span><span class="was">3.999 kr</span><span class="save">Save 1.000 kr</span></div>
+          <div class="lblrow">Benefits</div>
+          <div class="benefits">
+            <div class="b"><i></i>Foldable frame</div>
+            <div class="b"><i></i>Quiet motor</div>
+            <div class="b"><i></i>App connected</div>
+          </div>
+          <div class="atc">Add to cart</div>
+          <div class="mini">Split the cost with financing at checkout</div>
+        </div>
+        <div class="grow"></div>
+        <div class="scrollhint">What's included and which accessories come with it is spread across the page</div>
+      </div></div></div>
+      <div class="note"><span class="dot">①</span><span>The price stands almost alone. The accessories and capabilities that justify it are elsewhere on the page, so a price-sensitive Swedish visitor judges the number before seeing the value.</span></div>
+    </div>
+
+    <div class="col">
+      <div class="col-h"><span class="state after">After</span><span class="lab">"Your package" beside the price</span></div>
+      <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen dv">
+        <div class="anno">Free delivery · 30-day home trial</div>
+        <div class="head"><span class="ico">≡</span><span class="logo">dreaver</span><span class="ico">⌕ ⛒</span></div>
+        <div class="gallery"><div class="img">MOTION PRO TREADMILL</div><div class="gdots"><i class="on"></i><i></i><i></i></div></div>
+        <div class="pdp" style="padding-bottom:6px">
+          <div class="p-title">Dreaver Motion Pro</div>
+          <div class="p-rate"><span class="tp">Trustpilot</span> <span class="st">★★★★★</span> 3,427 reviews</div>
+          <div class="pricegrp"><span class="now">2.999 kr</span><span class="was">3.999 kr</span><span class="save">Save 1.000 kr</span></div>
+        </div>
+        <div style="position:relative" class="hl">
+          <span class="tagnum" style="top:-8px;left:5px">①</span>
+          <div class="pcard" style="margin:0 13px">
+            <div class="ph-t">Your package <span style="color:var(--dv-green);font-weight:600">included</span></div>
+            <div class="row"><span class="ck">✓</span><span><b>Motion Pro treadmill</b> — foldable frame</span></div>
+            <div class="row"><span class="ck">✓</span><span><b>Safety key + floor mat</b> — ready to use</span></div>
+            <div class="row"><span class="ck">✓</span><span><b>App &amp; guided walks</b> — follow a routine</span></div>
+            <div class="row"><span class="ck">✓</span><span><b>Home delivery</b> — 4–8 working days</span></div>
+            <div class="row tap" tabindex="0" role="button" data-opens="ov-b5" style="border-top:1px dashed var(--line)"><span class="ck" style="color:var(--dv-lilac-ink)">+</span><span style="opacity:.75">Optional extras &amp; financing</span><span class="info">›</span></div>
+          </div>
+        </div>
+        <div class="pdp" style="padding-top:8px">
+          <div class="atc">Add to cart</div>
+        </div>
+        <div class="grow"></div>
+        <div class="overlay" id="ov-b5">
+          <div class="sheet">
+            <div class="sh-h"><span class="t">Optional extras</span><span class="x" tabindex="0" role="button" data-close>✕</span></div>
+            <div class="checks">
+              <div class="c"><b>+</b> Extended warranty — add at checkout</div>
+              <div class="c"><b>+</b> Assembly service — optional</div>
+              <div class="c"><b>+</b> Split the cost with financing</div>
+            </div>
+            <p class="sh-body" style="font-size:8.5px;color:var(--grey);margin:9px 0 0;line-height:1.5">Price, promotion and included package are unchanged — extras are clearly optional.</p>
+          </div>
+        </div>
+      </div></div></div>
+      <div class="note"><span class="dot">①</span><span>A compact "Your package" card sits <b>directly under the price</b>, mapping each included item to a practical use and separating optional extras. The number is now read next to everything it buys.</span></div>
+    </div>
+  </div>
+  <div class="pagenav">
+    <button data-go="b4"><span>Previous</span>← T4 · Routine reviews</button>
+    <button class="nx" data-go="b6"><span>Next</span>T6 · Shop by intended use →</button>
+  </div>
+  </div>
+</div></div></div></section>
+
+<!-- ==================== T6 · H01 (Homepage) ==================== -->
+<section class="page" id="page-b6"><div class="test"><div class="wrap"><div class="test-grid">
+  <div class="test-info">
+    <div class="thead"><span class="hid">T6</span><span class="lnk"></span><span class="pgbadge pgbadge--home">Home</span><span class="lnk"></span><span class="stbadge">SE→DK→NL</span></div>
+    <h2>Shop by intended use</h2>
+    <p class="tsub"><b>H01 · Homepage.</b> Three optional routes near the main shopping CTA — "Walk while working", "Everyday walking" and "Walking + running" — each opening a relevant model selection with a short explanation and a reset. The existing shopping path stays available.</p>
+    <dl class="mlist">
+      <div><dt>KPIs</dt><dd>Treadmill purchase rate (all visitors in test) · qualified PDP visits (diagnostic)</dd></div>
+      <div><dt>Targeting</dt><dd>Homepage, near the main shopping CTA. Start SE or DK, then replicate in NL</dd></div>
+      <div><dt>Segment</dt><dd>All homepage visitors assigned to the test</dd></div>
+      <div><dt>Tool</dt><dd>Experiment platform</dd></div>
+      <div><dt>Evidence</dt><dd>"Want to compare models" was the main exit reason for 4/23 NL, 6/38 DK and 11/73 SE respondents. Inspired by WalkingPad's use-based buying guide</dd></div>
+      <div><dt>A/B test ID</dt><dd class="tid-ref">MC_HOME_SHOP_BY_INTENDED_USE_SE</dd></div>
+    </dl>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>Visitors may understand the benefits of a treadmill but struggle to identify which model suits their needs — so a single "shop" path leaves them to map their own use onto a model.</p></div>
+      <div class="box"><h4>Solution</h4><p>Add three optional intended-use routes near the homepage's main CTA. Each opens a relevant product selection with a short explanation and an option to reset; the existing shopping path is kept.</p></div>
+    </div>
+    <div class="hyp">
+      <span class="hyp-lbl">Hypothesis</span>
+      <p class="hline"><b>IF</b> visitors can start with their intended activity,</p>
+      <p class="hline"><b>THEN</b> more will purchase a suitable treadmill,</p>
+      <p class="hline"><b>BECAUSE</b> identifying relevant models becomes easier. Track qualified PDP visits as a diagnostic; monitor margin per visitor and model-related returns.</p>
+    </div>
+  </div>
+
+  <div class="test-frames"><div class="compare">
+    <div class="col">
+      <div class="col-h"><span class="state before">Before</span><span class="lab">one shopping path</span></div>
+      <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen dv">
+        <div class="anno">Free delivery · 30-day home trial</div>
+        <div class="head"><span class="ico">≡</span><span class="logo">dreaver</span><span class="ico">⌕ ⛒</span></div>
+        <div class="hero">
+          <span class="blob"></span>
+          <div class="hz">Stay in shape. Get more steps.</div>
+          <div class="hp">Foldable walking treadmills for the home — quiet enough to use any time.</div>
+          <div class="atc">Shop treadmills</div>
+        </div>
+        <div class="grow"></div>
+        <div class="scrollhint">One shopping path — the visitor has to map their own need onto a model</div>
+      </div></div></div>
+      <div class="note"><span class="dot">①</span><span>A single "Shop treadmills" CTA sends everyone to the same grid. A visitor who knows how they'll use it, but not which model fits, gets no help choosing.</span></div>
+    </div>
+
+    <div class="col">
+      <div class="col-h"><span class="state after">After</span><span class="lab">3 intended-use routes</span></div>
+      <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen dv">
+        <div class="anno">Free delivery · 30-day home trial</div>
+        <div class="head"><span class="ico">≡</span><span class="logo">dreaver</span><span class="ico">⌕ ⛒</span></div>
+        <div class="hero">
+          <span class="blob"></span>
+          <div class="hz">Stay in shape. Get more steps.</div>
+          <div class="hp">Foldable walking treadmills for the home — quiet enough to use any time.</div>
+          <div class="atc">Shop treadmills</div>
+        </div>
+        <div style="position:relative;margin-top:10px" class="hl">
+          <span class="tagnum" style="top:-8px;left:5px">①</span>
+          <div class="sectlbl" style="padding-bottom:4px">Not sure which model? Start here</div>
+          <div class="routes">
+            <div class="route tap" tabindex="0" role="button" data-opens="ov-b6" data-title="Walk while working" data-body="Quiet, low-speed models that slide under a standing desk — for steady movement through the working day.">
+              <span>Walk while working<span class="sub">under-desk, quiet, low speed</span></span><span class="ar">→</span>
+            </div>
+            <div class="route tap" tabindex="0" role="button" data-opens="ov-b6" data-title="Everyday walking" data-body="Balanced walking models for daily steps and gentle cardio, easy to fold away between sessions.">
+              <span>Everyday walking<span class="sub">daily steps &amp; gentle cardio</span></span><span class="ar">→</span>
+            </div>
+            <div class="route tap" tabindex="0" role="button" data-opens="ov-b6" data-title="Walking + running" data-body="Higher-speed models with room to run, within each model's tested limits — for mixed walking and running.">
+              <span>Walking + running<span class="sub">higher speed, room to run</span></span><span class="ar">→</span>
+            </div>
+          </div>
+        </div>
+        <div class="grow"></div>
+        <div class="overlay" id="ov-b6">
+          <div class="sheet">
+            <div class="sh-h"><span class="t">Walk while working</span><span class="x" tabindex="0" role="button" data-close>✕</span></div>
+            <p class="sh-body" style="font-size:9px;color:var(--dv-ink);opacity:.8;margin:0 0 9px;line-height:1.5">Quiet, low-speed models that slide under a standing desk — for steady movement through the working day.</p>
+            <div class="cgrid" style="padding:0;grid-template-columns:1fr 1fr">
+              <div class="ccard"><div class="img">MOTION</div><div class="pr">2.499 kr</div><div class="nm">Motion</div><div class="sub">Under-desk · quiet</div></div>
+              <div class="ccard"><div class="img">MOTION PRO</div><div class="pr">2.999 kr</div><div class="nm">Motion Pro</div><div class="sub">Under-desk · app</div></div>
+            </div>
+            <div class="shrow"><span class="more">Reset choice</span><div class="atc ghost tap" tabindex="0" role="button" data-close style="width:auto;padding:8px 14px">View these models</div></div>
+          </div>
+        </div>
+      </div></div></div>
+      <div class="note"><span class="dot">①</span><span>Three optional routes sit under the main CTA. Tapping one opens a small, relevant selection with a one-line explanation and a <b>reset</b> — while "Shop treadmills" still serves anyone who prefers to browse everything.</span></div>
+    </div>
+  </div>
+  <div class="pagenav">
+    <button data-go="b5"><span>Previous</span>← T5 · Package value</button>
+    <button class="nx" data-go="b7"><span>Next</span>T7 · Filter by movement →</button>
+  </div>
+  </div>
+</div></div></div></section>
+
+<!-- ==================== T7 · C02 (Collection) ==================== -->
+<section class="page" id="page-b7"><div class="test"><div class="wrap"><div class="test-grid">
+  <div class="test-info">
+    <div class="thead"><span class="hid">T7</span><span class="lnk"></span><span class="pgbadge pgbadge--coll">Collection</span><span class="lnk"></span><span class="stbadge">SE</span></div>
+    <h2>Filter by the way you move</h2>
+    <p class="tsub"><b>C02 · Collection.</b> Visible filter chips on the collection page — "All models", "Walking only", "Walking + running" and "Incline" — that update the grid, show the matching count and explain the selection, with a clear reset. Existing filters are retained.</p>
+    <dl class="mlist">
+      <div><dt>KPIs</dt><dd>Treadmill purchase rate (all collection visitors in test) · qualified PDP visits (diagnostic)</dd></div>
+      <div><dt>Targeting</dt><dd>Main treadmill collection, chips above the grid. Start SE</dd></div>
+      <div><dt>Segment</dt><dd>All collection visitors assigned to the test</dd></div>
+      <div><dt>Tool</dt><dd>Experiment platform</dd></div>
+      <div><dt>Evidence</dt><dd>Main collections received 33,520 NL, 38,519 DK and 33,790 SE landing sessions in the Shopify period; model-comparison concerns across all three surveys. Inspired by Therabody's use/feature filters</dd></div>
+      <div><dt>A/B test ID</dt><dd class="tid-ref">MC_COLL_FILTER_BY_MOVEMENT_SE</dd></div>
+    </dl>
+    <div class="ps">
+      <div class="box"><h4>Problem</h4><p>Price and availability filters don't help shoppers work out whether a treadmill supports their intended activity — they're left to interpret technical specifications themselves.</p></div>
+      <div class="box"><h4>Solution</h4><p>Add visible activity filter chips that update the product grid, show the matching product count and explain the selection, with a clear reset. Existing filters stay in place.</p></div>
+    </div>
+    <div class="hyp">
+      <span class="hyp-lbl">Hypothesis</span>
+      <p class="hline"><b>IF</b> shoppers can filter by activity instead of interpreting technical specifications,</p>
+      <p class="hline"><b>THEN</b> more collection visitors will purchase a suitable treadmill,</p>
+      <p class="hline"><b>BECAUSE</b> matching a model to their intended use becomes easier. Monitor empty results, revenue and contribution per visitor.</p>
+    </div>
+  </div>
+
+  <div class="test-frames"><div class="compare">
+    <div class="col">
+      <div class="col-h"><span class="state before">Before</span><span class="lab">price &amp; availability filters only</span></div>
+      <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen dv">
+        <div class="anno">Free delivery · 30-day home trial</div>
+        <div class="head"><span class="ico">≡</span><span class="logo">dreaver</span><span class="ico">⌕ ⛒</span></div>
+        <div class="cbar"><span>Treadmills</span><span>6 models</span></div>
+        <div class="cfilters"><span class="f">Price</span><span class="f">Availability</span><span class="f">Sort</span></div>
+        <div class="cgrid">
+          <div class="ccard"><div class="img">MOTION</div><div class="pr">2.499 kr</div><div class="nm">Motion</div><div class="sub">Walking</div></div>
+          <div class="ccard"><div class="img">MOTION PRO</div><div class="pr">2.999 kr</div><div class="nm">Motion Pro</div><div class="sub">Walking + running</div></div>
+          <div class="ccard"><div class="img">ELEVATE</div><div class="pr">3.499 kr</div><div class="nm">Elevate</div><div class="sub">Incline</div></div>
+          <div class="ccard"><div class="img">STRIDE</div><div class="pr">2.199 kr</div><div class="nm">Stride</div><div class="sub">Walking</div></div>
+        </div>
+        <div class="grow"></div>
+        <div class="scrollhint">Filters only sort by price/stock — nothing about how you'll use it</div>
+      </div></div></div>
+      <div class="note"><span class="dot">①</span><span>The only filters are price, availability and sort. A shopper who knows they want to run — or only walk — has to read each model's specs to work out which ones qualify.</span></div>
+    </div>
+
+    <div class="col">
+      <div class="col-h"><span class="state after">After</span><span class="lab">filter by activity</span></div>
+      <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="screen dv">
+        <div class="anno">Free delivery · 30-day home trial</div>
+        <div class="head"><span class="ico">≡</span><span class="logo">dreaver</span><span class="ico">⌕ ⛒</span></div>
+        <div class="cbar"><span>Treadmills</span><span>Price · Availability · Sort</span></div>
+        <div style="position:relative" class="hl">
+          <span class="tagnum" style="top:-8px;left:5px">①</span>
+          <div class="rtabs filters" data-rtabs>
+            <div class="rtabh">
+              <button class="rtab on" data-rtab="0">All models</button>
+              <button class="rtab" data-rtab="1">Walking only</button>
+              <button class="rtab" data-rtab="2">Walking + running</button>
+              <button class="rtab" data-rtab="3">Incline</button>
+            </div>
+            <div class="rpane" data-rpane="0">
+              <div class="ccount"><b>6 models</b> · all treadmills</div>
+              <div class="cgrid" style="padding-top:6px">
+                <div class="ccard"><div class="img">MOTION</div><div class="pr">2.499 kr</div><div class="nm">Motion</div><div class="sub">Walking</div></div>
+                <div class="ccard"><div class="img">MOTION PRO</div><div class="pr">2.999 kr</div><div class="nm">Motion Pro</div><div class="sub">Walking + running</div></div>
+                <div class="ccard"><div class="img">ELEVATE</div><div class="pr">3.499 kr</div><div class="nm">Elevate</div><div class="sub">Incline</div></div>
+                <div class="ccard"><div class="img">STRIDE</div><div class="pr">2.199 kr</div><div class="nm">Stride</div><div class="sub">Walking</div></div>
+              </div>
+            </div>
+            <div class="rpane" data-rpane="1" hidden>
+              <div class="ccount"><b>2 models</b> · quiet, low-speed for walking</div>
+              <div class="cgrid" style="padding-top:6px">
+                <div class="ccard"><div class="img">MOTION</div><div class="pr">2.499 kr</div><div class="nm">Motion</div><div class="sub">Walking</div></div>
+                <div class="ccard"><div class="img">STRIDE</div><div class="pr">2.199 kr</div><div class="nm">Stride</div><div class="sub">Walking</div></div>
+              </div>
+            </div>
+            <div class="rpane" data-rpane="2" hidden>
+              <div class="ccount"><b>2 models</b> · higher speed, room to run</div>
+              <div class="cgrid" style="padding-top:6px">
+                <div class="ccard"><div class="img">MOTION PRO</div><div class="pr">2.999 kr</div><div class="nm">Motion Pro</div><div class="sub">Walking + running</div></div>
+                <div class="ccard"><div class="img">ELEVATE PRO</div><div class="pr">3.999 kr</div><div class="nm">Elevate Pro</div><div class="sub">Run + incline</div></div>
+              </div>
+            </div>
+            <div class="rpane" data-rpane="3" hidden>
+              <div class="ccount"><b>2 models</b> · with incline</div>
+              <div class="cgrid" style="padding-top:6px">
+                <div class="ccard"><div class="img">ELEVATE</div><div class="pr">3.499 kr</div><div class="nm">Elevate</div><div class="sub">Incline</div></div>
+                <div class="ccard"><div class="img">ELEVATE PRO</div><div class="pr">3.999 kr</div><div class="nm">Elevate Pro</div><div class="sub">Run + incline</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="pdp" style="padding:6px 12px 2px"><span class="more">Reset filters</span></div>
+        </div>
+        <div class="grow"></div>
+      </div></div></div>
+      <div class="note"><span class="dot">①</span><span>Activity chips sit above the grid; tapping one filters the models, shows the <b>matching count</b> and explains the selection, with a reset. Price, availability and sort are retained — this adds a way to shop, it doesn't remove one.</span></div>
+    </div>
+  </div>
+  <div class="pagenav">
+    <button data-go="b6"><span>Previous</span>← T6 · Shop by intended use</button>
+    <button class="nx" data-go="plan"><span>Next</span>Planning →</button>
+  </div>
+  </div>
+</div></div></div></section>
+
+<!-- ==================== PLAN ==================== -->
+<section class="page" id="page-plan">
+  <div class="block"><div class="wrap">
+    <div class="section-lab">Execution</div>
+    <h2 class="sec">Recommended order</h2>
+    <p class="lede">A proposed sequence, not a fixed priority. Each test runs in its home market first; a winner is then localised and re-tested in the other two markets. Tests that touch the same PDP area run separately so results stay attributable.</p>
+    <div class="phases">
+      <div class="phase"><span class="ph-lbl">Phase 0 · Prerequisites</span><h4>Settle before anything ships</h4><p>Confirm the verified speed/app details and use-cases for <b>T1</b>, tag existing reviews by topic for <b>T2</b>, verify USP tooltip content with operations for <b>T3</b>, select the routine reviews and confirm provenance for <b>T4</b>, and lock the included-vs-optional package data for <b>T5</b>.</p></div>
+      <div class="phase"><span class="ph-lbl">Phase 1 · Fastest PDP clarity</span><h4>T3 · T5</h4><p>USP tooltips (NL) and the package-value summary (SE) are low-effort content additions at the buy box. They map to the clearest evidence — return/support clarity and price-to-value — and are the quickest to build.</p></div>
+      <div class="phase"><span class="ph-lbl">Phase 2 · Proof &amp; motivation</span><h4>T2 · T4 · T1</h4><p>Review topic tabs (NL) and routine reviews (DK) both rely on curated authentic reviews; run them separately since both touch review content. The use-case routine module (T1, NL) needs verified capability content. Any Phase-1 or Phase-2 winner becomes a cross-market rollout candidate.</p></div>
+      <div class="phase"><span class="ph-lbl">Phase 3 · Discovery &amp; selection</span><h4>T6 · T7</h4><p>Homepage intended-use routes (<b>T6</b>) and collection activity filters (<b>T7</b>) help visitors find a suitable model before the PDP. They sit on a different surface, so they can run alongside the PDP tests — but run T6 and T7 sequentially or on separate audiences so their effects can be distinguished. Start in SE (T7) and SE or DK (T6). Survey findings are directional; they don't establish that selection difficulty causes the market conversion gaps.</p></div>
+    </div>
+
+    <div class="foot">
+      <b>Measurement:</b> use unique eligible sessions per surface as the denominator; treat clicks and tooltip/tab opens as diagnostic and decide on purchase CVR, revenue, and contribution margin per eligible session. Report mobile and desktop separately. The commerce platform is the source of truth for orders and revenue.
+      <div class="src">
+        <b>Cross-market rule:</b> a test that wins in its home market is re-run in the other two markets with localised copy, currency and process, and re-validated against local evidence before launch.<br><br>
+        <b>Wireframes:</b> styling (palette, type, price treatment, layout) is taken from the live Dreaver PDP; copy is English reference. Numbers, ratings and section labels are schematic examples — validate every assumption, localise the copy and finalise imagery and spacing against the target storefront before build.
+      </div>
+    </div>
+
+    <div class="pagenav">
+      <button data-go="b7"><span>Previous</span>← T7 · Filter by movement</button>
+      <button class="nx" data-go="overview"><span>Back to</span>Overview →</button>
+    </div>
+  </div></div>
+</section>
+
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  /* Show the download only on the public Maison Commerce template route. */
+  var downloadBanner = document.getElementById('template-download');
+  var isPublicTemplate = location.hostname === 'www.maisoncommerce.co' &&
+    /^\/cro-wireframes-template(?:\/|$)/.test(location.pathname);
+  if (downloadBanner && isPublicTemplate) downloadBanner.hidden = false;
+
+  /* ---------------- router ---------------- */
+  var ORDER = ['overview', 'insights', 'survey', 'b1', 'b2', 'b3', 'b4', 'b5', 'b6', 'b7', 'plan'];
+  var pager = document.getElementById('pager');
+  var ink = document.getElementById('ink');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var current = null;
+
+  function pageEl(id) { return document.getElementById('page-' + id); }
+  function navBtn(id) { return pager.querySelector('button[data-go="' + id + '"]'); }
+
+  function moveInk(id, animate) {
+    var b = navBtn(id);
+    if (!b) { ink.style.width = '0px'; return; }
+    if (!animate) ink.classList.add('noanim');
+    ink.style.width = b.offsetWidth + 'px';
+    ink.style.transform = 'translateX(' + b.offsetLeft + 'px)';
+    if (!animate) requestAnimationFrame(function () { ink.classList.remove('noanim'); });
+  }
+
+  function show(id, push) {
+    if (!pageEl(id)) id = 'overview';
+    if (id === current) return;
+
+    ORDER.forEach(function (k) {
+      var el = pageEl(k);
+      if (el) el.classList.toggle('active', k === id);
+      var b = navBtn(k);
+      if (b) { if (k === id) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); }
+    });
+
+    /* reset any open popups on the page we leave */
+    document.querySelectorAll('.overlay.open').forEach(function (o) { o.classList.remove('open'); });
+    document.querySelectorAll('.hotcard.open').forEach(function (c) { c.classList.remove('open'); });
+
+    var first = current === null;
+    current = id;
+    moveInk(id, !first);
+
+    var i = ORDER.indexOf(id);
+    prevBtn.disabled = i <= 0;
+    nextBtn.disabled = i >= ORDER.length - 1;
+
+    /* keep the active nav item in view on narrow screens */
+    var b = navBtn(id);
+    if (b && pager.scrollWidth > pager.clientWidth) {
+      pager.scrollTo({ left: b.offsetLeft - pager.clientWidth / 2 + b.offsetWidth / 2, behavior: first ? 'auto' : 'smooth' });
+    }
+
+    if (push && location.hash !== '#' + id) history.pushState(null, '', '#' + id);
+    if (!first) window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function go(id) { show(id, true); }
+
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t || !t.closest) return;
+
+    /* ---- navigation ---- */
+    var nav = t.closest('[data-go]');
+    if (nav) { e.preventDefault(); go(nav.getAttribute('data-go')); return; }
+
+    /* ---- wireframe interactions ---- */
+    var add = t.closest('[data-add]');
+
+    var closer = t.closest('[data-close]');
+    if (closer) {
+      e.preventDefault();
+      var ov = closer.closest('.overlay');
+      if (ov) ov.classList.remove('open');
+      if (add) flashAdd(add);
+      return;
+    }
+
+    if (add) { e.preventDefault(); e.stopPropagation(); flashAdd(add); return; }
+
+    var trig = t.closest('[data-opens]');
+    if (trig) {
+      e.preventDefault();
+      var target = document.getElementById(trig.getAttribute('data-opens'));
+      if (target) {
+        var screen = target.closest('.screen');
+        if (screen) screen.querySelectorAll('.overlay.open').forEach(function (o) { o.classList.remove('open'); });
+        if (trig.dataset.title) {
+          var tt = target.querySelector('.sh-h .t');
+          if (tt) tt.textContent = trig.dataset.title;
+        }
+        if (trig.dataset.body) {
+          var bb = target.querySelector('.sh-body');
+          if (bb) bb.textContent = trig.dataset.body;
+        }
+        target.classList.add('open');
+      }
+      return;
+    }
+
+    var overlay = t.closest('.overlay');
+    if (overlay) {
+      if (!t.closest('.sheet')) overlay.classList.remove('open');
+      return;
+    }
+
+    var rtab = t.closest('.rtab');
+    if (rtab) {
+      var box = rtab.closest('[data-rtabs]');
+      if (box) {
+        var idx = rtab.getAttribute('data-rtab');
+        box.querySelectorAll('.rtab').forEach(function (x) { x.classList.toggle('on', x === rtab); });
+        box.querySelectorAll('.rpane').forEach(function (p) { p.hidden = p.getAttribute('data-rpane') !== idx; });
+      }
+      return;
+    }
+
+    var q = t.closest('.acc .q');
+    if (q) {
+      var isOpen = q.classList.toggle('open');
+      var a = q.nextElementSibling;
+      if (a && a.classList.contains('a')) a.style.display = isOpen ? 'block' : 'none';
+      var cx = q.querySelector('.cx');
+      if (cx) cx.textContent = isOpen ? '−' : '+';
+      return;
+    }
+
+    var hs = t.closest('.hotspot');
+    if (hs) {
+      var card = document.getElementById(hs.getAttribute('data-card'));
+      var wasOpen = card && card.classList.contains('open');
+      hs.closest('.banner').querySelectorAll('.hotcard').forEach(function (c) { c.classList.remove('open'); });
+      if (card && !wasOpen) card.classList.add('open');
+      return;
+    }
+
+    document.querySelectorAll('.hotcard.open').forEach(function (c) { c.classList.remove('open'); });
+  });
+
+  function flashAdd(el) {
+    if (el.dataset.busy) return;
+    el.dataset.busy = '1';
+    var prev = el.textContent;
+    el.textContent = el.classList.contains('add') ? '✓' : 'Added ✓';
+    setTimeout(function () { el.textContent = prev; delete el.dataset.busy; }, 1100);
+  }
+
+  prevBtn.addEventListener('click', function () { var i = ORDER.indexOf(current); if (i > 0) go(ORDER[i - 1]); });
+  nextBtn.addEventListener('click', function () { var i = ORDER.indexOf(current); if (i < ORDER.length - 1) go(ORDER[i + 1]); });
+
+  window.addEventListener('popstate', function () { show((location.hash || '#overview').slice(1), false); });
+  window.addEventListener('resize', function () { moveInk(current, false); });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.overlay.open').forEach(function (o) { o.classList.remove('open'); });
+      document.querySelectorAll('.hotcard.open').forEach(function (c) { c.classList.remove('open'); });
+      return;
+    }
+    var el = document.activeElement;
+    var typing = el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA');
+    if (!typing && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+      var i = ORDER.indexOf(current);
+      if (e.key === 'ArrowLeft' && i > 0) { e.preventDefault(); go(ORDER[i - 1]); }
+      if (e.key === 'ArrowRight' && i < ORDER.length - 1) { e.preventDefault(); go(ORDER[i + 1]); }
+      return;
+    }
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    if (el && el.matches && el.matches('[data-opens],[data-close],[data-add],.acc .q,.hotspot,.rtab')) {
+      e.preventDefault();
+      el.click();
+    }
+  });
+
+  /* label every After column that has something to click */
+  document.querySelectorAll('.col').forEach(function (col) {
+    if (!col.querySelector('.state.after')) return;
+    if (!col.querySelector('[data-opens],.acc .q,.hotspot')) return;
+    var head = col.querySelector('.col-h');
+    if (!head) return;
+    var chip = document.createElement('span');
+    chip.className = 'live';
+    chip.textContent = 'Interactive';
+    head.appendChild(chip);
+  });
+
+  /* boot */
+  function boot() { show((location.hash || '#overview').slice(1), false); }
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(function () { moveInk(current, false); }); }
+  boot();
+})();
+</script>
+
+</body>
+</html>
