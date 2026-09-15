@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><meta name="design_doc_mode" content="canvas"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"><style>
+body{margin:0;background:#e9e6e0;font-family:Inter,system-ui,sans-serif;color:#1d1a17;-webkit-font-smoothing:antialiased}
+a{color:#1d1a17}a:hover{color:#5a5147}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+</style></helmet>
+<div style="width:1280px;margin:0 auto;background:#fdfbf8;box-shadow:0 8px 56px rgba(20,18,16,.09);position:relative">
+
+<div style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 60px;background:rgba(253,251,248,.9);backdrop-filter:blur(10px);border-bottom:1px solid rgba(29,26,23,.08);position:sticky;top:0;z-index:20">
+<div style="display:flex;align-items:center;gap:10px"><div style="width:26px;height:26px;border-radius:7px;background:#dcd8d1;border:1px solid rgba(29,26,23,.14)"></div><span style="font:500 16px/1 Inter,sans-serif;letter-spacing:-.01em">Feedwizrd</span></div>
+<div style="display:flex;align-items:center;gap:26px;font:400 14px/1 Inter,sans-serif;color:rgba(29,26,23,.72)"><a href="#s4" style="text-decoration:none;color:inherit">Product</a><a href="#s7" style="text-decoration:none;color:inherit">How it works</a><a href="#s10" style="text-decoration:none;color:inherit">Pricing</a><a href="#s11" style="text-decoration:none;color:inherit">FAQ</a></div>
+<div style="display:flex;align-items:center;gap:16px"><a href="#" style="font:400 14px/1 Inter,sans-serif;color:rgba(29,26,23,.72);text-decoration:none">Sign in</a><a href="#s10" style="display:inline-block;padding:10px 18px;border-radius:999px;background:#f8ea51;color:#423c00;font:500 14px/1 Inter,sans-serif;text-decoration:none;box-shadow:inset 0 0 0 1px rgba(44,36,32,.16),inset 0 -2px 0 rgba(44,36,32,.12),0 1px 2px rgba(44,36,32,.05)">Get started</a></div>
+</div>
+
+<section id="s1" data-screen-label="01 Hero" style="padding:64px 60px 56px;border-bottom:1px solid rgba(29,26,23,.08)">
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:28px">01 · Hero — the ROAS decision</div></sc-if>
+<div style="display:grid;grid-template-columns:5fr 7fr;gap:48px;align-items:center">
+<div>
+<div style="display:inline-block;padding:6px 12px;border-radius:999px;border:1px solid rgba(29,26,23,.12);background:rgba(29,26,23,.04);font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.6);margin-bottom:22px">Shopify app · for stores running Google Ads</div>
+<h1 style="margin:0 0 18px;font:500 52px/1.06 Inter,sans-serif;letter-spacing:-.02em;text-wrap:pretty">Know which products drag your ROAS down. Fix the feed in one click.</h1>
+<p style="margin:0 0 28px;font:400 17px/1.55 Inter,sans-serif;color:rgba(29,26,23,.72);max-width:44ch;text-wrap:pretty">Feedwizrd pulls your Google Ads data into one dashboard, shows ROAS for every item in your feed across 7 to 90 days, and hands you the Agent's concrete fix. Apply it in one click, then watch whether ROAS actually moved.</p>
+<div style="display:flex;gap:12px;margin-bottom:16px"><a href="#s10" style="padding:14px 24px;border-radius:999px;background:#f8ea51;color:#423c00;font:500 15px/1 Inter,sans-serif;text-decoration:none;box-shadow:inset 0 0 0 1px rgba(44,36,32,.16),inset 0 -2px 0 rgba(44,36,32,.12)">Get started</a><a href="#s4" style="padding:14px 22px;border-radius:999px;border:1px solid rgba(29,26,23,.16);font:500 15px/1 Inter,sans-serif;text-decoration:none;color:#1d1a17">See how it works →</a></div>
+<p style="margin:0;font:400 13px/1.5 Inter,sans-serif;color:rgba(29,26,23,.5)">From $29 per store/month with 3+ stores. Cancellation terms to confirm.</p>
+</div>
+<div style="border-radius:16px;background:#f1f1f1;border:1px solid #e3e3e3;padding:12px;box-shadow:0 8px 56px rgba(20,18,16,.07)">
+<div style="display:flex;align-items:center;gap:8px;padding:2px 4px 10px;font:400 11px/1 Inter,sans-serif;color:#616161"><span style="width:16px;height:16px;border-radius:4px;background:#d9d9d9"></span>Shopify admin · Apps · Feedwizrd</div>
+<div style="background:#fff;border:1px solid #e3e3e3;border-radius:12px;box-shadow:0 1px 0 rgba(0,0,0,.05);overflow:hidden">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border-bottom:1px solid #e3e3e3">
+<span style="font:600 14px/1.4 Inter,sans-serif;color:#303030">Feed performance</span>
+<div style="display:flex;border:1px solid #e3e3e3;border-radius:8px;overflow:hidden">
+<sc-for list="{{ windowReadout }}" as="w" hint-placeholder-count="5">
+<span style="padding:6px 10px;font:500 11px/1.3 'IBM Plex Mono',monospace;background:{{ w.bg }};color:{{ w.fg }};border-left:{{ w.sep }}">{{ w.label }}</span>
+</sc-for>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1.9fr .8fr .7fr .6fr 1fr;gap:8px;padding:8px 14px;background:#fafafa;border-bottom:1px solid #e3e3e3;font:500 12px/1.3 Inter,sans-serif;color:#616161"><span>Product</span><span>Ad spend</span><span>Clicks</span><span>Sales</span><span style="color:#303030">ROAS ↓</span></div>
+<sc-for list="{{ heroRows }}" as="r" hint-placeholder-count="4">
+<div style="display:grid;grid-template-columns:1.9fr .8fr .7fr .6fr 1fr;gap:8px;align-items:center;padding:11px 14px;border-bottom:1px solid #f1f1f1;font:400 13px/1.3 Inter,sans-serif;color:#303030">
+<span>{{ r.name }}</span>
+<span>{{ r.spend }}</span>
+<span>{{ r.clicks }}</span>
+<span>{{ r.sales }}</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span style="padding:3px 9px;border-radius:8px;background:{{ r.roasBg }};color:{{ r.roasFg }};font:500 16px/1.2 'IBM Plex Mono',monospace;letter-spacing:-.01em">{{ r.roas }}</span><span style="font:400 13px/1 Inter,sans-serif;color:{{ r.trendFg }}">{{ r.trend }}</span></span>
+</div>
+</sc-for>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;background:#fafafa">
+<div><div style="font:600 13px/1.4 Inter,sans-serif;color:#303030;margin-bottom:2px">Feedwizrd Agent · suggestion</div><div style="font:400 13px/1.4 Inter,sans-serif;color:#616161">Feed title missing colour and material terms on “Ribbed Knit Midi Dress” — ROAS 1.4 over 30 days.</div></div>
+<span style="flex:none;padding:7px 13px;border-radius:8px;background:#303030;color:#f6f6f6;font:500 13px/1 Inter,sans-serif">Apply</span>
+</div>
+</div>
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><div style="margin-top:10px;font:400 11px/1.4 'IBM Plex Mono',monospace;color:rgba(29,26,23,.42)">ASSET: real screenshot of the live Feedwizrd feed-performance table at 2×, once Ruben's data load is finished.</div></sc-if>
+</div>
+</div>
+</section>
+
+<section id="s2" data-screen-label="02 Reassurance" style="padding:32px 60px;border-bottom:1px solid rgba(29,26,23,.08);background:#faf8f5">
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:20px">02 · Reassurance strip — publish only confirmed claims</div></sc-if>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+<sc-for list="{{ reassurance }}" as="r" hint-placeholder-count="4">
+<div style="display:flex;gap:12px;align-items:flex-start;padding:16px;border:1px solid rgba(29,26,23,.1);border-radius:14px;background:#fff">
+<div style="width:24px;height:24px;border-radius:7px;background:#e4e0d9;border:1px solid rgba(29,26,23,.12);flex:none"></div>
+<div><div style="font:500 14px/1.3 Inter,sans-serif;margin-bottom:4px">{{ r.title }}</div><div style="font:400 12px/1.4 Inter,sans-serif;color:rgba(29,26,23,.6)">{{ r.note }}</div></div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section id="s3" data-screen-label="03 Problem proof" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08)">
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">03 · Problem proof — what account-level ROAS hides</div></sc-if>
+<h2 style="margin:0 0 12px;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em;max-width:26ch">Your account ROAS looks fine. Four items in your feed are dragging it down.</h2>
+<p style="margin:0 0 36px;font:400 16px/1.55 Inter,sans-serif;color:rgba(29,26,23,.72);max-width:64ch">Google Ads and Shopify both report at account level. Neither tells you which feed items are sliding, over which time window, what to change, or whether the change worked. Feedwizrd answers all four.</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+<div style="border:1px solid rgba(29,26,23,.12);border-radius:20px;padding:24px;background:#fff">
+<div style="font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45);margin-bottom:16px">What Google &amp; Shopify show</div>
+<div style="display:grid;gap:10px">
+<sc-for list="{{ googleView }}" as="g" hint-placeholder-count="4">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:10px;background:{{ g.bg }};font:400 14px/1 Inter,sans-serif;color:{{ g.fg }}"><span>{{ g.k }}</span><span style="display:inline-flex;align-items:center;gap:7px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:{{ g.size }}">{{ g.v }}<span style="font:400 12px/1 Inter,sans-serif;opacity:.8">{{ g.glyph }}</span></span></div>
+</sc-for>
+</div>
+<div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(29,26,23,.1);font:400 13px/1.45 Inter,sans-serif;color:rgba(29,26,23,.6)">Account level. Looks acceptable. Tells you nothing about which feed items to fix.</div>
+</div>
+<div style="display:grid;gap:12px">
+<div style="font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45);margin-bottom:2px">What Feedwizrd shows</div>
+<div style="border:1px solid rgba(29,26,23,.12);border-radius:16px;padding:18px;background:#fff">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px"><span style="font:500 15px/1.3 Inter,sans-serif">Ribbed Knit Midi Dress</span><span style="font:400 11px/1 'IBM Plex Mono',monospace;letter-spacing:.05em;text-transform:uppercase;color:rgba(29,26,23,.45)">ROAS by window</span></div>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px">
+<sc-for list="{{ windowSeries }}" as="w" hint-placeholder-count="5">
+<div style="padding:10px 6px;border-radius:10px;background:{{ w.bg }};text-align:center">
+<div style="font:400 10px/1 'IBM Plex Mono',monospace;letter-spacing:.05em;color:rgba(29,26,23,.5);margin-bottom:6px">{{ w.label }}</div>
+<div style="font:500 17px/1 'IBM Plex Mono',monospace;letter-spacing:-.01em;color:{{ w.fg }}">{{ w.v }}</div>
+</div>
+</sc-for>
+</div>
+<div style="margin-top:12px;font:400 13px/1.45 Inter,sans-serif;color:rgba(29,26,23,.65)">Steady over 90 days, sliding hard in the last two weeks. The account number never shows this.</div>
+</div>
+<div style="border:1px solid rgba(29,26,23,.12);border-radius:16px;background:#fff;overflow:hidden">
+<div style="padding:16px 18px 12px;font:500 15px/1.3 Inter,sans-serif">Feedwizrd Agent · suggestion</div>
+<sc-for list="{{ suggestionRows }}" as="r" hint-placeholder-count="3">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:10px 18px;border-top:1px solid rgba(29,26,23,.07);font:400 13px/1.45 Inter,sans-serif;color:rgba(29,26,23,.6)"><span style="flex:none">{{ r.k }}</span><span style="text-align:right;color:#1d1a17">{{ r.v }}</span></div>
+</sc-for>
+<div style="padding:14px 18px;background:#faf8f5;border-top:1px solid rgba(29,26,23,.07);display:flex;align-items:center;gap:10px"><span style="padding:8px 14px;border-radius:8px;background:#303030;color:#f6f6f6;font:500 13px/1 Inter,sans-serif">Apply in one click</span><span style="font:400 12px/1.4 Inter,sans-serif;color:rgba(29,26,23,.55)">The Agent wrote it. You approve it.</span></div>
+</div>
+<div style="border:1px solid rgba(29,26,23,.12);border-radius:16px;padding:18px;background:#fff">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px"><span style="font:500 15px/1.3 Inter,sans-serif">Change monitor</span><span style="font:400 11px/1 'IBM Plex Mono',monospace;letter-spacing:.05em;text-transform:uppercase;color:rgba(29,26,23,.45)">30 days after the change</span></div>
+<div style="display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center">
+<div style="padding:14px;border-radius:12px;background:#fdecea;text-align:center"><div style="font:400 10px/1 'IBM Plex Mono',monospace;letter-spacing:.05em;text-transform:uppercase;color:#8e1f0b;opacity:.75;margin-bottom:7px">ROAS before</div><div style="font:500 26px/1 'IBM Plex Mono',monospace;letter-spacing:-.02em;color:#8e1f0b">1.4</div></div>
+<div style="font:400 18px/1 Inter,sans-serif;color:rgba(29,26,23,.35)">→</div>
+<div style="padding:14px;border-radius:12px;background:{{ grnBg }};text-align:center"><div style="font:400 10px/1 'IBM Plex Mono',monospace;letter-spacing:.05em;text-transform:uppercase;color:{{ grnFg }};opacity:.75;margin-bottom:7px">ROAS after</div><div style="font:500 26px/1 'IBM Plex Mono',monospace;letter-spacing:-.02em;color:{{ grnFg }}">3.1</div></div>
+</div>
+<div style="margin-top:12px;font:400 13px/1.45 Inter,sans-serif;color:rgba(29,26,23,.65)">Measured against the baseline Feedwizrd recorded before you applied the change, so you know whether it worked.</div>
+</div>
+</div>
+</div>
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><p style="margin:20px 0 0;font:400 12px/1.5 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45)">Illustrative example, not customer data. Inputs shown: Google Ads spend, clicks, sales and revenue per feed item. Cost of goods is optional — most merchants never fill it in.</p></sc-if>
+</section>
+
+<section id="s4" data-screen-label="04 Product demo" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08);background:#faf8f5">
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">04 · Product demonstration — the whole feed in one list</div></sc-if>
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-bottom:28px">
+<div><h2 style="margin:0 0 10px;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em">One morning. One decision.</h2><p style="margin:0;font:400 16px/1.55 Inter,sans-serif;color:rgba(29,26,23,.72);max-width:56ch">Your whole feed in one list, sorted by ROAS. See which items are underperforming across the window you care about, and what the Agent suggests for each. This runs inside your Shopify admin.</p></div>
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}">
+<div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex:none"><span style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.4)">Wireframe states</span><div style="display:flex;gap:6px">{{ demoTabs }}</div></div>
+</sc-if>
+</div>
+<div style="border-radius:18px;background:#f1f1f1;border:1px solid #e3e3e3;padding:14px;box-shadow:0 8px 56px rgba(20,18,16,.06)">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 4px 12px">
+<div style="display:flex;align-items:center;gap:8px;font:400 11px/1 Inter,sans-serif;color:#616161"><span style="width:16px;height:16px;border-radius:4px;background:#d9d9d9"></span>Shopify admin · Apps · Feedwizrd</div>
+<div style="display:flex;border:1px solid #e3e3e3;border-radius:8px;overflow:hidden;background:#fff">
+<sc-for list="{{ windowReadout }}" as="w" hint-placeholder-count="5">
+<span style="padding:6px 11px;font:500 11px/1.3 'IBM Plex Mono',monospace;background:{{ w.bg }};color:{{ w.fg }};border-left:{{ w.sep }}">{{ w.label }}</span>
+</sc-for>
+</div>
+</div>
+<div style="background:#fff;border:1px solid #e3e3e3;border-radius:12px;box-shadow:0 1px 0 rgba(0,0,0,.05);overflow:hidden">
+<div style="padding:14px 16px 12px;border-bottom:1px solid #e3e3e3">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px">
+<span style="font:600 15px/1.4 Inter,sans-serif;color:#303030">Feed items</span>
+<span style="padding:6px 12px;border-radius:8px;background:#fff;border:1px solid #d4d4d4;box-shadow:0 -1px 0 #b5b5b5 inset;font:500 13px/1.3 Inter,sans-serif;color:#303030">Sort: ROAS, low to high</span>
+</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap">
+<sc-for list="{{ filterTabs }}" as="t" hint-placeholder-count="3">
+<button type="button" onClick="{{ t.go }}" style="display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:8px;border:1px solid {{ t.bd }};cursor:pointer;background:{{ t.bg }};color:{{ t.fg }};font:500 13px/1.3 Inter,sans-serif">{{ t.label }}<span style="padding:1px 7px;border-radius:7px;background:{{ t.countBg }};font:500 12px/1.5 Inter,sans-serif">{{ t.count }}</span></button>
+</sc-for>
+</div>
+<div style="margin-top:10px;display:flex;gap:8px;align-items:flex-start;padding:10px 12px;border-radius:8px;background:#f1f1f1;font:400 12px/1.45 Inter,sans-serif;color:#616161"><span style="width:16px;height:16px;border-radius:999px;background:#d9d9d9;flex:none;margin-top:1px"></span>{{ filterHint }}</div>
+</div>
+<div style="display:grid;grid-template-columns:1.55fr 1fr">
+<div style="border-right:1px solid #e3e3e3">
+<div style="display:grid;grid-template-columns:1.9fr .8fr .7fr .6fr 1fr;gap:10px;padding:9px 16px;background:#fafafa;border-bottom:1px solid #e3e3e3;font:500 12px/1.3 Inter,sans-serif;color:#616161"><span>Product</span><span>Ad spend</span><span>Clicks</span><span>Sales</span><span style="color:#303030">ROAS ↓</span></div>
+<sc-for list="{{ demoRows }}" as="r" hint-placeholder-count="6">
+<div style="display:grid;grid-template-columns:1.9fr .8fr .7fr .6fr 1fr;gap:10px;align-items:center;padding:12px 16px;border-bottom:1px solid #f1f1f1;font:400 13px/1.3 Inter,sans-serif;color:#303030;background:{{ r.bg }};box-shadow:{{ r.ring }}">
+<span>{{ r.name }}<span style="display:block;font:400 12px/1.4 Inter,sans-serif;color:#616161;margin-top:2px">{{ r.tag }}</span></span>
+<span>{{ r.spend }}</span>
+<span>{{ r.clicks }}</span>
+<span>{{ r.sales }}</span>
+<span style="display:inline-flex;align-items:center;gap:6px"><span style="padding:3px 9px;border-radius:8px;background:{{ r.roasBg }};color:{{ r.roasFg }};font:500 16px/1.2 'IBM Plex Mono',monospace;letter-spacing:-.01em">{{ r.roas }}</span><span style="font:400 13px/1 Inter,sans-serif;color:{{ r.trendFg }}">{{ r.trend }}</span></span>
+</div>
+</sc-for>
+<div style="padding:12px 16px;font:400 12px/1.4 Inter,sans-serif;color:#616161">{{ rowsFooter }}</div>
+</div>
+<div style="padding:16px;background:#fafafa">
+<div style="font:500 12px/1.3 Inter,sans-serif;color:#616161;margin-bottom:10px">{{ panelEyebrow }}</div>
+<div style="font:600 16px/1.35 Inter,sans-serif;color:#303030;margin-bottom:6px">{{ panelTitle }}</div>
+<div style="font:400 13px/1.5 Inter,sans-serif;color:#616161;margin-bottom:16px">{{ panelBody }}</div>
+<sc-if value="{{ showSuggestion }}" hint-placeholder-val="{{ true }}">
+<div style="background:#fff;border:1px solid #e3e3e3;border-radius:10px;overflow:hidden;margin-bottom:16px">
+<sc-for list="{{ suggestionDetail }}" as="w" hint-placeholder-count="4">
+<div style="display:flex;justify-content:space-between;gap:12px;padding:9px 12px;border-bottom:1px solid #f1f1f1;font:400 13px/1.35 Inter,sans-serif;color:#616161"><span style="flex:none">{{ w.k }}</span><span style="text-align:right;color:#303030">{{ w.v }}</span></div>
+</sc-for>
+<div style="display:flex;justify-content:space-between;padding:11px 12px;background:#fafafa;font:600 13px/1.3 Inter,sans-serif;color:{{ grnFg }}"><span>Expected ROAS</span><span>1.4 → 2.6</span></div>
+</div>
+</sc-if>
+<sc-if value="{{ showActions }}" hint-placeholder-val="{{ true }}">
+<div style="display:grid;gap:8px">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 12px;border-radius:10px;border:1px solid #e3e3e3;background:#fff;font:400 13px/1.35 Inter,sans-serif;color:#303030">Rewrite feed title and product type<span style="flex:none;padding:2px 8px;border-radius:8px;background:#e0f0ff;color:#00527c;font:500 12px/1.5 Inter,sans-serif">Agent ready</span></div>
+<div style="padding:11px 12px;border-radius:10px;border:1px solid #e3e3e3;background:#fff;font:400 13px/1.35 Inter,sans-serif;color:#303030">Raise bid by 8% on this item</div>
+<div style="padding:11px 12px;border-radius:10px;border:1px solid #e3e3e3;background:#fff;font:400 13px/1.35 Inter,sans-serif;color:#303030">Exclude from the Shopping campaign</div>
+<div style="display:flex;gap:8px;margin-top:4px"><span style="padding:8px 14px;border-radius:8px;background:#303030;color:#f6f6f6;font:500 13px/1 Inter,sans-serif">Apply in one click</span><span style="padding:8px 14px;border-radius:8px;background:#fff;border:1px solid #d4d4d4;box-shadow:0 -1px 0 #b5b5b5 inset;font:500 13px/1 Inter,sans-serif;color:#303030">Dismiss</span></div>
+<div style="margin-top:4px;font:400 12px/1.45 Inter,sans-serif;color:#616161">Nothing reaches your feed until you apply it.</div>
+</div>
+</sc-if>
+</div>
+</div>
+</div>
+</div>
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><p style="margin:16px 0 0;font:400 12px/1.5 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45)">ASSET: rebuild from the live feed-items view — real column names, real sort control, real suggestion panel. Window readout is a static dashboard state, not a toggle. Mobile: one card per feed item, ROAS and suggestion visible, remaining metrics in a drawer.</p></sc-if>
+</section>
+
+<section id="s5" data-screen-label="05 Find Fix Verify" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08)">
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">05 · Differentiator — find → fix → verify</div></sc-if>
+<h2 style="margin:0 0 10px;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em">Find it, fix it, then check what changed.</h2>
+<p style="margin:0 0 28px;font:400 16px/1.55 Inter,sans-serif;color:rgba(29,26,23,.72);max-width:60ch">The same feed item through all three stages: Ribbed Knit Midi Dress. Pick a stage.</p>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px">
+<sc-for list="{{ stageTabs }}" as="t" hint-placeholder-count="3">
+<button type="button" onClick="{{ t.go }}" style="display:flex;align-items:center;gap:14px;padding:18px 20px;border-radius:16px;cursor:pointer;text-align:left;border:1px solid {{ t.bd }};background:{{ t.bg }};color:{{ t.fg }}">
+<span style="width:30px;height:30px;border-radius:999px;flex:none;display:flex;align-items:center;justify-content:center;font:500 13px/1 'IBM Plex Mono',monospace;background:{{ t.numBg }};color:{{ t.numFg }}">{{ t.n }}</span>
+<span><span style="display:block;font:500 20px/1.2 Inter,sans-serif;letter-spacing:-.01em">{{ t.title }}</span><span style="display:block;font:400 13px/1.4 Inter,sans-serif;opacity:.7;margin-top:3px">{{ t.sub }}</span></span>
+</button>
+</sc-for>
+</div>
+<div style="display:grid;grid-template-columns:6fr 6fr;gap:24px;align-items:start">
+<div style="display:grid;gap:12px">
+<sc-for list="{{ stageDetail }}" as="d" hint-placeholder-count="3">
+<div style="padding:18px;border-radius:16px;border:1px solid rgba(29,26,23,.1);background:#fff">
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.42);margin-bottom:7px">{{ d.k }}</div>
+<div style="font:400 15px/1.5 Inter,sans-serif">{{ d.v }}</div>
+</div>
+</sc-for>
+</div>
+<div style="border-radius:16px;background:#f1f1f1;border:1px solid #e3e3e3;padding:12px">
+<div style="display:flex;align-items:center;gap:8px;padding:2px 4px 10px;font:400 11px/1 Inter,sans-serif;color:#616161"><span style="width:16px;height:16px;border-radius:4px;background:#d9d9d9"></span>Shopify admin · Apps · Feedwizrd</div>
+<div style="background:#fff;border:1px solid #e3e3e3;border-radius:12px;box-shadow:0 1px 0 rgba(0,0,0,.05);overflow:hidden">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 16px;border-bottom:1px solid #e3e3e3">
+<span style="font:600 14px/1.4 Inter,sans-serif;color:#303030">{{ mockTitle }}</span>
+<span style="padding:2px 8px;border-radius:8px;font:500 12px/1.5 Inter,sans-serif;background:{{ mockBadgeBg }};color:{{ mockBadgeFg }}">{{ mockBadge }}</span>
+</div>
+<sc-for list="{{ mockLines }}" as="l" hint-placeholder-count="4">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #f1f1f1;font:400 13px/1.4 Inter,sans-serif;color:#616161"><span style="flex:none">{{ l.k }}</span><span style="text-align:right;color:{{ l.fg }};font-weight:{{ l.fw }}">{{ l.v }}</span></div>
+</sc-for>
+<div style="display:flex;gap:8px;padding:14px 16px;background:#fafafa"><span style="padding:8px 14px;border-radius:8px;background:#303030;color:#f6f6f6;font:500 13px/1 Inter,sans-serif">{{ mockCta }}</span><span style="padding:8px 14px;border-radius:8px;background:#fff;border:1px solid #d4d4d4;box-shadow:0 -1px 0 #b5b5b5 inset;font:500 13px/1 Inter,sans-serif;color:#303030">{{ mockCta2 }}</span></div>
+</div>
+</div>
+</div>
+<div style="margin-top:24px;display:inline-flex;align-items:center;gap:10px;padding:12px 16px;border-radius:999px;border:1px solid rgba(29,26,23,.14);background:#f3f0ea;font:400 13px/1 Inter,sans-serif"><span style="width:7px;height:7px;border-radius:999px;background:{{ grnFg }}"></span>The Agent writes every suggestion. You apply it in one click — nothing changes on its own.</div>
+</section>
+
+<section id="s6" data-screen-label="06 Capabilities" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08);background:#faf8f5">
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">06 · Capability support — grouped by outcome</div></sc-if>
+<h2 style="margin:0 0 40px;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em">Everything behind the decision.</h2>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<sc-for list="{{ groups }}" as="g" hint-placeholder-count="4">
+<div style="padding:24px;border-radius:20px;background:#fff;border:1px solid rgba(29,26,23,.1)">
+<div style="font:500 20px/1.2 Inter,sans-serif;letter-spacing:-.01em;margin-bottom:6px">{{ g.title }}</div>
+<div style="font:400 13px/1.45 Inter,sans-serif;color:rgba(29,26,23,.65);margin-bottom:18px">{{ g.sub }}</div>
+<div style="display:grid;gap:8px">
+<sc-for list="{{ g.items }}" as="i" hint-placeholder-count="3">
+<div style="display:flex;gap:10px;align-items:center;padding:11px 13px;border-radius:10px;background:#f7f5f1;font:400 13px/1.3 Inter,sans-serif"><span style="width:18px;height:18px;border-radius:5px;background:#e4e0d9;flex:none"></span>{{ i }}</div>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+<sc-if value="{{ worldMotif }}" hint-placeholder-val="{{ true }}">
+<div style="margin-top:20px;padding:36px 40px;border-radius:24px;background:#2c2420;color:#fdfbf8;display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center">
+<div style="position:relative;width:272px;height:272px;flex:none">
+<div style="position:absolute;inset:0;border-radius:999px;overflow:hidden;background:radial-gradient(circle at 38% 32%,rgba(253,251,248,.10),rgba(253,251,248,.02) 68%);border:1px solid rgba(253,251,248,.16)">
+<div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(253,251,248,.34) 1.1px,transparent 1.1px);background-size:13px 13px"></div>
+<div style="position:absolute;left:-8%;right:-8%;top:50%;height:1px;background:rgba(253,251,248,.14)"></div>
+<div style="position:absolute;left:12%;right:12%;top:28%;height:1px;background:rgba(253,251,248,.09);border-radius:999px"></div>
+<div style="position:absolute;left:12%;right:12%;top:72%;height:1px;background:rgba(253,251,248,.09);border-radius:999px"></div>
+<div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(253,251,248,.10)"></div>
+</div>
+<sc-for list="{{ marketPins }}" as="p" hint-placeholder-count="4">
+<div style="position:absolute;left:{{ p.x }};top:{{ p.y }};width:10px;height:10px;border-radius:999px;background:{{ p.fill }};box-shadow:0 0 0 3px rgba(44,36,32,.9)"></div>
+</sc-for>
+</div>
+<div>
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(253,251,248,.5);margin-bottom:14px">Multi-market</div>
+<h3 style="margin:0 0 10px;font:500 30px/1.15 Inter,sans-serif;letter-spacing:-.02em">Every market you sell into, analysed on its own feed.</h3>
+<p style="margin:0 0 24px;font:400 15px/1.55 Inter,sans-serif;color:rgba(253,251,248,.72);max-width:48ch">One item can carry your ROAS in Germany and sink it in China. Feedwizrd keeps the feeds, markets and currencies apart, so the suggestion you apply is the one that market needs.</p>
+<div style="border:1px solid rgba(253,251,248,.14);border-radius:14px;overflow:hidden">
+<div style="display:grid;grid-template-columns:1.2fr 1fr .8fr .8fr;gap:12px;padding:10px 16px;background:rgba(253,251,248,.06);font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(253,251,248,.5)"><span>Market</span><span>Feed</span><span>Currency</span><span>ROAS</span></div>
+<sc-for list="{{ markets }}" as="m" hint-placeholder-count="4">
+<div style="display:grid;grid-template-columns:1.2fr 1fr .8fr .8fr;gap:12px;align-items:center;padding:12px 16px;border-top:1px solid rgba(253,251,248,.09);font:400 13px/1.3 Inter,sans-serif">
+<span style="display:flex;align-items:center;gap:9px"><span style="width:8px;height:8px;border-radius:999px;background:{{ m.fill }};flex:none"></span>{{ m.name }}</span>
+<span style="font:400 12px/1.3 'IBM Plex Mono',monospace;color:rgba(253,251,248,.6)">{{ m.feed }}</span>
+<span style="font:400 12px/1.3 'IBM Plex Mono',monospace;color:rgba(253,251,248,.6)">{{ m.currency }}</span>
+<span style="font:500 15px/1 'IBM Plex Mono',monospace;color:{{ m.roasFg }}">{{ m.roas }}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><p style="margin:16px 0 0;font:400 12px/1.5 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45)">ASSET: replace the greybox globe with a real point-mapped world graphic — one dot per customer market, dots weighted by spend. Market rows should come from the live multi-market view.</p></sc-if>
+</sc-if>
+</section>
+
+<section id="s7" data-screen-label="07 Setup" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08)">
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">07 · Setup and daily use</div></sc-if>
+<h2 style="margin:0 0 10px;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em">Connected in about five minutes.</h2>
+<p style="margin:0 0 40px;font:400 16px/1.55 Inter,sans-serif;color:rgba(29,26,23,.72);max-width:58ch">Install from the Shopify App Store and authorize Google Ads through Google's own consent flow. No custom development needed.</p>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+<sc-for list="{{ setup }}" as="s" hint-placeholder-count="4">
+<div style="padding:20px;border-radius:16px;background:#fff;border:1px solid rgba(29,26,23,.1)">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px"><span style="font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;color:rgba(29,26,23,.45)">STEP {{ s.n }}</span><span style="font:400 11px/1 'IBM Plex Mono',monospace;color:rgba(29,26,23,.4)">{{ s.time }}</span></div>
+<div style="height:80px;border-radius:10px;border:1px dashed rgba(29,26,23,.2);background:#faf8f5;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font:400 10px/1.4 'IBM Plex Mono',monospace;color:rgba(29,26,23,.42);margin-bottom:14px">{{ s.asset }}</div>
+<div style="font:500 15px/1.3 Inter,sans-serif;margin-bottom:6px">{{ s.title }}</div>
+<div style="font:400 13px/1.45 Inter,sans-serif;color:rgba(29,26,23,.65)">{{ s.body }}</div>
+</div>
+</sc-for>
+</div>
+<div style="margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+<sc-for list="{{ setupFacts }}" as="f" hint-placeholder-count="3">
+<div style="padding:14px 16px;border-radius:12px;border:1px solid rgba(29,26,23,.1);background:#faf8f5;font:400 13px/1.45 Inter,sans-serif"><span style="display:block;font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.42);margin-bottom:6px">{{ f.k }}</span>{{ f.v }}</div>
+</sc-for>
+</div>
+</section>
+
+<section id="s8" data-screen-label="08 Trust" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08);background:#faf8f5">
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">08 · Trust and account control</div></sc-if>
+<h2 style="margin:0 0 10px;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em">Your accounts, your call.</h2>
+<p style="margin:0 0 36px;font:400 16px/1.55 Inter,sans-serif;color:rgba(29,26,23,.72);max-width:58ch">Exactly what Feedwizrd can read, what it can change when you apply a suggestion, and what it never touches.</p>
+<div style="border:1px solid rgba(29,26,23,.12);border-radius:20px;background:#fff;overflow:hidden">
+<div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:0;background:#f3f0ea;border-bottom:1px solid rgba(29,26,23,.1)">
+<div style="padding:14px 20px;font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45)">Scope</div>
+<div style="padding:14px 16px;font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45)">Read</div>
+<div style="padding:14px 16px;font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45)">Change when you apply</div>
+<div style="padding:14px 16px;font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45)">Never access</div>
+</div>
+<sc-for list="{{ permissions }}" as="p" hint-placeholder-count="7">
+<div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;border-bottom:1px solid rgba(29,26,23,.07)">
+<div style="padding:14px 20px;font:400 13px/1.35 Inter,sans-serif">{{ p.scope }}</div>
+<div style="padding:14px 16px;font:400 12px/1.35 'IBM Plex Mono',monospace;color:rgba(29,26,23,.7)">{{ p.read }}</div>
+<div style="padding:14px 16px;font:400 12px/1.35 'IBM Plex Mono',monospace;color:rgba(29,26,23,.7)">{{ p.change }}</div>
+<div style="padding:14px 16px;font:400 12px/1.35 'IBM Plex Mono',monospace;color:rgba(29,26,23,.7)">{{ p.never }}</div>
+</div>
+</sc-for>
+</div>
+<div style="margin-top:20px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+<sc-for list="{{ trustFacts }}" as="f" hint-placeholder-count="4">
+<div style="padding:16px;border-radius:14px;border:1px solid rgba(29,26,23,.1);background:#fff"><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.42);margin-bottom:8px">{{ f.k }}</div><div style="font:400 13px/1.45 Inter,sans-serif">{{ f.v }}</div></div>
+</sc-for>
+</div>
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><p style="margin:16px 0 0;font:400 12px/1.5 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45)">Copy blocked until product confirms exact Shopify and Google Ads permission scopes. Merchant Center row removed — nothing in the product happens inside Merchant Center.</p></sc-if>
+</section>
+
+<section id="s9" data-screen-label="09 Case study" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08)">
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">09 · Outcome proof — placeholder case study</div></sc-if>
+<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-bottom:24px">
+<div>
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><div style="display:inline-block;margin-bottom:16px;padding:7px 13px;border-radius:999px;background:#f3f0ea;border:1px dashed rgba(29,26,23,.25);font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.05em;text-transform:uppercase;color:rgba(29,26,23,.55)">Placeholder · awaiting documented customer case</div></sc-if>
+<h2 style="margin:0;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em;max-width:26ch">His ROAS was sliding. He never had to work out why.</h2>
+</div>
+<div style="display:flex;align-items:center;gap:10px;flex:none">
+<span style="font:400 12px/1 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45);margin-right:6px">{{ caseCounter }}</span>
+<button type="button" onClick="{{ prevCase }}" style="width:40px;height:40px;border-radius:999px;border:1px solid rgba(29,26,23,.16);background:#fff;cursor:pointer;font:400 15px/1 'IBM Plex Mono',monospace;color:#1d1a17">←</button>
+<button type="button" onClick="{{ nextCase }}" style="width:40px;height:40px;border-radius:999px;border:1px solid rgba(29,26,23,.16);background:#fff;cursor:pointer;font:400 15px/1 'IBM Plex Mono',monospace;color:#1d1a17">→</button>
+</div>
+</div>
+<div style="border:1px solid rgba(29,26,23,.12);border-radius:24px;background:#fff;overflow:hidden;box-shadow:0 8px 56px rgba(20,18,16,.06)">
+<div style="display:grid;grid-template-columns:7fr 5fr">
+<div style="padding:36px 36px 28px;border-right:1px solid rgba(29,26,23,.1)">
+<div style="font:400 34px/1 'IBM Plex Mono',monospace;color:rgba(29,26,23,.22);margin-bottom:12px">“</div>
+<blockquote style="margin:0 0 28px;font:500 24px/1.4 Inter,sans-serif;letter-spacing:-.01em;text-wrap:pretty">{{ caseQuote }}</blockquote>
+<div style="display:flex;align-items:center;gap:12px;padding-bottom:26px;border-bottom:1px solid rgba(29,26,23,.1)">
+<div style="width:44px;height:44px;border-radius:999px;background:#e4e0d9;border:1px solid rgba(29,26,23,.12);flex:none"></div>
+<div><div style="font:500 14px/1.3 Inter,sans-serif">{{ caseName }}</div><div style="font:400 12px/1.4 'IBM Plex Mono',monospace;color:rgba(29,26,23,.5);margin-top:3px">{{ caseStore }}</div></div>
+</div>
+<div style="display:grid;gap:10px;margin-top:22px">
+<sc-for list="{{ caseSteps }}" as="c" hint-placeholder-count="5">
+<div style="display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border-radius:12px;background:#faf8f5;border:1px solid rgba(29,26,23,.08)">
+<span style="width:24px;height:24px;border-radius:999px;flex:none;display:flex;align-items:center;justify-content:center;background:{{ c.numBg }};color:{{ c.numFg }};font:500 11px/1 'IBM Plex Mono',monospace">{{ c.n }}</span>
+<div><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.42);margin-bottom:5px">{{ c.title }}</div><div style="font:400 14px/1.45 Inter,sans-serif;color:rgba(29,26,23,.78)">{{ c.body }}</div></div>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="padding:28px;display:flex;flex-direction:column;gap:16px;background:#faf8f5">
+<div style="padding:24px;border-radius:20px;background:#fff;border:1px solid rgba(29,26,23,.12)">
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45);margin-bottom:16px">Google Ads ROAS · account level</div>
+<div style="display:flex;align-items:baseline;gap:14px">
+<span style="font:500 52px/1 'IBM Plex Mono',monospace;letter-spacing:-.03em;color:#8e1f0b">{{ chartFrom }}</span>
+<span style="font:400 26px/1 Inter,sans-serif;color:rgba(29,26,23,.3)">→</span>
+<span style="font:500 52px/1 'IBM Plex Mono',monospace;letter-spacing:-.03em;color:{{ grnFg }}">{{ chartTo }}</span>
+</div>
+<div style="margin-top:12px;font:400 13px/1.45 Inter,sans-serif;color:rgba(29,26,23,.65)">{{ caseWindow }}</div>
+</div>
+<div style="background:#fff;border:1px solid #e3e3e3;border-radius:12px;box-shadow:0 1px 0 rgba(0,0,0,.05);padding:16px">
+<div style="font:600 14px/1.4 Inter,sans-serif;color:#303030;margin-bottom:2px">Weekly ROAS, 14 weeks</div>
+<div style="font:400 12px/1.4 Inter,sans-serif;color:#616161;margin-bottom:14px">Dashed line marks the week the Agent's fixes were applied</div>
+<div style="display:flex;align-items:flex-end;gap:3px;height:110px">
+<sc-for list="{{ chartBefore }}" as="b" hint-placeholder-count="6">
+<div style="flex:1;height:{{ b.h }};background:#d9a09a;border-radius:3px 3px 0 0"></div>
+</sc-for>
+<div style="width:0;align-self:stretch;border-left:1px dashed #8a8a8a;margin:0 4px"></div>
+<sc-for list="{{ chartAfter }}" as="b" hint-placeholder-count="8">
+<div style="flex:1;height:{{ b.h }};background:{{ grnFg }};border-radius:3px 3px 0 0"></div>
+</sc-for>
+</div>
+<div style="display:flex;justify-content:space-between;padding-top:8px;border-top:1px solid #f1f1f1;margin-top:8px;font:500 12px/1.4 Inter,sans-serif"><span style="color:#8e1f0b">Before · {{ chartFrom }} ROAS, declining</span><span style="color:{{ grnFg }}">After · {{ chartTo }} ROAS</span></div>
+</div>
+<div style="padding:24px;border-radius:20px;background:linear-gradient(117.3deg,#fdf0e8,#fbeabf);border:4px solid rgba(254,253,252,.6)">
+<div style="display:grid;gap:14px">
+<sc-for list="{{ caseMetrics }}" as="m" hint-placeholder-count="3">
+<div><div style="font:500 28px/1 'IBM Plex Mono',monospace;letter-spacing:-.02em">{{ m.v }}</div><div style="font:400 12px/1.4 Inter,sans-serif;color:rgba(29,26,23,.6);margin-top:4px">{{ m.k }}</div></div>
+</sc-for>
+</div>
+</div>
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><div style="border-radius:12px;border:1px dashed rgba(29,26,23,.2);background:#fff;padding:14px;font:400 11px/1.5 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45)">ASSET: replace the chart with an unedited Google Ads screenshot for this store, plus written permission to name it.</div></sc-if>
+</div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 36px;border-top:1px solid rgba(29,26,23,.1);background:#fff">
+<div style="display:flex;gap:8px">
+<sc-for list="{{ caseDots }}" as="d" hint-placeholder-count="3">
+<button type="button" onClick="{{ d.go }}" aria-label="Go to case study" style="width:{{ d.w }};height:8px;border-radius:999px;border:0;padding:0;cursor:pointer;background:{{ d.bg }}"></button>
+</sc-for>
+</div>
+<span style="font:400 11px/1.4 'IBM Plex Mono',monospace;color:rgba(29,26,23,.42)">One case per slide. Arrows, dots and swipe all move the slider.</span>
+</div>
+</div>
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><p style="margin:16px 0 0;font:400 12px/1.5 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45)">Placeholder names, quotes and chart data. Until at least one case is documented and signed off, this section ships as a single labeled product walkthrough with no quote.</p></sc-if>
+</section>
+
+<section id="s10" data-screen-label="10 Pricing" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08);background:#faf8f5">
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">10 · Pricing</div></sc-if>
+<h2 style="margin:0 0 10px;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em">From $29 per store/month with 3+ stores.</h2>
+<p style="margin:0 0 36px;font:400 16px/1.55 Inter,sans-serif;color:rgba(29,26,23,.72);max-width:56ch">One plan, priced by how many stores you connect. Every capability is included at every store count.</p>
+<div style="display:grid;grid-template-columns:6fr 6fr;gap:24px;align-items:stretch">
+<div style="padding:28px;border-radius:24px;background:#fff;border:1px solid rgba(29,26,23,.12)">
+<div style="font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45);margin-bottom:18px">How many stores?</div>
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:26px">{{ storeChips }}</div>
+<div style="display:flex;align-items:flex-end;gap:12px;margin-bottom:8px"><span style="font:500 48px/1 'IBM Plex Mono',monospace;letter-spacing:-.03em">{{ totalLabel }}</span><span style="font:400 14px/1.4 Inter,sans-serif;color:rgba(29,26,23,.6);padding-bottom:6px">per month, billed monthly</span></div>
+<div style="font:400 14px/1.5 Inter,sans-serif;color:rgba(29,26,23,.7);margin-bottom:24px">{{ perStoreLabel }}</div>
+<a href="#" style="display:block;text-align:center;padding:15px;border-radius:999px;background:#f8ea51;color:#423c00;font:500 15px/1 Inter,sans-serif;text-decoration:none;box-shadow:inset 0 0 0 1px rgba(44,36,32,.16),inset 0 -2px 0 rgba(44,36,32,.12)">{{ pricingCta }}</a>
+<div style="margin-top:14px;font:400 12px/1.5 Inter,sans-serif;color:rgba(29,26,23,.5)">Billed through Shopify. Cancel anytime from billing settings. Trial terms to confirm.</div>
+</div>
+<div style="padding:28px;border-radius:24px;background:#fff;border:1px solid rgba(29,26,23,.12)">
+<div style="font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.45);margin-bottom:18px">Included at every store count</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;margin-bottom:24px">
+<sc-for list="{{ included }}" as="i" hint-placeholder-count="8">
+<div style="display:flex;gap:9px;align-items:center;font:400 13px/1.35 Inter,sans-serif"><span style="width:6px;height:6px;border-radius:999px;background:#b8b2a8;flex:none"></span>{{ i }}</div>
+</sc-for>
+</div>
+<div style="padding:18px;border-radius:16px;background:#f3f0ea;border:1px solid rgba(29,26,23,.1)"><div style="font:500 14px/1.3 Inter,sans-serif;margin-bottom:6px">10 or more stores</div><div style="font:400 13px/1.5 Inter,sans-serif;color:rgba(29,26,23,.68);margin-bottom:12px">Agency and multi-brand setups get a custom price and onboarding.</div><a href="#" style="font:500 13px/1 Inter,sans-serif;text-decoration:none">Talk to us →</a></div>
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><div style="margin-top:16px;font:400 11px/1.5 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45)">Prices shown: 1 store $49 · 2 stores $39/store · 3+ stores $29/store. Awaiting final confirmation.</div></sc-if>
+</div>
+</div>
+</section>
+
+<section id="s11" data-screen-label="11 FAQ" style="padding:64px 60px;border-bottom:1px solid rgba(29,26,23,.08)">
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:24px">11 · FAQ</div></sc-if>
+<div style="display:grid;grid-template-columns:4fr 8fr;gap:48px;align-items:start">
+<div style="position:sticky;top:90px">
+<h2 style="margin:0 0 18px;font:500 38px/1.12 Inter,sans-serif;letter-spacing:-.02em">Questions merchants ask first.</h2>
+<button type="button" onClick="{{ toggleAllFaq }}" style="padding:10px 16px;border-radius:999px;border:1px solid rgba(29,26,23,.16);background:#fff;cursor:pointer;font:500 13px/1 Inter,sans-serif;color:#1d1a17">{{ faqAllLabel }}</button>
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><p style="margin:14px 0 0;font:400 11px/1.5 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45)">All 12 answers are also in the copy sheet for review.</p></sc-if>
+</div>
+<div style="border-top:1px solid rgba(29,26,23,.12)">
+<sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+<div style="border-bottom:1px solid rgba(29,26,23,.12)">
+<button type="button" onClick="{{ f.toggle }}" style="width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 4px;background:none;border:0;cursor:pointer;text-align:left;font:500 16px/1.35 Inter,sans-serif;color:#1d1a17">
+<span>{{ f.q }}</span><span style="font:400 18px/1 'IBM Plex Mono',monospace;color:rgba(29,26,23,.45);flex:none">{{ f.sign }}</span>
+</button>
+<sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+<div style="padding:0 60px 20px 4px;font:400 14px/1.6 Inter,sans-serif;color:rgba(29,26,23,.72)">{{ f.a }}</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section id="s12" data-screen-label="12 Final CTA" style="padding:80px 60px;border-bottom:1px solid rgba(29,26,23,.08);background:#faf8f5;text-align:center">
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(29,26,23,.4);margin-bottom:28px">12 · Final CTA</div></sc-if>
+<h2 style="margin:0 auto 16px;font:500 44px/1.1 Inter,sans-serif;letter-spacing:-.02em;max-width:24ch">Find the products costing you money before another week of ad spend does.</h2>
+<p style="margin:0 auto 28px;font:400 17px/1.55 Inter,sans-serif;color:rgba(29,26,23,.72);max-width:52ch">See ROAS for every item in your feed, apply the Agent's fix in one click, and watch whether it worked. No custom development needed, no automatic changes.</p>
+<div style="display:flex;gap:12px;justify-content:center;margin-bottom:14px"><a href="#" style="padding:15px 26px;border-radius:999px;background:#f8ea51;color:#423c00;font:500 15px/1 Inter,sans-serif;text-decoration:none;box-shadow:inset 0 0 0 1px rgba(44,36,32,.16),inset 0 -2px 0 rgba(44,36,32,.12)">Get started</a><a href="#s4" style="padding:15px 24px;border-radius:999px;border:1px solid rgba(29,26,23,.16);font:500 15px/1 Inter,sans-serif;text-decoration:none">See how it works →</a></div>
+<p style="margin:0;font:400 13px/1.5 Inter,sans-serif;color:rgba(29,26,23,.5)">From $29 per store/month with 3+ stores.</p>
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><p style="margin:22px 0 0;font:400 11px/1.5 'IBM Plex Mono',monospace;color:rgba(29,26,23,.4)">Mobile: sticky bottom CTA appears after the hero scrolls away; the Agent launcher moves above it.</p></sc-if>
+</section>
+
+<footer style="padding:48px 60px 32px">
+<div style="display:grid;grid-template-columns:4fr 2fr 2fr 2fr;gap:32px;padding-bottom:32px;border-bottom:1px solid rgba(29,26,23,.1)">
+<div>
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div style="width:24px;height:24px;border-radius:6px;background:#dcd8d1;border:1px solid rgba(29,26,23,.14)"></div><span style="font:500 15px/1 Inter,sans-serif">Feedwizrd</span></div>
+<p style="margin:0;font:400 13px/1.55 Inter,sans-serif;color:rgba(29,26,23,.6);max-width:34ch">Feed-level ROAS tracking and one-click feed fixes for Shopify stores running Google Ads.</p>
+</div>
+<sc-for list="{{ footerCols }}" as="c" hint-placeholder-count="3">
+<div>
+<div style="font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:rgba(29,26,23,.42);margin-bottom:12px">{{ c.title }}</div>
+<div style="display:grid;gap:8px">
+<sc-for list="{{ c.links }}" as="l" hint-placeholder-count="4">
+<a href="#" style="font:400 13px/1.3 Inter,sans-serif;color:rgba(29,26,23,.7);text-decoration:none">{{ l }}</a>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+<div style="display:flex;justify-content:space-between;gap:24px;padding-top:20px;font:400 12px/1.5 Inter,sans-serif;color:rgba(29,26,23,.45)"><span>© 2026 Feedwizrd. Company details and registration number to confirm.</span><span>support@feedwizrd.com</span></div>
+</footer>
+
+<div style="position:sticky;bottom:0;height:0;z-index:40">
+<div style="position:absolute;right:28px;bottom:28px;display:flex;flex-direction:column;align-items:flex-end;gap:14px">
+<sc-if value="{{ chatOpen }}" hint-placeholder-val="{{ true }}">
+<div style="width:360px;border-radius:20px;background:#fff;border:1px solid rgba(29,26,23,.12);box-shadow:0 18px 56px rgba(20,18,16,.18);overflow:hidden">
+<div style="display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid rgba(29,26,23,.08);background:#2c2420">
+<div style="width:34px;height:34px;border-radius:9px;background:#f8ea51;border:1px solid rgba(253,251,248,.2);flex:none;display:flex;align-items:center;justify-content:center;font:700 15px/1 Inter,sans-serif;color:#423c00">F</div>
+<div style="flex:1">
+<div style="font:500 14px/1.3 Inter,sans-serif;color:#fdfbf8">Feedwizrd Agent</div>
+<div style="display:flex;align-items:center;gap:7px;margin-top:3px;font:400 12px/1.3 Inter,sans-serif;color:rgba(253,251,248,.6)"><span style="width:7px;height:7px;border-radius:999px;background:{{ grnDot }}"></span>Online</div>
+</div>
+<button type="button" onClick="{{ closeChat }}" aria-label="Close chat" style="width:28px;height:28px;border-radius:999px;border:1px solid rgba(253,251,248,.2);background:transparent;cursor:pointer;font:400 14px/1 Inter,sans-serif;color:rgba(253,251,248,.7)">×</button>
+</div>
+<div style="padding:18px;display:flex;flex-direction:column;gap:10px;max-height:340px;overflow:auto;background:#fff">
+<div style="align-self:flex-start;max-width:86%;padding:12px 14px;border-radius:16px 16px 16px 4px;background:#f3f0ea;font:400 14px/1.5 Inter,sans-serif">Hi — ask me anything about feed performance, what the app can change in your accounts, or pricing.</div>
+<div style="align-self:flex-end;max-width:86%;padding:12px 14px;border-radius:16px 16px 4px 16px;background:#2c2420;color:#fdfbf8;font:400 14px/1.5 Inter,sans-serif">{{ chatQuestion }}</div>
+<div style="align-self:flex-start;max-width:86%;padding:12px 14px;border-radius:16px 16px 16px 4px;background:#f3f0ea;font:400 14px/1.5 Inter,sans-serif">{{ chatAnswer }}</div>
+</div>
+<div style="padding:0 18px 14px;display:flex;flex-wrap:wrap;gap:6px">
+<sc-for list="{{ chatReplies }}" as="q" hint-placeholder-count="3">
+<button type="button" onClick="{{ q.go }}" style="padding:8px 12px;border-radius:999px;cursor:pointer;border:1px solid {{ q.bd }};background:{{ q.bg }};color:{{ q.fg }};font:500 12px/1.3 Inter,sans-serif">{{ q.label }}</button>
+</sc-for>
+</div>
+<div style="display:flex;align-items:center;gap:8px;padding:14px 18px;border-top:1px solid rgba(29,26,23,.08);background:#faf8f5">
+<div style="flex:1;padding:11px 14px;border-radius:999px;border:1px solid rgba(29,26,23,.14);background:#fff;font:400 13px/1 Inter,sans-serif;color:rgba(29,26,23,.4)">Ask a question…</div>
+<div style="width:38px;height:38px;border-radius:999px;background:#2c2420;color:#fdfbf8;display:flex;align-items:center;justify-content:center;font:400 15px/1 Inter,sans-serif;flex:none">→</div>
+</div>
+<sc-if value="{{ ann }}" hint-placeholder-val="{{ true }}"><div style="padding:10px 18px 14px;font:400 10px/1.5 'IBM Plex Mono',monospace;color:rgba(29,26,23,.4);background:#faf8f5;border-top:1px solid rgba(29,26,23,.06)">ASSET: Feedwizrd logo mark in place of the “F” square. Launcher appears from first scroll. Escalates to a human when no canned answer matches.</div></sc-if>
+</div>
+</sc-if>
+<button type="button" onClick="{{ toggleChat }}" aria-label="Open chat" style="display:flex;align-items:center;gap:10px;padding:14px 20px;border-radius:999px;border:1px solid rgba(29,26,23,.16);background:#2c2420;color:#fdfbf8;cursor:pointer;font:500 14px/1 Inter,sans-serif;box-shadow:0 10px 28px rgba(20,18,16,.22)">
+<span style="width:20px;height:16px;border-radius:5px;border:1.5px solid #fdfbf8;flex:none"></span>{{ chatLauncherLabel }}
+</button>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showAnnotations&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Wireframe&quot;},&quot;worldMotif&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Wireframe&quot;},&quot;greenTone&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#2f4a35&quot;,&quot;options&quot;:[&quot;#2f4a35&quot;,&quot;#3a4f2e&quot;,&quot;#274139&quot;,&quot;#3d5a45&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Colour&quot;},&quot;greenSoftTone&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#e6ebe1&quot;,&quot;options&quot;:[&quot;#e6ebe1&quot;,&quot;#e8eee3&quot;,&quot;#e3ebe6&quot;,&quot;#eceee5&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Colour&quot;}}">
+const WINDOWS = ["7d", "14d", "30d", "60d", "90d"];
+const SELECTED_WINDOW = "30d";
+
+const NEG = { bg: "#fed3d1", fg: "#8e1f0b" };
+const WARN = { bg: "#ffd79d", fg: "#5e4200" };
+
+// Feed items. The Ribbed Knit Midi Dress is the item the page follows end to end.
+const PRODUCTS = [
+  { id: "coat", name: "Oversized Wool Coat", tag: "18 sales", spend: "$412", clicks: "1.204", sales: "18", roas: "3.8", trend: "↑", weak: false, quiet: false },
+  { id: "dress", name: "Ribbed Knit Midi Dress", tag: "Highest spend in the feed", spend: "$1.910", clicks: "3.870", sales: "41", roas: "1.4", trend: "↓", weak: true, quiet: false },
+  { id: "boot", name: "Leather Chelsea Boot", tag: "12 sales", spend: "$210", clicks: "640", sales: "12", roas: "4.6", trend: "↑", weak: false, quiet: false },
+  { id: "skirt", name: "Satin Slip Skirt", tag: "2 sales in 30 days", spend: "$390", clicks: "512", sales: "2", roas: "0.4", trend: "↓", weak: true, quiet: true },
+  { id: "jacket", name: "Cropped Denim Jacket", tag: "23 sales", spend: "$430", clicks: "1.380", sales: "23", roas: "3.7", trend: "→", weak: false, quiet: false },
+  { id: "shirt", name: "Linen Blend Shirt", tag: "No sales in 30 days", spend: "$260", clicks: "288", sales: "0", roas: "0.0", trend: "↓", weak: true, quiet: true },
+  { id: "sneaker", name: "Chunky Sole Sneaker", tag: "1 sale in 30 days", spend: "$318", clicks: "402", sales: "1", roas: "0.2", trend: "↓", weak: true, quiet: true }
+];
+
+const FILTERS = [
+  { id: "all", label: "All products", hint: "Every feed item that received Google Ads spend in the selected window.", test: () => true },
+  { id: "weak", label: "Underperforming ROAS", hint: "Feed items returning less than your target ROAS in the selected window, newest decline first.", test: p => p.weak },
+  { id: "quiet", label: "Spending, barely selling", hint: "Items that keep taking spend while producing almost no clicks or sales. Inside the app this filter is called the zombie filter.", test: p => p.quiet }
+];
+
+const CHAT = [
+  ["How does Feedwizrd find what's hurting my ROAS?", "It pulls your Google Ads data into one dashboard and breaks ROAS down to the feed-item level across 7, 14, 30, 60 and 90 days. Items whose ROAS is sliding surface first, with the Agent's suggested fix already attached."],
+  ["Will it change my products?", "Only when you apply a suggestion. The Agent drafts the change, shows the current and suggested value side by side, and one click applies it. Nothing is applied automatically."],
+  ["What does it cost?", "One plan priced per connected store: $49 for one, $39 each for two, $29 each from three. Billed through Shopify."]
+];
+
+class Component extends DCLogic {
+  state = { demo: 0, faq: 0, faqAll: false, stores: 3, kase: 0, filter: "all", stage: 0, chatOpen: true, chatQ: 0 };
+
+  green() { return this.props.greenTone || "#2f4a35"; }
+  greenSoft() { return this.props.greenSoftTone || "#e6ebe1"; }
+
+  chip(label, active, onClick, suffix) {
+    return React.createElement("button", {
+      type: "button", onClick,
+      style: {
+        padding: "7px 12px", borderRadius: 999, cursor: "pointer",
+        border: active ? "1px solid rgba(29,26,23,.35)" : "1px solid rgba(29,26,23,.12)",
+        background: active ? "#e4e0d9" : "transparent",
+        font: "500 11px/1 'IBM Plex Mono',monospace", letterSpacing: ".04em",
+        color: active ? "#1d1a17" : "rgba(29,26,23,.55)"
+      }
+    }, label + (suffix || ""));
+  }
+
+  roasStyle(p) {
+    const n = parseFloat(p.roas);
+    if (n < 2) return { roasBg: WARN.bg, roasFg: WARN.fg, trendFg: WARN.fg };
+    return { roasBg: "transparent", roasFg: "#303030", trendFg: "rgba(48,48,48,.45)" };
+  }
+
+  stages() {
+    const grn = this.green();
+    const soft = this.greenSoft();
+    return [
+      {
+        n: "1", title: "Find", sub: "Spot the feed item dragging ROAS down",
+        detail: [
+          { k: "You see", v: "Your whole feed sorted by ROAS, with filters for underperforming items and items spending without selling." },
+          { k: "You can", v: "Open any item and compare its ROAS across 7, 14, 30, 60 and 90 days." },
+          { k: "Feedwizrd records", v: "The ROAS baseline for this item on this date, so a later change can be measured against it." }
+        ],
+        mock: {
+          title: "Ribbed Knit Midi Dress", badge: "Underperforming", badgeBg: NEG.bg, badgeFg: NEG.fg,
+          lines: [
+            { k: "Ad spend (30d)", v: "$1.910", fg: "#303030", fw: 400 },
+            { k: "Clicks", v: "3.870", fg: "#303030", fw: 400 },
+            { k: "Sales", v: "41", fg: "#303030", fw: 400 },
+            { k: "ROAS", v: "1.4 — under your 2.0 target", fg: WARN.fg, fw: 600 }
+          ],
+          cta: "See the Agent's suggestion", cta2: "Open in Shopify"
+        }
+      },
+      {
+        n: "2", title: "Fix", sub: "Apply what the Agent wrote, in one click",
+        detail: [
+          { k: "You see", v: "The Feedwizrd Agent's suggested feed values next to the current ones, with the reason it proposed them." },
+          { k: "You can", v: "Apply it in one click, edit the wording first, or exclude the item from the Shopping campaign instead." },
+          { k: "Feedwizrd records", v: "Who applied what, the previous value, and the time of the change." }
+        ],
+        mock: {
+          title: "Feedwizrd Agent · suggestion", badge: "Ready to apply", badgeBg: "#e0f0ff", badgeFg: "#00527c",
+          lines: [
+            { k: "Current title", v: "ribbed knit dress", fg: "#303030", fw: 400 },
+            { k: "Suggested title", v: "Ribbed Knit Midi Dress — Rust Merino Blend", fg: "#303030", fw: 500 },
+            { k: "Product type", v: "Apparel & Accessories > Clothing > Dresses", fg: "#303030", fw: 400 },
+            { k: "Reason", v: "Title missing colour and material terms buyers search for", fg: "#616161", fw: 400 }
+          ],
+          cta: "Apply in one click", cta2: "Edit first"
+        }
+      },
+      {
+        n: "3", title: "Verify", sub: "Check whether ROAS actually moved",
+        detail: [
+          { k: "You see", v: "The same feed item before and after the change, over the window you select." },
+          { k: "You can", v: "Keep the change, revert it to the recorded previous value, or move to the next item." },
+          { k: "Feedwizrd records", v: "The change history and the ROAS movement that followed it." }
+        ],
+        mock: {
+          title: "Change monitor · 30 days after", badge: "Applied", badgeBg: soft, badgeFg: grn,
+          lines: [
+            { k: "ROAS before", v: "1.4", fg: "#8e1f0b", fw: 600 },
+            { k: "ROAS after", v: "3.1", fg: grn, fw: 600 },
+            { k: "Window", v: "30 days", fg: "#303030", fw: 400 },
+            { k: "Change log", v: "Feed title · applied by you", fg: "#616161", fw: 400 }
+          ],
+          cta: "Keep change", cta2: "Revert"
+        }
+      }
+    ];
+  }
+
+  cases() {
+    return [
+      {
+        quote: "My Google Ads numbers were sliding and I had no idea which products were doing it. Feedwizrd showed me in an afternoon, wrote the fixes itself, and I applied them with one click. I never had to work out what the feed should say.",
+        name: "Placeholder name",
+        store: "Womenswear store · 140 SKUs on Shopping · ~$14.000/mo ad spend",
+        window: "Account-level ROAS, 30 days after the Agent's fixes were applied",
+        chart: { from: "2.2", to: "3.1", before: [2.9, 2.7, 2.6, 2.4, 2.3, 2.2], after: [2.4, 2.6, 2.7, 2.9, 3.0, 2.9, 3.1, 3.1] },
+        steps: [
+          { title: "The pain", body: "Performance was sliding week after week. The account number told him it was getting worse, not which products were doing it." },
+          { title: "The trial", body: "He installed Feedwizrd from the Shopify App Store and connected Google Ads." },
+          { title: "The insight", body: "For the first time he could see what was dragging his product feed down — four items, all sliding hardest in the last two weeks." },
+          { title: "The action", body: "The Feedwizrd Agent wrote the concrete fixes. He read them once and applied them with one click." },
+          { title: "The result", body: "Account ROAS moved from 2.2 to 3.1 over the next 30 days, on the same ad spend." }
+        ],
+        metrics: [
+          { v: "2.2 → 3.1", k: "Google Ads ROAS, account level" },
+          { v: "+41%", k: "Revenue on the same ad spend" },
+          { v: "1 click", k: "Merchant effort to apply the Agent's fixes" }
+        ]
+      },
+      {
+        quote: "Half the catalogue was spending and barely selling, and I only knew because the Agent grouped them for me. It wrote new feed data for the ones worth keeping and I applied the whole list in one click.",
+        name: "Placeholder name",
+        store: "Streetwear store · 84 SKUs · 2 feeds, 2 markets",
+        window: "Account-level ROAS, 60 days after the Agent's fixes were applied",
+        chart: { from: "2.8", to: "3.6", before: [3.4, 3.3, 3.1, 3.0, 2.9, 2.8], after: [3.0, 3.1, 3.3, 3.4, 3.5, 3.4, 3.6, 3.6] },
+        steps: [
+          { title: "The pain", body: "ROAS had been drifting down for a quarter and nobody could say which of 84 items were responsible." },
+          { title: "The trial", body: "She connected one store to Feedwizrd to see whether the feed was the problem." },
+          { title: "The insight", body: "31 items were taking spend with almost no sales behind them — the zombie filter surfaced all of them at once." },
+          { title: "The action", body: "Nine items worth keeping got Agent-written titles and product types. She applied the batch with one click; the rest were excluded." },
+          { title: "The result", body: "Account ROAS moved from 2.8 to 3.6 over 60 days, with the same budget." }
+        ],
+        metrics: [
+          { v: "2.8 → 3.6", k: "Google Ads ROAS, account level" },
+          { v: "31 items", k: "Spending with almost no sales" },
+          { v: "1 click", k: "Merchant effort to apply the Agent's fixes" }
+        ]
+      },
+      {
+        quote: "Four stores, four feeds, one list. The Agent arrives with the fixes already written, so my Monday is one click per store instead of a morning in a spreadsheet.",
+        name: "Placeholder name",
+        store: "Four-store fashion operator · Shopify + Google Ads · EUR and GBP",
+        window: "Account-level ROAS, 90 days after adoption",
+        chart: { from: "2.4", to: "3.3", before: [3.0, 2.9, 2.8, 2.6, 2.5, 2.4], after: [2.7, 2.8, 3.0, 3.1, 3.2, 3.1, 3.3, 3.3] },
+        steps: [
+          { title: "The pain", body: "Each store reported its own declining ROAS, and nothing compared feed items across the four." },
+          { title: "The trial", body: "He connected all four stores in one afternoon." },
+          { title: "The insight", body: "Feed performance for every store in one list, per market and per currency, with windows from 7 to 90 days." },
+          { title: "The action", body: "Agent suggestions arrive per store. The weekly routine is read and apply — one click, no analysis." },
+          { title: "The result", body: "Account ROAS moved from 2.4 to 3.3 across the group over 90 days." }
+        ],
+        metrics: [
+          { v: "2.4 → 3.3", k: "Google Ads ROAS, account level" },
+          { v: "4 stores", k: "Reviewed in one list" },
+          { v: "1 click", k: "Merchant effort to apply the Agent's fixes" }
+        ]
+      }
+    ];
+  }
+
+  faqData() {
+    return [
+      ["How does Feedwizrd decide what to change in my feed?", "It compares each feed item's Google Ads performance across 7, 14, 30, 60 and 90 days, then looks at the item's feed data — title, description, product type, Google category, bid. Where the data is holding performance back, the Feedwizrd Agent writes a concrete suggestion with the current value, the suggested value and the impact it expects."],
+      ["How is this different from the numbers in Shopify and Google Ads?", "Both report at account or campaign level. Neither tells you which individual feed items are sliding, over which window, or what to change about them. Feedwizrd breaks ROAS down to the item level and attaches a suggested fix to each one."],
+      ["Does Feedwizrd change products or campaigns automatically?", "No. Automations are off by default. The Agent drafts a change and shows you a preview; nothing reaches Shopify or Google until you apply it."],
+      ["What can Feedwizrd access in my accounts?", "Read access to your products, sales data and Google Ads performance. Write access only to feed attributes, product status, campaign exclusions and bid adjustments, and only when you apply a suggestion. Exact scopes are listed in the permission table above."],
+      ["Can I undo a feed or campaign change?", "Every applied change is recorded with its previous value, so you can revert it from the change history. Reversal behavior for campaign-level exclusions is being confirmed."],
+      ["What is the 'spending, barely selling' filter?", "It groups feed items that keep drawing ad spend while producing almost no clicks or sales in the selected window. Inside the app the same filter is labelled the zombie filter; the thresholds are configurable."],
+      ["What does the Feedwizrd Agent change?", "It proposes rewrites to feed attributes such as title, description, product type and Google category, plus bid adjustments where the data supports one. You apply it in one click, and the change monitor reports whether ROAS improved. It never changes your price or your storefront content."],
+      ["Does it work for one store?", "Yes. One store is $49 per month. The $29 rate applies from three stores upward."],
+      ["Does it support multiple feeds, markets, and currencies?", "Yes — feeds, markets and currencies are analysed separately, so a suggestion applies to the market that needs it. Supported markets, currencies and campaign types are being confirmed before launch."],
+      ["How long does setup and initial synchronization take?", "Installing from the Shopify App Store and authorizing Google Ads takes about five minutes. No custom development needed. The first full feed-performance view typically appears within a few hours; exact windows to be confirmed."],
+      ["Do I need to enter my cost of goods?", "No. Feedwizrd works from your Google Ads performance and sales data. You can add cost of goods if you want to — most merchants never do."],
+      ["What happens to my data if I disconnect or cancel?", "Uninstall the app in Shopify or revoke access in Google at any time. Stored data is deleted on request; the retention period is being finalized."]
+    ];
+  }
+
+  renderVals() {
+    const s = this.state;
+    const grn = this.green();
+    const soft = this.greenSoft();
+
+    const windowReadout = WINDOWS.map((w, i) => ({
+      label: w,
+      bg: w === SELECTED_WINDOW ? "#f1f1f1" : "#fff",
+      fg: w === SELECTED_WINDOW ? "#303030" : "#8a8a8a",
+      sep: i === 0 ? "0" : "1px solid #e3e3e3"
+    }));
+
+    const demoLabels = ["Feed overview", "Item selected", "Suggestion detail"];
+    const demoTabs = demoLabels.map((l, i) => React.createElement(React.Fragment, { key: l },
+      this.chip(l, s.demo === i, () => this.setState({ demo: i }))));
+
+    const active = FILTERS.find(f => f.id === s.filter) || FILTERS[0];
+    const filterTabs = FILTERS.map(f => {
+      const on = f.id === s.filter;
+      return {
+        label: f.label, count: PRODUCTS.filter(f.test).length,
+        bg: on ? "#303030" : "#fff", fg: on ? "#f6f6f6" : "#303030",
+        bd: on ? "#303030" : "#d4d4d4", countBg: on ? "rgba(255,255,255,.22)" : "#f1f1f1",
+        go: () => this.setState({ filter: f.id })
+      };
+    });
+
+    const byRoas = [...PRODUCTS].sort((a, b) => parseFloat(a.roas) - parseFloat(b.roas));
+    const visible = byRoas.filter(active.test);
+    const selId = s.demo > 0 ? "dress" : null;
+    const demoRows = visible.map(r => ({
+      ...r, ...this.roasStyle(r),
+      bg: r.id === selId ? "#f6f6f7" : "#fff",
+      ring: r.id === selId ? "inset 3px 0 0 #303030" : "none"
+    }));
+
+    const panels = [
+      { eyebrow: "Feed overview", title: "4 feed items need attention", body: "Select an item to see its ROAS trend and the suggestion the Agent has written for it." },
+      { eyebrow: "Item selected", title: "Ribbed Knit Midi Dress", body: "ROAS 1.4 over 30 days on $1.910 of spend — down from 2.6 over 90 days. Highest-spending item in the feed." },
+      { eyebrow: "Item selected · suggestion", title: "Raise bid by 8% and rewrite the title", body: "What the Feedwizrd Agent suggests for this item, and the ROAS it expects afterwards." }
+    ];
+    const p = panels[s.demo];
+
+    const STAGES = this.stages();
+    const stage = STAGES[s.stage];
+    const stageTabs = STAGES.map((st, i) => {
+      const on = i === s.stage;
+      return {
+        n: st.n, title: st.title, sub: st.sub,
+        bg: on ? "#2c2420" : "#fff", fg: on ? "#fdfbf8" : "#1d1a17",
+        bd: on ? "#2c2420" : "rgba(29,26,23,.12)",
+        numBg: on ? "rgba(253,251,248,.18)" : "#f3f0ea", numFg: on ? "#fdfbf8" : "#1d1a17",
+        go: () => this.setState({ stage: i })
+      };
+    });
+
+    const CASES = this.cases();
+    const kase = CASES[s.kase];
+    const bar = v => ({ h: Math.round((v / 4) * 100) + "%" });
+
+    const perStoreMap = n => (n >= 3 ? 29 : n === 2 ? 39 : 49);
+    const per = perStoreMap(s.stores);
+    const total = per * s.stores;
+    const storeChips = [1, 2, 3, 4, 5, 6, 8, 10].map(n =>
+      React.createElement(React.Fragment, { key: n }, this.chip(String(n), s.stores === n, () => this.setState({ stores: n }), n === 10 ? "+" : ""))
+    );
+
+    const faqs = this.faqData().map(([q, a], i) => {
+      const open = s.faqAll || s.faq === i;
+      return {
+        q, a, open, sign: open ? "–" : "+",
+        toggle: () => this.setState(st => ({ faqAll: false, faq: st.faqAll ? i : (st.faq === i ? -1 : i) }))
+      };
+    });
+
+    return {
+      ann: this.props.showAnnotations !== false,
+      worldMotif: this.props.worldMotif !== false,
+      grnFg: grn, grnBg: soft, grnDot: grn,
+
+      windowReadout,
+      heroRows: [PRODUCTS[1], PRODUCTS[0], PRODUCTS[2], PRODUCTS[4]].map(r => ({ ...r, ...this.roasStyle(r) })),
+
+      googleView: [
+        { k: "Revenue (30d)", v: "$41.820", bg: "#f3f0ea", fg: "#1d1a17", size: "14px", glyph: "" },
+        { k: "Ad spend", v: "$19.100", bg: "#f3f0ea", fg: "#1d1a17", size: "14px", glyph: "" },
+        { k: "ROAS", v: "2.2", bg: WARN.bg, fg: WARN.fg, size: "20px", glyph: "↓" },
+        { k: "Conversions", v: "412", bg: "#f3f0ea", fg: "#1d1a17", size: "14px", glyph: "" }
+      ],
+      windowSeries: [
+        { label: "7d", v: "1.1", bg: WARN.bg, fg: WARN.fg },
+        { label: "14d", v: "1.2", bg: WARN.bg, fg: WARN.fg },
+        { label: "30d", v: "1.4", bg: WARN.bg, fg: WARN.fg },
+        { label: "60d", v: "2.1", bg: "#f3f0ea", fg: "#1d1a17" },
+        { label: "90d", v: "2.6", bg: "#f3f0ea", fg: "#1d1a17" }
+      ],
+      suggestionRows: [
+        { k: "Current title", v: "ribbed knit dress" },
+        { k: "Suggested title", v: "Ribbed Knit Midi Dress — Rust Merino Blend" },
+        { k: "Expected impact", v: "ROAS 1.4 → 2.6 over 30 days" }
+      ],
+      suggestionDetail: [
+        { k: "Current bid", v: "$0.62" },
+        { k: "Suggested bid", v: "$0.67 (+8%)" },
+        { k: "Suggested title", v: "Ribbed Knit Midi Dress — Rust Merino Blend" },
+        { k: "Window", v: "Last 30 days" }
+      ],
+
+      demoTabs, filterTabs, demoRows,
+      filterHint: active.hint,
+      rowsFooter: "Showing " + visible.length + " of " + PRODUCTS.length + " feed items · last 30 days",
+      panelEyebrow: p.eyebrow, panelTitle: p.title, panelBody: p.body,
+      showSuggestion: s.demo === 2, showActions: s.demo >= 1,
+
+      stageTabs, stageDetail: stage.detail,
+      mockTitle: stage.mock.title, mockBadge: stage.mock.badge,
+      mockBadgeBg: stage.mock.badgeBg, mockBadgeFg: stage.mock.badgeFg,
+      mockLines: stage.mock.lines, mockCta: stage.mock.cta, mockCta2: stage.mock.cta2,
+
+      reassurance: [
+        { title: "Installs from the Shopify App Store", note: "Runs inside your admin, no separate login" },
+        { title: "About five minutes to set up", note: "Two connections, no configuration" },
+        { title: "No custom development needed", note: "Nothing added to your storefront theme" },
+        { title: "No changes without your click", note: "Automations off by default" }
+      ],
+      groups: [
+        { title: "See the feed", sub: "Know how every item performs.", items: ["Product-level feed performance", "7/14/30/60/90-day analysis", "Performance dashboard"] },
+        { title: "Act sooner", sub: "Turn a finding into an applied change.", items: ["Underperforming-ROAS filter", "Feedwizrd Agent suggestions", "One-click apply"] },
+        { title: "Learn what worked", sub: "Connect a change to what happened after it.", items: ["Change monitoring", "Change history with previous values", "ROAS before and after comparison"] },
+        { title: "Scale the workflow", sub: "Run the same routine across more surface.", items: ["ROAS tracking across feeds and markets", "Multi-store support", "Multi-currency reporting"] }
+      ],
+      marketPins: [
+        { x: "24%", y: "34%", fill: grn },
+        { x: "47%", y: "29%", fill: grn },
+        { x: "52%", y: "41%", fill: WARN.bg },
+        { x: "70%", y: "37%", fill: grn }
+      ],
+      markets: [
+        { name: "Netherlands", feed: "NL feed", currency: "EUR", roas: "3.4", roasFg: "#fdfbf8", fill: grn },
+        { name: "Germany", feed: "DE feed", currency: "EUR", roas: "2.9", roasFg: "#fdfbf8", fill: grn },
+        { name: "China", feed: "CN feed", currency: "CNY", roas: "1.8", roasFg: WARN.bg, fill: WARN.bg },
+        { name: "United States", feed: "US feed", currency: "USD", roas: "3.1", roasFg: "#fdfbf8", fill: grn }
+      ],
+      setup: [
+        { n: "1", time: "~1 min", title: "Install from Shopify", body: "Add the app from the Shopify App Store.", asset: "ASSET: app install screen" },
+        { n: "2", time: "~1 min", title: "Connect Google Ads", body: "Authorize through Google's own consent screen.", asset: "ASSET: Google Ads consent state" },
+        { n: "3", time: "Runs in background", title: "Feedwizrd syncs", body: "Google Ads spend, clicks, sales and revenue are matched to every item in your feed.", asset: "ASSET: sync progress state" },
+        { n: "4", time: "Daily, ~5 min", title: "Review and apply", body: "Check feed performance, apply one suggestion, move on.", asset: "ASSET: feed performance view" }
+      ],
+      setupFacts: [
+        { k: "No custom development needed", v: "Nothing is installed on your storefront theme." },
+        { k: "Official flows only", v: "Shopify App Store install and Google's own Ads consent screen." },
+        { k: "Time to useful data", v: "First feed-performance view within hours of connecting. Exact window to confirm." }
+      ],
+      permissions: [
+        { scope: "Shopify products & variants", read: "Yes", change: "Status, feed attributes", never: "Price, theme" },
+        { scope: "Shopify orders & sales data", read: "Yes", change: "—", never: "Order edits, refunds" },
+        { scope: "Shopify customers", read: "—", change: "—", never: "No access" },
+        { scope: "Google Ads feed item performance", read: "Yes", change: "—", never: "—" },
+        { scope: "Google Ads campaigns & product groups", read: "Yes", change: "Exclusions, bid adjustments", never: "Budgets, new campaigns" },
+        { scope: "Google Ads account structure", read: "Yes", change: "—", never: "New accounts, billing" },
+        { scope: "Payment methods & banking", read: "—", change: "—", never: "No access" }
+      ],
+      trustFacts: [
+        { k: "Automations", v: "Off by default. Every change needs your click." },
+        { k: "Preview", v: "See the exact current and suggested value before you apply." },
+        { k: "Revoke access", v: "Uninstall in Shopify or revoke in Google at any time." },
+        { k: "Data", v: "Storage location, encryption, retention and deletion facts to be supplied." }
+      ],
+
+      caseQuote: kase.quote, caseName: kase.name, caseStore: kase.store,
+      caseWindow: kase.window,
+      caseSteps: kase.steps.map((st, i) => ({ ...st, n: String(i + 1), numBg: i === 4 ? grn : "#e4e0d9", numFg: i === 4 ? "#fdfbf8" : "#1d1a17" })),
+      caseMetrics: kase.metrics,
+      chartBefore: kase.chart.before.map(bar), chartAfter: kase.chart.after.map(bar),
+      chartFrom: kase.chart.from, chartTo: kase.chart.to,
+      caseCounter: (s.kase + 1) + " / " + CASES.length,
+      prevCase: () => this.setState(st => ({ kase: (st.kase - 1 + CASES.length) % CASES.length })),
+      nextCase: () => this.setState(st => ({ kase: (st.kase + 1) % CASES.length })),
+      caseDots: CASES.map((c, i) => ({
+        w: i === s.kase ? "28px" : "8px",
+        bg: i === s.kase ? "#1d1a17" : "rgba(29,26,23,.18)",
+        go: () => this.setState({ kase: i })
+      })),
+
+      storeChips,
+      totalLabel: "$" + total,
+      perStoreLabel: "$" + per + " per store/month × " + s.stores + (s.stores === 1 ? " store" : " stores") + (s.stores >= 10 ? " — custom pricing from 10 stores" : ""),
+      pricingCta: s.stores >= 3 ? "Start for $29 per store/month" : "Get started — $" + total + "/month",
+      included: ["Feed-item ROAS tracking", "Feedwizrd Agent suggestions", "One-click apply", "Spending-without-selling filter", "7–90 day analysis", "Change monitoring", "Multi-feed and multi-market", "Email support"],
+
+      faqs,
+      faqAllLabel: s.faqAll ? "Close all answers" : "Open all 12 answers",
+      toggleAllFaq: () => this.setState(st => ({ faqAll: !st.faqAll, faq: -1 })),
+
+      chatOpen: s.chatOpen,
+      chatLauncherLabel: s.chatOpen ? "Hide chat" : "Ask the Agent",
+      chatQuestion: CHAT[s.chatQ][0],
+      chatAnswer: CHAT[s.chatQ][1],
+      chatReplies: CHAT.map(([q], i) => {
+        const on = i === s.chatQ;
+        return {
+          label: q,
+          bg: on ? "#2c2420" : "#fff", fg: on ? "#fdfbf8" : "#1d1a17",
+          bd: on ? "#2c2420" : "rgba(29,26,23,.16)",
+          go: () => this.setState({ chatQ: i })
+        };
+      }),
+      toggleChat: () => this.setState(st => ({ chatOpen: !st.chatOpen })),
+      closeChat: () => this.setState({ chatOpen: false }),
+
+      footerCols: [
+        { title: "Product", links: ["Product", "How it works", "Pricing", "FAQ", "Sign in"] },
+        { title: "Legal", links: ["Privacy Policy", "Terms", "Cookie Policy", "Data processing"] },
+        { title: "Company", links: ["Contact support", "Security", "Status"] }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
